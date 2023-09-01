@@ -1,0 +1,66 @@
+{
+  "label_settings_panel_title": {
+	"text": "Label Settings",
+	"context": "label_settings_panel_title"
+  },
+  "show_labels_text": {
+	"text": "Show labels",
+	"context": "show_labels_text"
+  },
+  "show_terms_and_privacy_text": {
+	"text": "Show Terms and Conditions & Privacy Policy Checkbox",
+	"context": "show_labels_text"
+  },
+  "font_weight_and_color_text": {
+	"text": "Font Weight & Font Color",
+	"context": "font_weight_and_color_input_text"
+  },
+  "input_settings_panel_title": {
+	"text": "Input Settings",
+	"context": "input_settings_panel_title"
+  },
+  "input_border_radius_text": {
+	"text": "Input Border Radius",
+	"context": "input_border_radius_text"
+  },
+  "show_placeholders_text": {
+	"text": "Show Placeholders",
+	"context": "show_placeholders_text"
+  },
+  "button_settings_panel_title": {
+	"text": "Button Settings",
+	"context": "button_settings_panel_title"
+  },
+  "button_border_radius_text": {
+	"text": "Button Border Radius",
+	"context": "button_border_radius_text"
+  },
+  "button_border_text": {
+	"text": "Button Border",
+	"context": "button_border_text"
+  },
+  "button_bg_color_text": {
+	"text": "Button Background Color",
+	"context": "button_bg_color_text"
+  },
+  "button_font_weight_text": {
+	"text": "Button Font Weight",
+	"context": "button_font_weight_text"
+  },
+  "button_text_color_text": {
+	"text": "Button Text Color",
+	"context": "button_text_color_text"
+  },
+  "description_settings": {
+	"text": "Description Settings",
+	"context": "description_settings"
+  },
+  "description_settings_title": {
+	"text": "Description",
+	"context": "description_settings_title"
+  },
+  "show_description": {
+	"text": "Show Description",
+	"context": "show_description"
+  }
+}

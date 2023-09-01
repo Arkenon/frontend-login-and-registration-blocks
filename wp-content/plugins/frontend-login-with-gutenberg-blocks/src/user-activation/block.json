@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "frontend-login-with-gutenberg-blocks/user-activation",
+  "version": "1.0.0",
+  "title": "User Activation Block",
+  "category": "theme",
+  "icon": "unlock",
+  "description": "Display user activation result",
+  "supports": {
+	"html": false
+  },
+  "textdomain": "user-activation",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

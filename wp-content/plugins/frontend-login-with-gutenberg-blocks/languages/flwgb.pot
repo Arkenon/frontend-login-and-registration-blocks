@@ -1,0 +1,606 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Frontend Login with Gutenberg Blocks\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-17 13:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.4; wp-6.3\n"
+"X-Domain: flwgb"
+
+#: admin/partials/general-settings.php:134
+msgctxt "activation_page"
+msgid "User Activation Page"
+msgstr ""
+
+#: admin/partials/general-settings.php:135
+msgctxt "activation_page_description"
+msgid ""
+"Select a page if you selected 'Yes' in the 'Enable user activation' setting"
+msgstr ""
+
+#: admin/partials/options-page.php:40
+msgctxt "admin_general_settings"
+msgid "General Settings"
+msgstr ""
+
+#: admin/partials/options-page.php:45
+msgctxt "admin_mail_settings"
+msgid "E-Mail Templates"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:5
+msgctxt "alert_for_logged_in_users"
+msgid "This form is only shown to logged in users..."
+msgstr ""
+
+#: public/partials/register/register-form.php:7
+#: public/partials/reset-password/reset-password-form.php:7
+msgctxt "alert_for_non_logged_in_users"
+msgid "This form is only shown to users who are not logged in."
+msgstr ""
+
+#: public/partials/register/register-form.php:133
+msgctxt "already_signed_in_message"
+msgid "Already signed up? "
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:36
+msgctxt "change_avatar_description"
+msgid "You can change your profile picture on Gravatar."
+msgstr ""
+
+#: inc/UserSettings.php:104
+msgctxt "check_your_user_info_error"
+msgid "Make sure your user information is correct."
+msgstr ""
+
+#: inc/UserSettings.php:116
+msgctxt "current_password_error"
+msgid "Your current password is wrong. Please check it again."
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:158
+msgctxt "current_password_input_text"
+msgid "Current Password"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:166
+msgctxt "current_password_placeholder_text"
+msgid "Enter your current password"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Do login, register and lost password operations from frontend with Gutenberg "
+"blocks. Easily customize forms and add to your pages."
+msgstr ""
+
+#: public/partials/register/register-form.php:55
+#: public/partials/reset-password/reset-request.php:34
+#: public/partials/user-settings/user-settings-form.php:90
+msgctxt "email_input_text"
+msgid "Your e-mail"
+msgstr ""
+
+#: public/partials/login/login-form.php:35
+msgctxt "email_or_username_input_text"
+msgid "Username or E-mail"
+msgstr ""
+
+#: public/partials/login/login-form.php:42
+msgctxt "email_or_username_placeholder_text"
+msgid "Enter your username or e-mail"
+msgstr ""
+
+#: public/partials/register/register-form.php:63
+#: public/partials/reset-password/reset-request.php:41
+#: public/partials/user-settings/user-settings-form.php:98
+msgctxt "email_placeholder_text"
+msgid "Enter your e-mail"
+msgstr ""
+
+#: admin/partials/limit-login-settings.php:28
+msgctxt "enable_limit_login"
+msgid "Enable limit login attempts"
+msgstr ""
+
+#: admin/partials/limit-login-settings.php:32
+msgctxt "enable_limit_login_description"
+msgid "Protect your web site from too many unsuccessful login attempts."
+msgstr ""
+
+#. Name of the plugin
+msgid "Frontend Login with Gutenberg Blocks"
+msgstr ""
+
+#: inc/LostPassword.php:88 inc/Register.php:161 inc/UserActivation.php:93
+#: inc/UserSettings.php:137
+msgctxt "general_error_message"
+msgid "Something went wrong. Please try again later."
+msgstr ""
+
+#: inc/UserSettings.php:93 inc/UserSettings.php:126
+msgctxt "general_success_message"
+msgid "Operation has been completed successfully."
+msgstr ""
+
+#: public/partials/login/already-logged-in.php:16
+msgctxt "go_to_user_dashboard_text"
+msgid "Go to user dashboard"
+msgstr ""
+
+#: admin/partials/general-settings.php:32
+msgctxt "has_activation"
+msgid "Enable user activation"
+msgstr ""
+
+#: admin/partials/general-settings.php:36
+msgctxt "has_activation_description"
+msgid "If you want to send an activation code to your users, select 'Yes'."
+msgstr ""
+
+#: admin/partials/general-settings.php:57
+msgctxt "has_user_settings"
+msgid "Enable user settings"
+msgstr ""
+
+#: admin/partials/general-settings.php:61
+msgctxt "has_user_settings_description"
+msgid ""
+"If you want to show a user settings page, select Yes. (Don't forget to "
+"select a User Settings page below)"
+msgstr ""
+
+#: public/partials/login/already-logged-in.php:9
+msgctxt "hello_text"
+msgid "Hello"
+msgstr ""
+
+#: admin/partials/general-settings.php:82
+msgctxt "hide_wp_login_admin"
+msgid "Hide wp-login&wp-admin"
+msgstr ""
+
+#: admin/partials/general-settings.php:86
+msgctxt "hide_wp_login_admin_description"
+msgid ""
+"If you choose 'Yes', users who are not logged in will be redirected to the "
+"home page."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://xideathemes.com/frontend-login-with-gutenberg-blocks"
+msgstr ""
+
+#. %1$s terms and cond. url %2$s privacy policy url
+#: public/partials/register/register-form.php:114
+#, php-format
+msgid ""
+"I have read and accept <a href=\"%1$s\" target=\"_blank\">terms and "
+"conditions</a> and <a href=\"%2$s\" target=\"_blank\">privacy policy</a>"
+msgstr ""
+
+#: inc/Login.php:165
+msgctxt "invalid_username_or_pass"
+msgid "Invalid username or password."
+msgstr ""
+
+#: admin/partials/limit-login-settings.php:68
+msgctxt "limit_login_lockout_duration"
+msgid "Lockout duration (as seconds)"
+msgstr ""
+
+#: admin/partials/limit-login-settings.php:53
+msgctxt "limit_login_max_attempt"
+msgid "Maximum number of attempts"
+msgstr ""
+
+#: admin/partials/options-page.php:50
+msgctxt "limit_login_settings"
+msgid "Limit Login Attempts"
+msgstr ""
+
+#: public/partials/login/login-form.php:83
+#: public/partials/register/register-form.php:129
+#: public/partials/reset-password/reset-in-progress.php:75
+#: public/partials/reset-password/reset-request.php:59
+#: public/partials/user-settings/user-settings-form.php:230
+msgctxt "loading_text"
+msgid "Loading..."
+msgstr ""
+
+#: admin/partials/general-settings.php:116
+msgctxt "login_page"
+msgid "Login Page"
+msgstr ""
+
+#: admin/partials/general-settings.php:117
+msgctxt "login_page_description"
+msgid "Select a page if created a login page."
+msgstr ""
+
+#: inc/Login.php:150
+msgctxt "login_successful"
+msgid "You have successfully logged in..."
+msgstr ""
+
+#: public/partials/login/login-form.php:79
+#: public/partials/register/register-form.php:135
+msgctxt "login_text"
+msgid "Login"
+msgstr ""
+
+#: public/partials/login/already-logged-in.php:22
+msgctxt "logout_text"
+msgid "Logout"
+msgstr ""
+
+#: admin/partials/general-settings.php:126
+msgctxt "lost_password_page"
+msgid "Lost (Reset) Password Page"
+msgstr ""
+
+#: public/partials/reset-password/reset-in-progress.php:50
+#: public/partials/user-settings/user-settings-form.php:202
+msgctxt "new_password_again_input_text"
+msgid "New Password Again"
+msgstr ""
+
+#: public/partials/reset-password/reset-in-progress.php:57
+#: public/partials/user-settings/user-settings-form.php:210
+msgctxt "new_password_again_placeholder_text"
+msgid "Enter your new password again"
+msgstr ""
+
+#: public/partials/reset-password/reset-in-progress.php:29
+#: public/partials/user-settings/user-settings-form.php:180
+msgctxt "new_password_input_text"
+msgid "New Password"
+msgstr ""
+
+#: public/partials/reset-password/reset-in-progress.php:36
+#: public/partials/user-settings/user-settings-form.php:188
+msgctxt "new_password_placeholder_text"
+msgid "Enter your new password"
+msgstr ""
+
+#: admin/partials/general-settings.php:46
+#: admin/partials/general-settings.php:71
+#: admin/partials/general-settings.php:96
+#: admin/partials/limit-login-settings.php:42
+msgctxt "no_text"
+msgid "No"
+msgstr ""
+
+#: public/partials/register/register-form.php:93
+msgctxt "password_again_input_text"
+msgid "Password Again"
+msgstr ""
+
+#: public/partials/register/register-form.php:101
+msgctxt "password_again_placeholder_text"
+msgid "Enter your password again"
+msgstr ""
+
+#: inc/LostPassword.php:140
+msgctxt "password_changed_confirmation"
+msgid "Your password has been changed. Please sign in..."
+msgstr ""
+
+#: public/partials/login/login-form.php:53
+#: public/partials/register/register-form.php:74
+msgctxt "password_input_text"
+msgid "Password"
+msgstr ""
+
+#: inc/LostPassword.php:156 inc/Register.php:73 inc/UserSettings.php:82
+msgctxt "password_match_error"
+msgid "Your passwords do not match"
+msgstr ""
+
+#: public/partials/login/login-form.php:60
+#: public/partials/register/register-form.php:82
+msgctxt "password_placeholder_text"
+msgid "Enter your password"
+msgstr ""
+
+#: admin/partials/general-settings.php:148
+msgctxt "privacy_policy_page"
+msgid "Privacy Policy Page"
+msgstr ""
+
+#: admin/partials/general-settings.php:121
+msgctxt "redirect_page_after_login"
+msgid "Redirection Page After Login"
+msgstr ""
+
+#: admin/partials/general-settings.php:122
+msgctxt "redirect_page_after_login_description"
+msgid ""
+"Select a page if you want to redirect users to a specific page after login."
+msgstr ""
+
+#: public/partials/login/login-form.php:92
+#: public/partials/register/register-form.php:126
+msgctxt "register_button_text"
+msgid "Register"
+msgstr ""
+
+#: inc/Register.php:150
+msgctxt "register_mail_title_to_admin"
+msgid "New Member Registration"
+msgstr ""
+
+#: inc/Register.php:142 inc/Register.php:146
+msgctxt "register_mail_title_to_user"
+msgid "Welcome to Join Us"
+msgstr ""
+
+#: admin/partials/mail-template-settings.php:39
+msgctxt "register_mail_to_admin"
+msgid "Registration Mail Template for Admin"
+msgstr ""
+
+#: inc/Mail.php:76
+msgctxt "register_mail_to_admin_template"
+msgid ""
+"New member registered to your web site. <br> Username: {{username}} | User E-"
+"Mail: {{email}}"
+msgstr ""
+
+#: admin/partials/mail-template-settings.php:25
+msgctxt "register_mail_to_user"
+msgid "Registration Mail Template for User"
+msgstr ""
+
+#: inc/Mail.php:68
+msgctxt "register_mail_to_user_template"
+msgid "Hello {{username}}, <br> Welcome to our website."
+msgstr ""
+
+#: inc/Mail.php:72
+msgctxt "register_mail_to_user_template_with_activation"
+msgid ""
+"Hello {{username}}. You have been sign up successfully. Please click the "
+"membership activation link below: <br/> {{activation_link}}"
+msgstr ""
+
+#: admin/partials/mail-template-settings.php:32
+msgctxt "register_mail_to_user_with_activation"
+msgid "Registration Mail Template for User (With Activation Code)"
+msgstr ""
+
+#: inc/Register.php:133
+msgctxt "register_succession"
+msgid ""
+"You have been sign up successfuly. You can sign in with your username and "
+"password."
+msgstr ""
+
+#: inc/Register.php:123
+msgctxt "register_succession_with_activation"
+msgid ""
+"You have been sign up successfully. Please click the membership activation "
+"link sent your e-mail."
+msgstr ""
+
+#: admin/partials/general-settings.php:130
+msgctxt "registration_page"
+msgid "Registration Page"
+msgstr ""
+
+#: public/partials/login/login-form.php:69
+msgctxt "remember_me_text"
+msgid "Remember me"
+msgstr ""
+
+#: public/partials/login/login-form.php:88
+msgctxt "reset_password_button_text"
+msgid "Lost Password"
+msgstr ""
+
+#: inc/LostPassword.php:136
+msgctxt "reset_password_mail_title"
+msgid "Your Password Changed"
+msgstr ""
+
+#: admin/partials/mail-template-settings.php:53
+msgctxt "reset_password_mail_to_user"
+msgid "Password Change Mail Template for User"
+msgstr ""
+
+#: inc/Mail.php:80
+msgctxt "reset_password_mail_to_user_template"
+msgid ""
+"Hello {{username}}, <br> This notice confirms that your password was changed."
+" If you did not change your password, please contact the Site Administrator."
+msgstr ""
+
+#: inc/LostPassword.php:81
+msgctxt "reset_password_request_confirmation"
+msgid ""
+"We have successfully get your request. We have sent you an e-mail. Please "
+"check your inbox..."
+msgstr ""
+
+#: admin/partials/mail-template-settings.php:46
+msgctxt "reset_password_request_mail_to_user"
+msgid "Password Reset Request Mail Template"
+msgstr ""
+
+#: inc/Mail.php:84
+msgctxt "reset_password_request_mail_to_user_template"
+msgid ""
+"Hello {{username}}, <br> You can change your password from the link below "
+"<br> {{reset_link}} <br> Thanks for your attention."
+msgstr ""
+
+#: inc/LostPassword.php:73
+msgctxt "reset_request_mail_title"
+msgid "Reset Password Request"
+msgstr ""
+
+#: admin/partials/general-settings.php:44
+#: admin/partials/general-settings.php:69
+#: admin/partials/general-settings.php:94
+#: admin/partials/general-settings.php:172
+#: admin/partials/limit-login-settings.php:40
+msgctxt "select_text"
+msgid "Please select..."
+msgstr ""
+
+#: public/partials/reset-password/reset-request.php:56
+msgctxt "send_reset_request"
+msgid "Send Request"
+msgstr ""
+
+#: public/partials/reset-password/reset-request.php:18
+msgctxt "send_reset_request_description"
+msgid ""
+"Please enter your e-mail address. We will send you an e-mail to reset your "
+"password."
+msgstr ""
+
+#: public/partials/reset-password/reset-in-progress.php:72
+msgctxt "submit_reset_password_button_text"
+msgid "Change Password"
+msgstr ""
+
+#: admin/partials/general-settings.php:144
+msgctxt "terms_and_conditions_page"
+msgid "Terms and Conditions Page"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:227
+msgctxt "update_user_button_text"
+msgid "Update User"
+msgstr ""
+
+#: inc/UserActivation.php:82
+msgctxt "user_already_activated"
+msgid "This account has already activated."
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:135
+msgctxt "user_bio_text"
+msgid "Your short biography (optional)"
+msgstr ""
+
+#: inc/Register.php:95
+msgctxt "user_exist_error"
+msgid "This user already exist."
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:53
+msgctxt "user_first_name_placeholder_text"
+msgid "Enter your first name"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:44
+msgctxt "user_first_name_text"
+msgid "First Name (optional)"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:76
+msgctxt "user_last_name_placeholder_text"
+msgid "Enter your last name"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:67
+msgctxt "user_last_name_text"
+msgid "Last Name (optional)"
+msgstr ""
+
+#: inc/Login.php:120
+msgctxt "user_not_activated"
+msgid ""
+"Please activate your account. We sent you an email. Click the activation "
+"link in the email."
+msgstr ""
+
+#: admin/partials/general-settings.php:139
+msgctxt "user_settings_page"
+msgid "User Settings Page"
+msgstr ""
+
+#: admin/partials/general-settings.php:140
+msgctxt "user_settings_page_description"
+msgid ""
+"Select a page if you selected 'Yes' in the 'Enable user settings' setting"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:121
+msgctxt "user_website_placeholder_text"
+msgid "Enter your website url"
+msgstr ""
+
+#: public/partials/user-settings/user-settings-form.php:112
+msgctxt "user_website_text"
+msgid "Website Url (optional)"
+msgstr ""
+
+#: inc/Register.php:84
+msgctxt "username_exist_error"
+msgid "This username already exist."
+msgstr ""
+
+#: public/partials/register/register-form.php:36
+msgctxt "username_input_text"
+msgid "Username"
+msgstr ""
+
+#: public/partials/register/register-form.php:44
+msgctxt "username_placeholder_text"
+msgid "Enter your username"
+msgstr ""
+
+#: inc/UserActivation.php:107
+#: public/partials/user-activation/user-activation.php:22
+msgctxt "wrong_activation_code"
+msgid "Wrong activation code. Please contact with your site administrator."
+msgstr ""
+
+#: public/partials/reset-password/reset-password-form.php:27
+msgctxt "wrong_reset_password_link"
+msgid ""
+"Wrong reset password link. Please check your reset link sent to your e-mail "
+"address or send a new request."
+msgstr ""
+
+#. Author of the plugin
+msgid "Xidea Themes"
+msgstr ""
+
+#: admin/partials/general-settings.php:45
+#: admin/partials/general-settings.php:70
+#: admin/partials/general-settings.php:95
+#: admin/partials/limit-login-settings.php:41
+msgctxt "yes_text"
+msgid "Yes"
+msgstr ""
+
+#. %1$s duration limit %2$s duration type (second or minute)
+#: inc/Login.php:246
+#, php-format
+msgid ""
+"You have made too many unsuccessful login attempts. Please wait %1$s %2$s"
+msgstr ""
+
+#: admin/partials/mail-template-settings.php:76
+msgctxt "you_can_use_this_tags_text"
+msgid "You can use these tags:"
+msgstr ""
+
+#: inc/UserActivation.php:100
+msgctxt "your_account_has_activated"
+msgid "Your account has activated successfully. You can sign in."
+msgstr ""

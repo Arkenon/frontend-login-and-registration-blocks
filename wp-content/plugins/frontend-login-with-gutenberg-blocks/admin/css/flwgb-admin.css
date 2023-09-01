@@ -1,0 +1,14 @@
+/*
+ * Css codes for admin dashboard /
+ * Frontend Login with Gutenberg Blocks Settings page
+*/
+
+#flwgb-admin-general-settings select{
+	width: 100% !important;
+}
+
+.flwgb-admin-settings-description{
+	font-weight: normal;
+	font-size: 13px;
+	color: darkgrey;
+}
