@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "title": "Reset (Lost) Password Form",
   "category": "theme",
-  "icon": "format-aside",
+  "icon": "unlock",
   "description": "Display reset password form",
   "attributes": {
 	"showLabels": {

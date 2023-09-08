@@ -137,33 +137,6 @@ class Helper {
 
 	}
 
-
-	/**
-	 * Replace texts with dynamic values (for e-mail templates)
-	 *
-	 * @param string $option_name Mail template option name
-	 * @param string $template_name Mail template name for translation
-	 * @param array $params Parameters for mail templates (username, mail, etc.)
-	 *
-	 * @return string $dynamicText Replaced text
-	 *
-	 * @since 1.0.0
-	 */
-	public static function replace_mail_parameters( string $option_name, string $template, array $params ): string {
-
-		$text = get_option( $option_name ) ?: $template;
-
-		return preg_replace_callback( '/{{(.*?)}}/', function ( $matches ) use ( $params ) {
-
-			$placeholder = $matches[1];
-
-			return $params[ $placeholder ] ?? $matches[0];
-
-		}, $text );
-
-	}
-
-
 	/**
 	 * Select option input helper for post query
 	 *

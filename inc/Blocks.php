@@ -65,6 +65,9 @@ class Blocks {
 				'render_callback' => [ $this, 'user_settings_render_callback' ]
 			] );
 
+		//Logout Menu Item Block
+		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/logout-nav-menu-item');
+
 	}
 
 	/**

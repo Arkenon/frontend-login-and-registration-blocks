@@ -161,7 +161,7 @@ $pages = get_pages();
 					</label>
 
 					<p class="flwgb-admin-settings-description">
-						<?php echo esc_html( $select['description']); ?>
+						<?php echo esc_html( $select['description'] ?? null); ?>
 					</p>
 
 				</th>

@@ -15,7 +15,7 @@ class Mail {
 	 *
 	 * @since    1.0.0
 	 */
-	public function mail_html_format() {
+	public function mail_html_format() : string {
 		return "text/html";
 	}
 
@@ -37,7 +37,7 @@ class Mail {
 
 		$template = self::mail_templates( $template_name );
 
-		$body = Helper::replace_mail_parameters( $option_name, $template, $params );
+		$body = $this->replace_mail_parameters( $option_name, $template, $params );
 
 		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 
@@ -88,6 +88,31 @@ class Mail {
 				return "";
 
 		}
+
+	}
+
+	/**
+	 * Replace texts with dynamic values (for e-mail templates)
+	 *
+	 * @param string $option_name Mail template option name
+	 * @param string $template_name Mail template name for translation
+	 * @param array $params Parameters for mail templates (username, mail, etc.)
+	 *
+	 * @return string $dynamicText Replaced text
+	 *
+	 * @since 1.0.0
+	 */
+	public function replace_mail_parameters( string $option_name, string $template, array $params ): string {
+
+		$text = get_option( $option_name ) ?: $template;
+
+		return preg_replace_callback( '/{{(.*?)}}/', function ( $matches ) use ( $params ) {
+
+			$placeholder = $matches[1];
+
+			return $params[ $placeholder ] ?? $matches[0];
+
+		}, $text );
 
 	}
 }

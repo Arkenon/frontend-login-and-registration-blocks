@@ -353,11 +353,11 @@
 	"context": "register_form_step_2_title"
   },
   "register_succession_with_activation": {
-	"text": "You have been sign up successfully. Please click the membership activation link sent your e-mail.",
+	"text": "You have been signed up successfully. Please click the membership activation link sent your e-mail.",
 	"context": "register_succession_with_activation"
   },
   "register_succession": {
-	"text": "You have been sign up successfully. You can sign in with your username and password.",
+	"text": "You have been signed up successfully. You can sign in with your username and password.",
 	"context": "register_succession"
   },
   "register_mail_to_user": {

@@ -370,7 +370,7 @@ msgstr ""
 #: inc/Mail.php:72
 msgctxt "register_mail_to_user_template_with_activation"
 msgid ""
-"Hello {{username}}. You have been sign up successfully. Please click the "
+"Hello {{username}}. You have been signed up successfully. Please click the "
 "membership activation link below: <br/> {{activation_link}}"
 msgstr ""
 
@@ -382,7 +382,7 @@ msgstr ""
 #: inc/Register.php:133
 msgctxt "register_succession"
 msgid ""
-"You have been sign up successfuly. You can sign in with your username and "
+"You have been signed up successfully. You can sign in with your username and "
 "password."
 msgstr ""
 

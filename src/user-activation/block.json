@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "title": "User Activation Block",
   "category": "theme",
-  "icon": "unlock",
+  "icon": "admin-users",
   "description": "Display user activation result",
   "supports": {
 	"html": false

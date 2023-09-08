@@ -120,7 +120,7 @@ class Register {
 
 				if ( $add_user_activation && $add_user_activation_code ) {
 
-					$message = esc_html_x( "You have been sign up successfully. Please click the membership activation link sent your e-mail.", "register_succession_with_activation", "flwgb" );
+					$message = esc_html_x( "You have been signed up successfully. Please click the membership activation link sent your e-mail.", "register_succession_with_activation", "flwgb" );
 
 					$activation_link = site_url() . '/' . get_option( "flwgb_activation_page" ) . '?key=' . $code . '&user=' . $newuser;
 
@@ -130,7 +130,7 @@ class Register {
 
 			} else {
 
-				$message = esc_html_x( "You have been sign up successfuly. You can sign in with your username and password.", "register_succession", "flwgb" );
+				$message = esc_html_x( "You have been signed up successfully. You can sign in with your username and password.", "register_succession", "flwgb" );
 
 			}
 
