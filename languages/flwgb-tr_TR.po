@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Frontend Login with Gutenberg Blocks\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-16 12:57+0000\n"
-"PO-Revision-Date: 2023-08-17 13:06+0000\n"
+"PO-Revision-Date: 2023-09-11 11:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
@@ -126,7 +126,7 @@ msgstr "Web sitenizi çok fazla hatalı giriş denemelerinden koruyun"
 msgid "Frontend Login with Gutenberg Blocks"
 msgstr ""
 
-#: inc/LostPassword.php:88 inc/Register.php:161 inc/UserActivation.php:93
+#: inc/LostPassword.php:85 inc/Register.php:160 inc/UserActivation.php:93
 #: inc/UserSettings.php:137
 msgctxt "general_error_message"
 msgid "Something went wrong. Please try again later."
@@ -137,7 +137,7 @@ msgctxt "general_success_message"
 msgid "Operation has been completed successfully."
 msgstr "İşlem başarılı."
 
-#: public/partials/login/already-logged-in.php:16
+#: public/partials/login/already-logged-in.php:22
 msgctxt "go_to_user_dashboard_text"
 msgid "Go to user dashboard"
 msgstr "Kullanıcı sayfasına git"
@@ -167,7 +167,7 @@ msgstr ""
 "Eğer bir kullanıcı ayarlar sayfası göstermek istiyorsanız, 'Evet'i seçin. "
 "(Aşağıdan bir Kullanıcı Ayarları sayfası seçmeyi unutmayın)"
 
-#: public/partials/login/already-logged-in.php:9
+#: public/partials/login/already-logged-in.php:15
 msgctxt "hello_text"
 msgid "Hello"
 msgstr "Merhaba"
@@ -187,7 +187,7 @@ msgstr ""
 "yönlendirilecektir."
 
 #. URI of the plugin
-msgid "https://xideathemes.com/frontend-login-with-gutenberg-blocks"
+msgid "https://xideathemes.gitbook.io/frontend-login-with-gutenberg-blocks/"
 msgstr ""
 
 #. %1$s terms and cond. url %2$s privacy policy url
@@ -204,6 +204,10 @@ msgstr ""
 msgctxt "invalid_username_or_pass"
 msgid "Invalid username or password."
 msgstr "Hatalı kullanıcı adı veya şifre."
+
+#. Author of the plugin
+msgid "Kadim Gültekin"
+msgstr ""
 
 #: admin/partials/limit-login-settings.php:68
 msgctxt "limit_login_lockout_duration"
@@ -246,11 +250,13 @@ msgstr "Başarıyla giriş yaptınız..."
 
 #: public/partials/login/login-form.php:79
 #: public/partials/register/register-form.php:135
+#: public/partials/user-activation/user-activation.php:37
 msgctxt "login_text"
 msgid "Login"
 msgstr "Giriş Yap"
 
-#: public/partials/login/already-logged-in.php:22
+#: public/partials/login/already-logged-in.php:28
+#: public/partials/logout/logout-menu-item.php:11
 msgctxt "logout_text"
 msgid "Logout"
 msgstr "Çıkış Yap"
@@ -302,7 +308,7 @@ msgctxt "password_again_placeholder_text"
 msgid "Enter your password again"
 msgstr "Şifrenizi yeniden giriniz"
 
-#: inc/LostPassword.php:140
+#: inc/LostPassword.php:136
 msgctxt "password_changed_confirmation"
 msgid "Your password has been changed. Please sign in..."
 msgstr "Şifreniz değişmiştir. Lütfen giriş yapınız..."
@@ -313,7 +319,7 @@ msgctxt "password_input_text"
 msgid "Password"
 msgstr "Şifre"
 
-#: inc/LostPassword.php:156 inc/Register.php:73 inc/UserSettings.php:82
+#: inc/LostPassword.php:152 inc/Register.php:73 inc/UserSettings.php:82
 msgctxt "password_match_error"
 msgid "Your passwords do not match"
 msgstr "Şifreleriniz eşleşmiyor"
@@ -348,12 +354,12 @@ msgctxt "register_button_text"
 msgid "Register"
 msgstr "Kayıt Ol"
 
-#: inc/Register.php:150
+#: inc/Register.php:149
 msgctxt "register_mail_title_to_admin"
 msgid "New Member Registration"
 msgstr "Yeni Üye Kaydı"
 
-#: inc/Register.php:142 inc/Register.php:146
+#: inc/Register.php:141 inc/Register.php:145
 msgctxt "register_mail_title_to_user"
 msgid "Welcome to Join Us"
 msgstr "Aramıza Hoş Geldiniz"
@@ -383,13 +389,16 @@ msgid "Hello {{username}}, <br> Welcome to our website."
 msgstr "Merhaba {{username}}, <br> Web sitemize hoş geldin."
 
 #: inc/Mail.php:72
+#| msgid ""
+#| "Hello {{username}}. You have been sign up successfully. Please click the "
+#| "membership activation link below: <br/> {{activation_link}}"
 msgctxt "register_mail_to_user_template_with_activation"
 msgid ""
 "Hello {{username}}. You have been signed up successfully. Please click the "
 "membership activation link below: <br/> {{activation_link}}"
 msgstr ""
-"Merhaba {{username}}. Başarıyla kaydoldunuz. Lütfen aşağıdaki üyelik "
-"aktivasyon linkine tıklayın: <br/> {{activation_link}}"
+"Merhaba {{username}}. Kayıt işlemi başarıyla tamamlandı. Lütfen aşağıdaki "
+"üyelik aktivasyon linkine tıklayın: <br/> {{activation_link}}"
 
 #: admin/partials/mail-template-settings.php:32
 msgctxt "register_mail_to_user_with_activation"
@@ -428,7 +437,7 @@ msgctxt "reset_password_button_text"
 msgid "Lost Password"
 msgstr "Şifremi Unuttum"
 
-#: inc/LostPassword.php:136
+#: inc/LostPassword.php:132
 msgctxt "reset_password_mail_title"
 msgid "Your Password Changed"
 msgstr "Şifreniz Değişti"
@@ -447,7 +456,7 @@ msgstr ""
 "Merhaba {{username}}, <br> Bu bildirim, parolanızın değiştirildiğini onaylar."
 " Şifrenizi değiştirmediyseniz, lütfen Site Yöneticisi ile iletişime geçin."
 
-#: inc/LostPassword.php:81
+#: inc/LostPassword.php:78
 msgctxt "reset_password_request_confirmation"
 msgid ""
 "We have successfully get your request. We have sent you an e-mail. Please "
@@ -470,7 +479,7 @@ msgstr ""
 "Merhaba {{username}}, <br> Aşağıdaki bağlantıdan şifrenizi "
 "değiştirebilirsiniz <br> {{reset_link}} <br> İlginiz için teşekkürler."
 
-#: inc/LostPassword.php:73
+#: inc/LostPassword.php:70
 msgctxt "reset_request_mail_title"
 msgid "Reset Password Request"
 msgstr "Şifre Sıfırlama İsteği"
@@ -507,6 +516,15 @@ msgstr "Şifreyi Değiştir"
 msgctxt "terms_and_conditions_page"
 msgid "Terms and Conditions Page"
 msgstr "Şartlar ve Koşullar Sayfası"
+
+#. %1$s duration limit %2$s duration type (second or minute)
+#: inc/Login.php:246
+#, php-format
+msgctxt "unsuccessful_login_attempts_error"
+msgid ""
+"You have made too many unsuccessful login attempts. Please wait %1$s %2$s"
+msgstr ""
+"Çok fazla başarısız giriş denemesi yaptınız. Lütfen %1$s %2$s bekleyiniz."
 
 #: public/partials/user-settings/user-settings-form.php:227
 msgctxt "update_user_button_text"
@@ -596,7 +614,7 @@ msgid "Enter your username"
 msgstr "Kullanıcı adınızı giriniz"
 
 #: inc/UserActivation.php:107
-#: public/partials/user-activation/user-activation.php:22
+#: public/partials/user-activation/user-activation.php:26
 msgctxt "wrong_activation_code"
 msgid "Wrong activation code. Please contact with your site administrator."
 msgstr "Yanlış aktivasyon kodu. Lütfen site yöneticinizle iletişime geçin."
@@ -610,10 +628,6 @@ msgstr ""
 "Yanlış sıfırlama şifresi bağlantısı. Lütfen e-posta adresinize gönderilen "
 "sıfırlama bağlantınızı kontrol edin veya yeni bir istek gönderin."
 
-#. Author of the plugin
-msgid "Xidea Themes"
-msgstr ""
-
 #: admin/partials/general-settings.php:45
 #: admin/partials/general-settings.php:70
 #: admin/partials/general-settings.php:95
@@ -621,15 +635,6 @@ msgstr ""
 msgctxt "yes_text"
 msgid "Yes"
 msgstr "Evet"
-
-#. %1$s duration limit %2$s duration type (second or minute)
-#: inc/Login.php:246
-#, php-format
-msgid ""
-"You have made too many unsuccessful login attempts. Please wait %1$s %2$s"
-msgstr ""
-"Çok fazla başarısız oturum açma girişiminde bulundunuz. Lütfen %1$s %2$s "
-"bekleyin"
 
 #: admin/partials/mail-template-settings.php:76
 msgctxt "you_can_use_this_tags_text"

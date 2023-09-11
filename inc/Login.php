@@ -243,7 +243,7 @@ class Login {
 		return json_encode( array(
 			'status'  => false,
 			// translators: %1$s duration limit %2$s duration type (second or minute)
-			'message' => sprintf( __( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'flwgb' ), $duration_limit, $duration_type )
+			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error','flwgb' ), $duration_limit, $duration_type )
 		) );
 
 	}

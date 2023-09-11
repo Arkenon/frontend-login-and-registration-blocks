@@ -69,7 +69,7 @@ class Mail {
 				break;
 
 			case "register_mail_to_user_template_with_activation":
-				return _x( 'Hello {{username}}. You have been sign up successfully. Please click the membership activation link below: <br/> {{activation_link}}', 'register_mail_to_user_template_with_activation', 'flwgb' );
+				return _x( 'Hello {{username}}. You have been signed up successfully. Please click the membership activation link below: <br/> {{activation_link}}', 'register_mail_to_user_template_with_activation', 'flwgb' );
 				break;
 
 			case "register_mail_to_admin_template":
