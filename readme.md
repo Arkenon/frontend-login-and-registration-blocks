@@ -13,7 +13,7 @@ Stable tag:        1.0.0
 
 Frontend Login with Gutenberg Blocks plugin provides blocks helps you to add login, register, lost password forms from front end.
 
-Additionally, you can create user settings page, add your website limit login attempts and user activation functionality and more...
+Additionally, you can create user settings page, add limit login attempts and user activation functionality and more to your website...
 
 == Installation ==
 
