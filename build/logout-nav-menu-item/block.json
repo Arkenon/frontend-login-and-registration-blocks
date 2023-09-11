@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "frontend-login-with-gutenberg-blocks/logout-nav-menu-item",
+  "version": "1.0.0",
+  "title": "Log out Menu Item",
+  "category": "theme",
+  "parent": [
+    "core/navigation"
+  ],
+  "icon": "menu-alt2",
+  "description": "Navigation menu item for log out operation.",
+  "supports": {
+    "html": false,
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "textdomain": "logout-nav-menu-item",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

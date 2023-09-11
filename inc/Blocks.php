@@ -30,7 +30,7 @@ class Blocks {
 	public function register_flwgb_blocks() {
 
 		//Login Form Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ). '/build/login-form',
+		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/login-form',
 			[
 				'render_callback' => [ $this, 'login_form_render_callback' ]
 			] );
@@ -66,7 +66,10 @@ class Blocks {
 			] );
 
 		//Logout Menu Item Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/logout-nav-menu-item');
+		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/logout-nav-menu-item',
+			[
+				'render_callback' => [ $this, 'logout_menu_item_render_callback' ]
+			] );
 
 	}
 
@@ -74,14 +77,15 @@ class Blocks {
 	 * Callback function for user settings form block
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
+	 *
 	 * @return string User settings form html template
 	 * @since    1.0.0
 	 */
-	public function user_settings_render_callback(array $block_attributes): string {
+	public function user_settings_render_callback( array $block_attributes ): string {
 
 		$login = new UserSettings();
 
-		return $login->user_settings_form($block_attributes);
+		return $login->user_settings_form( $block_attributes );
 
 	}
 
@@ -89,14 +93,15 @@ class Blocks {
 	 * Callback function for login form block
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
+	 *
 	 * @return string Login form html template
 	 * @since    1.0.0
 	 */
-	public function login_form_render_callback(array $block_attributes): string {
+	public function login_form_render_callback( array $block_attributes ): string {
 
 		$login = new Login();
 
-		return $login->login_form($block_attributes);
+		return $login->login_form( $block_attributes );
 
 	}
 
@@ -108,11 +113,11 @@ class Blocks {
 	 * @return string Login form template html
 	 * @since    1.0.0
 	 */
-	public function register_form_render_callback(array $block_attributes): string {
+	public function register_form_render_callback( array $block_attributes ): string {
 
 		$register = new Register();
 
-		return $register->register_form($block_attributes);
+		return $register->register_form( $block_attributes );
 
 
 	}
@@ -123,11 +128,11 @@ class Blocks {
 	 * @return string Lost password form template html
 	 * @since    1.0.0
 	 */
-	public function reset_password_form_render_callback(array $block_attributes): string {
+	public function reset_password_form_render_callback( array $block_attributes ): string {
 
 		$lost_password = new LostPassword();
 
-		return $lost_password->lost_password_form($block_attributes);
+		return $lost_password->lost_password_form( $block_attributes );
 
 	}
 
@@ -137,13 +142,13 @@ class Blocks {
 	 * @return string User activation block template html
 	 * @since    1.0.0
 	 */
-	public function user_activation_render_callback(array $block_attributes): string {
+	public function user_activation_render_callback( array $block_attributes ): string {
 
-		Helper::using('inc/UserActivation.php');
+		Helper::using( 'inc/UserActivation.php' );
 
 		$lost_password = new UserActivation();
 
-		return $lost_password->user_activation_block($block_attributes);
+		return $lost_password->user_activation_block( $block_attributes );
 
 	}
 
@@ -153,12 +158,28 @@ class Blocks {
 	 * @return string Welcome card block template html
 	 * @since    1.0.0
 	 */
-	public function welcome_card_render_callback(array $block_attributes): string {
+	public function welcome_card_render_callback( array $block_attributes ): string {
 
 		$lost_password = new Login();
 
-		return $lost_password->welcome_card($block_attributes);
+		return $lost_password->welcome_card( $block_attributes );
 
 	}
 
+	/**
+	 * Callback function for logout menu item block
+	 *
+	 * @param array $block_attributes Get block attributes from block-name/edit.js
+	 *
+	 * @return string User settings form html template
+	 * @since    1.0.0
+	 */
+	public function logout_menu_item_render_callback( array $block_attributes ): string {
+
+		Helper::using( "inc/Logout.php" );
+		$logout = new Logout();
+
+		return $logout->logout_menu_item( $block_attributes );
+
+	}
 }

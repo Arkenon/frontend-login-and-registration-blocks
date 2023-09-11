@@ -2,7 +2,13 @@
 
 global $user_login;
 
-$view = '<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);transition: 0.3s;width:100%;" '.get_block_wrapper_attributes().'>
+use FLWGB\Helper;
+use FLWGB\Logout;
+
+Helper::using("inc/Logout.php");
+$logout = new Logout();
+
+$view = '<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);transition: 0.3s;width:100%;" ' . get_block_wrapper_attributes() . '>
 			<div style="padding: 16px;text-align:center;">
 				<div style="display: flex; align-items: center;justify-content: center;">
 					<span class="dashicons dashicons-admin-users"></span>
@@ -18,7 +24,7 @@ if ( get_option( 'flwgb_has_user_dashboard' ) === 'yes' ) :
 
 endif;
 
-$view .= '<a style="text-decoration:none;font-size:14px;" href="' . esc_url( wp_logout_url( home_url() ) ) . '">
+$view .= '<a style="text-decoration:none;font-size:14px;" href="' . esc_url( $logout->nonce_url_for_logout() ) . '">
 			' . esc_html_x( "Logout", "logout_text", "flwgb" ) . '
 		  </a>
 			</div>
