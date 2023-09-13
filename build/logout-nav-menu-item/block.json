@@ -3,13 +3,13 @@
   "apiVersion": 3,
   "name": "frontend-login-with-gutenberg-blocks/logout-nav-menu-item",
   "version": "1.0.0",
-  "title": "Log out Menu Item",
+  "title": "Login/Logout Menu Item",
   "category": "theme",
   "parent": [
     "core/navigation"
   ],
   "icon": "menu-alt2",
-  "description": "Navigation menu item for log out operation.",
+  "description": "Navigation menu item for login/logout operation.",
   "supports": {
     "html": false,
     "typography": {

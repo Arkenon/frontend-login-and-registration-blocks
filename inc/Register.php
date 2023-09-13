@@ -54,6 +54,17 @@ class Register {
 
 		header( 'Access-Control-Allow-Origin: *' );
 
+		if(!get_option('users_can_register')){
+
+			echo json_encode( array(
+				'status'  => false,
+				'message' => esc_html_x( "Users are not allowed to register on your website. Please set the 'anyone can register' option in the General Options.", "users_can_register_error", "flwgb" )
+			) );
+
+			wp_die();
+
+		}
+
 		$password       = Helper::post( 'flwgb-password-for-register' );
 		$password_again = Helper::post( 'flwgb-password-again-for-register' );
 		$username       = Helper::post( 'flwgb-username-for-register' );

@@ -126,7 +126,7 @@ class Login {
 
 			} else {
 
-				$this->login_success_response();
+				echo $this->login_success_response();
 
 			}
 
@@ -146,7 +146,7 @@ class Login {
 
 		return json_encode( array(
 			'status'     => true,
-			'return_url' => site_url( get_option( 'flwgb_redirect_after_login' ) ),
+			'return_url' => site_url( get_option( 'flwgb_redirect_after_login' ) ) ?? null,
 			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "flwgb" )
 		) );
 

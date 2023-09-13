@@ -38,7 +38,7 @@
   "general_success_message": {
 	"text": "Operation has been completed successfully.",
 	"context": "general_success_message"
-  }
+  },
   "login_text": {
 	"text": "Login",
 	"context": "login_text"
@@ -359,6 +359,10 @@
   "register_succession": {
 	"text": "You have been signed up successfully. You can sign in with your username and password.",
 	"context": "register_succession"
+  },
+  "users_can_register_error": {
+	"text": "Users are not allowed to register on your website. Please set the 'anyone can register' option in the General Options.",
+	"context": "users_can_register_error"
   },
   "register_mail_to_user": {
 	"text": "Registration Mail Template for User",
