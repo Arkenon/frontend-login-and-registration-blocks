@@ -1,7 +1,7 @@
 === Frontend Login and Registration Blocks ===
 
 Contributors:      arkenon
-Tags:              block, gutenberg, login form, register form, frontend login, wp-login, authentication
+Tags:              block, gutenberg, login form, register form, lost password form, frontend login, wp-login, authentication, site editor, site editing
 Requires at least: 6.1
 Tested up to:      6.3.1
 Requires PHP:      7.0
