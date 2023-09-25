@@ -1,17 +1,18 @@
-=== Frontend Login With Gutenberg Blocks ===
+=== Frontend Login and Registration Blocks ===
 
-Contributors:      Kadim Gültekin
-
-Tags:              block, gutenberg, login form, register form, frontend login
-
-Tested up to:      6.3
-
+Contributors:      arkenon
+Tags:              block, gutenberg, login form, register form, frontend login, wp-login, authentication
+Requires at least: 6.1
+Tested up to:      6.3.1
+Requires PHP:      7.0
 Stable tag:        1.0.0
+License:           GPL-2.0-or-later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
 
 == Description ==
 
-Frontend Login with Gutenberg Blocks plugin provides blocks helps you to add login, register, lost password forms from front end.
+Frontend Login and Registration Blocks plugin provides blocks helps you to add login, register, lost password forms from front end.
 
 Additionally, you can create user settings page, add limit login attempts and user activation functionality and more to your website...
 

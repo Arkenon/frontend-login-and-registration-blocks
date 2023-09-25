@@ -1,15 +1,16 @@
 <?php
 /**
- * Plugin Name:       Frontend Login with Gutenberg Blocks
- * Plugin URI:        https://xideathemes.gitbook.io/frontend-login-with-gutenberg-blocks/
+ * Plugin Name:       Frontend Login and Registration Blocks
+ * Plugin URI:        https://frontendlogin.iyziweb.site/
  * Description:       Do login, register and lost password operations from frontend with Gutenberg blocks. Easily customize forms and add to your pages.
  * Requires at least: 5.9
  * Requires PHP:      7.0
  * Version:           1.0.0
  * Author:            Kadim Gültekin
+ * Author URI:        https://github.com/Arkenon
  * Text Domain:       flwgb
  * Domain Path:       /languages
- * @package           Frontend_Login_With_Gutenberg_Blocks
+ * @package           Frontend_Login_And_Registration_Blocks
  */
 
 // Exit if accessed directly.
@@ -17,7 +18,7 @@ defined( 'ABSPATH' ) or die;
 
 use FLWGB\Activator;
 use FLWGB\Deactivator;
-use FLWGB\Flwgb;
+use FLWGB\Core;
 use FLWGB\Helper;
 
 //Get helper functions at first.
@@ -84,7 +85,7 @@ register_deactivation_hook( __FILE__, 'deactivate_flwgb' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, public-facing site hooks and more...
  */
-Helper::using( 'inc/Flwgb.php' );
+Helper::using( 'inc/Core.php' );
 
 /**
  * Begins execution of the plugin.
@@ -95,6 +96,6 @@ Helper::using( 'inc/Flwgb.php' );
  *
  * @since    1.0.0
  */
-$plugin = new Flwgb();
+$plugin = new Core();
 
 $plugin->run();

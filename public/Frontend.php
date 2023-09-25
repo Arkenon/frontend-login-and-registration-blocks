@@ -6,8 +6,8 @@
  * enqueue the public-facing stylesheet and JavaScript.
  *
  * @since      1.0.0
- * @package    Frontend_Login_With_Gutenberg_Blocks
- * @subpackage Frontend_Login_With_Gutenberg_Blocks/public
+ * @package    Frontend_Login_And_Registration_Blocks
+ * @subpackage Frontend_Login_And_Registration_Blocks/public
  */
 
 namespace FLWGB;

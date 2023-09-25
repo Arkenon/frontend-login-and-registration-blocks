@@ -5,8 +5,8 @@
  * This is used to register settings, create an options page at admin dashboard.
  *
  * @since      1.0.0
- * @package    Frontend_Login_With_Gutenberg_Blocks
- * @subpackage Frontend_Login_With_Gutenberg_Blocks/inc
+ * @package    Frontend_Login_And_Registration_Blocks
+ * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
 namespace FLWGB;

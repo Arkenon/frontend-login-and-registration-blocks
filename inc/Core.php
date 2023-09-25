@@ -9,8 +9,8 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Frontend_Login_With_Gutenberg_Blocks
- * @subpackage Frontend_Login_With_Gutenberg_Blocks/inc
+ * @package    Frontend_Login_And_Registration_Blocks
+ * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
 namespace FLWGB;
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) or die;
 Helper::using( 'inc/Loader.php' );
 
 
-class Flwgb extends Loader {
+class Core extends Loader {
 
 	/**
 	 * Define the core functionality of the plugin.
