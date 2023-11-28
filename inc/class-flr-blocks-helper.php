@@ -11,12 +11,55 @@
  */
 
 namespace FLR_BLOCKS;
+
 use WP_Post;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
 class Flr_Blocks_Helper {
+
+	/**
+	 * Secures $_POST operation
+	 *
+	 * @param string $name $_POST['name']
+	 *
+	 * @return mixed|null $_POST['name'] or null when !isset($_POST['name'])
+	 * @since 1.0.0
+	 */
+	public static function post( string $name, string $type = "" ) {
+
+		if ( isset( $_POST[ $name ] ) ) {
+			switch ( $type ) {
+				case "text":
+					return sanitize_text_field( $_POST[$name] );
+					break;
+				case "title":
+					return sanitize_title($_POST[$name]);
+					break;
+				case "id":
+					return absint($_POST[$name]);
+					break;
+				case "textarea":
+					return sanitize_textarea_field($_POST[$name]);
+					break;
+				case "url":
+					return sanitize_url($_POST[$name]);
+					break;
+				case "email":
+					return sanitize_email($_POST[$name]);
+					break;
+				case "username":
+					return sanitize_user($_POST[$name]);
+					break;
+				default:
+					return $_POST[$name];
+			}
+		}
+
+		return null;
+
+	}
 
 	/**
 	 * Filters string for $_POST, $_GET or $_REQUEST operations
@@ -32,22 +75,6 @@ class Flr_Blocks_Helper {
 			'self',
 			'filter_request_string'
 		], $str ) : htmlspecialchars( trim( $str ) );
-
-	}
-
-	/**
-	 * Secures $_POST operation
-	 *
-	 * @param string $name $_POST['name']
-	 *
-	 * @return mixed|null $_POST['name'] or null when !isset($_POST['name'])
-	 * @since 1.0.0
-	 */
-	public static function post( string $name ) {
-
-		$_POST = array_map( [ 'self', 'filter_request_string' ], $_POST );
-
-		return $_POST[ $name ] ?? null;
 
 	}
 
@@ -144,7 +171,7 @@ class Flr_Blocks_Helper {
 	 *
 	 * @since 1.0.0
 	 */
-	public static function get_select_options_from_query(WP_Post $query_item, string $option_name ) {
+	public static function get_select_options_from_query( WP_Post $query_item, string $option_name ) {
 
 		$selected = $query_item->post_name === esc_attr( get_option( $option_name ) ) ? " selected" : "";
 

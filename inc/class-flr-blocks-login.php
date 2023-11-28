@@ -89,9 +89,9 @@ class Flr_Blocks_Login {
 		check_ajax_referer( 'flrblocksloginhandle', 'security' );
 
 		$credentials                  = array();
-		$credentials['user_login']    = Flr_Blocks_Helper::post( 'flr-blocks-username-or-email' ) ?? '';
+		$credentials['user_login']    = Flr_Blocks_Helper::post( 'flr-blocks-username-or-email','text' ) ?? '';
 		$credentials['user_password'] = Flr_Blocks_Helper::post( 'flr-blocks-password' ) ?? '';
-		$credentials['remember']      = Flr_Blocks_Helper::post( 'flr-blocks-rememberme' ) === 'on' ? true : false;
+		$credentials['remember']      = Flr_Blocks_Helper::post( 'flr-blocks-rememberme','text' ) === 'on' ? true : false;
 
 		$user = wp_signon( $credentials, is_ssl() );
 

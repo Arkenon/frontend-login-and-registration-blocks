@@ -58,15 +58,15 @@ class Flr_Blocks_User_Settings {
 
 		header( 'Access-Control-Allow-Origin: *' );
 
-		$user_id = Flr_Blocks_Helper::post( 'user_id' );
+		$user_id = Flr_Blocks_Helper::post( 'user_id' ,'id');
 
 		$user_info = get_userdata( $user_id );
 
-		$user_info->first_name  = Flr_Blocks_Helper::post( 'flr-blocks-user-first-name' );
-		$user_info->last_name   = Flr_Blocks_Helper::post( 'flr-blocks-user-last-name' );
-		$user_info->user_email  = Flr_Blocks_Helper::post( 'flr-blocks-email-update' );
-		$user_info->user_url    = Flr_Blocks_Helper::post( 'flr-blocks-user-website' );
-		$user_info->description = Flr_Blocks_Helper::post( 'flr-blocks-user-bio' );
+		$user_info->first_name  = Flr_Blocks_Helper::post( 'flr-blocks-user-first-name','text' );
+		$user_info->last_name   = Flr_Blocks_Helper::post( 'flr-blocks-user-last-name','text' );
+		$user_info->user_email  = Flr_Blocks_Helper::post( 'flr-blocks-email-update','email' );
+		$user_info->user_url    = Flr_Blocks_Helper::post( 'flr-blocks-user-website','text' );
+		$user_info->description = Flr_Blocks_Helper::post( 'flr-blocks-user-bio','textarea' );
 
 		$update = wp_update_user( $user_info );
 

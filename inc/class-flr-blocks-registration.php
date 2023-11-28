@@ -67,8 +67,8 @@ class Flr_Blocks_Registration {
 
 		$password       = Flr_Blocks_Helper::post( 'flr-blocks-password-for-register' );
 		$password_again = Flr_Blocks_Helper::post( 'flr-blocks-password-again-for-register' );
-		$username       = Flr_Blocks_Helper::post( 'flr-blocks-username-for-register' );
-		$email          = Flr_Blocks_Helper::post( 'flr-blocks-email-for-register' );
+		$username       = Flr_Blocks_Helper::post( 'flr-blocks-username-for-register','username' );
+		$email          = Flr_Blocks_Helper::post( 'flr-blocks-email-for-register','email' );
 
 		$params = [
 			'username'        => $username,
