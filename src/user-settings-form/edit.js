@@ -36,93 +36,93 @@ export default function Edit(props) {
 
 			<div {...blockProps}>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
 						{attributes.showLabels &&
-						<label className="flwgb-input-label" style={textStyle}
-							   htmlFor="flwgb-user-first-name">{__('First Name (optional)', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-user-first-name" type="text"
+						<label className="flr-blocks-input-label" style={textStyle}
+							   htmlFor="flr-blocks-user-first-name">{__('First Name (optional)', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-user-first-name" type="text"
 							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your first name', 'flwgb')}/>
+							   placeholder={attributes.showPlaceholders && __('Enter your first name', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
 						{attributes.showLabels &&
-						<label className="flwgb-input-label" style={textStyle}
-							   htmlFor="flwgb-user-last-name">{__('Last Name (optional)', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-user-last-name" type="text"
+						<label className="flr-blocks-input-label" style={textStyle}
+							   htmlFor="flr-blocks-user-last-name">{__('Last Name (optional)', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-user-last-name" type="text"
 							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your last name', 'flwgb')}/>
+							   placeholder={attributes.showPlaceholders && __('Enter your last name', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
 						{attributes.showLabels &&
-						<label className="flwgb-input-label" style={textStyle}
-							   htmlFor="flwgb-user-website">{__('Website Url (optional)', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-user-website" type="text"
+						<label className="flr-blocks-input-label" style={textStyle}
+							   htmlFor="flr-blocks-user-website">{__('Website Url (optional)', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-user-website" type="text"
 							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your website url', 'flwgb')}/>
+							   placeholder={attributes.showPlaceholders && __('Enter your website url', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
 						{attributes.showLabels &&
-						<label className="flwgb-input-label" style={textStyle}
-							   htmlFor="flwgb-user-bio">{__('Your short bio (optional)', 'flwgb')}</label>}
-						<textarea className="flwgb-textarea-control" name="flwgb-user-bio" id="flwgb-user-bio" cols="30" rows="10">
+						<label className="flr-blocks-input-label" style={textStyle}
+							   htmlFor="flr-blocks-user-bio">{__('Your short bio (optional)', 'flr-blocks')}</label>}
+						<textarea className="flr-blocks-textarea-control" name="flr-blocks-user-bio" id="flr-blocks-user-bio" cols="30" rows="10">
 
 						</textarea>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
 						{attributes.showLabels &&
-						<label className="flwgb-input-label" style={textStyle}
-							   htmlFor="flwgb-email-update">{__('Your e-mail', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-email-update" type="text"
+						<label className="flr-blocks-input-label" style={textStyle}
+							   htmlFor="flr-blocks-email-update">{__('Your e-mail', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-email-update" type="text"
 							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'flwgb')}/>
+							   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
-						{attributes.showLabels && <label className="flwgb-input-label" style={textStyle}
-														 htmlFor="flwgb-current-password">{__('Current Password', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-current-password" type="password" style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your current password', 'flwgb')}/>
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
+						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
+														 htmlFor="flr-blocks-current-password">{__('Current Password', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-current-password" type="password" style={inputStyle}
+							   placeholder={attributes.showPlaceholders && __('Enter your current password', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
-						{attributes.showLabels && <label className="flwgb-input-label" style={textStyle}
-														 htmlFor="flwgb-password-update">{__('New Password', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-password-update" type="password" style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your new password', 'flwgb')}/>
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
+						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
+														 htmlFor="flr-blocks-password-update">{__('New Password', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-password-update" type="password" style={inputStyle}
+							   placeholder={attributes.showPlaceholders && __('Enter your new password', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
-						{attributes.showLabels && <label className="flwgb-input-label" style={textStyle}
-														 htmlFor="flwgb-password-again-update">{__('New Password Again', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-password-again-update" type="password" style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your new password again', 'flwgb')}/>
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
+						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
+														 htmlFor="flr-blocks-password-again-update">{__('New Password Again', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-password-again-update" type="password" style={inputStyle}
+							   placeholder={attributes.showPlaceholders && __('Enter your new password again', 'flr-blocks')}/>
 					</div>
 				</div>
 
 
-				<div className="flwgb-form-row">
-					<button style={buttonStyle} type="submit" name="wp-submit" id="flwgb-user-settings-submit"
-							className="flwgb-update-user-btn flwgb-btn">
-						{__('Update User', 'flwgb')}
+				<div className="flr-blocks-form-row">
+					<button style={buttonStyle} type="submit" name="wp-submit" id="flr-blocks-user-settings-submit"
+							className="flr-blocks-update-user-btn flr-blocks-btn">
+						{__('Update User', 'flr-blocks')}
 					</button>
 				</div>
 

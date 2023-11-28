@@ -15,31 +15,31 @@
 
 	<?php
 
-	settings_fields( 'flwgb-limit-login-settings-group' );
+	settings_fields( 'flr-blocks-limit-login-settings-group' );
 
 	?>
 
-	<table id="flwgb-admin-general-settings" class="form-table">
+	<table id="flr-blocks-admin-general-settings" class="form-table">
 
 		<tr>
 			<th scope="row">
 
-				<label for="flwgb_enable_limit_login">
-					<?php echo esc_html_x( "Enable limit login attempts", "enable_limit_login", "flwgb" ); ?>
+				<label for="flr_blocks_enable_limit_login">
+					<?php echo esc_html_x( "Enable limit login attempts", "enable_limit_login", "flr-blocks" ); ?>
 				</label>
 
-				<p class="flwgb-admin-settings-description">
-					<?php echo esc_html_x( "Protect your web site from too many unsuccessful login attempts.", "enable_limit_login_description", "flwgb" ); ?>
+				<p class="flr-blocks-admin-settings-description">
+					<?php echo esc_html_x( "Protect your web site from too many unsuccessful login attempts.", "enable_limit_login_description", "flr-blocks" ); ?>
 				</p>
 
 			</th>
 			<td>
 
-				<select name="flwgb_enable_limit_login" id="flwgb_enable_limit_login">
+				<select name="flr_blocks_enable_limit_login" id="flr_blocks_enable_limit_login">
 
-					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flwgb" ) ?></option>
-					<option value="yes" <?php echo get_option( 'flwgb_enable_limit_login' ) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flwgb" ); ?></option>
-					<option value="no" <?php echo get_option( 'flwgb_enable_limit_login' ) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flwgb" ); ?></option>
+					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flr-blocks" ) ?></option>
+					<option value="yes" <?php echo get_option( 'flr_blocks_enable_limit_login' ) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
+					<option value="no" <?php echo get_option( 'flr_blocks_enable_limit_login' ) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
 
 				</select>
 
@@ -49,14 +49,14 @@
 		<tr>
 			<th scope="row">
 
-				<label for="flwgb_limit_login_max_attempts">
-					<?php echo esc_html_x("Maximum number of attempts", "limit_login_max_attempt", "flwgb" ); ?>
+				<label for="flr_blocks_limit_login_max_attempts">
+					<?php echo esc_html_x("Maximum number of attempts", "limit_login_max_attempt", "flr-blocks" ); ?>
 				</label>
 
 			</th>
 			<td>
 
-				<input type="number" name="flwgb_limit_login_max_attempts" id="flwgb_limit_login_max_attempts" value="<?php echo esc_attr(get_option( 'flwgb_limit_login_max_attempts' )); ?>">
+				<input type="number" name="flr_blocks_limit_login_max_attempts" id="flr_blocks_limit_login_max_attempts" value="<?php echo esc_attr(get_option( 'flr_blocks_limit_login_max_attempts' )); ?>">
 
 			</td>
 		</tr>
@@ -64,14 +64,14 @@
 		<tr>
 			<th scope="row">
 
-				<label for="flwgb_limit_login_lockout_duration">
-					<?php echo esc_html_x( "Lockout duration (as seconds)", "limit_login_lockout_duration", "flwgb" ); ?>
+				<label for="flr_blocks_limit_login_lockout_duration">
+					<?php echo esc_html_x( "Lockout duration (as seconds)", "limit_login_lockout_duration", "flr-blocks" ); ?>
 				</label>
 
 			</th>
 			<td>
 
-				<input type="number" name="flwgb_limit_login_lockout_duration" id="flwgb_limit_login_lockout_duration" value="<?php echo esc_attr(get_option( 'flwgb_limit_login_lockout_duration' )); ?>">
+				<input type="number" name="flr_blocks_limit_login_lockout_duration" id="flr_blocks_limit_login_lockout_duration" value="<?php echo esc_attr(get_option( 'flr_blocks_limit_login_lockout_duration' )); ?>">
 
 			</td>
 		</tr>

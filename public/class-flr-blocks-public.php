@@ -10,12 +10,12 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/public
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-class Frontend {
+class Flr_Blocks_Public {
 
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
@@ -36,7 +36,7 @@ class Frontend {
 		 * class.
 		 */
 
-		wp_enqueue_style( "flwgb-public-css", plugin_dir_url( __FILE__ ) . 'css/flwgb-public.css', array(), FLWGB_VERSION, 'all' );
+		wp_enqueue_style( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/css/flr-blocks-public.css', array(), FLR_BLOCKS_VERSION, 'all' );
 
 	}
 
@@ -59,8 +59,8 @@ class Frontend {
 		 * class.
 		 */
 
-		wp_enqueue_script( "flwgb-public-js", plugin_dir_url( __FILE__ ) . 'js/flwgb-public.js', array( 'jquery' ), FLWGB_VERSION, false );
-		wp_localize_script( 'jquery', 'flwgb_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_enqueue_script( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/js/flr-blocks-public.js', array( 'jquery' ), FLR_BLOCKS_VERSION, false );
+		wp_localize_script( 'jquery', 'flr_blocks_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Frontend {
 	public function get_the_form(string $path, array $block_attributes) : string  {
 
 		//Return html output of the form
-		return Helper::return_view( $path, $block_attributes );
+		return Flr_Blocks_Helper::return_view( $path, $block_attributes );
 
 	}
 

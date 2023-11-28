@@ -10,12 +10,12 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/admin
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-class Backend {
+class Flr_Blocks_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
@@ -23,7 +23,7 @@ class Backend {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( "flwgb-admin-css", plugin_dir_url( __FILE__ ) . 'css/flwgb-admin.css', array(), FLWGB_VERSION, 'all' );
+		wp_enqueue_style( "flr-blocks-admin-css", FLR_BLOCKS_PLUGIN_URL . '/admin/css/flr-blocks-admin.css', array(), FLR_BLOCKS_VERSION, 'all' );
 
 	}
 
@@ -34,7 +34,7 @@ class Backend {
 	 */
 	public function editor_styles() {
 
-		add_editor_style( array( plugin_dir_url( __FILE__ ) . 'css/flwgb-editor.css' ) );
+		add_editor_style( array( FLR_BLOCKS_PLUGIN_URL . '/admin/css/flr-blocks-editor.css' ) );
 
 	}
 
@@ -45,7 +45,7 @@ class Backend {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( "flwgb-admin-js", plugin_dir_url( __FILE__ ) . 'js/flwgb-admin.js', array( 'jquery' ), FLWGB_VERSION, false );
+		wp_enqueue_script( "flr-blocks-admin-js", FLR_BLOCKS_PLUGIN_URL . '/admin/js/flr-blocks-admin.js', array( 'jquery' ), FLR_BLOCKS_VERSION, false );
 
 	}
 
@@ -57,7 +57,7 @@ class Backend {
 	public function get_options_page() {
 
 		//Include options page html template from options_page.php
-		Helper::print_view( 'admin/partials/options-page.php' );
+		Flr_Blocks_Helper::print_view( 'admin/partials/options-page.php' );
 
 	}
 }

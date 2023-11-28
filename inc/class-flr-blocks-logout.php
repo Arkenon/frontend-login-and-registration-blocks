@@ -7,9 +7,9 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
-class Logout {
+class Flr_Blocks_Logout {
 
 	/**
 	 * Logout menu item for navigation block
@@ -19,7 +19,7 @@ class Logout {
 	 */
 	public function logout_menu_item(array $block_attributes ): string {
 
-		$frontend = new Frontend();
+		$frontend = new Flr_Blocks_Public();
 
 		//Get logout menu item html output from Frontend class
 		return $frontend->get_the_form( 'public/partials/logout/logout-menu-item.php', $block_attributes );

@@ -2,7 +2,7 @@
 
 if( !is_user_logged_in()){
 
-	$view = '<div style="text-align: center;">'.esc_html_x( "This form is only shown to logged in users...", "alert_for_logged_in_users", "flwgb" ).'</div>';
+	$view = '<div style="text-align: center;">'.esc_html_x( "This form is only shown to logged in users...", "alert_for_logged_in_users", "flr-blocks" ).'</div>';
 	return;
 
 }
@@ -30,27 +30,27 @@ $button_style = 'color:'. $form_attributes['buttonTextColor'].'; '.
                 'border-radius: '. $form_attributes['buttonBorderRadius'].'px;'.
                 'font-weight: '. $form_attributes['buttonTextFontWeight'];
 $view = '<div '.get_block_wrapper_attributes().'>';
-$view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" method="post">
+$view .= '<form name="flr-blocks-user-settings-form" id="flr-blocks-user-settings-form" method="post">
 			<div style="display: flex; flex-direction: column; margin-bottom: 50px; justify-content: center; align-items: center;">
 				<img src="'.get_avatar_url($ID).'" alt="user avatar" style="max-width: 100%; height: auto; border-radius: 100%;">
-				<a style="font-size:12px;" target="_blank" href="'.esc_url_raw('https://en.gravatar.com/').'">'.esc_html_x('You can change your profile picture on Gravatar.','change_avatar_description','flwgb').'</a>
+				<a style="font-size:12px;" target="_blank" href="'.esc_url_raw('https://en.gravatar.com/').'">'.esc_html_x('You can change your profile picture on Gravatar.','change_avatar_description','flr-blocks').'</a>
 			</div>
-            <div class="flwgb-form-row">
-               <div class="flwgb-input-group">';
+            <div class="flr-blocks-form-row">
+               <div class="flr-blocks-input-group">';
 
 					if ( $form_attributes['showLabels'] ) {
 
-						$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-user-first-name">
-									' . esc_html_x( "First Name (optional)", "user_first_name_text", "flwgb" ) . '
+						$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-user-first-name">
+									' . esc_html_x( "First Name (optional)", "user_first_name_text", "flr-blocks" ) . '
 								  </label>';
 
 					}
 
-					$view .= '<input class="flwgb-input-control" id="flwgb-user-first-name" name="flwgb-user-first-name" type="text" style='.$input_style.' placeholder="';
+					$view .= '<input class="flr-blocks-input-control" id="flr-blocks-user-first-name" name="flr-blocks-user-first-name" type="text" style='.$input_style.' placeholder="';
 
 					if ( $form_attributes['showPlaceholders'] ) {
 
-						$view .= esc_attr_x( "Enter your first name", "user_first_name_placeholder_text", "flwgb" ) ;
+						$view .= esc_attr_x( "Enter your first name", "user_first_name_placeholder_text", "flr-blocks" ) ;
 
 					}
 
@@ -58,22 +58,22 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
 			</div>';
 
-			$view .= '<div class="flwgb-form-row">
-				         <div class="flwgb-input-group">';
+			$view .= '<div class="flr-blocks-form-row">
+				         <div class="flr-blocks-input-group">';
 
 							if ( $form_attributes['showLabels'] ) {
 
-								$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-user-last-name">
-												' . esc_html_x( "Last Name (optional)", "user_last_name_text", "flwgb" ) . '
+								$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-user-last-name">
+												' . esc_html_x( "Last Name (optional)", "user_last_name_text", "flr-blocks" ) . '
 										</label>';
 
 							}
 
-							$view .= '<input class="flwgb-input-control" id="flwgb-user-last-name" name="flwgb-user-last-name" type="text" style='.$input_style.' placeholder="';
+							$view .= '<input class="flr-blocks-input-control" id="flr-blocks-user-last-name" name="flr-blocks-user-last-name" type="text" style='.$input_style.' placeholder="';
 
 							if ( $form_attributes['showPlaceholders'] ) {
 
-								$view .= esc_attr_x("Enter your last name", "user_last_name_placeholder_text", "flwgb" ) ;
+								$view .= esc_attr_x("Enter your last name", "user_last_name_placeholder_text", "flr-blocks" ) ;
 
 							}
 
@@ -81,21 +81,21 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
 			</div>';
 
-		   $view .= '<div class="flwgb-form-row">
-               <div class="flwgb-input-group">';
+		   $view .= '<div class="flr-blocks-form-row">
+               <div class="flr-blocks-input-group">';
 
 					if ( $form_attributes['showLabels'] ) {
 
-						$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-email-update">
-									' . esc_html_x( "Your e-mail", "email_input_text", "flwgb" ) . '
+						$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-email-update">
+									' . esc_html_x( "Your e-mail", "email_input_text", "flr-blocks" ) . '
 								 </label>';
 					}
 
-					$view .= '<input class="flwgb-input-control" id="flwgb-email-update" name="flwgb-email-update" type="text" required style='.$input_style.' placeholder="';
+					$view .= '<input class="flr-blocks-input-control" id="flr-blocks-email-update" name="flr-blocks-email-update" type="text" required style='.$input_style.' placeholder="';
 
 					if ( $form_attributes['showPlaceholders'] ) {
 
-						$view .= esc_attr_x( "Enter your e-mail", "email_placeholder_text", "flwgb" ) ;
+						$view .= esc_attr_x( "Enter your e-mail", "email_placeholder_text", "flr-blocks" ) ;
 
 					}
 
@@ -103,22 +103,22 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
            </div>';
 
-			$view .= '<div class="flwgb-form-row">
-				         <div class="flwgb-input-group">';
+			$view .= '<div class="flr-blocks-form-row">
+				         <div class="flr-blocks-input-group">';
 
 						if ( $form_attributes['showLabels'] ) {
 
-							$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-user-website">
-										' . esc_html_x( "Website Url (optional)", "user_website_text", "flwgb" ) . '
+							$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-user-website">
+										' . esc_html_x( "Website Url (optional)", "user_website_text", "flr-blocks" ) . '
 									 </label>';
 
 						}
 
-						$view .= '<input class="flwgb-input-control" id="flwgb-user-website" name="flwgb-user-website" type="text" style='.$input_style.' placeholder="';
+						$view .= '<input class="flr-blocks-input-control" id="flr-blocks-user-website" name="flr-blocks-user-website" type="text" style='.$input_style.' placeholder="';
 
 						if ( $form_attributes['showPlaceholders'] ) {
 
-							$view .= esc_attr_x( "Enter your website url", "user_website_placeholder_text", "flwgb" ) ;
+							$view .= esc_attr_x( "Enter your website url", "user_website_placeholder_text", "flr-blocks" ) ;
 
 						}
 
@@ -126,18 +126,18 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
 			</div>';
 
-			$view .= '<div class="flwgb-form-row">
-						<div class="flwgb-input-group">';
+			$view .= '<div class="flr-blocks-form-row">
+						<div class="flr-blocks-input-group">';
 
 							if ( $form_attributes['showLabels'] ) {
 
-								$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-user-bio">
-											' . esc_html_x( "Your short biography (optional)", "user_bio_text", "flwgb" ) . '
+								$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-user-bio">
+											' . esc_html_x( "Your short biography (optional)", "user_bio_text", "flr-blocks" ) . '
 										 </label>';
 
 							}
 
-							$view .= '<textarea class="flwgb-textarea-control" name="flwgb-user-bio" id="flwgb-user-bio" cols="30" rows="10" >';
+							$view .= '<textarea class="flr-blocks-textarea-control" name="flr-blocks-user-bio" id="flr-blocks-user-bio" cols="30" rows="10" >';
 
 									if($bio){
 
@@ -149,21 +149,21 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
 			</div>';
 
-			$view .= '<div class="flwgb-form-row">
-					      <div class="flwgb-input-group">';
+			$view .= '<div class="flr-blocks-form-row">
+					      <div class="flr-blocks-input-group">';
 
 							if ( $form_attributes['showLabels'] ) {
 
-								$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-current-password">
-											' . esc_html_x( "Current Password", "current_password_input_text", "flwgb" ) . '
+								$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-current-password">
+											' . esc_html_x( "Current Password", "current_password_input_text", "flr-blocks" ) . '
 										  </label>';
 							}
 
-							$view .= '<input class="flwgb-input-control" id="flwgb-current-password" name="flwgb-current-password" type="password" style='.$input_style.' placeholder="';
+							$view .= '<input class="flr-blocks-input-control" id="flr-blocks-current-password" name="flr-blocks-current-password" type="password" style='.$input_style.' placeholder="';
 
 							if ( $form_attributes['showPlaceholders'] ) {
 
-								$view .= esc_attr_x( "Enter your current password", "current_password_placeholder_text", "flwgb" ) ;
+								$view .= esc_attr_x( "Enter your current password", "current_password_placeholder_text", "flr-blocks" ) ;
 
 							}
 
@@ -171,21 +171,21 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
 			</div>';
 
-			$view .= '<div class="flwgb-form-row">
-					      <div class="flwgb-input-group">';
+			$view .= '<div class="flr-blocks-form-row">
+					      <div class="flr-blocks-input-group">';
 
 							if ( $form_attributes['showLabels'] ) {
 
-								$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-password-update">
-											' . esc_html_x( "New Password","new_password_input_text", "flwgb" ) . '
+								$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-password-update">
+											' . esc_html_x( "New Password","new_password_input_text", "flr-blocks" ) . '
 										 </label>';
 							}
 
-							$view .= '<input class="flwgb-input-control" id="flwgb-password-update" name="flwgb-password-update" type="password" style='.$input_style.' placeholder="';
+							$view .= '<input class="flr-blocks-input-control" id="flr-blocks-password-update" name="flr-blocks-password-update" type="password" style='.$input_style.' placeholder="';
 
 							if ( $form_attributes['showPlaceholders'] ) {
 
-								$view .= esc_attr_x( "Enter your new password", "new_password_placeholder_text", "flwgb" ) ;
+								$view .= esc_attr_x( "Enter your new password", "new_password_placeholder_text", "flr-blocks" ) ;
 
 							}
 
@@ -193,21 +193,21 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
 			</div>';
 
-			$view .= '<div class="flwgb-form-row">
-					    <div class="flwgb-input-group">';
+			$view .= '<div class="flr-blocks-form-row">
+					    <div class="flr-blocks-input-group">';
 
 							if ( $form_attributes['showLabels'] ) {
 
-								$view .= '<label class="flwgb-input-label" style="'.$text_style.'" for="flwgb-password-again-update">
-											' . esc_html_x( "New Password Again", "new_password_again_input_text", "flwgb" ) . '
+								$view .= '<label class="flr-blocks-input-label" style="'.$text_style.'" for="flr-blocks-password-again-update">
+											' . esc_html_x( "New Password Again", "new_password_again_input_text", "flr-blocks" ) . '
 										  </label>';
 							}
 
-							$view .= '<input class="flwgb-input-control" id="flwgb-password-again-update" name="flwgb-password-again-update" type="password" style='.$input_style.' placeholder="';
+							$view .= '<input class="flr-blocks-input-control" id="flr-blocks-password-again-update" name="flr-blocks-password-again-update" type="password" style='.$input_style.' placeholder="';
 
 							if ( $form_attributes['showPlaceholders'] ) {
 
-								$view .= esc_attr_x( "Enter your new password again", "new_password_again_placeholder_text", "flwgb" ) ;
+								$view .= esc_attr_x( "Enter your new password again", "new_password_again_placeholder_text", "flr-blocks" ) ;
 
 							}
 
@@ -216,18 +216,18 @@ $view .= '<form name="flwgb-user-settings-form" id="flwgb-user-settings-form" me
 				$view .= '</div>
 			</div>';
 
-			$view .= '<input type="hidden" name="action" value="'.esc_attr('flwgbusersettingsupdatehandle').'">';
+			$view .= '<input type="hidden" name="action" value="'.esc_attr('flrblocksusersettingsupdatehandle').'">';
 
-			$view .= '<input type="hidden" name="security" value="'.esc_attr(wp_create_nonce('flwgbusersettingsupdatehandle')).'">';
+			$view .= '<input type="hidden" name="security" value="'.esc_attr(wp_create_nonce('flrblocksusersettingsupdatehandle')).'">';
 
 			$view .= '<input type="hidden" name="user_id" value="'.esc_attr($ID).'">';
 
-			$view .= '<div class="flwgb-form-row">
-							<button style="'.$button_style.'" type="submit" id="flwgb-user-settings-submit" class="flwgb-update-user-btn flwgb-btn">
-								'.esc_html_x("Update User","update_user_button_text","flwgb").'
+			$view .= '<div class="flr-blocks-form-row">
+							<button style="'.$button_style.'" type="submit" id="flr-blocks-user-settings-submit" class="flr-blocks-update-user-btn flr-blocks-btn">
+								'.esc_html_x("Update User","update_user_button_text","flr-blocks").'
 							</button>
 						</div>
-						<div id="flwgb-user-settings-loading" class="flwgb-loading flwgb-hide">' . esc_html_x( "Loading...", "loading_text", "flwgb" ) . '</div>';
+						<div id="flr-blocks-user-settings-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...", "loading_text", "flr-blocks" ) . '</div>';
 		$view .= '</form>
-	<div id="flwgb-user-settings-form-result"></div>
+	<div id="flr-blocks-user-settings-form-result"></div>
 </div></div>';

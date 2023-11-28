@@ -3,12 +3,12 @@
  * Plugin Name:       Frontend Login and Registration Blocks
  * Plugin URI:        https://frontendlogin.iyziweb.site/
  * Description:       Do login, register and lost password operations from frontend with Gutenberg blocks. Easily customize forms and add to your pages.
- * Requires at least: 5.9
- * Requires PHP:      7.0
+ * Requires at least: 6.1
+ * Requires PHP:      7.4
  * Version:           1.0.0
  * Author:            Kadim Gültekin
  * Author URI:        https://github.com/Arkenon
- * Text Domain:       flwgb
+ * Text Domain:       flr-blocks
  * Domain Path:       /languages
  * @package           Frontend_Login_And_Registration_Blocks
  */
@@ -16,20 +16,24 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-use FLWGB\Activator;
-use FLWGB\Deactivator;
-use FLWGB\Core;
-use FLWGB\Helper;
+//TODO check path and url
+define( 'FLR_BLOCKS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'FLR_BLOCKS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
+use FLR_BLOCKS\Flr_Blocks_Helper;
+use FLR_BLOCKS\Flr_Blocks_Activator;
+use FLR_BLOCKS\Flr_Blocks_Deactivator;
+use FLR_BLOCKS\Flr_Blocks_Core;
 
 //Get helper functions at first.
-require plugin_dir_path( __FILE__ ) . 'inc/Helper.php';
+require plugin_dir_path( __FILE__ ) . 'inc/class-flr-blocks-helper.php';
 
 /**
  * Get plugin data.
  *
  * @since    1.0.0
  */
-function flwgb_get_plugin_data(): array {
+function flr_blocks_get_plugin_data(): array {
 
 	return get_file_data(
 		__FILE__,
@@ -45,32 +49,32 @@ function flwgb_get_plugin_data(): array {
  *
  * @since    1.0.0
  */
-define( 'FLWGB_VERSION', flwgb_get_plugin_data()['version'] );
+define( 'FLR_BLOCKS_VERSION', flr_blocks_get_plugin_data()['version'] );
 
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in inc/Activator.php
+ * This action is documented in inc/class-flr-blocks-activator.php
  * @since    1.0.0
  */
-function activate_flwgb() {
+function activate_flr_blocks() {
 
-	Helper::using( 'inc/Activator.php' );
+	Flr_Blocks_Helper::using( 'inc/class-flr-blocks-activator.php' );
 
-	Activator::activate();
+	Flr_Blocks_Activator::activate();
 
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in inc/Deactivator.php
+ * This action is documented in inc/class-flr-blocks-deactivator.php
  * @since    1.0.0
  */
-function deactivate_flwgb() {
+function deactivate_flr_blocks() {
 
-	Helper::using( 'inc/Deactivator.php' );
+	Flr_Blocks_Helper::using( 'inc/class-flr-blocks-deactivator.php' );
 
-	Deactivator::deactivate();
+	Flr_Blocks_Deactivator::deactivate();
 
 }
 
@@ -78,14 +82,14 @@ function deactivate_flwgb() {
  * Register activation and deactivation hooks
  * @since    1.0.0
  */
-register_activation_hook( __FILE__, 'activate_flwgb' );
-register_deactivation_hook( __FILE__, 'deactivate_flwgb' );
+register_activation_hook( __FILE__, 'activate_flr_blocks' );
+register_deactivation_hook( __FILE__, 'deactivate_flr_blocks' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, public-facing site hooks and more...
  */
-Helper::using( 'inc/Core.php' );
+Flr_Blocks_Helper::using( 'inc/class-flr-blocks-core.php' );
 
 /**
  * Begins execution of the plugin.
@@ -96,6 +100,6 @@ Helper::using( 'inc/Core.php' );
  *
  * @since    1.0.0
  */
-$plugin = new Core();
+$plugin = new Flr_Blocks_Core();
 
 $plugin->run();

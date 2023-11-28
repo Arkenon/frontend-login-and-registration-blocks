@@ -9,12 +9,12 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-class Activator {
+class Flr_Blocks_Activator {
 
 	/**
 	 * This is plugin activator.

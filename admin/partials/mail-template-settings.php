@@ -8,7 +8,7 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/admin/partials
  */
 
-use FLWGB\Mail;
+use FLR_BLOCKS\Flr_Blocks_Mail;
 
 ?>
 
@@ -17,43 +17,43 @@ use FLWGB\Mail;
 
 	<?php
 
-	settings_fields( 'flwgb-mail-settings-group' );
+	settings_fields( 'flr-blocks-mail-settings-group' );
 
 	$data = [
 			[
-					"id"       => "flwgb_register_mail_to_user",
-					"title"    => _x( "Registration Mail Template for User", "register_mail_to_user", "flwgb" ),
+					"id"       => "flr_blocks_register_mail_to_user",
+					"title"    => _x( "Registration Mail Template for User", "register_mail_to_user", "flr-blocks" ),
 					"tags"     => "{{username}}",
-					"template" => Mail::mail_templates( 'register_mail_to_user_template' ),
-					"content"  => "flwgb_register_mail_to_user"
+					"template" => Flr_Blocks_Mail::mail_templates( 'register_mail_to_user_template' ),
+					"content"  => "flr_blocks_register_mail_to_user"
 			],
 			[
-					"id"       => "flwgb_register_mail_to_user_with_activation",
-					"title"    => _x( "Registration Mail Template for User (With Activation Code)", "register_mail_to_user_with_activation", "flwgb" ),
+					"id"       => "flr_blocks_register_mail_to_user_with_activation",
+					"title"    => _x( "Registration Mail Template for User (With Activation Code)", "register_mail_to_user_with_activation", "flr-blocks" ),
 					"tags"     => "{{username}}, {{activation_link}}",
-					"template" => Mail::mail_templates( 'register_mail_to_user_template_with_activation' ),
-					"content"  => "flwgb_register_mail_to_user_with_activation"
+					"template" => Flr_Blocks_Mail::mail_templates( 'register_mail_to_user_template_with_activation' ),
+					"content"  => "flr_blocks_register_mail_to_user_with_activation"
 			],
 			[
-					"id"       => "flwgb_register_mail_to_admin",
-					"title"    => _x( "Registration Mail Template for Admin", "register_mail_to_admin", "flwgb" ),
+					"id"       => "flr_blocks_register_mail_to_admin",
+					"title"    => _x( "Registration Mail Template for Admin", "register_mail_to_admin", "flr-blocks" ),
 					"tags"     => "{{username}}, {{email}}",
-					"template" => Mail::mail_templates( 'register_mail_to_admin_template' ),
-					"content"  => "flwgb_register_mail_to_admin"
+					"template" => Flr_Blocks_Mail::mail_templates( 'register_mail_to_admin_template' ),
+					"content"  => "flr_blocks_register_mail_to_admin"
 			],
 			[
-					"id"       => "flwgb_reset_request_mail_to_user",
-					"title"    => _x( "Password Reset Request Mail Template", "reset_password_request_mail_to_user", "flwgb" ),
+					"id"       => "flr_blocks_reset_request_mail_to_user",
+					"title"    => _x( "Password Reset Request Mail Template", "reset_password_request_mail_to_user", "flr-blocks" ),
 					"tags"     => "{{username}}, {{reset_link}}",
-					"template" => Mail::mail_templates( 'reset_password_request_mail_to_user_template' ),
-					"content"  => "flwgb_reset_request_mail_to_user"
+					"template" => Flr_Blocks_Mail::mail_templates( 'reset_password_request_mail_to_user_template' ),
+					"content"  => "flr_blocks_reset_request_mail_to_user"
 			],
 			[
-					"id"       => "flwgb_reset_password_mail_to_user",
-					"title"    => _x( "Password Change Mail Template for User", "reset_password_mail_to_user", "flwgb" ),
+					"id"       => "flr_blocks_reset_password_mail_to_user",
+					"title"    => _x( "Password Change Mail Template for User", "reset_password_mail_to_user", "flr-blocks" ),
 					"tags"     => "{{username}}",
-					"template" => Mail::mail_templates( 'reset_password_mail_to_user_template' ),
-					"content"  => "flwgb_reset_password_mail_to_user"
+					"template" => Flr_Blocks_Mail::mail_templates( 'reset_password_mail_to_user_template' ),
+					"content"  => "flr_blocks_reset_password_mail_to_user"
 			]
 	]
 
@@ -73,7 +73,7 @@ use FLWGB\Mail;
 				</th>
 				<td>
 
-					<p><?php echo esc_html_x( "You can use these tags:", "you_can_use_this_tags_text", "flwgb" ); ?>
+					<p><?php echo esc_html_x( "You can use these tags:", "you_can_use_this_tags_text", "flr-blocks" ); ?>
 						<?php echo $item['tags'] ?> </p>
 
 					<?php

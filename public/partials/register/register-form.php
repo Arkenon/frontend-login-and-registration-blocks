@@ -1,15 +1,15 @@
 <?php
 
-use FLWGB\Login;
+use FLR_BLOCKS\Flr_Blocks_Login;
 
 if( is_user_logged_in()){
 
-	$view = '<div style="text-align: center;">'.esc_html_x( "This form is only shown to users who are not logged in.", "alert_for_non_logged_in_users", "flwgb" ).'</div>';
+	$view = '<div style="text-align: center;">'.esc_html_x( "This form is only shown to users who are not logged in.", "alert_for_non_logged_in_users", "flr-blocks" ).'</div>';
 	return;
 
 }
 
-$login = new Login();
+$login = new Flr_Blocks_Login();
 $login_url = $login->get_login_url();
 
 $input_style = 'border-radius:' . $form_attributes['inputBorderRadius'] . 'px';
@@ -27,112 +27,112 @@ $button_style = 'color:' . $form_attributes['buttonTextColor'] . '; ' .
                 'border-radius: ' . $form_attributes['buttonBorderRadius'] . 'px;' .
                 'font-weight: ' . $form_attributes['buttonTextFontWeight'];
 $view = '<div '.get_block_wrapper_attributes().'>';
-$view .= '<form name="flwgb-register-form" id="flwgb-register-form" method="post">
-            <div class="flwgb-form-row">
-               <div class="flwgb-input-group">';
+$view .= '<form name="flr-blocks-register-form" id="flr-blocks-register-form" method="post">
+            <div class="flr-blocks-form-row">
+               <div class="flr-blocks-input-group">';
 if ( $form_attributes['showLabels'] ) {
 
-	$view .= '<label class="flwgb-input-label" style="' . $text_style . '" for="flwgb-username-for-register">
-						        ' . esc_html_x( "Username", "username_input_text", "flwgb" ) . '
+	$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-username-for-register">
+						        ' . esc_html_x( "Username", "username_input_text", "flr-blocks" ) . '
 						     </label>';
 }
 
-$view .= '<input class="flwgb-input-control" id="flwgb-username-for-register" name="flwgb-username-for-register" type="text" required style=' . $input_style . ' placeholder="';
+$view .= '<input class="flr-blocks-input-control" id="flr-blocks-username-for-register" name="flr-blocks-username-for-register" type="text" required style=' . $input_style . ' placeholder="';
 
 if ( $form_attributes['showPlaceholders'] ) {
 
-	$view .= esc_attr_x( "Enter your username", "username_placeholder_text", "flwgb" );
+	$view .= esc_attr_x( "Enter your username", "username_placeholder_text", "flr-blocks" );
 
 }
 
 $view .= '" /></div></div>';
 
-$view .= '<div class="flwgb-form-row">
-               <div class="flwgb-input-group">';
+$view .= '<div class="flr-blocks-form-row">
+               <div class="flr-blocks-input-group">';
 if ( $form_attributes['showLabels'] ) {
 
-	$view .= '<label class="flwgb-input-label" style="' . $text_style . '" for="flwgb-email-for-register">
-								' . esc_html_x( "Your e-mail", "email_input_text", "flwgb" ) . '
+	$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-email-for-register">
+								' . esc_html_x( "Your e-mail", "email_input_text", "flr-blocks" ) . '
 							 </label>';
 }
 
-$view .= '<input class="flwgb-input-control" id="flwgb-email-for-register" name="flwgb-email-for-register" type="text" required style=' . $input_style . ' placeholder="';
+$view .= '<input class="flr-blocks-input-control" id="flr-blocks-email-for-register" name="flr-blocks-email-for-register" type="text" required style=' . $input_style . ' placeholder="';
 
 if ( $form_attributes['showPlaceholders'] ) {
 
-	$view .= esc_attr_x( "Enter your e-mail", "email_placeholder_text", "flwgb" );
+	$view .= esc_attr_x( "Enter your e-mail", "email_placeholder_text", "flr-blocks" );
 
 }
 
 $view .= '" /></div></div>';
 
-$view .= '<div class="flwgb-form-row">
-	            <div class="flwgb-input-group">';
+$view .= '<div class="flr-blocks-form-row">
+	            <div class="flr-blocks-input-group">';
 if ( $form_attributes['showLabels'] ) {
 
-	$view .= '<label class="flwgb-input-label" style="' . $text_style . '" for="flwgb-password-for-register">
-								' . esc_html_x( "Password", "password_input_text", "flwgb" ) . '
+	$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-password-for-register">
+								' . esc_html_x( "Password", "password_input_text", "flr-blocks" ) . '
 							  </label>';
 }
 
-$view .= '<input class="flwgb-input-control" id="flwgb-password-for-register" name="flwgb-password-for-register" type="password" required style=' . $input_style . ' placeholder="';
+$view .= '<input class="flr-blocks-input-control" id="flr-blocks-password-for-register" name="flr-blocks-password-for-register" type="password" required style=' . $input_style . ' placeholder="';
 
 if ( $form_attributes['showPlaceholders'] ) {
 
-	$view .= esc_attr_x( "Enter your password", "password_placeholder_text", "flwgb" );
+	$view .= esc_attr_x( "Enter your password", "password_placeholder_text", "flr-blocks" );
 
 }
 
 $view .= '" /></div></div>';
 
-$view .= '<div class="flwgb-form-row">
-	            <div class="flwgb-input-group">';
+$view .= '<div class="flr-blocks-form-row">
+	            <div class="flr-blocks-input-group">';
 if ( $form_attributes['showLabels'] ) {
 
-	$view .= '<label class="flwgb-input-label" style="' . $text_style . '" for="flwgb-password-again-for-register">
-							    ' . esc_html_x( "Password Again", "password_again_input_text", "flwgb" ) . '
+	$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-password-again-for-register">
+							    ' . esc_html_x( "Password Again", "password_again_input_text", "flr-blocks" ) . '
 							 </label>';
 }
 
-$view .= '<input class="flwgb-input-control" id="flwgb-password-again-for-register" name="flwgb-password-again-for-register" type="password" required style=' . $input_style . ' placeholder="';
+$view .= '<input class="flr-blocks-input-control" id="flr-blocks-password-again-for-register" name="flr-blocks-password-again-for-register" type="password" required style=' . $input_style . ' placeholder="';
 
 if ( $form_attributes['showPlaceholders'] ) {
 
-	$view .= esc_attr_x( "Enter your password again", "password_again_placeholder_text", "flwgb" );
+	$view .= esc_attr_x( "Enter your password again", "password_again_placeholder_text", "flr-blocks" );
 
 }
 
 $view .= '" /></div></div>';
 
 if($form_attributes['showTermsAndPrivacy']):
-$view .= '<div class="flwgb-form-row">
-				<div class="flwgb-input-group">
-					<input id="flwgb-terms-and-privacy" checked="checked" type="checkbox" name="flwgb-terms-and-privacy" required class="flwgb-form-check-input"/>
-						<label class="flwgb-form-check-label" for="flwgb-terms-and-privacy">
+$view .= '<div class="flr-blocks-form-row">
+				<div class="flr-blocks-input-group">
+					<input id="flr-blocks-terms-and-privacy" checked="checked" type="checkbox" name="flr-blocks-terms-and-privacy" required class="flr-blocks-form-check-input"/>
+						<label class="flr-blocks-form-check-label" for="flr-blocks-terms-and-privacy">
 						' .
          //translators: %1$s terms and cond. url %2$s privacy policy url
-         sprintf( __( 'I have read and accept <a href="%1$s" target="_blank">terms and conditions</a> and <a href="%2$s" target="_blank">privacy policy</a>', 'flwgb' ), get_option( 'flwgb_terms_and_conditions_page' ), get_option( 'flwgb_privacy_policy_page' ) ) . '
+         sprintf( __( 'I have read and accept <a href="%1$s" target="_blank">terms and conditions</a> and <a href="%2$s" target="_blank">privacy policy</a>', 'flr-blocks' ), get_option( 'flr_blocks_terms_and_conditions_page' ), get_option( 'flr_blocks_privacy_policy_page' ) ) . '
 						</label>
 					</div>
 				</div>';
 endif;
 
-$view .= '<input type="hidden" name="action" value="' . esc_attr( 'flwgbregisterhandle' ) . '">';
+$view .= '<input type="hidden" name="action" value="' . esc_attr( 'flrblocksregisterhandle' ) . '">';
 
-$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flwgbregisterhandle' ) ) . '">';
+$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flrblocksregisterhandle' ) ) . '">';
 
-$view .= '<div class="flwgb-form-row">
-						<button style="' . $button_style . '" type="submit" id="flwgb-register-submit" class="flwgb-register-btn flwgb-btn">
-							' . esc_html_x( "Register", "register_button_text", "flwgb" ) . '
+$view .= '<div class="flr-blocks-form-row">
+						<button style="' . $button_style . '" type="submit" id="flr-blocks-register-submit" class="flr-blocks-register-btn flr-blocks-btn">
+							' . esc_html_x( "Register", "register_button_text", "flr-blocks" ) . '
 						</button>
 					</div>
-					<div id="flwgb-register-loading" class="flwgb-loading flwgb-hide">' . esc_html_x( "Loading...", "loading_text", "flwgb" ) . '</div>';
+					<div id="flr-blocks-register-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...", "loading_text", "flr-blocks" ) . '</div>';
 $view .= '</form>
-			<div id="flwgb-register-form-result"></div>';
+			<div id="flr-blocks-register-form-result"></div>';
 			$view .= '<div style="text-align:center;">
-						'. esc_html_x( "Already signed up? ", "already_signed_in_message", "flwgb" ).'
+						'. esc_html_x( "Already signed up? ", "already_signed_in_message", "flr-blocks" ).'
 						<a style="text-decoration:none;" href="' . esc_url( $login_url ) . '">
-						    ' . esc_html_x( "Login", "login_text", "flwgb" ) . '
+						    ' . esc_html_x( "Login", "login_text", "flr-blocks" ) . '
 						</a>
 					 </div>
     </div>

@@ -14,12 +14,12 @@ const InputSettings = ({options}) => {
 	return (
 		<Panel>
 			<PanelBody
-				title={__('Input Settings', 'flwgb')}
+				title={__('Input Settings', 'flr-blocks')}
 				initialOpen={false}
 			>
 				<PanelRow>
 					<RangeControl
-						label={__('Input Border Radius', 'flwgb')}
+						label={__('Input Border Radius', 'flr-blocks')}
 						value={attributes.inputBorderRadius}
 						onChange={(val) =>
 							setAttributes({inputBorderRadius: val})
@@ -30,7 +30,7 @@ const InputSettings = ({options}) => {
 				</PanelRow>
 				<PanelRow>
 					<ToggleControl
-						label={__('Show Placeholders', 'flwgb')}
+						label={__('Show Placeholders', 'flr-blocks')}
 						help={attributes.showPlaceholders ? 'Show' : 'Hide'}
 						checked={attributes.showPlaceholders}
 						onChange={(val) =>

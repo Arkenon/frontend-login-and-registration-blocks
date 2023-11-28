@@ -17,12 +17,12 @@ const ButtonSettings = ({options}) => {
 	return (
 		<Panel>
 			<PanelBody
-				title={__('Button Settings', 'flwgb')}
+				title={__('Button Settings', 'flr-blocks')}
 				initialOpen={false}
 			>
 				<PanelRow>
 					<RangeControl
-						label={__('Button Border Radius', 'flwgb')}
+						label={__('Button Border Radius', 'flr-blocks')}
 						value={attributes.buttonBorderRadius}
 						onChange={(val) =>
 							setAttributes({buttonBorderRadius: val})
@@ -33,7 +33,7 @@ const ButtonSettings = ({options}) => {
 				</PanelRow>
 				<PanelRow>
 					<BorderControl
-						label={__('Button Border', 'flwgb')}
+						label={__('Button Border', 'flr-blocks')}
 						onChange={(newButtonBorder) =>
 							setAttributes({
 								buttonBorder: newButtonBorder,
@@ -44,7 +44,7 @@ const ButtonSettings = ({options}) => {
 				</PanelRow>
 				<PanelRow>
 					<Text>
-						{__('Button Background Color', 'flwgb')}
+						{__('Button Background Color', 'flr-blocks')}
 					</Text>
 				</PanelRow>
 				<PanelRow>
@@ -58,7 +58,7 @@ const ButtonSettings = ({options}) => {
 				<PanelRow>
 					<SelectControl
 						labelPosition={'top'}
-						label={__('Button Font Weight', 'flwgb')}
+						label={__('Button Font Weight', 'flr-blocks')}
 						value={attributes.buttonTextFontWeight}
 						options={[
 							{label: 'Normal', value: 'normal'},
@@ -70,7 +70,7 @@ const ButtonSettings = ({options}) => {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<Text>{__('Button Text Color', 'flwgb')}</Text>
+					<Text>{__('Button Text Color', 'flr-blocks')}</Text>
 				</PanelRow>
 				<PanelRow>
 					<ColorPalette

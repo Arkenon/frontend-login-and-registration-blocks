@@ -1,6 +1,6 @@
 <?php
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) or die;
  * @package    Frontend_Login_And_Registration_Blocks
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
-abstract class Loader {
+abstract class Flr_Blocks_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

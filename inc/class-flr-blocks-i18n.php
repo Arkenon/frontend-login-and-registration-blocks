@@ -1,6 +1,6 @@
 <?php
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
@@ -16,17 +16,17 @@ defined( 'ABSPATH' ) or die;
  * @package    Frontend_Login_And_Registration_Blocks
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
-class I18n {
+class Flr_Blocks_I18n {
 
 	/**
 	 * Load the plugin text domain for translation.
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_flwgb_textdomain() {
+	public function load_flr_blocks_textdomain() {
 
 		load_plugin_textdomain(
-			"flwgb",
+			"flr-blocks",
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

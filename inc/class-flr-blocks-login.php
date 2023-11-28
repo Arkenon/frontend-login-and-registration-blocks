@@ -7,12 +7,12 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-class Login {
+class Flr_Blocks_Login {
 
 	private $max_attempts = 5; //times
 	private $lockout_duration = 300; //seconds
@@ -20,11 +20,11 @@ class Login {
 	public function load_login_actions() {
 
 		///Load ajax callback
-		add_action( 'wp_ajax_nopriv_flwgbloginhandle', [ $this, 'login_handle_ajax_callback' ] );
-		add_action( 'wp_ajax_flwgbloginhandle', [ $this, 'login_handle_ajax_callback' ] );
+		add_action( 'wp_ajax_nopriv_flrblocksloginhandle', [ $this, 'login_handle_ajax_callback' ] );
+		add_action( 'wp_ajax_flrblocksloginhandle', [ $this, 'login_handle_ajax_callback' ] );
 
 		//Limit login
-		if ( get_option( 'flwgb_enable_limit_login' ) === 'yes' ) {
+		if ( get_option( 'flr_blocks_enable_limit_login' ) === 'yes' ) {
 
 			add_action( 'wp_login_failed', [ $this, 'limit_login_attempts' ] );
 
@@ -45,7 +45,7 @@ class Login {
 	 */
 	public function welcome_card( array $block_attributes ): string {
 
-		$frontend = new Frontend();
+		$frontend = new Flr_Blocks_Public();
 
 		//Get html output from Frontend class
 		return $frontend->get_the_form( 'public/partials/login/welcome-card.php', $block_attributes );
@@ -62,7 +62,7 @@ class Login {
 	 */
 	public function login_form( array $block_attributes ): string {
 
-		$frontend = new Frontend();
+		$frontend = new Flr_Blocks_Public();
 
 		//Get login form html output from Frontend class
 		return $frontend->get_the_form( 'public/partials/login/login-form.php', $block_attributes );
@@ -78,7 +78,7 @@ class Login {
 
 		header( 'Access-Control-Allow-Origin: *' );
 
-		if ( get_option( 'flwgb_enable_limit_login' ) === 'yes' && $this->get_login_attempts_count()['login_attempts'] >= $this->get_limit_login_options()['max_attempts'] ) {
+		if ( get_option( 'flr_blocks_enable_limit_login' ) === 'yes' && $this->get_login_attempts_count()['login_attempts'] >= $this->get_limit_login_options()['max_attempts'] ) {
 
 			echo $this->login_attempts_error();
 
@@ -86,12 +86,12 @@ class Login {
 
 		}
 
-		check_ajax_referer( 'flwgbloginhandle', 'security' );
+		check_ajax_referer( 'flrblocksloginhandle', 'security' );
 
 		$credentials                  = array();
-		$credentials['user_login']    = Helper::post( 'flwgb-username-or-email' ) ?? '';
-		$credentials['user_password'] = Helper::post( 'flwgb-password' ) ?? '';
-		$credentials['remember']      = Helper::post( 'flwgb-rememberme' ) === 'on' ? true : false;
+		$credentials['user_login']    = Flr_Blocks_Helper::post( 'flr-blocks-username-or-email' ) ?? '';
+		$credentials['user_password'] = Flr_Blocks_Helper::post( 'flr-blocks-password' ) ?? '';
+		$credentials['remember']      = Flr_Blocks_Helper::post( 'flr-blocks-rememberme' ) === 'on' ? true : false;
 
 		$user = wp_signon( $credentials, is_ssl() );
 
@@ -104,10 +104,10 @@ class Login {
 
 			wp_set_current_user( $user->ID, $user->user_login );
 
-			if ( get_option( 'flwgb_has_activation' ) === 'yes' ) {
+			if ( get_option( 'flr_blocks_has_activation' ) === 'yes' ) {
 
-				Helper::using( "inc/UserActivation.php" );
-				$activation = new UserActivation();
+				Flr_Blocks_Helper::using( "inc/class-flr-blocks-user-activation.php" );
+				$activation = new Flr_Blocks_User_Activation();
 
 				if ( $activation->check_is_user_activated( $user->ID ) ) {
 
@@ -117,7 +117,7 @@ class Login {
 
 					echo json_encode( array(
 						'status'  => false,
-						'message' => esc_html_x( "Please activate your account. We sent you an email. Click the activation link in the email.", "user_not_activated", "flwgb" )
+						'message' => esc_html_x( "Please activate your account. We sent you an email. Click the activation link in the email.", "user_not_activated", "flr-blocks" )
 					) );
 
 					wp_logout();
@@ -146,8 +146,8 @@ class Login {
 
 		return json_encode( array(
 			'status'     => true,
-			'return_url' => site_url( get_option( 'flwgb_redirect_after_login' ) ) ?? null,
-			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "flwgb" )
+			'return_url' => site_url( get_option( 'flr_blocks_redirect_after_login' ) ) ?? null,
+			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "flr-blocks" )
 		) );
 
 	}
@@ -162,7 +162,7 @@ class Login {
 
 		return json_encode( array(
 			'status'  => false,
-			'message' => esc_html_x( "Invalid username or password.", "invalid_username_or_pass", "flwgb" )
+			'message' => esc_html_x( "Invalid username or password.", "invalid_username_or_pass", "flr-blocks" )
 		) );
 
 	}
@@ -192,8 +192,8 @@ class Login {
 	 */
 	public function get_limit_login_options(): array {
 
-		$max_attempts     = ! get_option( 'flwgb_limit_login_max_attempts' ) ? $this->max_attempts : get_option( 'flwgb_limit_login_max_attempts' );
-		$lockout_duration = ! get_option( 'flwgb_limit_login_lockout_duration' ) ? $this->lockout_duration : get_option( 'flwgb_limit_login_lockout_duration' );
+		$max_attempts     = ! get_option( 'flr_blocks_limit_login_max_attempts' ) ? $this->max_attempts : get_option( 'flr_blocks_limit_login_max_attempts' );
+		$lockout_duration = ! get_option( 'flr_blocks_limit_login_lockout_duration' ) ? $this->lockout_duration : get_option( 'flr_blocks_limit_login_lockout_duration' );
 
 		return [
 			'max_attempts'     => $max_attempts,
@@ -243,7 +243,7 @@ class Login {
 		return json_encode( array(
 			'status'  => false,
 			// translators: %1$s duration limit %2$s duration type (second or minute)
-			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error','flwgb' ), $duration_limit, $duration_type )
+			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error','flr-blocks' ), $duration_limit, $duration_type )
 		) );
 
 	}
@@ -255,7 +255,7 @@ class Login {
 	 */
 	public function redirect_login_admin_pages() {
 
-		if ( get_option( 'flwgb_redirect_from_wp_login_admin' ) === 'yes' && ! is_user_logged_in() && ! defined( 'DOING_AJAX' ) ) {
+		if ( get_option( 'flr_blocks_redirect_from_wp_login_admin' ) === 'yes' && ! is_user_logged_in() && ! defined( 'DOING_AJAX' ) ) {
 
 			$login_url = $this->get_login_url();
 			$url       = isset( $_REQUEST['redirect_to'] ) ? "wp-login.php" : basename( $_SERVER['REQUEST_URI'] );
@@ -279,7 +279,7 @@ class Login {
 	 */
 	public function get_login_url(): string {
 
-		return get_option( 'flwgb_login_page' ) ? site_url(get_option( 'flwgb_login_page' )): home_url();
+		return get_option( 'flr_blocks_login_page' ) ? site_url(get_option( 'flr_blocks_login_page' )): home_url();
 
 	}
 

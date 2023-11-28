@@ -13,7 +13,7 @@ const Options = ({options}) => {
 		<InspectorControls>
 
 			<ToggleControl
-				label={__('Show Terms and Conditions / Privacy Policy Checkbox', 'flwgb')}
+				label={__('Show Terms and Conditions / Privacy Policy Checkbox', 'flr-blocks')}
 				help={attributes.showTermsAndPrivacy ? 'Show' : 'Hide'}
 				checked={attributes.showTermsAndPrivacy}
 				onChange={(val) =>

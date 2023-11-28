@@ -42,36 +42,36 @@ export default function Edit(props) {
 			<div {...blockProps}>
 
 				<div style={{'display': 'flex', 'justify-content': 'center', 'align-items': 'center', 'gap':'15px','margin-bottom':'30px'}}>
-					<a style={formSelectBtnStyles} onClick={() => setAttributes({selectedForm: 'requestForm'})}>{__('Step 1', 'flwgb')}</a>
-					<a style={formSelectBtnStyles} onClick={() => setAttributes({selectedForm: 'changePasswordForm'})}>{__('Step 2', 'flwgb')}</a>
+					<a style={formSelectBtnStyles} onClick={() => setAttributes({selectedForm: 'requestForm'})}>{__('Step 1', 'flr-blocks')}</a>
+					<a style={formSelectBtnStyles} onClick={() => setAttributes({selectedForm: 'changePasswordForm'})}>{__('Step 2', 'flr-blocks')}</a>
 				</div>
 
 				{
 					attributes.selectedForm === 'requestForm' &&
 					<div>
-						<p style={{'text-align':'center','font-weight':'bold'}}>{__('Password Reset Request Form', 'flwgb')}</p>
+						<p style={{'text-align':'center','font-weight':'bold'}}>{__('Password Reset Request Form', 'flr-blocks')}</p>
 						{
 							attributes.showDescription &&
 							<div style={{'text-align': 'center'}}>
-								<p>{__(desc,'flwgb')}</p>
+								<p>{__(desc,'flr-blocks')}</p>
 							</div>
 						}
-						<div className="flwgb-form-row">
-							<div className="flwgb-input-group">
+						<div className="flr-blocks-form-row">
+							<div className="flr-blocks-input-group">
 								{attributes.showLabels &&
-								<label className="flwgb-input-label" style={textStyle}
-									   htmlFor="flwgb-email">{__('Your e-mail', 'flwgb')}</label>}
-								<input className="flwgb-input-control" id="flwgb-email" type="text"
+								<label className="flr-blocks-input-label" style={textStyle}
+									   htmlFor="flr-blocks-email">{__('Your e-mail', 'flr-blocks')}</label>}
+								<input className="flr-blocks-input-control" id="flr-blocks-email" type="text"
 									   style={inputStyle}
-									   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'flwgb')}/>
+									   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'flr-blocks')}/>
 							</div>
 						</div>
 
 
-						<div className="flwgb-form-row">
+						<div className="flr-blocks-form-row">
 							<button style={buttonStyle} type="submit" name="wp-submit" id="wp-submit"
-									className="flwgb-reset-password-btn flwgb-btn">
-								{__('Send Request', 'flwgb')}
+									className="flr-blocks-reset-password-btn flr-blocks-btn">
+								{__('Send Request', 'flr-blocks')}
 							</button>
 						</div>
 
@@ -81,34 +81,34 @@ export default function Edit(props) {
 				{
 					attributes.selectedForm === 'changePasswordForm' &&
 					<div>
-						<p style={{'text-align':'center','font-weight':'bold'}}>{__('Change Password Form', 'flwgb')}</p>
-						<div className="flwgb-form-row">
-							<div className="flwgb-input-group">
+						<p style={{'text-align':'center','font-weight':'bold'}}>{__('Change Password Form', 'flr-blocks')}</p>
+						<div className="flr-blocks-form-row">
+							<div className="flr-blocks-input-group">
 								{attributes.showLabels &&
-								<label className="flwgb-input-label" style={textStyle}
-									   htmlFor="flwgb-password">{__('Password', 'flwgb')}</label>}
-								<input className="flwgb-input-control" id="flwgb-password" type="password"
+								<label className="flr-blocks-input-label" style={textStyle}
+									   htmlFor="flr-blocks-password">{__('Password', 'flr-blocks')}</label>}
+								<input className="flr-blocks-input-control" id="flr-blocks-password" type="password"
 									   style={inputStyle}
-									   placeholder={attributes.showPlaceholders && __('Enter your password', 'flwgb')}/>
+									   placeholder={attributes.showPlaceholders && __('Enter your password', 'flr-blocks')}/>
 							</div>
 						</div>
 
-						<div className="flwgb-form-row">
-							<div className="flwgb-input-group">
+						<div className="flr-blocks-form-row">
+							<div className="flr-blocks-input-group">
 								{attributes.showLabels &&
-								<label className="flwgb-input-label" style={textStyle}
-									   htmlFor="flwgb-password-again">{__('Password Again', 'flwgb')}</label>}
-								<input className="flwgb-input-control" id="flwgb-password-again" type="password"
+								<label className="flr-blocks-input-label" style={textStyle}
+									   htmlFor="flr-blocks-password-again">{__('Password Again', 'flr-blocks')}</label>}
+								<input className="flr-blocks-input-control" id="flr-blocks-password-again" type="password"
 									   style={inputStyle}
-									   placeholder={attributes.showPlaceholders && __('Enter your password again', 'flwgb')}/>
+									   placeholder={attributes.showPlaceholders && __('Enter your password again', 'flr-blocks')}/>
 							</div>
 						</div>
 
 
-						<div className="flwgb-form-row">
+						<div className="flr-blocks-form-row">
 							<button style={buttonStyle} type="submit" name="wp-submit-pwd" id="wp-submit-pwd"
-									className="flwgb-reset-password-btn flwgb-btn">
-								{__('Change Password', 'flwgb')}
+									className="flr-blocks-reset-password-btn flr-blocks-btn">
+								{__('Change Password', 'flr-blocks')}
 							</button>
 						</div>
 

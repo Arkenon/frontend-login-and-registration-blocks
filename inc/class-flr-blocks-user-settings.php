@@ -7,12 +7,12 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-class UserSettings {
+class Flr_Blocks_User_Settings {
 
 	/**
 	 * Load user settings actions.
@@ -22,11 +22,11 @@ class UserSettings {
 	public function load_user_settings_actions() {
 
 		//Load ajax callback
-		add_action( 'wp_ajax_nopriv_flwgbusersettingsupdatehandle', [
+		add_action( 'wp_ajax_nopriv_flrblocksusersettingsupdatehandle', [
 			$this,
-			'flwgb_user_settings_handle_ajax_callback'
+			'flr_blocks_user_settings_handle_ajax_callback'
 		] );
-		add_action( 'wp_ajax_flwgbusersettingsupdatehandle', [ $this, 'flwgb_user_settings_handle_ajax_callback' ] );
+		add_action( 'wp_ajax_flrblocksusersettingsupdatehandle', [ $this, 'flr_blocks_user_settings_handle_ajax_callback' ] );
 
 	}
 
@@ -41,7 +41,7 @@ class UserSettings {
 	 */
 	public function user_settings_form( array $block_attributes ) {
 
-		$frontend = new Frontend();
+		$frontend = new Flr_Blocks_Public();
 
 		//Get user settings form html output from Frontend class
 		return $frontend->get_the_form( 'public/partials/user-settings/user-settings-form.php', $block_attributes );
@@ -54,27 +54,27 @@ class UserSettings {
 	 * @return string|false a JSON encoded string on success or FALSE on failure.
 	 * @since 1.0.0
 	 */
-	public function flwgb_user_settings_handle_ajax_callback() {
+	public function flr_blocks_user_settings_handle_ajax_callback() {
 
 		header( 'Access-Control-Allow-Origin: *' );
 
-		$user_id = Helper::post( 'user_id' );
+		$user_id = Flr_Blocks_Helper::post( 'user_id' );
 
 		$user_info = get_userdata( $user_id );
 
-		$user_info->first_name  = Helper::post( 'flwgb-user-first-name' );
-		$user_info->last_name   = Helper::post( 'flwgb-user-last-name' );
-		$user_info->user_email  = Helper::post( 'flwgb-email-update' );
-		$user_info->user_url    = Helper::post( 'flwgb-user-website' );
-		$user_info->description = Helper::post( 'flwgb-user-bio' );
+		$user_info->first_name  = Flr_Blocks_Helper::post( 'flr-blocks-user-first-name' );
+		$user_info->last_name   = Flr_Blocks_Helper::post( 'flr-blocks-user-last-name' );
+		$user_info->user_email  = Flr_Blocks_Helper::post( 'flr-blocks-email-update' );
+		$user_info->user_url    = Flr_Blocks_Helper::post( 'flr-blocks-user-website' );
+		$user_info->description = Flr_Blocks_Helper::post( 'flr-blocks-user-bio' );
 
 		$update = wp_update_user( $user_info );
 
 		if ( ! is_wp_error( $update ) ) {
 
-			$current_password   = Helper::post( 'flwgb-current-password' );
-			$new_password       = Helper::post( 'flwgb-password-update' );
-			$new_password_again = Helper::post( 'flwgb-password-again-update' );
+			$current_password   = Flr_Blocks_Helper::post( 'flr-blocks-current-password' );
+			$new_password       = Flr_Blocks_Helper::post( 'flr-blocks-password-update' );
+			$new_password_again = Flr_Blocks_Helper::post( 'flr-blocks-password-again-update' );
 
 			if ( ! empty( $new_password ) && ! empty( $new_password_again ) ) {
 
@@ -86,7 +86,7 @@ class UserSettings {
 
 							echo json_encode( array(
 								'status'  => false,
-								'message' => esc_html_x("Your passwords do not match", "password_match_error", "flwgb" )
+								'message' => esc_html_x("Your passwords do not match", "password_match_error", "flr-blocks" )
 							) );
 
 							wp_die();
@@ -97,7 +97,7 @@ class UserSettings {
 
 							echo json_encode( array(
 								'status'  => true,
-								'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flwgb" )
+								'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flr-blocks" )
 							) );
 
 							wp_die();
@@ -108,7 +108,7 @@ class UserSettings {
 
 						echo json_encode( array(
 							'status'  => false,
-							'message' => esc_html_x( "Make sure your user information is correct.", "check_your_user_info_error", "flwgb" )
+							'message' => esc_html_x( "Make sure your user information is correct.", "check_your_user_info_error", "flr-blocks" )
 						) );
 
 						wp_die();
@@ -120,7 +120,7 @@ class UserSettings {
 
 					echo json_encode( array(
 						'status'  => false,
-						'message' => esc_html_x( "Your current password is wrong. Please check it again.", "current_password_error", "flwgb" )
+						'message' => esc_html_x( "Your current password is wrong. Please check it again.", "current_password_error", "flr-blocks" )
 					) );
 
 					wp_die();
@@ -130,7 +130,7 @@ class UserSettings {
 
 				echo json_encode( array(
 					'status'  => true,
-					'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flwgb" )
+					'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flr-blocks" )
 				) );
 
 				wp_die();
@@ -141,7 +141,7 @@ class UserSettings {
 
 			echo json_encode( array(
 				'status'  => false,
-				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flwgb" )
+				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flr-blocks" )
 			) );
 
 			wp_die();

@@ -1,16 +1,16 @@
 jQuery(document).ready(function ($) {
-	$('#flwgb-login-form').on('submit', function (e) {
+	$('#flr-blocks-login-form').on('submit', function (e) {
 		e.preventDefault();
 		const form = $(this);
 		const formData = new FormData(
-			document.getElementById('flwgb-login-form')
+			document.getElementById('flr-blocks-login-form')
 		);
-		const submitBtn = form.find('#flwgb-login-submit');
-		const formResult = $('#flwgb-login-form-result');
-		const loadingBtn = $('#flwgb-login-loading');
+		const submitBtn = form.find('#flr-blocks-login-submit');
+		const formResult = $('#flr-blocks-login-form-result');
+		const loadingBtn = $('#flr-blocks-login-loading');
 
 		$.ajax({
-			url: flwgb_ajax_object.ajax_url,
+			url: flr_blocks_ajax_object.ajax_url,
 			type: 'POST',
 			processData: false,
 			contentType: false,
@@ -29,18 +29,18 @@ jQuery(document).ready(function ($) {
 	});
 
 	//Lost password request form
-	$('#flwgb-reset-pass-request-form').on('submit', function (e) {
+	$('#flr-blocks-reset-pass-request-form').on('submit', function (e) {
 		e.preventDefault();
 		const form = $(this);
 		const formData = new FormData(
-			document.getElementById('flwgb-reset-pass-request-form')
+			document.getElementById('flr-blocks-reset-pass-request-form')
 		);
-		const submitBtn = form.find('#flwgb-reset-request-submit');
-		const formResult = $('#flwgb-reset-request-form-result');
-		const loadingBtn = $('#flwgb-reset-request-loading');
+		const submitBtn = form.find('#flr-blocks-reset-request-submit');
+		const formResult = $('#flr-blocks-reset-request-form-result');
+		const loadingBtn = $('#flr-blocks-reset-request-loading');
 
 		$.ajax({
-			url: flwgb_ajax_object.ajax_url,
+			url: flr_blocks_ajax_object.ajax_url,
 			type: 'POST',
 			processData: false,
 			contentType: false,
@@ -59,18 +59,18 @@ jQuery(document).ready(function ($) {
 	});
 
 	// Reset Password Form
-	$('#flwgb-reset-pass-form').on('submit', function (e) {
+	$('#flr-blocks-reset-pass-form').on('submit', function (e) {
 		e.preventDefault();
 		const form = $(this);
 		const formData = new FormData(
-			document.getElementById('flwgb-reset-pass-form')
+			document.getElementById('flr-blocks-reset-pass-form')
 		);
-		const submitBtn = form.find('#flwgb-reset-password-submit');
-		const formResult = $('#flwgb-reset-password-form-result');
-		const loadingBtn = $('#flwgb-reset-password-loading');
+		const submitBtn = form.find('#flr-blocks-reset-password-submit');
+		const formResult = $('#flr-blocks-reset-password-form-result');
+		const loadingBtn = $('#flr-blocks-reset-password-loading');
 
 		$.ajax({
-			url: flwgb_ajax_object.ajax_url,
+			url: flr_blocks_ajax_object.ajax_url,
 			type: 'POST',
 			processData: false,
 			contentType: false,
@@ -89,18 +89,18 @@ jQuery(document).ready(function ($) {
 	});
 
 	// Registration Form
-	$('#flwgb-register-form').on('submit', function (e) {
+	$('#flr-blocks-register-form').on('submit', function (e) {
 		e.preventDefault();
 		const form = $(this);
 		const formData = new FormData(
-			document.getElementById('flwgb-register-form')
+			document.getElementById('flr-blocks-register-form')
 		);
-		const submitBtn = form.find('#flwgb-register-submit');
-		const formResult = $('#flwgb-register-form-result');
-		const loadingBtn = $('#flwgb-register-loading');
+		const submitBtn = form.find('#flr-blocks-register-submit');
+		const formResult = $('#flr-blocks-register-form-result');
+		const loadingBtn = $('#flr-blocks-register-loading');
 
 		$.ajax({
-			url: flwgb_ajax_object.ajax_url,
+			url: flr_blocks_ajax_object.ajax_url,
 			type: 'POST',
 			processData: false,
 			contentType: false,
@@ -119,18 +119,18 @@ jQuery(document).ready(function ($) {
 	});
 
 	// User Settings Form
-	$('#flwgb-user-settings-form').on('submit', function (e) {
+	$('#flr-blocks-user-settings-form').on('submit', function (e) {
 		e.preventDefault();
 		const form = $(this);
 		const formData = new FormData(
-			document.getElementById('flwgb-user-settings-form')
+			document.getElementById('flr-blocks-user-settings-form')
 		);
-		const submitBtn = form.find('#flwgb-user-settings-submit');
-		const formResult = $('#flwgb-user-settings-form-result');
-		const loadingBtn = $('#flwgb-user-settings-loading');
+		const submitBtn = form.find('#flr-blocks-user-settings-submit');
+		const formResult = $('#flr-blocks-user-settings-form-result');
+		const loadingBtn = $('#flr-blocks-user-settings-loading');
 
 		$.ajax({
-			url: flwgb_ajax_object.ajax_url,
+			url: flr_blocks_ajax_object.ajax_url,
 			type: 'POST',
 			processData: false,
 			contentType: false,
@@ -149,21 +149,21 @@ jQuery(document).ready(function ($) {
 	});
 
 	function formBeforeSend(form_result, submitBtn, loadingBtn) {
-		loadingBtn.removeClass('flwgb-hide');
+		loadingBtn.removeClass('flr-blocks-hide');
 		form_result.html('');
 		submitBtn.prop('disabled', true);
 	}
 
 	function formSuccess(response, form_result, submitBtn, loadingBtn) {
 		if (response.status) {
-			form_result.addClass('flwgb-success');
+			form_result.addClass('flr-blocks-success');
 		} else {
-			form_result.addClass('flwgb-danger');
+			form_result.addClass('flr-blocks-danger');
 		}
 
 		form_result.html(response.message);
 
-		loadingBtn.addClass('flwgb-hide');
+		loadingBtn.addClass('flr-blocks-hide');
 
 		submitBtn.prop('disabled', false);
 
@@ -173,7 +173,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	function formError(xhr, form_result){
-		form_result.addClass('flwgb-danger');
+		form_result.addClass('flr-blocks-danger');
 		form_result.html(xhr.responseText);
 	}
 

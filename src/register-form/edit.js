@@ -36,62 +36,62 @@ export default function Edit(props) {
 
 			<div {...blockProps}>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
 						{attributes.showLabels &&
-						<label className="flwgb-input-label" style={textStyle}
-							   htmlFor="flwgb-username">{__('Username', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-username" type="text"
+						<label className="flr-blocks-input-label" style={textStyle}
+							   htmlFor="flr-blocks-username">{__('Username', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-username" type="text"
 							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your username', 'flwgb')}/>
+							   placeholder={attributes.showPlaceholders && __('Enter your username', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
 						{attributes.showLabels &&
-						<label className="flwgb-input-label" style={textStyle}
-							   htmlFor="flwgb-email">{__('Your e-mail', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-email" type="text"
+						<label className="flr-blocks-input-label" style={textStyle}
+							   htmlFor="flr-blocks-email">{__('Your e-mail', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-email" type="text"
 							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'flwgb')}/>
+							   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
-						{attributes.showLabels && <label className="flwgb-input-label" style={textStyle}
-														 htmlFor="flwgb-password">{__('Password', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-password" type="password" style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your password', 'flwgb')}/>
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
+						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
+														 htmlFor="flr-blocks-password">{__('Password', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-password" type="password" style={inputStyle}
+							   placeholder={attributes.showPlaceholders && __('Enter your password', 'flr-blocks')}/>
 					</div>
 				</div>
 
-				<div className="flwgb-form-row">
-					<div className="flwgb-input-group">
-						{attributes.showLabels && <label className="flwgb-input-label" style={textStyle}
-														 htmlFor="flwgb-password-again">{__('Password Again', 'flwgb')}</label>}
-						<input className="flwgb-input-control" id="flwgb-password-again" type="password" style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your password again', 'flwgb')}/>
+				<div className="flr-blocks-form-row">
+					<div className="flr-blocks-input-group">
+						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
+														 htmlFor="flr-blocks-password-again">{__('Password Again', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-password-again" type="password" style={inputStyle}
+							   placeholder={attributes.showPlaceholders && __('Enter your password again', 'flr-blocks')}/>
 					</div>
 				</div>
 
 
 				{
 					attributes.showTermsAndPrivacy &&
-					<div className="flwgb-form-row">
-						<div className="flwgb-form-check-group">
-							<input id="flwgb-terms-and-privacy" checked="checked" type="checkbox"
-								   className="flwgb-form-check-input"/>
-							<label className="flwgb-form-check-label" htmlFor="flwgb-terms-and-privacy">{__('I have read and accept terms and conditions and privacy policy.', 'flwgb')}</label>
+					<div className="flr-blocks-form-row">
+						<div className="flr-blocks-form-check-group">
+							<input id="flr-blocks-terms-and-privacy" checked="checked" type="checkbox"
+								   className="flr-blocks-form-check-input"/>
+							<label className="flr-blocks-form-check-label" htmlFor="flr-blocks-terms-and-privacy">{__('I have read and accept terms and conditions and privacy policy.', 'flr-blocks')}</label>
 						</div>
 					</div>
 				}
 
-				<div className="flwgb-form-row">
+				<div className="flr-blocks-form-row">
 					<button style={buttonStyle} type="submit" name="wp-submit" id="wp-submit"
-							className="flwgb-register-btn flwgb-btn">
-						{__('Register', 'flwgb')}
+							className="flr-blocks-register-btn flr-blocks-btn">
+						{__('Register', 'flr-blocks')}
 					</button>
 				</div>
 

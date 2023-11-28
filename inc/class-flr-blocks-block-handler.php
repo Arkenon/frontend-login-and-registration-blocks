@@ -11,15 +11,15 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-class Blocks {
+class Flr_Blocks_Block_Handler {
 
-	public function load_flwgb_blocks() {
-		add_action( 'init', [ $this, 'register_flwgb_blocks' ] );
+	public function load_flr_blocks() {
+		add_action( 'init', [ $this, 'register_blocks' ] );
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Blocks {
 	 *
 	 * @since    1.0.0
 	 */
-	public function register_flwgb_blocks() {
+	public function register_blocks() {
 
 		//Login Form Block
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/login-form',
@@ -83,7 +83,7 @@ class Blocks {
 	 */
 	public function user_settings_render_callback( array $block_attributes ): string {
 
-		$login = new UserSettings();
+		$login = new Flr_Blocks_User_Settings();
 
 		return $login->user_settings_form( $block_attributes );
 
@@ -99,7 +99,7 @@ class Blocks {
 	 */
 	public function login_form_render_callback( array $block_attributes ): string {
 
-		$login = new Login();
+		$login = new Flr_Blocks_Login();
 
 		return $login->login_form( $block_attributes );
 
@@ -115,7 +115,7 @@ class Blocks {
 	 */
 	public function register_form_render_callback( array $block_attributes ): string {
 
-		$register = new Register();
+		$register = new Flr_Blocks_Registration();
 
 		return $register->register_form( $block_attributes );
 
@@ -130,7 +130,7 @@ class Blocks {
 	 */
 	public function reset_password_form_render_callback( array $block_attributes ): string {
 
-		$lost_password = new LostPassword();
+		$lost_password = new Flr_Blocks_Lost_Password();
 
 		return $lost_password->lost_password_form( $block_attributes );
 
@@ -144,9 +144,9 @@ class Blocks {
 	 */
 	public function user_activation_render_callback( array $block_attributes ): string {
 
-		Helper::using( 'inc/UserActivation.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-user-activation.php' );
 
-		$lost_password = new UserActivation();
+		$lost_password = new Flr_Blocks_User_Activation();
 
 		return $lost_password->user_activation_block( $block_attributes );
 
@@ -160,7 +160,7 @@ class Blocks {
 	 */
 	public function welcome_card_render_callback( array $block_attributes ): string {
 
-		$lost_password = new Login();
+		$lost_password = new Flr_Blocks_Login();
 
 		return $lost_password->welcome_card( $block_attributes );
 
@@ -176,8 +176,8 @@ class Blocks {
 	 */
 	public function logout_menu_item_render_callback( array $block_attributes ): string {
 
-		Helper::using( "inc/Logout.php" );
-		$logout = new Logout();
+		Flr_Blocks_Helper::using( "inc/class-flr-blocks-logout.php" );
+		$logout = new Flr_Blocks_Logout();
 
 		return $logout->logout_menu_item( $block_attributes );
 

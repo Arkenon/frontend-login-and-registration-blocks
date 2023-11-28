@@ -10,14 +10,13 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
+use WP_Post;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-use FLWGB\I18n\I18n;
-
-class Helper {
+class Flr_Blocks_Helper {
 
 	/**
 	 * Filters string for $_POST, $_GET or $_REQUEST operations
@@ -140,12 +139,12 @@ class Helper {
 	/**
 	 * Select option input helper for post query
 	 *
-	 * @param string $query_item Post item
+	 * @param WP_Post $query_item Post item
 	 * @param array $option_name Option name
 	 *
 	 * @since 1.0.0
 	 */
-	public static function get_select_options_from_query( $query_item, $option_name ) {
+	public static function get_select_options_from_query(WP_Post $query_item, string $option_name ) {
 
 		$selected = $query_item->post_name === esc_attr( get_option( $option_name ) ) ? " selected" : "";
 

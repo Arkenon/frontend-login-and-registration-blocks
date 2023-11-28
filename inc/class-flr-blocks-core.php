@@ -13,22 +13,24 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-Helper::using( 'inc/Loader.php' );
+Flr_Blocks_Helper::using( 'inc/class-flr-blocks-loader.php' );
 
 
-class Core extends Loader {
+class Flr_Blocks_Core extends Flr_Blocks_Loader {
 
 	/**
 	 * Define the core functionality of the plugin.
 	 *
-	 * Set the plugin name and the plugin version that can be used throughout the plugin.
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
+	 *
+	 * Create an instance of the loader which will be used to register the hooks
+	 * with WordPress.
 	 *
 	 * @since    1.0.0
 	 */
@@ -77,10 +79,8 @@ class Core extends Loader {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - \PLUGIN_NAMESPACE\Blocks. Load block types
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
+	 * - \FLR_BLOCKS\Flr_Blocks_Block_Handler : Load block types
+	 * - \FLR_BLOCKS\Flr_Blocks_I18n : Load internalization functionality
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -90,19 +90,20 @@ class Core extends Loader {
 		/**
 		 * The class responsible for registering block types
 		 */
-		Helper::using( 'inc/Blocks.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-block-handler.php' );
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 */
-		Helper::using( 'inc/I18n.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-i18n.php' );
 
 	}
 
 	/**
-	 * Get admin dashboard options page
 	 *
-	 * Creates a menu item in admin dashboard and prints an options page
+	 * Get admin dashboard options page actions
+	 *
+	 * Load admin dashboard options page actions from Flr_Blocks_Options class
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -112,18 +113,18 @@ class Core extends Loader {
 		/**
 		 * The class responsible for admin options.
 		 */
-		Helper::using( 'inc/Options.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-options.php' );
 
-		$plugin_options = new Options();
+		$plugin_options = new Flr_Blocks_Options();
 
-		self::add_action( 'plugins_loaded', $plugin_options, 'load_flwgb_options' );
+		self::add_action( 'plugins_loaded', $plugin_options, 'load_flr_blocks_options' );
 
 	}
 
 	/**
 	 * Get login form actions
 	 *
-	 * Load login actions from Login Class
+	 * Load login actions from Flr_Blocks_Login class
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -133,18 +134,18 @@ class Core extends Loader {
 		/**
 		 * The class responsible for login operations.
 		 */
-		Helper::using( 'inc/Login.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-login.php' );
 
-		$login = new Login();
+		$login = new Flr_Blocks_Login();
 
 		self::add_action( 'plugins_loaded', $login, 'load_login_actions' );
 
 	}
 
 	/**
-	 * Get register form ajax actions.
+	 * Get registration (sign up) form actions
 	 *
-	 * Get ajax handle action from Register.php
+	 * Load registration actions from Flr_Blocks_Registration class
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -152,20 +153,20 @@ class Core extends Loader {
 	private function set_register_form_actions() {
 
 		/**
-		 * The class responsible for registeration operations.
+		 * The class responsible for registration operations.
 		 */
-		Helper::using( 'inc/Register.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-registration.php' );
 
-		$register = new Register();
+		$register = new Flr_Blocks_Registration();
 
 		self::add_action( 'plugins_loaded', $register, 'load_register_actions' );
 
 	}
 
 	/**
-	 * Get user settings form ajax actions.
+	 * Get user settings form actions
 	 *
-	 * Get ajax handle action from UserSettings.php
+	 * Load user settings actions from Flr_Blocks_User_Settings class
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -175,18 +176,18 @@ class Core extends Loader {
 		/**
 		 * The class responsible for user settings operations.
 		 */
-		Helper::using( 'inc/UserSettings.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-user-settings.php' );
 
-		$user_settings = new UserSettings();
+		$user_settings = new Flr_Blocks_User_Settings();
 
 		self::add_action( 'plugins_loaded', $user_settings, 'load_user_settings_actions' );
 
 	}
 
 	/**
-	 * Get lost password form ajax actions.
+	 * Get lost/reset password form actions
 	 *
-	 * Get ajax handle action from Register.php
+	 * Load lost/reset password actions from Flr_Blocks_Lost_Password class
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -196,9 +197,9 @@ class Core extends Loader {
 		/**
 		 * The class responsible for registration operations.
 		 */
-		Helper::using( 'inc/LostPassword.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-lost-password.php' );
 
-		$lost_password = new LostPassword();
+		$lost_password = new Flr_Blocks_Lost_Password();
 
 		self::add_action( 'plugins_loaded', $lost_password, 'load_reset_password_actions' );
 
@@ -207,16 +208,16 @@ class Core extends Loader {
 	/**
 	 * Get block types
 	 *
-	 * Block types registered at class \FLWGB\Blocks
+	 * Block types registered at Flr_Blocks_Block_Handler class
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function set_block_types() {
 
-		$plugin_options = new Blocks();
+		$plugin_options = new Flr_Blocks_Block_Handler();
 
-		self::add_action( 'plugins_loaded', $plugin_options, 'load_flwgb_blocks' );
+		self::add_action( 'plugins_loaded', $plugin_options, 'load_flr_blocks' );
 
 	}
 
@@ -231,9 +232,9 @@ class Core extends Loader {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new I18n();
+		$plugin_i18n = new Flr_Blocks_I18n();
 
-		self::add_action( 'plugins_loaded', $plugin_i18n, 'load_flwgb_textdomain' );
+		self::add_action( 'plugins_loaded', $plugin_i18n, 'load_flr_blocks_textdomain' );
 
 	}
 
@@ -250,9 +251,9 @@ class Core extends Loader {
 		 * The class responsible for defining all actions that occur in the admin area and block editor
 		 * Editor styles for only common css rules of blocks.
 		 */
-		Helper::using( 'admin/Backend.php' );
+		Flr_Blocks_Helper::using( 'admin/class-flr-blocks-admin.php' );
 
-		$plugin_admin = new Backend();
+		$plugin_admin = new Flr_Blocks_Admin();
 
 		self::add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		self::add_action( 'init', $plugin_admin, 'editor_styles' );
@@ -270,9 +271,9 @@ class Core extends Loader {
 	 */
 	private function define_public_hooks() {
 
-		Helper::using( 'public/Frontend.php' );
+		Flr_Blocks_Helper::using( 'public/class-flr-blocks-public.php' );
 
-		$plugin_public = new Frontend();
+		$plugin_public = new Flr_Blocks_Public();
 
 		self::add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		self::add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -280,20 +281,20 @@ class Core extends Loader {
 	}
 
 	/**
+	 * Get mail actions
 	 *
-	 * Actions from Mail class.
+	 * Load mail actions from Flr_Blocks_Mail class
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function set_wp_mail_actions() {
 
-		Helper::using( 'inc/Mail.php' );
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-mail.php' );
 
-		$mail = new Mail();
+		$mail = new Flr_Blocks_Mail();
 
-		//Set mail content type as html
-		self::add_filter( 'wp_mail_content_type', $mail, 'mail_html_format' );
+		self::add_action( 'plugins_loaded', $mail, 'load_mail_actions' );
 
 	}
 

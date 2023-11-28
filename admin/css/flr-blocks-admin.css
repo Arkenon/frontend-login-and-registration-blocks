@@ -1,0 +1,14 @@
+/*
+ * Css codes for admin dashboard /
+ * Frontend Login and Registration Blocks Settings page
+*/
+
+#flr-blocks-admin-general-settings select{
+	width: 100% !important;
+}
+
+.flr-blocks-admin-settings-description{
+	font-weight: normal;
+	font-size: 13px;
+	color: darkgrey;
+}

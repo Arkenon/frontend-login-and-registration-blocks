@@ -15,12 +15,12 @@ const LabelSettings = ({options}) => {
 	return (
 		<Panel>
 			<PanelBody
-				title={__('Label Settings', 'flwgb')}
+				title={__('Label Settings', 'flr-blocks')}
 				initialOpen={false}
 			>
 				<PanelRow>
 					<ToggleControl
-						label={__('Show labels', 'flwgb')}
+						label={__('Show labels', 'flr-blocks')}
 						help={attributes.showLabels ? 'Show' : 'Hide'}
 						checked={attributes.showLabels}
 						onChange={(val) =>
@@ -31,7 +31,7 @@ const LabelSettings = ({options}) => {
 				<PanelRow>
 					<SelectControl
 						labelPosition={'top'}
-						label={__('Font Weight & Font Color', 'flwgb')}
+						label={__('Font Weight & Font Color', 'flr-blocks')}
 						value={attributes.textFontWeight}
 						options={[
 							{label: 'Normal', value: 'normal'},

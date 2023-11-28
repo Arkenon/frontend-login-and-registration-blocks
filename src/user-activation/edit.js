@@ -10,7 +10,7 @@ export default function Edit(props) {
 
 		<div {...blockProps}>
 
-			{__('This is a placeholder for the USER ACTIVATION BLOCK. Go to the front end of the page to preview the activation result.','flwgb')}
+			{__('This is a placeholder for the USER ACTIVATION BLOCK. Go to the front end of the page to preview the activation result.','flr-blocks')}
 
 		</div>
 

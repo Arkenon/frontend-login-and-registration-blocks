@@ -9,7 +9,7 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/admin/partials
  */
 
-use FLWGB\Helper;
+use FLR_BLOCKS\Flr_Blocks_Helper;
 
 if ( ! current_user_can( "administrator" ) ) {
 
@@ -18,7 +18,7 @@ if ( ! current_user_can( "administrator" ) ) {
 }
 
 $default_tab = null;
-$tab         = Helper::get( 'tab' ) ?? $default_tab;
+$tab         = Flr_Blocks_Helper::get( 'tab' ) ?? $default_tab;
 
 ?>
 
@@ -37,17 +37,17 @@ $tab         = Helper::get( 'tab' ) ?? $default_tab;
 
 		<a href="?page=frontend-login-with-gutenberg-blocks-settings"
 		   class="nav-tab <?php if ( $tab === null ): ?>nav-tab-active<?php endif; ?>">
-			<?php echo esc_html_x( "General Settings", "admin_general_settings", "flwgb" ); ?>
+			<?php echo esc_html_x( "General Settings", "admin_general_settings", "flr-blocks" ); ?>
 		</a>
 
 		<a href="?page=frontend-login-with-gutenberg-blocks-settings&tab=mail-templates"
 		   class="nav-tab <?php if ( $tab === 'mail-templates' ): ?>nav-tab-active<?php endif; ?>">
-			<?php echo esc_html_x( "E-Mail Templates", "admin_mail_settings", "flwgb" ); ?>
+			<?php echo esc_html_x( "E-Mail Templates", "admin_mail_settings", "flr-blocks" ); ?>
 		</a>
 
 		<a href="?page=frontend-login-with-gutenberg-blocks-settings&tab=limit-login"
 		   class="nav-tab <?php if ( $tab === 'limit-login' ): ?>nav-tab-active<?php endif; ?>">
-			<?php echo esc_html_x( "Limit Login Attempts", "limit_login_settings", "flwgb" ); ?>
+			<?php echo esc_html_x( "Limit Login Attempts", "limit_login_settings", "flr-blocks" ); ?>
 		</a>
 
 	</nav>
@@ -58,15 +58,15 @@ $tab         = Helper::get( 'tab' ) ?? $default_tab;
 		switch ( $tab ) :
 
 			case 'mail-templates':
-				Helper::print_view( "admin/partials/mail-template-settings.php" );
+				Flr_Blocks_Helper::print_view( "admin/partials/mail-template-settings.php" );
 				break;
 
 			case 'limit-login':
-				Helper::print_view( "admin/partials/limit-login-settings.php" );
+				Flr_Blocks_Helper::print_view( "admin/partials/limit-login-settings.php" );
 				break;
 
 			default:
-				Helper::print_view( "admin/partials/general-settings.php" );
+				Flr_Blocks_Helper::print_view( "admin/partials/general-settings.php" );
 				break;
 
 		endswitch;

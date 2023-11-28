@@ -15,10 +15,10 @@ $button_style = 'color:' . $form_attributes['buttonTextColor'] . '; ' .
                 'border-radius: ' . $form_attributes['buttonBorderRadius'] . 'px;' .
                 'font-weight: ' . $form_attributes['buttonTextFontWeight'];
 
-$desc = $form_attributes['description'] ?: _x( "Please enter your e-mail address. We will send you an e-mail to reset your password.", "send_reset_request_description", "flwgb" );
+$desc = $form_attributes['description'] ?: _x( "Please enter your e-mail address. We will send you an e-mail to reset your password.", "send_reset_request_description", "flr-blocks" );
 
 $view = '<div '.get_block_wrapper_attributes().'>
-				<form name="flwgb-reset-pass-request-form" id="flwgb-reset-pass-request-form" method="post">';
+				<form name="flr-blocks-reset-pass-request-form" id="flr-blocks-reset-pass-request-form" method="post">';
 
 if ( $form_attributes['showDescription'] ) {
 	$view .= '<div style="text-align:center;">
@@ -26,19 +26,19 @@ if ( $form_attributes['showDescription'] ) {
 						  </div>';
 }
 
-$view .= '<div class="flwgb-form-row">
-						    <div class="flwgb-input-group">';
+$view .= '<div class="flr-blocks-form-row">
+						    <div class="flr-blocks-input-group">';
 
 if ( $form_attributes['showLabels'] ) {
 
-	$view .= '<label class="flwgb-input-label" style="' . $text_style . '" for="flwgb-email">' . esc_html_x("Your e-mail", "email_input_text", "flwgb" ) . '</label>';
+	$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-email">' . esc_html_x("Your e-mail", "email_input_text", "flr-blocks" ) . '</label>';
 }
 
-$view .= '<input class="flwgb-input-control" id="flwgb-email" name="flwgb-email" required type="text" style=' . $input_style . ' placeholder="';
+$view .= '<input class="flr-blocks-input-control" id="flr-blocks-email" name="flr-blocks-email" required type="text" style=' . $input_style . ' placeholder="';
 
 if ( $form_attributes['showPlaceholders'] ) {
 
-	$view .= esc_attr_x( "Enter your e-mail", "email_placeholder_text", "flwgb" );
+	$view .= esc_attr_x( "Enter your e-mail", "email_placeholder_text", "flr-blocks" );
 
 }
 
@@ -47,18 +47,18 @@ $view .= '</div>
 
 						</div>';
 
-$view .= '<input type="hidden" name="action" value="' . esc_attr( 'flwgbresetrequesthandle' ) . '">';
+$view .= '<input type="hidden" name="action" value="' . esc_attr( 'flrblocksresetrequesthandle' ) . '">';
 
-$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flwgbresetrequesthandle' ) ) . '">';
+$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flrblocksresetrequesthandle' ) ) . '">';
 
-$view .= '<div class="flwgb-form-row">
-							<button style="' . $button_style . '" type="submit" id="flwgb-reset-request-submit" class="flwgb-reset-request-btn flwgb-btn">
-								' . esc_html_x( "Send Request", "send_reset_request", "flwgb" ) . '
+$view .= '<div class="flr-blocks-form-row">
+							<button style="' . $button_style . '" type="submit" id="flr-blocks-reset-request-submit" class="flr-blocks-reset-request-btn flr-blocks-btn">
+								' . esc_html_x( "Send Request", "send_reset_request", "flr-blocks" ) . '
 							</button>
 						</div>
-				<div id="flwgb-reset-request-loading" class="flwgb-loading flwgb-hide">' . esc_html_x( "Loading...", "loading_text", "flwgb" ) . '</div>';
+				<div id="flr-blocks-reset-request-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...", "loading_text", "flr-blocks" ) . '</div>';
 $view .= '</form>
-			<div id="flwgb-reset-request-form-result"></div>
+			<div id="flr-blocks-reset-request-form-result"></div>
 	    </div>';
 
 

@@ -1,11 +1,11 @@
 <?php
 
-use FLWGB\Helper;
+use FLR_BLOCKS\Flr_Blocks_Helper;
 
 //Login Form
 if ( is_user_logged_in() ) {
 
-	$view = Helper::return_view( 'public/partials/login/already-logged-in.php' );
+	$view = Flr_Blocks_Helper::return_view( 'public/partials/login/already-logged-in.php' );
 
 } else {
 
@@ -25,71 +25,71 @@ if ( is_user_logged_in() ) {
 	                'font-weight: ' . $form_attributes['buttonTextFontWeight'];
 
 	$view = '<div '.get_block_wrapper_attributes().'>
-				<form name="flwgb-login-form" id="flwgb-login-form" method="post">';
+				<form name="flr-blocks-login-form" id="flr-blocks-login-form" method="post">';
 
-	$view .= '<div class="flwgb-form-row">
-							<div class="flwgb-input-group">';
+	$view .= '<div class="flr-blocks-form-row">
+							<div class="flr-blocks-input-group">';
 
 	if ( $form_attributes['showLabels'] ) {
 
-		$view .= '<label class="flwgb-input-label" style="' . $text_style . '" for="flwgb-username-or-email">' . esc_html_x( "Username or E-mail", "email_or_username_input_text", "flwgb" ) . '</label>';
+		$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-username-or-email">' . esc_html_x( "Username or E-mail", "email_or_username_input_text", "flr-blocks" ) . '</label>';
 	}
 
-	$view .= '<input class="flwgb-input-control" id="flwgb-username-or-email" name="flwgb-username-or-email" type="text" required style=' . $input_style . ' placeholder="';
+	$view .= '<input class="flr-blocks-input-control" id="flr-blocks-username-or-email" name="flr-blocks-username-or-email" type="text" required style=' . $input_style . ' placeholder="';
 
 	if ( $form_attributes['showPlaceholders'] ) {
 
-		$view .= esc_attr_x( "Enter your username or e-mail", "email_or_username_placeholder_text", "flwgb" );
+		$view .= esc_attr_x( "Enter your username or e-mail", "email_or_username_placeholder_text", "flr-blocks" );
 
 	}
 
 	$view .= '" /></div></div>';
 
-	$view .= '<div class="flwgb-form-row">
-										<div class="flwgb-input-group">';
+	$view .= '<div class="flr-blocks-form-row">
+										<div class="flr-blocks-input-group">';
 
 	if ( $form_attributes['showLabels'] ) {
 
-		$view .= '<label class="flwgb-input-label" style="' . $text_style . '" for="flwgb-password">' . esc_html_x( "Password", "password_input_text", "flwgb" ) . '</label>';
+		$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-password">' . esc_html_x( "Password", "password_input_text", "flr-blocks" ) . '</label>';
 	}
 
-	$view .= '<input class="flwgb-input-control" id="flwgb-password" name="flwgb-password" type="password" required style=' . $input_style . ' placeholder="';
+	$view .= '<input class="flr-blocks-input-control" id="flr-blocks-password" name="flr-blocks-password" type="password" required style=' . $input_style . ' placeholder="';
 
 	if ( $form_attributes['showPlaceholders'] ) {
 
-		$view .= esc_attr_x( "Enter your password", "password_placeholder_text", "flwgb" );
+		$view .= esc_attr_x( "Enter your password", "password_placeholder_text", "flr-blocks" );
 
 	}
 
 	$view .= '" /></div></div>';
 
-	$view .= '<div class="flwgb-form-row">
-						<div class="flwgb-form-check-group">
-							<input id="flwgb-rememberme" checked="checked" type="checkbox" name="flwgb-rememberme" class="flwgb-form-check-input"/>
-							<label class="flwgb-form-check-label" for="flwgb-rememberme">' . esc_html_x( "Remember me", "remember_me_text", "flwgb" ) . '</label>
+	$view .= '<div class="flr-blocks-form-row">
+						<div class="flr-blocks-form-check-group">
+							<input id="flr-blocks-rememberme" checked="checked" type="checkbox" name="flr-blocks-rememberme" class="flr-blocks-form-check-input"/>
+							<label class="flr-blocks-form-check-label" for="flr-blocks-rememberme">' . esc_html_x( "Remember me", "remember_me_text", "flr-blocks" ) . '</label>
 						</div>
 					</div>';
 
-	$view .= '<input type="hidden" name="action" value="' . esc_attr( 'flwgbloginhandle' ) . '">';
+	$view .= '<input type="hidden" name="action" value="' . esc_attr( 'flrblocksloginhandle' ) . '">';
 
-	$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flwgbloginhandle' ) ) . '">';
+	$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flrblocksloginhandle' ) ) . '">';
 
-	$view .= '<div class="flwgb-form-row">
-						<button style="' . $button_style . '" type="submit" id="flwgb-login-submit" class="flwgb-login-btn flwgb-btn">
-							' . esc_html_x( "Login", "login_text", "flwgb" ) . '
+	$view .= '<div class="flr-blocks-form-row">
+						<button style="' . $button_style . '" type="submit" id="flr-blocks-login-submit" class="flr-blocks-login-btn flr-blocks-btn">
+							' . esc_html_x( "Login", "login_text", "flr-blocks" ) . '
 						</button>
 						' . do_action( 'wp_login' ) . '
 					</div>
-					<div id="flwgb-login-loading" class="flwgb-loading flwgb-hide">' . esc_html_x( "Loading...", "loading_text", "flwgb" ) . '</div>';
+					<div id="flr-blocks-login-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...", "loading_text", "flr-blocks" ) . '</div>';
 	$view .= '</form>';
-	$view .= '<div id="flwgb-login-form-result"></div>';
+	$view .= '<div id="flr-blocks-login-form-result"></div>';
 	$view .= '<div style="text-align:center;">
-				<a style="text-decoration:none;" href="' . esc_url( site_url( get_option( 'flwgb_lost_password_page' ) ) ) . '">
-						' . esc_html_x( "Lost Password", "reset_password_button_text", "flwgb" ) . '
+				<a style="text-decoration:none;" href="' . esc_url( site_url( get_option( 'flr_blocks_lost_password_page' ) ) ) . '">
+						' . esc_html_x( "Lost Password", "reset_password_button_text", "flr-blocks" ) . '
 				</a> | ';
 
-	$view .= '<a style="text-decoration:none;" href="' . esc_url( site_url( get_option( 'flwgb_register_page' ) ) ) . '">
-						' . esc_html_x( "Register", "register_button_text", "flwgb" ) . '
+	$view .= '<a style="text-decoration:none;" href="' . esc_url( site_url( get_option( 'flr_blocks_register_page' ) ) ) . '">
+						' . esc_html_x( "Register", "register_button_text", "flr-blocks" ) . '
 				</a>
 			</div>
     </div>';

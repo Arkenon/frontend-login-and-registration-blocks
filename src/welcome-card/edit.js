@@ -10,7 +10,7 @@ export default function Edit(props) {
 
 		<div {...blockProps}>
 
-			{__('This is a placeholder for the WELCOME CARD BLOCK to display a welcome card for logged in users. Card has a logout button... Go to the front end of the page to preview the activation result.', 'flwgb')}
+			{__('This is a placeholder for the WELCOME CARD BLOCK to display a welcome card for logged in users. Card has a logout button... Go to the front end of the page to preview the activation result.', 'flr-blocks')}
 
 		</div>
 

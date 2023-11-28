@@ -7,13 +7,19 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/inc
  */
 
-namespace FLWGB;
+namespace FLR_BLOCKS;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
 
-class Mail {
+class Flr_Blocks_Mail {
+
+	public function load_mail_actions(){
+
+		//Load mail html format
+		add_filter( 'wp_mail_content_type', [$this,'mail_html_format'] );
+	}
 
 	/**
 	 * Html formatted mail body
@@ -72,23 +78,23 @@ class Mail {
 		switch ( $template_name ) {
 
 			case "register_mail_to_user_template":
-				return _x( 'Hello {{username}}, <br> Welcome to our website.', 'register_mail_to_user_template', 'flwgb' );
+				return _x( 'Hello {{username}}, <br> Welcome to our website.', 'register_mail_to_user_template', 'flr-blocks' );
 				break;
 
 			case "register_mail_to_user_template_with_activation":
-				return _x( 'Hello {{username}}. You have been signed up successfully. Please click the membership activation link below: <br/> {{activation_link}}', 'register_mail_to_user_template_with_activation', 'flwgb' );
+				return _x( 'Hello {{username}}. You have been signed up successfully. Please click the membership activation link below: <br/> {{activation_link}}', 'register_mail_to_user_template_with_activation', 'flr-blocks' );
 				break;
 
 			case "register_mail_to_admin_template":
-				return _x( 'New member registered to your web site. <br> Username: {{username}} | User E-Mail: {{email}}', 'register_mail_to_admin_template', 'flwgb' );
+				return _x( 'New member registered to your web site. <br> Username: {{username}} | User E-Mail: {{email}}', 'register_mail_to_admin_template', 'flr-blocks' );
 				break;
 
 			case "reset_password_mail_to_user_template":
-				return _x( 'Hello {{username}}, <br> This notice confirms that your password was changed. If you did not change your password, please contact the Site Administrator.', 'reset_password_mail_to_user_template', 'flwgb' );
+				return _x( 'Hello {{username}}, <br> This notice confirms that your password was changed. If you did not change your password, please contact the Site Administrator.', 'reset_password_mail_to_user_template', 'flr-blocks' );
 				break;
 
 			case "reset_password_request_mail_to_user_template":
-				return _x( 'Hello {{username}}, <br> You can change your password from the link below <br> {{reset_link}} <br> Thanks for your attention.', 'reset_password_request_mail_to_user_template', 'flwgb' );
+				return _x( 'Hello {{username}}, <br> You can change your password from the link below <br> {{reset_link}} <br> Thanks for your attention.', 'reset_password_request_mail_to_user_template', 'flr-blocks' );
 				break;
 
 			default:
