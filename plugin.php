@@ -10,13 +10,14 @@
  * Author URI:        https://github.com/Arkenon
  * Text Domain:       flr-blocks
  * Domain Path:       /languages
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * @package           Frontend_Login_And_Registration_Blocks
  */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
-//TODO check path and url
 define( 'FLR_BLOCKS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'FLR_BLOCKS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 

@@ -13,12 +13,12 @@ use FLR_BLOCKS\Flr_Blocks_Helper;
 
 if ( ! current_user_can( "administrator" ) ) {
 
-	wp_die(__("You are not authorized to see this page."));
+	wp_die( __( "You are not authorized to see this page." ) );
 
 }
 
 $default_tab = null;
-$tab         = Flr_Blocks_Helper::get( 'tab' ) ?? $default_tab;
+$tab         = Flr_Blocks_Helper::sanitize( 'tab', 'get', 'text' ) ?? $default_tab;
 
 ?>
 

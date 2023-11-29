@@ -54,21 +54,21 @@ class Flr_Blocks_Registration {
 
 		header( 'Access-Control-Allow-Origin: *' );
 
-		if(!get_option('users_can_register')){
+		if ( ! get_option( 'users_can_register' ) ) {
 
 			echo json_encode( array(
 				'status'  => false,
-				'message' => esc_html_x( "Users are not allowed to register on your website. Please set the 'anyone can register' option in the General Options.", "users_can_register_error", "flr-blocks" )
+				'message' => esc_html_x( "Users are not allowed to register on this website.", "users_can_register_error", "flr-blocks" )
 			) );
 
 			wp_die();
 
 		}
 
-		$password       = Flr_Blocks_Helper::post( 'flr-blocks-password-for-register' );
-		$password_again = Flr_Blocks_Helper::post( 'flr-blocks-password-again-for-register' );
-		$username       = Flr_Blocks_Helper::post( 'flr-blocks-username-for-register','username' );
-		$email          = Flr_Blocks_Helper::post( 'flr-blocks-email-for-register','email' );
+		$password       = Flr_Blocks_Helper::sanitize( 'flr-blocks-password-for-register', 'post' );
+		$password_again = Flr_Blocks_Helper::sanitize( 'flr-blocks-password-again-for-register', 'post' );
+		$username       = Flr_Blocks_Helper::sanitize( 'flr-blocks-username-for-register', 'post', 'username' );
+		$email          = Flr_Blocks_Helper::sanitize( 'flr-blocks-email-for-register', 'post', 'email' );
 
 		$params = [
 			'username'        => $username,

@@ -26,7 +26,10 @@ class Flr_Blocks_User_Settings {
 			$this,
 			'flr_blocks_user_settings_handle_ajax_callback'
 		] );
-		add_action( 'wp_ajax_flrblocksusersettingsupdatehandle', [ $this, 'flr_blocks_user_settings_handle_ajax_callback' ] );
+		add_action( 'wp_ajax_flrblocksusersettingsupdatehandle', [
+			$this,
+			'flr_blocks_user_settings_handle_ajax_callback'
+		] );
 
 	}
 
@@ -58,35 +61,35 @@ class Flr_Blocks_User_Settings {
 
 		header( 'Access-Control-Allow-Origin: *' );
 
-		$user_id = Flr_Blocks_Helper::post( 'user_id' ,'id');
+		$user_id = Flr_Blocks_Helper::sanitize( 'user_id', 'post', 'id' );
 
 		$user_info = get_userdata( $user_id );
 
-		$user_info->first_name  = Flr_Blocks_Helper::post( 'flr-blocks-user-first-name','text' );
-		$user_info->last_name   = Flr_Blocks_Helper::post( 'flr-blocks-user-last-name','text' );
-		$user_info->user_email  = Flr_Blocks_Helper::post( 'flr-blocks-email-update','email' );
-		$user_info->user_url    = Flr_Blocks_Helper::post( 'flr-blocks-user-website','text' );
-		$user_info->description = Flr_Blocks_Helper::post( 'flr-blocks-user-bio','textarea' );
+		$user_info->first_name  = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-first-name', 'post', 'text' );
+		$user_info->last_name   = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-last-name', 'post', 'text' );
+		$user_info->user_email  = Flr_Blocks_Helper::sanitize( 'flr-blocks-email-update', 'post', 'email' );
+		$user_info->user_url    = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-website', 'post', 'text' );
+		$user_info->description = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-bio', 'post', 'textarea' );
 
 		$update = wp_update_user( $user_info );
 
 		if ( ! is_wp_error( $update ) ) {
 
-			$current_password   = Flr_Blocks_Helper::post( 'flr-blocks-current-password' );
-			$new_password       = Flr_Blocks_Helper::post( 'flr-blocks-password-update' );
-			$new_password_again = Flr_Blocks_Helper::post( 'flr-blocks-password-again-update' );
+			$current_password   = Flr_Blocks_Helper::sanitize( 'flr-blocks-current-password', 'post' );
+			$new_password       = Flr_Blocks_Helper::sanitize( 'flr-blocks-password-update', 'post' );
+			$new_password_again = Flr_Blocks_Helper::sanitize( 'flr-blocks-password-again-update', 'post' );
 
 			if ( ! empty( $new_password ) && ! empty( $new_password_again ) ) {
 
 				if ( $user_info ) {
 
-					if(wp_check_password( $current_password, $user_info->user_pass, $user_id )){
+					if ( wp_check_password( $current_password, $user_info->user_pass, $user_id ) ) {
 
 						if ( ( ! empty( $new_password ) && ! empty( $new_password_again ) ) && ( $new_password != $new_password_again ) ) {
 
 							echo json_encode( array(
 								'status'  => false,
-								'message' => esc_html_x("Your passwords do not match", "password_match_error", "flr-blocks" )
+								'message' => esc_html_x( "Your passwords do not match", "password_match_error", "flr-blocks" )
 							) );
 
 							wp_die();

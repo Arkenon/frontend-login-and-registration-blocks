@@ -4,16 +4,16 @@ use FLR_BLOCKS\Flr_Blocks_Helper;
 
 if ( is_user_logged_in() ) {
 
-	$view = '<div style="text-align: center;">'.esc_html_x( "This form is only shown to users who are not logged in.", "alert_for_non_logged_in_users", "flr-blocks" ).'</div>';
+	$view = '<div style="text-align: center;">' . esc_html_x( "This form is only shown to users who are not logged in.", "alert_for_non_logged_in_users", "flr-blocks" ) . '</div>';
 
 	return;
 
 }
 
-if ( Flr_Blocks_Helper::get( 'reset' ) === 'in-progress' ) {
+if ( Flr_Blocks_Helper::sanitize( 'reset', 'get', 'text' ) === 'in-progress' ) {
 
-	$code = Flr_Blocks_Helper::get( 'key' );
-	$user = Flr_Blocks_Helper::get( 'user' );
+	$code = Flr_Blocks_Helper::sanitize( 'key', 'get', 'text' );
+	$user = Flr_Blocks_Helper::sanitize( 'user', 'get', 'id' );
 
 	$code2 = get_user_meta( $user, 'flr_blocks_lost_password_key', true );
 

@@ -89,9 +89,9 @@ class Flr_Blocks_Login {
 		check_ajax_referer( 'flrblocksloginhandle', 'security' );
 
 		$credentials                  = array();
-		$credentials['user_login']    = Flr_Blocks_Helper::post( 'flr-blocks-username-or-email','text' ) ?? '';
-		$credentials['user_password'] = Flr_Blocks_Helper::post( 'flr-blocks-password' ) ?? '';
-		$credentials['remember']      = Flr_Blocks_Helper::post( 'flr-blocks-rememberme','text' ) === 'on' ? true : false;
+		$credentials['user_login']    = Flr_Blocks_Helper::sanitize( 'flr-blocks-username-or-email', 'post', 'text' ) ?? '';
+		$credentials['user_password'] = Flr_Blocks_Helper::sanitize( 'flr-blocks-password', 'post' ) ?? '';
+		$credentials['remember']      = Flr_Blocks_Helper::sanitize( 'flr-blocks-rememberme', 'post', 'text' ) === 'on';
 
 		$user = wp_signon( $credentials, is_ssl() );
 
@@ -243,7 +243,7 @@ class Flr_Blocks_Login {
 		return json_encode( array(
 			'status'  => false,
 			// translators: %1$s duration limit %2$s duration type (second or minute)
-			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error','flr-blocks' ), $duration_limit, $duration_type )
+			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error', 'flr-blocks' ), $duration_limit, $duration_type )
 		) );
 
 	}
@@ -274,12 +274,12 @@ class Flr_Blocks_Login {
 	/**
 	 * Return the url of login page
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
 	public function get_login_url(): string {
 
-		return get_option( 'flr_blocks_login_page' ) ? site_url(get_option( 'flr_blocks_login_page' )): home_url();
+		return get_option( 'flr_blocks_login_page' ) ? site_url( get_option( 'flr_blocks_login_page' ) ) : home_url();
 
 	}
 

@@ -37,14 +37,23 @@ class Flr_Blocks_Lost_Password {
 	 */
 	public function load_reset_password_actions() {
 
-		add_action( 'wp_ajax_nopriv_flrblocksresetpasswordhandle', [ $this, 'flr_blocks_reset_password_handle_ajax_callback' ] );
-		add_action( 'wp_ajax_flrblocksresetpasswordhandle', [ $this, 'flr_blocks_reset_password_handle_ajax_callback' ] );
+		add_action( 'wp_ajax_nopriv_flrblocksresetpasswordhandle', [
+			$this,
+			'flr_blocks_reset_password_handle_ajax_callback'
+		] );
+		add_action( 'wp_ajax_flrblocksresetpasswordhandle', [
+			$this,
+			'flr_blocks_reset_password_handle_ajax_callback'
+		] );
 
 		add_action( 'wp_ajax_nopriv_flrblocksresetrequesthandle', [
 			$this,
 			'flr_blocks_reset_password_request_handle_ajax_callback'
 		] );
-		add_action( 'wp_ajax_flrblocksresetrequesthandle', [ $this, 'flr_blocks_reset_password_request_handle_ajax_callback' ] );
+		add_action( 'wp_ajax_flrblocksresetrequesthandle', [
+			$this,
+			'flr_blocks_reset_password_request_handle_ajax_callback'
+		] );
 
 	}
 
@@ -59,7 +68,7 @@ class Flr_Blocks_Lost_Password {
 
 		check_ajax_referer( 'flrblocksresetrequesthandle', 'security' );
 
-		$email      = Flr_Blocks_Helper::post( 'flr-blocks-email','email' );
+		$email      = Flr_Blocks_Helper::sanitize( 'flr-blocks-email', 'post', 'email' );
 		$user       = get_user_by( 'email', $email );
 		$user_id    = $user->ID;
 		$username   = $user->user_login;
@@ -110,13 +119,13 @@ class Flr_Blocks_Lost_Password {
 
 		check_ajax_referer( 'flrblocksresetpasswordhandle', 'security' );
 
-		$user_id  = Flr_Blocks_Helper::post( 'userid','id' );
+		$user_id  = Flr_Blocks_Helper::sanitize( 'userid', 'post', 'id' );
 		$user     = get_userdata( $user_id );
 		$email    = $user->user_email;
 		$username = $user->user_login;
 
-		$new_password       = Flr_Blocks_Helper::post( 'resetpass_pwd' );
-		$new_password_again = Flr_Blocks_Helper::post( 'resetpass_pwd_again' );
+		$new_password       = Flr_Blocks_Helper::sanitize( 'resetpass_pwd', 'post' );
+		$new_password_again = Flr_Blocks_Helper::sanitize( 'resetpass_pwd_again', 'post' );
 
 		$params = [
 			'username' => $username,
@@ -126,17 +135,17 @@ class Flr_Blocks_Lost_Password {
 		if ( $new_password === $new_password_again ) {
 
 			$reset_pass = wp_update_user( array(
-				'ID'        => Flr_Blocks_Helper::post( 'userid','id' ),
-				'user_pass' => wp_slash( Flr_Blocks_Helper::post( 'resetpass_pwd' ) )
+				'ID'        => Flr_Blocks_Helper::sanitize( 'userid', 'post', 'id' ),
+				'user_pass' => wp_slash( Flr_Blocks_Helper::sanitize( 'resetpass_pwd', 'post' ) )
 			) );
 
 			if ( ! is_wp_error( $reset_pass ) ) {
 
-				delete_user_meta(  Flr_Blocks_Helper::post( 'userid','id' ), 'flr_blocks_lost_password_key' );
+				delete_user_meta( Flr_Blocks_Helper::sanitize( 'userid', 'post', 'id' ), 'flr_blocks_lost_password_key' );
 
 				$mail = new Flr_Blocks_Mail();
 
-				$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'flr-blocks' ));
+				$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'flr-blocks' ) );
 
 				echo json_encode( array(
 					'status'  => true,

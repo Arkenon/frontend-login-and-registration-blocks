@@ -27,33 +27,35 @@ class Flr_Blocks_Helper {
 	 * @return mixed|null $_POST['name'] or null when !isset($_POST['name'])
 	 * @since 1.0.0
 	 */
-	public static function post( string $name, string $type = "" ) {
+	public static function sanitize( string $name, string $method, string $type = "" ) {
 
-		if ( isset( $_POST[ $name ] ) ) {
+		$value = $method == 'post' ? $_POST[ $name ] : $_GET[ $name ];
+
+		if ( isset( $value ) ) {
 			switch ( $type ) {
 				case "text":
-					return sanitize_text_field( $_POST[$name] );
+					return sanitize_text_field( $value );
 					break;
 				case "title":
-					return sanitize_title($_POST[$name]);
+					return sanitize_title( $value );
 					break;
 				case "id":
-					return absint($_POST[$name]);
+					return absint( $value );
 					break;
 				case "textarea":
-					return sanitize_textarea_field($_POST[$name]);
+					return sanitize_textarea_field( $value );
 					break;
 				case "url":
-					return sanitize_url($_POST[$name]);
+					return sanitize_url( $value );
 					break;
 				case "email":
-					return sanitize_email($_POST[$name]);
+					return sanitize_email( $value );
 					break;
 				case "username":
-					return sanitize_user($_POST[$name]);
+					return sanitize_user( $value );
 					break;
 				default:
-					return $_POST[$name];
+					return $value;
 			}
 		}
 

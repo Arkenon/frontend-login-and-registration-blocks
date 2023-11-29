@@ -65,7 +65,7 @@ $view = '<div '.get_block_wrapper_attributes().'>
 
 			$view .= '<input type="hidden" name="action" value="'.esc_attr('flrblocksresetpasswordhandle').'">';
 			$view .= '<input type="hidden" name="security" value="'.esc_attr(wp_create_nonce('flrblocksresetpasswordhandle')).'">';
-			$view .= '<input type="hidden" name="userid" value="' . esc_attr(Flr_Blocks_Helper::get( 'user' )) . '">';
+			$view .= '<input type="hidden" name="userid" value="' . esc_attr(Flr_Blocks_Helper::sanitize( 'user','get','id' )) . '">';
 
 			$view .= '<div class="flr-blocks-form-row">
 							<button style="'.$button_style.'" type="submit" id="flr-blocks-reset-password-submit" class="flr-blocks-reset-password-btn flr-blocks-btn">

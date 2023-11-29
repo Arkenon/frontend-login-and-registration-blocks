@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Frontend Login and Registration Blocks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 10:55+0000\n"
+"POT-Creation-Date: 2023-11-29 08:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -58,12 +58,12 @@ msgctxt "change_avatar_description"
 msgid "You can change your profile picture on Gravatar."
 msgstr ""
 
-#: inc/class-flr-blocks-user-settings.php:111
+#: inc/class-flr-blocks-user-settings.php:114
 msgctxt "check_your_user_info_error"
 msgid "Make sure your user information is correct."
 msgstr ""
 
-#: inc/class-flr-blocks-user-settings.php:123
+#: inc/class-flr-blocks-user-settings.php:126
 msgctxt "current_password_error"
 msgid "Your current password is wrong. Please check it again."
 msgstr ""
@@ -122,16 +122,16 @@ msgstr ""
 msgid "Frontend Login and Registration Blocks"
 msgstr ""
 
-#: inc/class-flr-blocks-lost-password.php:92
+#: inc/class-flr-blocks-lost-password.php:101
 #: inc/class-flr-blocks-registration.php:171
 #: inc/class-flr-blocks-user-activation.php:93
-#: inc/class-flr-blocks-user-settings.php:144
+#: inc/class-flr-blocks-user-settings.php:147
 msgctxt "general_error_message"
 msgid "Something went wrong. Please try again later."
 msgstr ""
 
-#: inc/class-flr-blocks-user-settings.php:100
-#: inc/class-flr-blocks-user-settings.php:133
+#: inc/class-flr-blocks-user-settings.php:103
+#: inc/class-flr-blocks-user-settings.php:136
 msgctxt "general_success_message"
 msgid "Operation has been completed successfully."
 msgstr ""
@@ -247,7 +247,7 @@ msgstr ""
 #: public/partials/login/login-form.php:79
 #: public/partials/logout/logout-menu-item.php:15
 #: public/partials/register/register-form.php:135
-#: public/partials/user-activation/user-activation.php:37
+#: public/partials/user-activation/user-activation.php:36
 msgctxt "login_text"
 msgid "Login"
 msgstr ""
@@ -305,7 +305,7 @@ msgctxt "password_again_placeholder_text"
 msgid "Enter your password again"
 msgstr ""
 
-#: inc/class-flr-blocks-lost-password.php:143
+#: inc/class-flr-blocks-lost-password.php:152
 msgctxt "password_changed_confirmation"
 msgid "Your password has been changed. Please sign in..."
 msgstr ""
@@ -316,9 +316,9 @@ msgctxt "password_input_text"
 msgid "Password"
 msgstr ""
 
-#: inc/class-flr-blocks-lost-password.php:159
+#: inc/class-flr-blocks-lost-password.php:168
 #: inc/class-flr-blocks-registration.php:84
-#: inc/class-flr-blocks-user-settings.php:89
+#: inc/class-flr-blocks-user-settings.php:92
 msgctxt "password_match_error"
 msgid "Your passwords do not match"
 msgstr ""
@@ -425,7 +425,7 @@ msgctxt "reset_password_button_text"
 msgid "Lost Password"
 msgstr ""
 
-#: inc/class-flr-blocks-lost-password.php:139
+#: inc/class-flr-blocks-lost-password.php:148
 msgctxt "reset_password_mail_title"
 msgid "Your Password Changed"
 msgstr ""
@@ -442,7 +442,7 @@ msgid ""
 " If you did not change your password, please contact the Site Administrator."
 msgstr ""
 
-#: inc/class-flr-blocks-lost-password.php:85
+#: inc/class-flr-blocks-lost-password.php:94
 msgctxt "reset_password_request_confirmation"
 msgid ""
 "We have successfully get your request. We have sent you an e-mail. Please "
@@ -461,7 +461,7 @@ msgid ""
 "<br> {{reset_link}} <br> Thanks for your attention."
 msgstr ""
 
-#: inc/class-flr-blocks-lost-password.php:77
+#: inc/class-flr-blocks-lost-password.php:86
 msgctxt "reset_request_mail_title"
 msgid "Reset Password Request"
 msgstr ""
@@ -590,9 +590,7 @@ msgstr ""
 
 #: inc/class-flr-blocks-registration.php:61
 msgctxt "users_can_register_error"
-msgid ""
-"Users are not allowed to register on your website. Please set the 'anyone "
-"can register' option in the General Options."
+msgid "Users are not allowed to register on this website."
 msgstr ""
 
 #: inc/class-flr-blocks-user-activation.php:107
