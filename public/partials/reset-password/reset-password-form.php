@@ -2,6 +2,9 @@
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 if ( is_user_logged_in() ) {
 
 	$view = '<div style="text-align: center;">' . esc_html_x( "This form is only shown to users who are not logged in.", "alert_for_non_logged_in_users", "flr-blocks" ) . '</div>';

@@ -2,7 +2,11 @@
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 global $user_login;
+
 
 if(is_user_logged_in()):
 

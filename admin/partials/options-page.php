@@ -11,6 +11,9 @@
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 if ( ! current_user_can( "administrator" ) ) {
 
 	wp_die( __( "You are not authorized to see this page." ) );

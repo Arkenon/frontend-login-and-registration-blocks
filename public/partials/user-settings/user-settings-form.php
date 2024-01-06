@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 if( !is_user_logged_in()){
 
 	$view = '<div style="text-align: center;">'.esc_html_x( "This form is only shown to logged in users...", "alert_for_logged_in_users", "flr-blocks" ).'</div>';

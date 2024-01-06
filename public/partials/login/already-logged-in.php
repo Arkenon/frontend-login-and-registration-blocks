@@ -1,8 +1,14 @@
 <?php
 
 global $user_login;
+
+// Exit if accessed directly.
+use FLR_BLOCKS\Flr_Blocks_Helper;
 use FLR_BLOCKS\Flr_Blocks_Logout;
 
+defined( 'ABSPATH' ) or die;
+
+Flr_Blocks_Helper::using('inc/class-flr-blocks-logout.php');
 $logout = new Flr_Blocks_Logout();
 
 $view = '<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);transition: 0.3s;width:100%;" ' . get_block_wrapper_attributes() . '>

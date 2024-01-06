@@ -2,6 +2,9 @@
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 //Login Form
 if ( is_user_logged_in() ) {
 

@@ -10,6 +10,9 @@
 
 use FLR_BLOCKS\Flr_Blocks_Mail;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 ?>
 
 

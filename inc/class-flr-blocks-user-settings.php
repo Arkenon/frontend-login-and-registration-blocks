@@ -87,7 +87,7 @@ class Flr_Blocks_User_Settings {
 
 						if ( ( ! empty( $new_password ) && ! empty( $new_password_again ) ) && ( $new_password != $new_password_again ) ) {
 
-							echo json_encode( array(
+							wp_send_json( array(
 								'status'  => false,
 								'message' => esc_html_x( "Your passwords do not match", "password_match_error", "flr-blocks" )
 							) );
@@ -98,7 +98,7 @@ class Flr_Blocks_User_Settings {
 
 							wp_set_password( $new_password, $user_id );
 
-							echo json_encode( array(
+							wp_send_json( array(
 								'status'  => true,
 								'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flr-blocks" )
 							) );
@@ -109,7 +109,7 @@ class Flr_Blocks_User_Settings {
 
 					} else {
 
-						echo json_encode( array(
+						wp_send_json( array(
 							'status'  => false,
 							'message' => esc_html_x( "Make sure your user information is correct.", "check_your_user_info_error", "flr-blocks" )
 						) );
@@ -121,7 +121,7 @@ class Flr_Blocks_User_Settings {
 
 				} else {
 
-					echo json_encode( array(
+					wp_send_json( array(
 						'status'  => false,
 						'message' => esc_html_x( "Your current password is wrong. Please check it again.", "current_password_error", "flr-blocks" )
 					) );
@@ -131,7 +131,7 @@ class Flr_Blocks_User_Settings {
 				}
 			} else {
 
-				echo json_encode( array(
+				wp_send_json( array(
 					'status'  => true,
 					'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flr-blocks" )
 				) );
@@ -142,7 +142,7 @@ class Flr_Blocks_User_Settings {
 
 		} else {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flr-blocks" )
 			) );

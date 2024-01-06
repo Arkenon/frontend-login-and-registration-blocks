@@ -111,11 +111,11 @@ class Flr_Blocks_Login {
 
 				if ( $activation->check_is_user_activated( $user->ID ) ) {
 
-					echo $this->login_success_response();
+					$this->login_success_response();
 
 				} else {
 
-					echo json_encode( array(
+					wp_send_json( array(
 						'status'  => false,
 						'message' => esc_html_x( "Please activate your account. We sent you an email. Click the activation link in the email.", "user_not_activated", "flr-blocks" )
 					) );
@@ -126,7 +126,7 @@ class Flr_Blocks_Login {
 
 			} else {
 
-				echo $this->login_success_response();
+				$this->login_success_response();
 
 			}
 
@@ -142,9 +142,9 @@ class Flr_Blocks_Login {
 	 * @return string Json result
 	 * @since 1.0.0
 	 */
-	private function login_success_response(): string {
+	private function login_success_response(): void {
 
-		return json_encode( array(
+		wp_send_json( array(
 			'status'     => true,
 			'return_url' => site_url( get_option( 'flr_blocks_redirect_after_login' ) ) ?? null,
 			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "flr-blocks" )
@@ -160,7 +160,7 @@ class Flr_Blocks_Login {
 	 */
 	private function login_failed_response(): string {
 
-		return json_encode( array(
+		return wp_json_encode( array(
 			'status'  => false,
 			'message' => esc_html_x( "Invalid username or password.", "invalid_username_or_pass", "flr-blocks" )
 		) );
@@ -175,7 +175,7 @@ class Flr_Blocks_Login {
 	 */
 	public function get_login_attempts_count(): array {
 
-		$user_ip = $_SERVER['REMOTE_ADDR'];
+		$user_ip = preg_replace( '/[^0-9., ]/', '', wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 
 		return [
 			'user_ip'        => $user_ip,
@@ -240,7 +240,7 @@ class Flr_Blocks_Login {
 
 		}
 
-		return json_encode( array(
+		return wp_json_encode( array(
 			'status'  => false,
 			// translators: %1$s duration limit %2$s duration type (second or minute)
 			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error', 'flr-blocks' ), $duration_limit, $duration_type )
@@ -249,7 +249,7 @@ class Flr_Blocks_Login {
 	}
 
 	/**
-	 * Redirect non-login users from wp-login and wp-admin to homepage
+	 * Redirect non-logged in users from wp-login and wp-admin to homepage
 	 *
 	 * @since 1.0.0
 	 */
@@ -258,11 +258,12 @@ class Flr_Blocks_Login {
 		if ( get_option( 'flr_blocks_redirect_from_wp_login_admin' ) === 'yes' && ! is_user_logged_in() && ! defined( 'DOING_AJAX' ) ) {
 
 			$login_url = $this->get_login_url();
-			$url       = isset( $_REQUEST['redirect_to'] ) ? "wp-login.php" : basename( $_SERVER['REQUEST_URI'] );
+			$current_page = esc_url_raw( $_SERVER['REQUEST_URI'] );
+			$url       = isset( $_REQUEST['redirect_to'] ) ? "wp-login.php" : $current_page;
 
 			if ( $url == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' ) {
 
-				wp_redirect( $login_url );
+				wp_redirect( esc_url_raw( $login_url ) );
 				exit;
 
 			}

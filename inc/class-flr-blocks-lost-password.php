@@ -89,14 +89,14 @@ class Flr_Blocks_Lost_Password {
 
 			update_user_meta( $user_id, 'flr_blocks_lost_password_key', $code );
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => true,
 				'message' => esc_html_x( "We have successfully get your request. We have sent you an e-mail. Please check your inbox...", "reset_password_request_confirmation", "flr-blocks" )
 			) );
 
 		} else {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flr-blocks" )
 			) );
@@ -147,14 +147,14 @@ class Flr_Blocks_Lost_Password {
 
 				$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'flr-blocks' ) );
 
-				echo json_encode( array(
+				wp_send_json( array(
 					'status'  => true,
 					'message' => esc_html_x( "Your password has been changed. Please sign in...", "password_changed_confirmation", "flr-blocks" )
 				) );
 
 			} else {
 
-				echo json_encode( array(
+				wp_send_json( array(
 					'status'  => false,
 					'message' => $reset_pass->get_error_message()
 				) );
@@ -163,7 +163,7 @@ class Flr_Blocks_Lost_Password {
 
 		} else {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "Your passwords do not match", "password_match_error", "flr-blocks" )
 			) );

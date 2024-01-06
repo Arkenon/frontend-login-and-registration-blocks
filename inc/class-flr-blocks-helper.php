@@ -29,13 +29,20 @@ class Flr_Blocks_Helper {
 	 */
 	public static function sanitize( string $name, string $method, string $type = "" ) {
 
-		$value = $method == 'post' ? $_POST[ $name ] : $_GET[ $name ];
+		$value = '';
+
+		if ($method == 'post') {
+			if (isset($_POST[$name])) {
+				$value = sanitize_text_field($_POST[$name]);
+			}
+		} else {
+			if (isset($_GET[$name])) {
+				$value = sanitize_text_field($_GET[$name]);
+			}
+		}
 
 		if ( isset( $value ) ) {
 			switch ( $type ) {
-				case "text":
-					return sanitize_text_field( $value );
-					break;
 				case "title":
 					return sanitize_title( $value );
 					break;
@@ -46,7 +53,7 @@ class Flr_Blocks_Helper {
 					return sanitize_textarea_field( $value );
 					break;
 				case "url":
-					return sanitize_url( $value );
+					return esc_url_raw( $value );
 					break;
 				case "email":
 					return sanitize_email( $value );
@@ -60,55 +67,6 @@ class Flr_Blocks_Helper {
 		}
 
 		return null;
-
-	}
-
-	/**
-	 * Filters string for $_POST, $_GET or $_REQUEST operations
-	 *
-	 * @param string $str
-	 *
-	 * @return array|string $str or array
-	 * @since 1.0.0
-	 */
-	private static function filter_request_string( string $str ) {
-
-		return is_array( $str ) ? array_map( [
-			'self',
-			'filter_request_string'
-		], $str ) : htmlspecialchars( trim( $str ) );
-
-	}
-
-	/**
-	 * Secures $_GET operation
-	 *
-	 * @param string $name $_GET['name']
-	 *
-	 * @return mixed|null $_GET['name'] or null when !isset($_GET['name'])
-	 * @since 1.0.0
-	 */
-	public static function get( string $name ) {
-
-		$_GET = array_map( [ 'self', 'filter_request_string' ], $_GET );
-
-		return $_GET[ $name ] ?? null;
-
-	}
-
-	/**
-	 * Secures $_REQUEST operation
-	 *
-	 * @param string $name $_REQUEST['name']
-	 *
-	 * @return mixed|null $_REQUEST['name'] or null when !isset($_REQUEST['name'])
-	 * @since 1.0.0
-	 */
-	public static function request( string $name ) {
-
-		$_REQUEST = array_map( [ 'self', 'filter_request_string' ], $_REQUEST );
-
-		return $_REQUEST[ $name ] ?? null;
 
 	}
 
@@ -138,12 +96,12 @@ class Flr_Blocks_Helper {
 	 * @since 1.0.0
 	 *
 	 */
-	public static function return_view( string $path, array $block_attributes = [] ): string {
+	public static function return_view( string $path, array $form_attributes = [] ): string {
 
 		$view = "";
 
 		//Get attributes
-		$form_attributes = $block_attributes;
+		extract($form_attributes);
 
 		//Include php file which has a variable named $view and equals to html output
 		include_once plugin_dir_path( dirname( __FILE__ ) ) . $path;
@@ -178,7 +136,7 @@ class Flr_Blocks_Helper {
 		$selected = $query_item->post_name === esc_attr( get_option( $option_name ) ) ? " selected" : "";
 
 		echo '<option value="' . esc_attr( $query_item->post_name ) . '"' . $selected . '>
-			' . $query_item->post_title . '
+			' . esc_html($query_item->post_title) . '
 		  </option>';
 
 	}

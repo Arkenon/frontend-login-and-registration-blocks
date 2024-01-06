@@ -56,7 +56,7 @@ class Flr_Blocks_Registration {
 
 		if ( ! get_option( 'users_can_register' ) ) {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "Users are not allowed to register on this website.", "users_can_register_error", "flr-blocks" )
 			) );
@@ -79,7 +79,7 @@ class Flr_Blocks_Registration {
 
 		if ( ( ! empty( $password ) && ! empty( $password_again ) ) && ( $password != $password_again ) ) {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "Your passwords do not match", "password_match_error", "flr-blocks" )
 			) );
@@ -90,7 +90,7 @@ class Flr_Blocks_Registration {
 
 		if ( username_exists( $username ) ) {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "This username already exist.", "username_exist_error", "flr-blocks" )
 			) );
@@ -101,7 +101,7 @@ class Flr_Blocks_Registration {
 
 		if ( email_exists( $email ) ) {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "This user already exist.", "user_exist_error", "flr-blocks" )
 			) );
@@ -159,14 +159,14 @@ class Flr_Blocks_Registration {
 
 			$mail->send_mail( 'flr_blocks_register_mail_to_admin', 'register_mail_to_admin_template', $params, _x( 'New Member Registration', 'register_mail_title_to_admin', 'flr-blocks' ), true );
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => true,
 				'message' => $message,
 			) );
 
 		} else {
 
-			echo json_encode( array(
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flr-blocks" )
 			) );

@@ -11,6 +11,9 @@
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 $pages = get_pages();
 
 ?>

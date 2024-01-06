@@ -9,6 +9,9 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/admin/partials
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 ?>
 
 <form method="post" action="options.php">
