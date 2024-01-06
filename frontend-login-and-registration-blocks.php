@@ -58,11 +58,15 @@ define( 'FLR_BLOCKS_VERSION', flr_blocks_get_plugin_data()['version'] );
  * This action is documented in inc/class-flr-blocks-activator.php
  * @since    1.0.0
  */
-function activate_flr_blocks() {
+if(!function_exists('flr_blocks_activate')){
 
-	Flr_Blocks_Helper::using( 'inc/class-flr-blocks-activator.php' );
+	function flr_blocks_activate() {
 
-	Flr_Blocks_Activator::activate();
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-activator.php' );
+
+		Flr_Blocks_Activator::activate();
+
+	}
 
 }
 
@@ -71,11 +75,15 @@ function activate_flr_blocks() {
  * This action is documented in inc/class-flr-blocks-deactivator.php
  * @since    1.0.0
  */
-function deactivate_flr_blocks() {
+if('flr_blocks_deactivate'){
 
-	Flr_Blocks_Helper::using( 'inc/class-flr-blocks-deactivator.php' );
+	function flr_blocks_deactivate() {
 
-	Flr_Blocks_Deactivator::deactivate();
+		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-deactivator.php' );
+
+		Flr_Blocks_Deactivator::deactivate();
+
+	}
 
 }
 
@@ -83,8 +91,8 @@ function deactivate_flr_blocks() {
  * Register activation and deactivation hooks
  * @since    1.0.0
  */
-register_activation_hook( __FILE__, 'activate_flr_blocks' );
-register_deactivation_hook( __FILE__, 'deactivate_flr_blocks' );
+register_activation_hook( __FILE__, 'flr_blocks_activate' );
+register_deactivation_hook( __FILE__, 'flr_blocks_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,

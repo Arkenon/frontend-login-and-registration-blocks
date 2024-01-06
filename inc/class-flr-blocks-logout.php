@@ -9,6 +9,9 @@
 
 namespace FLR_BLOCKS;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) or die;
+
 class Flr_Blocks_Logout {
 
 	/**
@@ -17,7 +20,7 @@ class Flr_Blocks_Logout {
 	 * @return string Logout url
 	 * @since 1.0.0
 	 */
-	public function logout_menu_item(array $block_attributes ): string {
+	public function logout_menu_item( array $block_attributes ): string {
 
 		$frontend = new Flr_Blocks_Public();
 
@@ -34,7 +37,7 @@ class Flr_Blocks_Logout {
 	 */
 	public function nonce_url_for_logout(): string {
 
-		$redirect_url             = urlencode( esc_url( $_SERVER['REQUEST_URI'] ) );
+		$redirect_url             = esc_url_raw( $_SERVER['REQUEST_URI'] );
 		$logout_url               = wp_logout_url( home_url( '/' ) );
 		$logout_url_with_redirect = add_query_arg( 'redirect_to', $redirect_url, $logout_url );
 
