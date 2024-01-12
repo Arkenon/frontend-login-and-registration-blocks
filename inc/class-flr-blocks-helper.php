@@ -132,11 +132,21 @@ class Flr_Blocks_Helper {
 	 */
 	public static function get_select_options_from_query( WP_Post $query_item, string $option_name ) {
 
-		$selected = $query_item->post_name === esc_attr( get_option( $option_name ) ) ? " selected" : "";
+		$selected = $query_item->post_name === esc_attr( get_option( $option_name ) ) ? " selected='true'" : "";
 
-		echo '<option value="' . esc_attr( $query_item->post_name ) . '"' . $selected . '>
+		$options =  '<option value="' . esc_attr( $query_item->post_name ) . '"' . $selected . '>
 			' . esc_html($query_item->post_title) . '
 		  </option>';
+
+		echo wp_kses(
+			$options,
+			[
+				'option' => [
+					'value' => [],
+					'selected' => []
+				]
+			]
+		);
 
 	}
 
