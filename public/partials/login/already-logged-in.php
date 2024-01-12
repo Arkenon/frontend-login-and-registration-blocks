@@ -1,12 +1,10 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $user_login;
 
-// Exit if accessed directly.
 use FLR_BLOCKS\Flr_Blocks_Helper;
 use FLR_BLOCKS\Flr_Blocks_Logout;
-
-defined( 'ABSPATH' ) or die;
 
 Flr_Blocks_Helper::using('inc/class-flr-blocks-logout.php');
 $logout = new Flr_Blocks_Logout();

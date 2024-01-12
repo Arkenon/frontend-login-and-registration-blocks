@@ -1,9 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use FLR_BLOCKS\Flr_Blocks_Login;
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
 
 if( is_user_logged_in()){
 

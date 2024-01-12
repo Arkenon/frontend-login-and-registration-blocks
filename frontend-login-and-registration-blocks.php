@@ -15,8 +15,7 @@
  * @package           Frontend_Login_And_Registration_Blocks
  */
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 define( 'FLR_BLOCKS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'FLR_BLOCKS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

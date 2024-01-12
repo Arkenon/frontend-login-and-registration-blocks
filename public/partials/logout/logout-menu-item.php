@@ -1,10 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use FLR_BLOCKS\Flr_Blocks_Login;
 use FLR_BLOCKS\Flr_Blocks_Logout;
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
 
 $logout = new Flr_Blocks_Logout();
 $login = new Flr_Blocks_Login();

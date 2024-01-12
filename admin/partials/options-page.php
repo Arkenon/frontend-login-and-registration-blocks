@@ -9,10 +9,9 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/admin/partials
  */
 
-use FLR_BLOCKS\Flr_Blocks_Helper;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+use FLR_BLOCKS\Flr_Blocks_Helper;
 
 if ( ! current_user_can( "administrator" ) ) {
 
@@ -30,7 +29,7 @@ $tab         = Flr_Blocks_Helper::sanitize( 'tab', 'get', 'text' ) ?? $default_t
 
 	<!-- Print the page title -->
 	<h1>
-		<?php echo get_admin_page_title(); ?>
+		<?php echo esc_html(get_admin_page_title()); ?>
 	</h1>
 
 	<?php settings_errors(); ?>

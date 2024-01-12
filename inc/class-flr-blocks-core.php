@@ -15,8 +15,7 @@
 
 namespace FLR_BLOCKS;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 Flr_Blocks_Helper::using( 'inc/class-flr-blocks-loader.php' );
 

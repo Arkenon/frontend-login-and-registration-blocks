@@ -7,11 +7,9 @@
  * @package    Frontend_Login_And_Registration_Blocks
  * @subpackage Frontend_Login_And_Registration_Blocks/admin/partials
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use FLR_BLOCKS\Flr_Blocks_Mail;
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
 
 ?>
 
@@ -69,15 +67,17 @@ defined( 'ABSPATH' ) or die;
 			<tr>
 				<th scope="row">
 
-					<label for="<?php echo $item['id'] ?>">
+					<label for="<?php echo esc_attr($item['id']) ?>">
 						<?php echo esc_html( $item['title'] ); ?>
 					</label>
 
 				</th>
 				<td>
 
-					<p><?php echo esc_html_x( "You can use these tags:", "you_can_use_this_tags_text", "flr-blocks" ); ?>
-						<?php echo $item['tags'] ?> </p>
+					<p>
+						<?php echo esc_html_x( "You can use these tags:", "you_can_use_this_tags_text", "flr-blocks" ); ?>
+						<?php echo esc_html($item['tags']) ?>
+					</p>
 
 					<?php
 

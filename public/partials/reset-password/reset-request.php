@@ -1,7 +1,5 @@
 <?php
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $input_style = 'border-radius:' . $form_attributes['inputBorderRadius'] . 'px';
 $text_style  = 'color:' . $form_attributes['textColor'] . '; font-weight:' . $form_attributes['textFontWeight'];

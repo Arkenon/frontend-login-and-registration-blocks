@@ -9,10 +9,9 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/admin/partials
  */
 
-use FLR_BLOCKS\Flr_Blocks_Helper;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+use FLR_BLOCKS\Flr_Blocks_Helper;
 
 $pages = get_pages();
 
@@ -45,8 +44,8 @@ $pages = get_pages();
 				<select name="flr_blocks_has_activation" id="flr_blocks_has_activation">
 
 					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flr-blocks" ) ?></option>
-					<option value="yes" <?php echo get_option( 'flr_blocks_has_activation' ) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
-					<option value="no" <?php echo get_option( 'flr_blocks_has_activation' ) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
+					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_has_activation' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
+					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_has_activation' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
 
 				</select>
 
@@ -70,8 +69,8 @@ $pages = get_pages();
 				<select name="flr_blocks_has_user_dashboard" id="flr_blocks_has_user_dashboard">
 
 					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flr-blocks" ) ?></option>
-					<option value="yes" <?php echo get_option( 'flr_blocks_has_user_dashboard' ) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
-					<option value="no" <?php echo get_option( 'flr_blocks_has_user_dashboard' ) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
+					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_has_user_dashboard' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
+					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_has_user_dashboard' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
 
 				</select>
 
@@ -95,8 +94,8 @@ $pages = get_pages();
 				<select name="flr_blocks_redirect_from_wp_login_admin" id="flr_blocks_redirect_from_wp_login_admin">
 
 					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flr-blocks" ) ?></option>
-					<option value="yes" <?php echo get_option( 'flr_blocks_redirect_from_wp_login_admin' ) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
-					<option value="no" <?php echo get_option( 'flr_blocks_redirect_from_wp_login_admin' ) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
+					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_redirect_from_wp_login_admin' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
+					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_redirect_from_wp_login_admin' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
 
 				</select>
 
@@ -159,7 +158,7 @@ $pages = get_pages();
 			<tr>
 				<th scope="row">
 
-					<label for="<?php echo $select['option']; ?>">
+					<label for="<?php echo esc_attr($select['option']); ?>">
 						<?php echo esc_html( $select['title'] ); ?>
 					</label>
 
@@ -170,7 +169,7 @@ $pages = get_pages();
 				</th>
 				<td>
 
-					<select name="<?php echo $select['option']; ?>" id="<?php echo $select['option']; ?>">
+					<select name="<?php echo esc_attr($select['option']); ?>" id="<?php echo esc_attr($select['option']); ?>">
 
 						<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flr-blocks" ) ?></option>
 

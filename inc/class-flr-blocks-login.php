@@ -80,7 +80,7 @@ class Flr_Blocks_Login {
 
 		if ( get_option( 'flr_blocks_enable_limit_login' ) === 'yes' && $this->get_login_attempts_count()['login_attempts'] >= $this->get_limit_login_options()['max_attempts'] ) {
 
-			echo $this->login_attempts_error();
+			$this->login_attempts_error();
 
 			wp_die();
 
@@ -98,7 +98,7 @@ class Flr_Blocks_Login {
 
 		if ( is_wp_error( $user ) ) {
 
-			echo $this->login_failed_response();
+			$this->login_failed_response();
 
 		} else {
 
@@ -158,9 +158,9 @@ class Flr_Blocks_Login {
 	 * @return string Json result
 	 * @since 1.0.0
 	 */
-	private function login_failed_response(): string {
+	private function login_failed_response(): void {
 
-		return wp_json_encode( array(
+		wp_send_json( array(
 			'status'  => false,
 			'message' => esc_html_x( "Invalid username or password.", "invalid_username_or_pass", "flr-blocks" )
 		) );
@@ -224,7 +224,7 @@ class Flr_Blocks_Login {
 	 * @return string Json result
 	 * @since 1.0.0
 	 */
-	private function login_attempts_error(): string {
+	private function login_attempts_error(): void {
 
 		$limit_login_options = $this->get_limit_login_options();
 
@@ -240,7 +240,7 @@ class Flr_Blocks_Login {
 
 		}
 
-		return wp_json_encode( array(
+		wp_send_json( array(
 			'status'  => false,
 			// translators: %1$s duration limit %2$s duration type (second or minute)
 			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error', 'flr-blocks' ), $duration_limit, $duration_type )

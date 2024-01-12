@@ -1,11 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 use FLR_BLOCKS\Flr_Blocks_Login;
 use FLR_BLOCKS\Flr_Blocks_User_Activation;
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
 
 Flr_Blocks_Helper::using( 'inc/class-flr-blocks-user-activation.php' );
 

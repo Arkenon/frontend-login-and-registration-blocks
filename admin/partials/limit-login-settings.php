@@ -9,8 +9,7 @@
  * @subpackage Frontend_Login_And_Registration_Blocks/admin/partials
  */
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 ?>
 
@@ -41,8 +40,8 @@ defined( 'ABSPATH' ) or die;
 				<select name="flr_blocks_enable_limit_login" id="flr_blocks_enable_limit_login">
 
 					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flr-blocks" ) ?></option>
-					<option value="yes" <?php echo get_option( 'flr_blocks_enable_limit_login' ) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
-					<option value="no" <?php echo get_option( 'flr_blocks_enable_limit_login' ) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
+					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_enable_limit_login' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
+					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_enable_limit_login' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
 
 				</select>
 

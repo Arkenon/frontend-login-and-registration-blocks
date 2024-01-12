@@ -1,7 +1,5 @@
 <?php
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   
 
 if( !is_user_logged_in()){
 

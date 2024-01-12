@@ -14,8 +14,7 @@ namespace FLR_BLOCKS;
 
 use WP_Post;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) or die;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Flr_Blocks_Helper {
 
