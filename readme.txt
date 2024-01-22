@@ -1,10 +1,10 @@
 === Frontend Login and Registration Blocks ===
 Contributors:      arkenon
-Tags:              block, gutenberg, login form, register form, lost password form, frontend login, wp-login, authentication, site editor, site editing
+Tags:              block, block editor, gutenberg, login form, register form, lost password form, frontend login, wp-login, authentication, site editor, site editing
 Requires at least: 6.1
 Tested up to:      6.4
 Requires PHP:      7.4
-Stable tag:        1.0.0
+Stable tag:        1.0.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,12 +15,41 @@ Frontend Login and Registration Blocks plugin provides blocks helps you to add l
 
 Additionally, you can create user settings page, add limit login attempts and user activation functionality and more to your website...
 
+
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/frontend-login-and-registration-blocks` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 
+
+=== Why Choose Frontend Login and Registration Forms ===
+
+**1. Easy to Use**
+You can add login, register, lost password or user settings with just a one click. They are all blocks!
+
+**2. Customization**
+Each block has color, font and size option in the right sidebar of block editor. You can easily customize your forms.
+
+...and more....
+
+
+== Note: Please read the guide before using the plugin. ==
+☑ [Documentation](https://guide-frontendlogin.iyziweb.site/)
+☑ [Official Web Site](https://frontendlogin.iyziweb.site/)
+
+
+== Compatibility ==
+
+* Block Editor
+* Site Editor
+
+
 == Changelog ==
+
+= 1.0.1 =
+* Readme.txt updated
+* Code revisions
+* Fixed "function exists" function in frontend-login-and-registration-blocks.php
 
 = 1.0.0 =
 * Release
