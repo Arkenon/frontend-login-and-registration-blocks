@@ -33,15 +33,17 @@ require plugin_dir_path( __FILE__ ) . 'inc/class-flr-blocks-helper.php';
  *
  * @since    1.0.0
  */
-function flr_blocks_get_plugin_data(): array {
+if(!function_exists('flr_blocks_get_plugin_data')){
+	function flr_blocks_get_plugin_data(): array {
 
-	return get_file_data(
-		__FILE__,
-		array(
-			'version' => 'Version'
-		)
-	);
+		return get_file_data(
+			__FILE__,
+			array(
+				'version' => 'Version'
+			)
+		);
 
+	}
 }
 
 /**
@@ -74,7 +76,7 @@ if(!function_exists('flr_blocks_activate')){
  * This action is documented in inc/class-flr-blocks-deactivator.php
  * @since    1.0.0
  */
-if('flr_blocks_deactivate'){
+if(!function_exists('flr_blocks_deactivate')){
 
 	function flr_blocks_deactivate() {
 
