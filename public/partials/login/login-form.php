@@ -76,7 +76,7 @@ if ( is_user_logged_in() ) {
 	$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flrblocksloginhandle' ) ) . '">';
 
 	$view .= '<div class="flr-blocks-form-row">
-						<button style="' . $button_style . '" type="submit" id="flr-blocks-login-submit" class="flr-blocks-login-btn flr-blocks-btn">
+						<button style="' . $button_style . '" type="submit" id="flr-blocks-login-submit" class="flr-blocks-login-btn flr-blocks-btn wp-block-button__link wp-element-button">
 							' . esc_html_x( "Login", "login_text", "flr-blocks" ) . '
 						</button>
 						' . do_action( 'wp_login' ) . '

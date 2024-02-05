@@ -123,7 +123,7 @@ $view .= '<input type="hidden" name="action" value="' . esc_attr( 'flrblocksregi
 $view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flrblocksregisterhandle' ) ) . '">';
 
 $view .= '<div class="flr-blocks-form-row">
-						<button style="' . $button_style . '" type="submit" id="flr-blocks-register-submit" class="flr-blocks-register-btn flr-blocks-btn">
+						<button style="' . $button_style . '" type="submit" id="flr-blocks-register-submit" class="flr-blocks-register-btn flr-blocks-btn wp-block-button__link wp-element-button">
 							' . esc_html_x( "Register", "register_button_text", "flr-blocks" ) . '
 						</button>
 					</div>

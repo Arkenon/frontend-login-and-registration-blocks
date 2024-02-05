@@ -53,7 +53,7 @@ $view .= '<input type="hidden" name="action" value="' . esc_attr( 'flrblocksrese
 $view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flrblocksresetrequesthandle' ) ) . '">';
 
 $view .= '<div class="flr-blocks-form-row">
-							<button style="' . $button_style . '" type="submit" id="flr-blocks-reset-request-submit" class="flr-blocks-reset-request-btn flr-blocks-btn">
+							<button style="' . $button_style . '" type="submit" id="flr-blocks-reset-request-submit" class="flr-blocks-reset-request-btn flr-blocks-btn wp-block-button__link wp-element-button">
 								' . esc_html_x( "Send Request", "send_reset_request", "flr-blocks" ) . '
 							</button>
 						</div>

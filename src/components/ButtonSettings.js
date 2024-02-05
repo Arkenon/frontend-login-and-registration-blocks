@@ -2,17 +2,50 @@ import {__} from '@wordpress/i18n';
 import {
 	__experimentalText as Text,
 	__experimentalBorderControl as BorderControl,
-	ColorPalette,
 	SelectControl,
 	RangeControl,
 	Panel,
 	PanelBody,
+	ColorPalette,
 	PanelRow
 } from '@wordpress/components';
+import {useSelect} from "@wordpress/data";
+import {useState} from '@wordpress/element';
 
 const ButtonSettings = ({options}) => {
 
 	const {attributes, setAttributes} = options;
+	const [ color, setColor ] = useState ()
+	const [colors, setColors] = useState([]);
+
+	useSelect((select) => {
+
+		const getThemeData = select('core').getCurrentTheme();
+
+		const themeJsonPath = `/wp-content/themes/${getThemeData.stylesheet}/theme.json`;
+
+		fetch(themeJsonPath)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(themeJson => {
+				if (getThemeData.is_block_theme) {
+					const palettes = themeJson.settings.color.palette;
+					const newColors = palettes.map(palette => ({
+						color: palette.color,
+						name: palette.name,
+					}));
+
+					setColors(newColors);
+				}
+			})
+			.catch(error => {
+				console.error('Error fetching the theme.json file:', error);
+			});
+	}, []);
 
 	return (
 		<Panel>
@@ -49,9 +82,12 @@ const ButtonSettings = ({options}) => {
 				</PanelRow>
 				<PanelRow>
 					<ColorPalette
-						value={attributes.buttonBgColor}
-						onChange={(val) =>
-							setAttributes({buttonBgColor: val})
+						colors={colors}
+						value={color}
+						onChange={(color) =>{
+								setColor(color)
+								setAttributes({buttonBgColor: color})
+							}
 						}
 					/>
 				</PanelRow>
@@ -74,6 +110,7 @@ const ButtonSettings = ({options}) => {
 				</PanelRow>
 				<PanelRow>
 					<ColorPalette
+						colors={colors}
 						value={attributes.buttonTextColor}
 						onChange={(val) =>
 							setAttributes({buttonTextColor: val})

@@ -21,7 +21,7 @@ class Flr_Blocks_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles() : void {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -44,7 +44,7 @@ class Flr_Blocks_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts() : void {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -60,6 +60,7 @@ class Flr_Blocks_Public {
 
 		wp_enqueue_script( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/js/flr-blocks-public.js', array( 'jquery' ), FLR_BLOCKS_VERSION, false );
 		wp_localize_script( 'jquery', 'flr_blocks_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+
 	}
 
 	/**

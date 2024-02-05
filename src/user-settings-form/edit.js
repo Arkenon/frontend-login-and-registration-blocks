@@ -121,7 +121,7 @@ export default function Edit(props) {
 
 				<div className="flr-blocks-form-row">
 					<button style={buttonStyle} type="submit" name="wp-submit" id="flr-blocks-user-settings-submit"
-							className="flr-blocks-update-user-btn flr-blocks-btn">
+							className="flr-blocks-update-user-btn flr-blocks-btn wp-block-button__link wp-element-button">
 						{__('Update User', 'flr-blocks')}
 					</button>
 				</div>

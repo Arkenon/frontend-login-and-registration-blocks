@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if( !is_user_logged_in()){
 
@@ -224,7 +224,7 @@ $view .= '<form name="flr-blocks-user-settings-form" id="flr-blocks-user-setting
 			$view .= '<input type="hidden" name="user_id" value="'.esc_attr($ID).'">';
 
 			$view .= '<div class="flr-blocks-form-row">
-							<button style="'.$button_style.'" type="submit" id="flr-blocks-user-settings-submit" class="flr-blocks-update-user-btn flr-blocks-btn">
+							<button style="'.$button_style.'" type="submit" id="flr-blocks-user-settings-submit" class="flr-blocks-update-user-btn flr-blocks-btn wp-block-button__link wp-element-button">
 								'.esc_html_x("Update User","update_user_button_text","flr-blocks").'
 							</button>
 						</div>

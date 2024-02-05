@@ -70,7 +70,7 @@ export default function Edit(props) {
 
 						<div className="flr-blocks-form-row">
 							<button style={buttonStyle} type="submit" name="wp-submit" id="wp-submit"
-									className="flr-blocks-reset-password-btn flr-blocks-btn">
+									className="flr-blocks-reset-password-btn flr-blocks-btn wp-block-button__link wp-element-button">
 								{__('Send Request', 'flr-blocks')}
 							</button>
 						</div>
@@ -107,7 +107,7 @@ export default function Edit(props) {
 
 						<div className="flr-blocks-form-row">
 							<button style={buttonStyle} type="submit" name="wp-submit-pwd" id="wp-submit-pwd"
-									className="flr-blocks-reset-password-btn flr-blocks-btn">
+									className="flr-blocks-reset-password-btn flr-blocks-btn wp-block-button__link wp-element-button">
 								{__('Change Password', 'flr-blocks')}
 							</button>
 						</div>

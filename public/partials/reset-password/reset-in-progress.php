@@ -69,7 +69,7 @@ $view = '<div '.get_block_wrapper_attributes().'>
 			$view .= '<input type="hidden" name="userid" value="' . esc_attr(Flr_Blocks_Helper::sanitize( 'user','get','id' )) . '">';
 
 			$view .= '<div class="flr-blocks-form-row">
-							<button style="'.$button_style.'" type="submit" id="flr-blocks-reset-password-submit" class="flr-blocks-reset-password-btn flr-blocks-btn">
+							<button style="'.$button_style.'" type="submit" id="flr-blocks-reset-password-submit" class="flr-blocks-reset-password-btn flr-blocks-btn wp-block-button__link wp-element-button">
 								' . esc_html_x( "Change Password", "submit_reset_password_button_text", "flr-blocks" ) . '
 							</button>
 						</div>
