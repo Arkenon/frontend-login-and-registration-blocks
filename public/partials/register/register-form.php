@@ -13,20 +13,30 @@ if( is_user_logged_in()){
 $login = new Flr_Blocks_Login();
 $login_url = $login->get_login_url();
 
-$input_style = 'border-radius:' . $form_attributes['inputBorderRadius'] . 'px';
-$text_style  = 'color:' . $form_attributes['textColor'] . '; font-weight:' . $form_attributes['textFontWeight'];
+$input_border_radius = $form_attributes['inputBorderRadius'] ?? '';
+$text_color = $form_attributes['textColor'] ?? '';
+$text_font_weight = $form_attributes['textFontWeight'] ?? '';
+$button_text_color = $form_attributes['buttonTextColor'] ?? '';
+$button_text_font_weight = $form_attributes['buttonTextFontWeight'] ?? '';
+$button_bg_color = $form_attributes['buttonBgColor'] ?? '';
+$button_border_radius = $form_attributes['buttonBorderRadius'] ?? '';
+
+$input_style = 'border-radius:' . $input_border_radius.'px' ;
+$text_style  = 'color:' .$text_color.'; font-weight:' . $text_font_weight;
 
 $button_border_color = array_key_exists( 'color', $form_attributes['buttonBorder'] ) ? 'border-color: ' . $form_attributes['buttonBorder']['color'] . ';' : "";
 $button_border_style = array_key_exists( 'style', $form_attributes['buttonBorder'] ) ? 'border-style: ' . $form_attributes['buttonBorder']['style'] . ';' : "";
 $button_border_width = array_key_exists( 'width', $form_attributes['buttonBorder'] ) ? 'border-width: ' . $form_attributes['buttonBorder']['width'] . ';' : "";
 
-$button_style = 'color:' . $form_attributes['buttonTextColor'] . '; ' .
-                'background-color: ' . $form_attributes['buttonBgColor'] . '; ' .
+$button_style = 'color:' . $button_text_color . '; ' .
+                'background-color: ' . $button_bg_color . '; ' .
                 $button_border_color .
                 $button_border_style .
                 $button_border_width .
-                'border-radius: ' . $form_attributes['buttonBorderRadius'] . 'px;' .
-                'font-weight: ' . $form_attributes['buttonTextFontWeight'];
+                'border-radius: ' . $button_border_radius . 'px;' .
+                'font-weight: ' . $button_text_font_weight;
+
+
 $view = '<div '.get_block_wrapper_attributes().'>';
 $view .= '<form name="flr-blocks-register-form" id="flr-blocks-register-form" method="post">
             <div class="flr-blocks-form-row">

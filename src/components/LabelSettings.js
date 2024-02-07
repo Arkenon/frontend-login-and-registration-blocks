@@ -7,6 +7,7 @@ import {
 	PanelBody,
 	PanelRow
 } from '@wordpress/components';
+import {FlrColorPalette, FlrBorderControl} from "./CustomControls";
 
 const LabelSettings = ({options}) => {
 
@@ -43,13 +44,9 @@ const LabelSettings = ({options}) => {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<ColorPicker
-						color={attributes.textColor}
-						onChange={(val) =>
-							setAttributes({textColor: val})
-						}
-						enableAlpha
-						defaultValue="#000"
+					<FlrColorPalette
+						options={options}
+						attributeName="textColor"
 					/>
 				</PanelRow>
 			</PanelBody>

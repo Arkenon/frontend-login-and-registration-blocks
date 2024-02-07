@@ -234,6 +234,7 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 		$plugin_i18n = new Flr_Blocks_I18n();
 
 		self::add_action( 'plugins_loaded', $plugin_i18n, 'load_flr_blocks_textdomain' );
+		/*self::add_action( 'plugins_loaded', $plugin_i18n, 'load_block_translations' );*/
 
 	}
 

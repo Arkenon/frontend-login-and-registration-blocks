@@ -2,7 +2,9 @@
 
 namespace FLR_BLOCKS;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 
 /**
@@ -22,7 +24,7 @@ class Flr_Blocks_I18n {
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_flr_blocks_textdomain() {
+	public function load_flr_blocks_textdomain(): void {
 
 		load_plugin_textdomain(
 			"flr-blocks",
@@ -31,5 +33,15 @@ class Flr_Blocks_I18n {
 		);
 
 	}
+
+	/**
+	 * Set translations for custom blocks
+	 *
+	 * @since    1.0.0
+	 */
+	/*public function load_block_translations(): void {
+		wp_set_script_translations( 'frontend-login-with-gutenberg-blocks-login-form-editor-script-js', 'flr-blocks' );
+
+	}*/
 
 }

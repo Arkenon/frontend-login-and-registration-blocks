@@ -1,51 +1,17 @@
 import {__} from '@wordpress/i18n';
 import {
 	__experimentalText as Text,
-	__experimentalBorderControl as BorderControl,
 	SelectControl,
 	RangeControl,
 	Panel,
 	PanelBody,
-	ColorPalette,
 	PanelRow
 } from '@wordpress/components';
-import {useSelect} from "@wordpress/data";
-import {useState} from '@wordpress/element';
+import {FlrColorPalette, FlrBorderControl} from "./CustomControls";
 
 const ButtonSettings = ({options}) => {
 
 	const {attributes, setAttributes} = options;
-	const [ color, setColor ] = useState ()
-	const [colors, setColors] = useState([]);
-
-	useSelect((select) => {
-
-		const getThemeData = select('core').getCurrentTheme();
-
-		const themeJsonPath = `/wp-content/themes/${getThemeData.stylesheet}/theme.json`;
-
-		fetch(themeJsonPath)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.json();
-			})
-			.then(themeJson => {
-				if (getThemeData.is_block_theme) {
-					const palettes = themeJson.settings.color.palette;
-					const newColors = palettes.map(palette => ({
-						color: palette.color,
-						name: palette.name,
-					}));
-
-					setColors(newColors);
-				}
-			})
-			.catch(error => {
-				console.error('Error fetching the theme.json file:', error);
-			});
-	}, []);
 
 	return (
 		<Panel>
@@ -65,14 +31,9 @@ const ButtonSettings = ({options}) => {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<BorderControl
-						label={__('Button Border', 'flr-blocks')}
-						onChange={(newButtonBorder) =>
-							setAttributes({
-								buttonBorder: newButtonBorder,
-							})
-						}
-						value={attributes.buttonBorder}
+					<FlrBorderControl
+						options={options}
+						attributeName="buttonBorder"
 					/>
 				</PanelRow>
 				<PanelRow>
@@ -81,14 +42,9 @@ const ButtonSettings = ({options}) => {
 					</Text>
 				</PanelRow>
 				<PanelRow>
-					<ColorPalette
-						colors={colors}
-						value={color}
-						onChange={(color) =>{
-								setColor(color)
-								setAttributes({buttonBgColor: color})
-							}
-						}
+					<FlrColorPalette
+						options={options}
+						attributeName="buttonBgColor"
 					/>
 				</PanelRow>
 				<PanelRow>
@@ -109,12 +65,9 @@ const ButtonSettings = ({options}) => {
 					<Text>{__('Button Text Color', 'flr-blocks')}</Text>
 				</PanelRow>
 				<PanelRow>
-					<ColorPalette
-						colors={colors}
-						value={attributes.buttonTextColor}
-						onChange={(val) =>
-							setAttributes({buttonTextColor: val})
-						}
+					<FlrColorPalette
+						options={options}
+						attributeName="buttonTextColor"
 					/>
 				</PanelRow>
 			</PanelBody>

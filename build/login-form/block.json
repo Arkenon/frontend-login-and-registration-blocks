@@ -35,9 +35,9 @@
     "buttonBorder": {
       "type": "object",
       "default": {
-        "color": "",
-        "style": "",
-        "width": ""
+        "color": "#000",
+        "style": "solid",
+        "width": "0px"
       }
     },
     "buttonBorderRadius": {

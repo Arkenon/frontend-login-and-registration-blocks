@@ -10,20 +10,9 @@ if ( is_user_logged_in() ) {
 
 } else {
 
-	$input_style = 'border-radius:' . $form_attributes['inputBorderRadius'] . 'px';
-	$text_style  = 'color:' . $form_attributes['textColor'] . '; font-weight:' . $form_attributes['textFontWeight'];
-
-	$button_border_color = array_key_exists( 'color', $form_attributes['buttonBorder'] ) ? 'border-color: ' . $form_attributes['buttonBorder']['color'] . ';' : "";
-	$button_border_style = array_key_exists( 'style', $form_attributes['buttonBorder'] ) ? 'border-style: ' . $form_attributes['buttonBorder']['style'] . ';' : "";
-	$button_border_width = array_key_exists( 'width', $form_attributes['buttonBorder'] ) ? 'border-width: ' . $form_attributes['buttonBorder']['width'] . ';' : "";
-
-	$button_style = 'color:' . $form_attributes['buttonTextColor'] . '; ' .
-	                'background-color: ' . $form_attributes['buttonBgColor'] . '; ' .
-	                $button_border_color .
-	                $button_border_style .
-	                $button_border_width .
-	                'border-radius: ' . $form_attributes['buttonBorderRadius'] . 'px;' .
-	                'font-weight: ' . $form_attributes['buttonTextFontWeight'];
+	$input_style = Flr_Blocks_Helper::get_input_style($form_attributes);
+	$text_style = Flr_Blocks_Helper::get_label_style($form_attributes);
+	$button_style = Flr_Blocks_Helper::get_button_style($form_attributes);
 
 	$view = '<div '.get_block_wrapper_attributes().'>
 				<form name="flr-blocks-login-form" id="flr-blocks-login-form" method="post">';
