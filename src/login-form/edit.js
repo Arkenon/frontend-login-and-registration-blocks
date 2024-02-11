@@ -43,7 +43,7 @@ export default function Edit(props) {
 								   htmlFor="flr-blocks-username-or-email">{__('Username or E-mail', 'flr-blocks')}</label>}
 						<input className="flr-blocks-input-control" id="flr-blocks-username-or-email" type="text"
 							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && _x('Enter your username or e-mail', 'email_or_username_placeholder_text','flr-blocks')}/>
+							   placeholder={attributes.showPlaceholders && __('Enter your username or e-mail', 'flr-blocks')}/>
 					</div>
 				</div>
 
