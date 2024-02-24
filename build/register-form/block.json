@@ -21,24 +21,20 @@
       "default": true
     },
     "textColor": {
-      "type": "string",
-      "default": "black"
+      "type": "string"
     },
     "textFontWeight": {
       "type": "string",
       "default": "bold"
     },
     "inputBorderRadius": {
-      "type": "number",
-      "default": 0
+      "type": "number"
     },
     "buttonBgColor": {
-      "type": "string",
-      "default": "gray"
+      "type": "string"
     },
     "buttonTextColor": {
-      "type": "string",
-      "default": "black"
+      "type": "string"
     },
     "buttonBorder": {
       "type": "object",
@@ -49,18 +45,16 @@
       }
     },
     "buttonBorderRadius": {
-      "type": "number",
-      "default": 0
+      "type": "number"
     },
     "buttonTextFontWeight": {
-      "type": "string",
-      "default": "normal"
+      "type": "string"
     }
   },
   "supports": {
     "html": false
   },
-  "textdomain": "register-form",
+  "textdomain": "flr-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"

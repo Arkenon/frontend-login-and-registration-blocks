@@ -15,10 +15,10 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^26.17.0"
+		"@wordpress/scripts": "^27.3.0"
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^12.14.0",
-		"@wordpress/core-data": "^6.27.2"
+		"@wordpress/block-editor": "^12.20.0",
+		"@wordpress/core-data": "^6.29.0"
 	}
 }

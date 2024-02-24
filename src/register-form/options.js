@@ -12,14 +12,17 @@ const Options = ({options}) => {
 	return (
 		<InspectorControls>
 
-			<ToggleControl
-				label={__('Show Terms and Conditions / Privacy Policy Checkbox', 'flr-blocks')}
-				help={attributes.showTermsAndPrivacy ? 'Show' : 'Hide'}
-				checked={attributes.showTermsAndPrivacy}
-				onChange={(val) =>
-					setAttributes({showTermsAndPrivacy: val})
-				}
-			/>
+			<div style={{padding:"20px"}}>
+				<ToggleControl
+					label={__('Show Terms and Conditions / Privacy Policy Checkbox', 'flr-blocks')}
+					help={attributes.showTermsAndPrivacy ? 'Show' : 'Hide'}
+					checked={attributes.showTermsAndPrivacy}
+					onChange={(val) =>
+						setAttributes({showTermsAndPrivacy: val})
+					}
+				/>
+			</div>
+
 
 			<LabelSettings options={options} />
 

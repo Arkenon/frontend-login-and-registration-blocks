@@ -15,7 +15,7 @@
 	  "lineHeight": true
 	}
   },
-  "textdomain": "logout-nav-menu-item",
+  "textdomain": "flr-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
