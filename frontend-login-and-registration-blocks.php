@@ -5,7 +5,7 @@
  * Description:       Do login, register and lost password operations from frontend with Gutenberg blocks. Easily customize forms and add to your pages.
  * Requires at least: 6.1
  * Requires PHP:      7.4
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Kadim Gültekin
  * Author URI:        https://github.com/Arkenon
  * Text Domain:       flr-blocks

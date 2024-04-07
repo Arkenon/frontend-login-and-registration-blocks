@@ -2,9 +2,9 @@
 Contributors:      arkenon
 Tags:              block, block editor, gutenberg, login form, register form, lost password form, frontend login, wp-login, authentication, site editor, site editing
 Requires at least: 6.1
-Tested up to:      6.4
+Tested up to:      6.5
 Requires PHP:      7.4
-Stable tag:        1.0.3
+Stable tag:        1.0.4
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,9 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 
 == Changelog ==
+
+= 1.0.4 =
+* Tested up to WordPress 6.5
 
 = 1.0.3 =
 * Textdomain values fixed in all blocks
