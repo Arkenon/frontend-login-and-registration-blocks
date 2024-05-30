@@ -117,7 +117,11 @@ class Flr_Blocks_Registration {
 
 		$newuser = wp_insert_user( $userdata );
 
+
 		if ( ! is_wp_error( $newuser ) ) {
+
+			// Update custom fields
+			do_action('flr_blocks_save_register_form_extra_user_fields', $newuser);
 
 			$message = "";
 

@@ -70,6 +70,9 @@ class Flr_Blocks_User_Settings {
 		$user_info->user_url    = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-website', 'post', 'text' );
 		$user_info->description = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-bio', 'post', 'textarea' );
 
+		// Update custom fields
+		do_action('flr_blocks_save_user_form_extra_user_fields', $user_id);
+
 		$update = wp_update_user( $user_info );
 
 		if ( ! is_wp_error( $update ) ) {

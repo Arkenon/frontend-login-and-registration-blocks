@@ -136,6 +136,8 @@ $view .= '<form name="flr-blocks-user-settings-form" id="flr-blocks-user-setting
 				$view .= '</div>
 			</div>';
 
+			$view .=	apply_filters('flr_blocks_user_settings_extra_fields', '', $current_user);
+
 			$view .= '<div class="flr-blocks-form-row">
 						<div class="flr-blocks-input-group">';
 

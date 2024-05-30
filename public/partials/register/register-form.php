@@ -77,6 +77,8 @@ if ( $form_attributes['showPlaceholders'] ) {
 
 $view .= '" /></div></div>';
 
+$view .=	apply_filters('flr_blocks_register_form_extra_fields', '');
+
 $view .= '<div class="flr-blocks-form-row">
 	            <div class="flr-blocks-input-group">';
 if ( $form_attributes['showLabels'] ) {
