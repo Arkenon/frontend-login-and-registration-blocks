@@ -77,7 +77,8 @@ if ( $form_attributes['showPlaceholders'] ) {
 
 $view .= '" /></div></div>';
 
-$view .=	apply_filters('flr_blocks_register_form_extra_fields', '');
+$hook_attributes = ['text_style'=> $text_style, 'input_style'=> $input_style, 'form_attributes' =>$form_attributes];
+$view .=	apply_filters('flr_blocks_register_form_extra_fields', '', $hook_attributes);
 
 $view .= '<div class="flr-blocks-form-row">
 	            <div class="flr-blocks-input-group">';
