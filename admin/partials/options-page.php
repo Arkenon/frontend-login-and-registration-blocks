@@ -38,7 +38,7 @@ $tab         = Flr_Blocks_Helper::sanitize( 'tab', 'get', 'text' ) ?? $default_t
 	<nav class="nav-tab-wrapper">
 
 		<a href="?page=frontend-login-with-gutenberg-blocks-settings"
-		   class="nav-tab <?php if ( $tab === null ): ?>nav-tab-active<?php endif; ?>">
+		   class="nav-tab <?php if ( empty($tab) ): ?>nav-tab-active<?php endif; ?>">
 			<?php echo esc_html_x( "General Settings", "admin_general_settings", "flr-blocks" ); ?>
 		</a>
 

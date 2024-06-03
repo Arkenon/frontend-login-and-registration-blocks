@@ -1,13 +1,14 @@
 === Frontend Login and Registration Blocks ===
 Contributors:      arkenon
-Tags:              block, block editor, gutenberg, login form, register form, lost password form, frontend login, wp-login, authentication, site editor, site editing
+Tags:              block, block editor, gutenberg, login form, register form
 Requires at least: 6.1
 Tested up to:      6.5
 Requires PHP:      7.4
-Stable tag:        1.0.4
+Stable tag:        1.0.5
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
+Frontend Login and Registration Blocks plugin provides blocks helps you to add login, register, lost password forms from front end.
 
 == Description ==
 
@@ -45,6 +46,10 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 
 == Changelog ==
+
+= 1.0.5 =
+* Register Form & User Settings Form hooks created
+* 'nav-tab-active' class added to active tab in General Settings Form
 
 = 1.0.4 =
 * Tested up to WordPress 6.5
