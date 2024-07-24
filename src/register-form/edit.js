@@ -7,6 +7,8 @@ export default function Edit(props) {
 
 	const {attributes} = props;
 
+	console.log(attributes.additionalFields)
+
 	const blockProps = useBlockProps(props);
 
 	const inputStyle = {
@@ -58,6 +60,28 @@ export default function Edit(props) {
 					</div>
 				</div>
 
+				{
+					attributes.additionalFields.showFirstName && <div className="flr-blocks-input-group">
+						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
+														 htmlFor="flr-blocks-first-name">{__('First Name', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-first-name" type="text"
+							   style={inputStyle}
+							   placeholder={attributes.showPlaceholders && __('Enter your first name', 'flr-blocks')}/>
+					</div>
+
+				}
+
+				{
+					attributes.additionalFields.showLastName && <div className="flr-blocks-input-group">
+						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
+														 htmlFor="flr-blocks-last-name">{__('Last Name', 'flr-blocks')}</label>}
+						<input className="flr-blocks-input-control" id="flr-blocks-last-name" type="text"
+							   style={inputStyle}
+							   placeholder={attributes.showPlaceholders && __('Enter your last name', 'flr-blocks')}/>
+					</div>
+
+				}
+
 				<div className="flr-blocks-form-row">
 					<div className="flr-blocks-input-group">
 						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
@@ -83,7 +107,8 @@ export default function Edit(props) {
 						<div className="flr-blocks-form-check-group">
 							<input id="flr-blocks-terms-and-privacy" checked="checked" type="checkbox"
 								   className="flr-blocks-form-check-input"/>
-							<label className="flr-blocks-form-check-label" htmlFor="flr-blocks-terms-and-privacy">{__('I have read and accept terms and conditions and privacy policy.', 'flr-blocks')}</label>
+							<label className="flr-blocks-form-check-label"
+								   htmlFor="flr-blocks-terms-and-privacy">{__('I have read and accept terms and conditions and privacy policy.', 'flr-blocks')}</label>
 						</div>
 					</div>
 				}

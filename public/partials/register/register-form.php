@@ -80,6 +80,50 @@ $view .= '" /></div></div>';
 $hook_attributes = ['text_style'=> $text_style, 'input_style'=> $input_style, 'form_attributes' =>$form_attributes];
 $view .=	apply_filters('flr_blocks_register_form_extra_fields', '', $hook_attributes);
 
+
+if($form_attributes['additionalFields']['showFirstName']){
+	$view .= '<div class="flr-blocks-form-row">
+               <div class="flr-blocks-input-group">';
+	if ( $form_attributes['showLabels'] ) {
+
+		$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-first-name-for-register">
+								' . esc_html_x( "First Name", "first_name_input_text", "flr-blocks" ) . '
+							 </label>';
+	}
+
+	$view .= '<input class="flr-blocks-input-control" id="flr-blocks-first-name-for-register" name="flr-blocks-first-name-for-register" type="text" style=' . $input_style . ' placeholder="';
+
+	if ( $form_attributes['showPlaceholders'] ) {
+
+		$view .= esc_attr_x( "Enter your first name", "first_name_placeholder_text", "flr-blocks" );
+
+	}
+
+	$view .= '" /></div></div>';
+}
+
+if($form_attributes['additionalFields']['showLastName']){
+	$view .= '<div class="flr-blocks-form-row">
+               <div class="flr-blocks-input-group">';
+	if ( $form_attributes['showLabels'] ) {
+
+		$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-last-name-for-register">
+								' . esc_html_x( "Last Name", "last_name_input_text", "flr-blocks" ) . '
+							 </label>';
+	}
+
+	$view .= '<input class="flr-blocks-input-control" id="flr-blocks-last-name-for-register" name="flr-blocks-last-name-for-register" type="text" style=' . $input_style . ' placeholder="';
+
+	if ( $form_attributes['showPlaceholders'] ) {
+
+		$view .= esc_attr_x( "Enter your last name", "last_name_placeholder_text", "flr-blocks" );
+
+	}
+
+	$view .= '" /></div></div>';
+}
+
+
 $view .= '<div class="flr-blocks-form-row">
 	            <div class="flr-blocks-input-group">';
 if ( $form_attributes['showLabels'] ) {

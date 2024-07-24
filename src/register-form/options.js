@@ -4,6 +4,7 @@ import {__} from '@wordpress/i18n';
 import LabelSettings from "../components/LabelSettings";
 import ButtonSettings from "../components/ButtonSettings";
 import InputSettings from "../components/InputSettings";
+import AdditionalFieldsSettings from "../components/AdditionalFieldsSettings";
 
 const Options = ({options}) => {
 
@@ -29,6 +30,8 @@ const Options = ({options}) => {
 			<InputSettings options={options}/>
 
 			<ButtonSettings options={options}/>
+
+			<AdditionalFieldsSettings options={options}/>
 
 		</InspectorControls>
 	)

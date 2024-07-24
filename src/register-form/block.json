@@ -1,61 +1,68 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "frontend-login-with-gutenberg-blocks/register-form",
-  "version": "1.0.0",
-  "title": "Register Form",
-  "category": "theme",
-  "icon": "format-aside",
-  "description": "Display register form",
-  "attributes": {
-	"showLabels": {
-	  "type": "boolean",
-	  "default": true
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontend-login-with-gutenberg-blocks/register-form",
+	"version": "1.0.0",
+	"title": "Register Form",
+	"category": "theme",
+	"icon": "format-aside",
+	"description": "Display register form",
+	"attributes": {
+		"showLabels": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPlaceholders": {
+			"type": "boolean",
+			"default": false
+		},
+		"showTermsAndPrivacy": {
+			"type": "boolean",
+			"default": true
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"textFontWeight": {
+			"type": "string",
+			"default": "bold"
+		},
+		"inputBorderRadius": {
+			"type": "number"
+		},
+		"buttonBgColor": {
+			"type": "string"
+		},
+		"buttonTextColor": {
+			"type": "string"
+		},
+		"buttonBorder": {
+			"type": "object",
+			"default": {
+				"color": "#000",
+				"style": "solid",
+				"width": "0px"
+			}
+		},
+		"buttonBorderRadius": {
+			"type": "number"
+		},
+		"buttonTextFontWeight": {
+			"type": "string"
+		},
+		"additionalFields": {
+			"type": "object",
+			"default": {
+				"showFirstName": false,
+				"showLastName": false
+			}
+		}
 	},
-	"showPlaceholders": {
-	  "type": "boolean",
-	  "default": false
+	"supports": {
+		"html": false
 	},
-	"showTermsAndPrivacy": {
-	  "type": "boolean",
-	  "default": true
-	},
-	"textColor": {
-	  "type": "string"
-	},
-	"textFontWeight": {
-	  "type": "string",
-	  "default": "bold"
-	},
-	"inputBorderRadius": {
-	  "type": "number"
-	},
-	"buttonBgColor": {
-	  "type": "string"
-	},
-	"buttonTextColor": {
-	  "type": "string"
-	},
-	"buttonBorder": {
-	  "type": "object",
-	  "default": {
-		"color": "#000",
-		"style": "solid",
-		"width": "0px"
-	  }
-	},
-	"buttonBorderRadius": {
-	  "type": "number"
-	},
-	"buttonTextFontWeight": {
-	  "type": "string"
-	}
-  },
-  "supports": {
-	"html": false
-  },
-  "textdomain": "flr-blocks",
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+	"textdomain": "flr-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
 }

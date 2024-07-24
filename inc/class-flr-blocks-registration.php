@@ -9,7 +9,9 @@
 
 namespace FLR_BLOCKS;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 class Flr_Blocks_Registration {
 
@@ -68,6 +70,8 @@ class Flr_Blocks_Registration {
 		$password_again = Flr_Blocks_Helper::sanitize( 'flr-blocks-password-again-for-register', 'post' );
 		$username       = Flr_Blocks_Helper::sanitize( 'flr-blocks-username-for-register', 'post', 'username' );
 		$email          = Flr_Blocks_Helper::sanitize( 'flr-blocks-email-for-register', 'post', 'email' );
+		$first_name     = Flr_Blocks_Helper::sanitize( 'flr-blocks-first-name-for-register', 'post', 'text' );
+		$last_name      = Flr_Blocks_Helper::sanitize( 'flr-blocks-last-name-for-register', 'post', 'text' );
 
 		$params = [
 			'username'        => $username,
@@ -113,6 +117,8 @@ class Flr_Blocks_Registration {
 			'user_login' => $username,
 			'user_email' => $email,
 			'user_pass'  => $password,
+			'first_name' => $first_name,
+			'last_name'  => $last_name,
 		);
 
 		$newuser = wp_insert_user( $userdata );
@@ -121,7 +127,7 @@ class Flr_Blocks_Registration {
 		if ( ! is_wp_error( $newuser ) ) {
 
 			// Update custom fields
-			do_action('flr_blocks_save_register_form_extra_user_fields', $newuser);
+			do_action( 'flr_blocks_save_register_form_extra_user_fields', $newuser );
 
 			$message = "";
 

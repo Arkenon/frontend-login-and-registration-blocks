@@ -49,6 +49,13 @@
     },
     "buttonTextFontWeight": {
       "type": "string"
+    },
+    "additionalFields": {
+      "type": "object",
+      "default": {
+        "showFirstName": false,
+        "showLastName": false
+      }
     }
   },
   "supports": {
