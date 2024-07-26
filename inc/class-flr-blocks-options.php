@@ -72,6 +72,7 @@ class Flr_Blocks_Options {
 		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_has_user_dashboard' );
 
 		// E-Mail settings
+		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_enable_mails' );
 		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_user' );
 		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_user_with_activation' );
 		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_admin' );

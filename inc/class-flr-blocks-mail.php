@@ -9,15 +9,17 @@
 
 namespace FLR_BLOCKS;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 
 class Flr_Blocks_Mail {
 
-	public function load_mail_actions(){
+	public function load_mail_actions() {
 
 		//Load mail html format
-		add_filter( 'wp_mail_content_type', [$this,'mail_html_format'] );
+		add_filter( 'wp_mail_content_type', [ $this, 'mail_html_format' ] );
 	}
 
 	/**
@@ -27,7 +29,7 @@ class Flr_Blocks_Mail {
 	 *
 	 * @since    1.0.0
 	 */
-	public function mail_html_format() : string {
+	public function mail_html_format(): string {
 		return "text/html";
 	}
 
@@ -46,6 +48,10 @@ class Flr_Blocks_Mail {
 	 * @since 1.0.0
 	 */
 	public function send_mail( string $option_name, string $template_name, array $params, string $mail_title, bool $to_admin = false ): bool {
+
+		if ( get_option( 'flr_blocks_enable_mails' ) === 'no' ) {
+			return false;
+		}
 
 		$template = self::mail_templates( $template_name );
 
@@ -107,7 +113,7 @@ class Flr_Blocks_Mail {
 	 * Replace texts with dynamic values (for e-mail templates)
 	 *
 	 * @param string $option_name Mail template option name
-	 * @param string $template_name Mail template name for translation
+	 * @param string $template Mail template name for translation
 	 * @param array $params Parameters for mail templates (username, mail, etc.)
 	 *
 	 * @return string $dynamicText Replaced text

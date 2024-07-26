@@ -55,6 +55,8 @@ class Flr_Blocks_Registration {
 
 		header( 'Access-Control-Allow-Origin: *' );
 
+		check_ajax_referer( 'flrblocksregisterhandle', 'security' );
+
 		if ( ! get_option( 'users_can_register' ) ) {
 
 			wp_send_json( array(
@@ -131,7 +133,7 @@ class Flr_Blocks_Registration {
 
 			$message = "";
 
-			if ( get_option( "flr_blocks_has_activation" ) ) {
+			if ( get_option( "flr_blocks_has_activation" ) === 'yes' ) {
 
 				$code = sha1( $email . time() );
 
@@ -156,7 +158,7 @@ class Flr_Blocks_Registration {
 
 			$mail = new Flr_Blocks_Mail();
 
-			if ( get_option( "flr_blocks_has_activation" ) ) {
+			if ( get_option( "flr_blocks_has_activation" ) === 'yes' ) {
 
 				$mail->send_mail( 'flr_blocks_register_mail_to_user_with_activation', 'register_mail_to_user_template_with_activation', $params, _x( 'Welcome to Join Us', 'register_mail_title_to_user', 'flr-blocks' ) );
 

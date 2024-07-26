@@ -2,9 +2,9 @@
 Contributors:      arkenon
 Tags:              block, block editor, gutenberg, login form, register form
 Requires at least: 6.1
-Tested up to:      6.5
+Tested up to:      6.6
 Requires PHP:      7.4
-Stable tag:        1.0.6
+Stable tag:        1.0.7
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,15 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 
 == Changelog ==
+
+= 1.0.7 =
+* Register form security check added
+* Register form code improvements
+* Php mailer functionality checking added into send_mail() function
+* A warning message added to the mail options for SMTP settings
+* Enable E-Mail option added
+* Tested up to Wp Version 6.6
+* Translation files updated
 
 = 1.0.6 =
 * Additional fields added to Register Form Block
