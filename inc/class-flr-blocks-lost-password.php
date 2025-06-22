@@ -9,7 +9,9 @@
 
 namespace FLR_BLOCKS;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 class Flr_Blocks_Lost_Password {
 
@@ -67,17 +69,45 @@ class Flr_Blocks_Lost_Password {
 
 		check_ajax_referer( 'flrblocksresetrequesthandle', 'security' );
 
-		$email      = Flr_Blocks_Helper::sanitize( 'flr-blocks-email', 'post', 'email' );
-		$user       = get_user_by( 'email', $email );
-		$user_id    = $user->ID;
-		$username   = $user->user_login;
-		$code       = sha1( $user_id . time() );
-		$reset_link = site_url( get_option( 'flr_blocks_lost_password_page' ) ) . '/?reset=in-progress&key=' . $code . '&user=' . $user_id;
+		$email = Flr_Blocks_Helper::sanitize( 'flr-blocks-email', 'post', 'email' );
+
+		if ( ! email_exists( $email ) ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => esc_html_x( "Sorry, we can't find a user with that email address.", "reset_password_request_user_not_found", "flr-blocks" )
+			) );
+			wp_die();
+		}
+
+		$user = get_user_by( 'email', $email );
+
+		$key = get_password_reset_key( $user );
+
+		if ( is_wp_error( $key ) ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => esc_html_x( "Something went wrong while generating the reset key. Please try again.", "general_error_message", "flr-blocks" )
+			) );
+			wp_die();
+		}
+
+
+		$username               = $user->user_login;
+		$lost_password_page_url = site_url( get_option( 'flr_blocks_lost_password_page' ) );
+
+		$reset_link = add_query_arg(
+			[
+				'rp_key'   => $key,
+				'rp_login' => rawurlencode( $username ),
+				'reset'    => 'in-progress'
+			],
+			$lost_password_page_url
+		);
 
 		$params = [
 			'username'   => $username,
 			'email'      => $email,
-			'reset_link' => $reset_link
+			'reset_link' => $reset_link,
 		];
 
 		$mail = new Flr_Blocks_Mail();
@@ -85,8 +115,6 @@ class Flr_Blocks_Lost_Password {
 		$send_reset_password_email = $mail->send_mail( 'flr_blocks_reset_request_mail_to_user', 'reset_password_request_mail_to_user_template', $params, _x( 'Reset Password Request', 'reset_request_mail_title', 'flr-blocks' ) );
 
 		if ( $send_reset_password_email ) {
-
-			update_user_meta( $user_id, 'flr_blocks_lost_password_key', $code );
 
 			wp_send_json( array(
 				'status'  => true,
@@ -97,7 +125,7 @@ class Flr_Blocks_Lost_Password {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flr-blocks" )
+				'message' => esc_html_x( "Reset password e-mail can not sent. Please contact with site administrator.", "general_error_message", "flr-blocks" )
 			) );
 
 		}
@@ -107,9 +135,9 @@ class Flr_Blocks_Lost_Password {
 	}
 
 	/**
-	 * POST operation for reset password form.
+	 * POST operation for a reset password form.
 	 *
-	 * @return string|false a JSON encoded string on success or FALSE on failure.
+	 * @return void a JSON encoded string on success or FALSE on failure.
 	 * @since 1.0.0
 	 */
 	public function flr_blocks_reset_password_handle_ajax_callback() {
@@ -118,59 +146,51 @@ class Flr_Blocks_Lost_Password {
 
 		check_ajax_referer( 'flrblocksresetpasswordhandle', 'security' );
 
-		$user_id  = Flr_Blocks_Helper::sanitize( 'userid', 'post', 'id' );
-		$user     = get_userdata( $user_id );
-		$email    = $user->user_email;
-		$username = $user->user_login;
-
+		$rp_key             = Flr_Blocks_Helper::sanitize( 'rp_key', 'post' );
+		$rp_login           = Flr_Blocks_Helper::sanitize( 'rp_login', 'post' );
 		$new_password       = Flr_Blocks_Helper::sanitize( 'resetpass_pwd', 'post' );
 		$new_password_again = Flr_Blocks_Helper::sanitize( 'resetpass_pwd_again', 'post' );
 
+		if ( empty( $rp_key ) || empty( $rp_login ) || empty( $new_password ) || empty( $new_password_again ) ) {
+			wp_send_json( [
+				'status'  => false,
+				'message' => __( 'All fields are required.', 'flr-blocks' )
+			] );
+		}
+
+		if ( $new_password !== $new_password_again ) {
+			wp_send_json( [
+				'status'  => false,
+				'message' => __( 'Passwords do not match.', 'flr-blocks' )
+			] );
+		}
+
+		$user = check_password_reset_key( $rp_key, $rp_login );
+
+		if ( is_wp_error( $user ) ) {
+			wp_send_json( [
+				'status'  => false,
+				'message' => __( 'Your password reset link appears to be invalid. Please request a new one.', 'flr-blocks' )
+			] );
+		}
+
+		reset_password( $user, $new_password );
+
 		$params = [
-			'username' => $username,
-			'email'    => $email,
+			'username' => $user->user_login,
+			'email'    => $user->user_email,
 		];
 
-		if ( $new_password === $new_password_again ) {
+		$mail = new Flr_Blocks_Mail();
 
-			$reset_pass = wp_update_user( array(
-				'ID'        => Flr_Blocks_Helper::sanitize( 'userid', 'post', 'id' ),
-				'user_pass' => wp_slash( Flr_Blocks_Helper::sanitize( 'resetpass_pwd', 'post' ) )
-			) );
+		$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'flr-blocks' ) );
 
-			if ( ! is_wp_error( $reset_pass ) ) {
-
-				delete_user_meta( Flr_Blocks_Helper::sanitize( 'userid', 'post', 'id' ), 'flr_blocks_lost_password_key' );
-
-				$mail = new Flr_Blocks_Mail();
-
-				$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'flr-blocks' ) );
-
-				wp_send_json( array(
-					'status'  => true,
-					'message' => esc_html_x( "Your password has been changed. Please sign in...", "password_changed_confirmation", "flr-blocks" )
-				) );
-
-			} else {
-
-				wp_send_json( array(
-					'status'  => false,
-					'message' => $reset_pass->get_error_message()
-				) );
-
-			}
-
-		} else {
-
-			wp_send_json( array(
-				'status'  => false,
-				'message' => esc_html_x( "Your passwords do not match", "password_match_error", "flr-blocks" )
-			) );
-
-		}
+		wp_send_json( [
+			'status'  => true,
+			'message' => __( 'Your password has been reset successfully.', 'flr-blocks' )
+		] );
 
 		wp_die();
 
 	}
-
 }

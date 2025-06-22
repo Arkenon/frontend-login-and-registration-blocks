@@ -2,9 +2,9 @@
 Contributors:      arkenon
 Tags:              block, block editor, gutenberg, login form, register form
 Requires at least: 6.1
-Tested up to:      6.6
+Tested up to:      6.8
 Requires PHP:      7.4
-Stable tag:        1.0.7
+Stable tag:        1.0.8
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,9 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 
 == Changelog ==
+
+= 1.0.8 =
+* Fixed: Lost Password form security issue. (Resting password with userid was causing security issue)
 
 = 1.0.7 =
 * Register form security check added

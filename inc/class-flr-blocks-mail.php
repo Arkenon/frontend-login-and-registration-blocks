@@ -49,7 +49,7 @@ class Flr_Blocks_Mail {
 	 */
 	public function send_mail( string $option_name, string $template_name, array $params, string $mail_title, bool $to_admin = false ): bool {
 
-		if ( get_option( 'flr_blocks_enable_mails' ) === 'no' ) {
+		if ( get_option( 'flr_blocks_enable_mails' ) === 'no' && $option_name !== "flr_blocks_reset_request_mail_to_user" ) {
 			return false;
 		}
 
@@ -74,6 +74,8 @@ class Flr_Blocks_Mail {
 	/**
 	 *
 	 * E-mail templates
+	 *
+	 * @param $template_name
 	 *
 	 * @return string
 	 * @since 1.0.0

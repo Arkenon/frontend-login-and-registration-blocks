@@ -1,21 +1,23 @@
 <?php
 /**
- * Plugin Name:       Frontend Login and Registration Blocks
- * Plugin URI:        https://frontendlogin.iyziweb.site/
- * Description:       Do login, register and lost password operations from frontend with Gutenberg blocks. Easily customize forms and add to your pages.
+ * Plugin Name: Frontend Login and Registration Blocks
+ * Plugin URI: https://frontendlogin.iyziweb.site/
+ * Description: Do login, register and lost password operations from frontend with Gutenberg blocks. Easily customize forms and add to your pages.
  * Requires at least: 6.1
- * Requires PHP:      7.4
- * Version:           1.0.7
- * Author:            Kadim Gültekin
- * Author URI:        https://github.com/Arkenon
- * Text Domain:       flr-blocks
- * Domain Path:       /languages
- * License:           GPL v2 or later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * @package           Frontend_Login_And_Registration_Blocks
+ * Requires PHP: 7.4
+ * Version: 1.0.8
+ * Author: Kadim Gültekin
+ * Author URI: https://github.com/Arkenon
+ * Text Domain: flr-blocks
+ * Domain Path: /languages
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * @package Frontend_Login_And_Registration_Blocks
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 define( 'FLR_BLOCKS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'FLR_BLOCKS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -33,7 +35,7 @@ require plugin_dir_path( __FILE__ ) . 'inc/class-flr-blocks-helper.php';
  *
  * @since    1.0.0
  */
-if(!function_exists('flr_blocks_get_plugin_data')){
+if ( ! function_exists( 'flr_blocks_get_plugin_data' ) ) {
 	function flr_blocks_get_plugin_data(): array {
 
 		return get_file_data(
@@ -59,7 +61,7 @@ define( 'FLR_BLOCKS_VERSION', flr_blocks_get_plugin_data()['version'] );
  * This action is documented in inc/class-flr-blocks-activator.php
  * @since    1.0.0
  */
-if(!function_exists('flr_blocks_activate')){
+if ( ! function_exists( 'flr_blocks_activate' ) ) {
 
 	function flr_blocks_activate() {
 
@@ -76,7 +78,7 @@ if(!function_exists('flr_blocks_activate')){
  * This action is documented in inc/class-flr-blocks-deactivator.php
  * @since    1.0.0
  */
-if(!function_exists('flr_blocks_deactivate')){
+if ( ! function_exists( 'flr_blocks_deactivate' ) ) {
 
 	function flr_blocks_deactivate() {
 

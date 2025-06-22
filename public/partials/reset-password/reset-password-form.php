@@ -1,5 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 
@@ -13,12 +15,12 @@ if ( is_user_logged_in() ) {
 
 if ( Flr_Blocks_Helper::sanitize( 'reset', 'get', 'text' ) === 'in-progress' ) {
 
-	$code = Flr_Blocks_Helper::sanitize( 'key', 'get', 'text' );
-	$user = Flr_Blocks_Helper::sanitize( 'user', 'get', 'id' );
+	$rp_key   = Flr_Blocks_Helper::sanitize( 'rp_key', 'get' );
+	$rp_login = Flr_Blocks_Helper::sanitize( 'rp_login', 'get' );
 
-	$code2 = get_user_meta( $user, 'flr_blocks_lost_password_key', true );
+	$user = check_password_reset_key( $rp_key, $rp_login );
 
-	if ( $code === $code2 ) {
+	if ( ! is_wp_error( $user ) ) {
 
 		$view = Flr_Blocks_Helper::return_view( 'public/partials/reset-password/reset-in-progress.php', $form_attributes );
 
