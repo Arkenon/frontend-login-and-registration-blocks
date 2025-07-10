@@ -91,7 +91,7 @@ class Flr_Blocks_User_Settings {
 
 							wp_send_json( array(
 								'status'  => false,
-								'message' => esc_html_x( "Your passwords do not match", "password_match_error", "flr-blocks" )
+								'message' => esc_html_x( "Your passwords do not match", "password_match_error", "frontend-login-and-registration-blocks" )
 							) );
 
 							wp_die();
@@ -102,7 +102,7 @@ class Flr_Blocks_User_Settings {
 
 							wp_send_json( array(
 								'status'  => true,
-								'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flr-blocks" )
+								'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "frontend-login-and-registration-blocks" )
 							) );
 
 							wp_die();
@@ -113,7 +113,7 @@ class Flr_Blocks_User_Settings {
 
 						wp_send_json( array(
 							'status'  => false,
-							'message' => esc_html_x( "Make sure your user information is correct.", "check_your_user_info_error", "flr-blocks" )
+							'message' => esc_html_x( "Make sure your user information is correct.", "check_your_user_info_error", "frontend-login-and-registration-blocks" )
 						) );
 
 						wp_die();
@@ -125,7 +125,7 @@ class Flr_Blocks_User_Settings {
 
 					wp_send_json( array(
 						'status'  => false,
-						'message' => esc_html_x( "Your current password is wrong. Please check it again.", "current_password_error", "flr-blocks" )
+						'message' => esc_html_x( "Your current password is wrong. Please check it again.", "current_password_error", "frontend-login-and-registration-blocks" )
 					) );
 
 					wp_die();
@@ -135,7 +135,7 @@ class Flr_Blocks_User_Settings {
 
 				wp_send_json( array(
 					'status'  => true,
-					'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "flr-blocks" )
+					'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "frontend-login-and-registration-blocks" )
 				) );
 
 				wp_die();
@@ -146,7 +146,7 @@ class Flr_Blocks_User_Settings {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flr-blocks" )
+				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "frontend-login-and-registration-blocks" )
 			) );
 
 			wp_die();

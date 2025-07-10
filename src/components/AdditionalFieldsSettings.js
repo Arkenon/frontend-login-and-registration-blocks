@@ -27,19 +27,19 @@ const LabelSettings = ({options}) => {
 	return (
 		<Panel>
 			<PanelBody
-				title={__('Additional Fields', 'flr-blocks')}
+				title={__('Additional Fields', 'frontend-login-and-registration-blocks')}
 				initialOpen={false}
 			>
 				<PanelRow>
 					<ToggleControl
-						label={__('Show First Name', 'flr-blocks')}
+						label={__('Show First Name', 'frontend-login-and-registration-blocks')}
 						checked={showFirstName}
 						onChange={handleFieldChange('showFirstName')}
 					/>
 				</PanelRow>
 				<PanelRow>
 					<ToggleControl
-						label={__('Show Last Name', 'flr-blocks')}
+						label={__('Show Last Name', 'frontend-login-and-registration-blocks')}
 						checked={showLastName}
 						onChange={handleFieldChange('showLastName')}
 					/>

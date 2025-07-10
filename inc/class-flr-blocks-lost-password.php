@@ -74,7 +74,7 @@ class Flr_Blocks_Lost_Password {
 		if ( ! email_exists( $email ) ) {
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Sorry, we can't find a user with that email address.", "reset_password_request_user_not_found", "flr-blocks" )
+				'message' => esc_html_x( "Sorry, we can't find a user with that email address.", "reset_password_request_user_not_found", "frontend-login-and-registration-blocks" )
 			) );
 			wp_die();
 		}
@@ -86,7 +86,7 @@ class Flr_Blocks_Lost_Password {
 		if ( is_wp_error( $key ) ) {
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Something went wrong while generating the reset key. Please try again.", "general_error_message", "flr-blocks" )
+				'message' => esc_html_x( "Something went wrong while generating the reset key. Please try again.", "general_error_message", "frontend-login-and-registration-blocks" )
 			) );
 			wp_die();
 		}
@@ -112,20 +112,20 @@ class Flr_Blocks_Lost_Password {
 
 		$mail = new Flr_Blocks_Mail();
 
-		$send_reset_password_email = $mail->send_mail( 'flr_blocks_reset_request_mail_to_user', 'reset_password_request_mail_to_user_template', $params, _x( 'Reset Password Request', 'reset_request_mail_title', 'flr-blocks' ) );
+		$send_reset_password_email = $mail->send_mail( 'flr_blocks_reset_request_mail_to_user', 'reset_password_request_mail_to_user_template', $params, _x( 'Reset Password Request', 'reset_request_mail_title', 'frontend-login-and-registration-blocks' ) );
 
 		if ( $send_reset_password_email ) {
 
 			wp_send_json( array(
 				'status'  => true,
-				'message' => esc_html_x( "We have successfully get your request. We have sent you an e-mail. Please check your inbox...", "reset_password_request_confirmation", "flr-blocks" )
+				'message' => esc_html_x( "We have successfully get your request. We have sent you an e-mail. Please check your inbox...", "reset_password_request_confirmation", "frontend-login-and-registration-blocks" )
 			) );
 
 		} else {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Reset password e-mail can not sent. Please contact with site administrator.", "general_error_message", "flr-blocks" )
+				'message' => esc_html_x( "Reset password e-mail can not sent. Please contact with site administrator.", "general_error_message", "frontend-login-and-registration-blocks" )
 			) );
 
 		}
@@ -154,14 +154,14 @@ class Flr_Blocks_Lost_Password {
 		if ( empty( $rp_key ) || empty( $rp_login ) || empty( $new_password ) || empty( $new_password_again ) ) {
 			wp_send_json( [
 				'status'  => false,
-				'message' => __( 'All fields are required.', 'flr-blocks' )
+				'message' => __( 'All fields are required.', 'frontend-login-and-registration-blocks' )
 			] );
 		}
 
 		if ( $new_password !== $new_password_again ) {
 			wp_send_json( [
 				'status'  => false,
-				'message' => __( 'Passwords do not match.', 'flr-blocks' )
+				'message' => __( 'Passwords do not match.', 'frontend-login-and-registration-blocks' )
 			] );
 		}
 
@@ -170,7 +170,7 @@ class Flr_Blocks_Lost_Password {
 		if ( is_wp_error( $user ) ) {
 			wp_send_json( [
 				'status'  => false,
-				'message' => __( 'Your password reset link appears to be invalid. Please request a new one.', 'flr-blocks' )
+				'message' => __( 'Your password reset link appears to be invalid. Please request a new one.', 'frontend-login-and-registration-blocks' )
 			] );
 		}
 
@@ -183,11 +183,11 @@ class Flr_Blocks_Lost_Password {
 
 		$mail = new Flr_Blocks_Mail();
 
-		$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'flr-blocks' ) );
+		$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'frontend-login-and-registration-blocks' ) );
 
 		wp_send_json( [
 			'status'  => true,
-			'message' => __( 'Your password has been reset successfully.', 'flr-blocks' )
+			'message' => __( 'Your password has been reset successfully.', 'frontend-login-and-registration-blocks' )
 		] );
 
 		wp_die();

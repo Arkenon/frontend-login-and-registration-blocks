@@ -21,54 +21,75 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Flr_Blocks_Helper {
 
 	/**
-	 * Secures $_POST operation
+	 * Sanitize input
 	 *
-	 * @param string $name $_POST['name']
+	 * @param string $name Input name
+	 * @param string $method GET or POST or REQUEST
+	 * @param string $type Type of input (title, id, textarea, url, email, username, text, bool), default is text
 	 *
-	 * @return mixed|null $_POST['name'] or null when !isset($_POST['name'])
+	 * @return bool|int|string|null
 	 * @since 1.0.0
 	 */
-	public static function sanitize( string $name, string $method, string $type = "" ) {
+	public static function sanitize( string $name, string $method, string $type = "text" ) {
 
-		$value = '';
+		$value  = "";
+		$method = strtolower( $method );
 
-		if ( $method == 'post' ) {
-			if ( isset( $_POST[ $name ] ) ) {
-				$value = sanitize_text_field( $_POST[ $name ] );
-			}
-		} else {
-			if ( isset( $_GET[ $name ] ) ) {
-				$value = sanitize_text_field( $_GET[ $name ] );
-			}
+		// This is a helper function for sanitizing input, nonce verification is not needed here
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$input = $method === 'post' ? $_POST : ( $method === 'get' ? $_GET : $_REQUEST );
+
+		if ( isset( $input[ $name ] ) ) {
+			$value = wp_unslash( $input[ $name ] );
+			$value = is_array( $value ) ? self::sanitizeArray( $value ) : sanitize_text_field( $value );
 		}
 
 		if ( isset( $value ) ) {
 			switch ( $type ) {
 				case "title":
 					return sanitize_title( $value );
-					break;
 				case "id":
 					return absint( $value );
-					break;
 				case "textarea":
 					return sanitize_textarea_field( $value );
-					break;
 				case "url":
 					return esc_url_raw( $value );
-					break;
 				case "email":
 					return sanitize_email( $value );
-					break;
 				case "username":
 					return sanitize_user( $value );
-					break;
+				case "bool":
+					return rest_sanitize_boolean( $value );
 				default:
 					return $value;
 			}
 		}
 
 		return null;
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+	}
 
+	/**
+	 * Sanitize an array recursively
+	 *
+	 * @param array $array
+	 *
+	 * @return array
+	 * @since 1.0.0
+	 */
+	public static function sanitizeArray( array $array ): array {
+		return array_map( function ( $value ) {
+			if ( is_array( $value ) ) {
+				return self::sanitizeArray( $value );
+			}
+
+			return sanitize_text_field( $value );
+		}, array_combine(
+			array_map( 'sanitize_text_field', array_keys( $array ) ),
+			$array
+		) );
 	}
 
 	/**
@@ -86,16 +107,14 @@ class Flr_Blocks_Helper {
 	}
 
 	/**
-	 * Returns an html variable as a view
+	 * Returns an HTML variable as a view
 	 * To return a view uses include_once() function
 	 *
 	 * @param string $path Path for view page
-	 * @param array $block_attributes Get block attributes from block-name/edit.js
+	 * @param array $form_attributes
 	 *
 	 * @return string $view
-	 * @var string $view html output
 	 * @since 1.0.0
-	 *
 	 */
 	public static function return_view( string $path, array $form_attributes = [] ): string {
 
@@ -128,7 +147,7 @@ class Flr_Blocks_Helper {
 	 * Select option input helper for post query
 	 *
 	 * @param WP_Post $query_item Post item
-	 * @param array $option_name Option name
+	 * @param string $option_name Option name
 	 *
 	 * @since 1.0.0
 	 */
@@ -157,7 +176,7 @@ class Flr_Blocks_Helper {
 	 *
 	 * @param array $form_attributes Block attributes
 	 *
-	 * @return string $button_style Css style for the button
+	 * @return string $button_style CSS style for the button
 	 * @since 1.0.2
 	 */
 	public static function get_button_style( array $form_attributes ): string {
@@ -186,7 +205,7 @@ class Flr_Blocks_Helper {
 	 *
 	 * @param array $form_attributes Block attributes
 	 *
-	 * @return string $label_style Css style for the label
+	 * @return string $label_style CSS style for the label
 	 * @since 1.0.2
 	 */
 	public static function get_label_style( array $form_attributes ): string {
@@ -203,7 +222,7 @@ class Flr_Blocks_Helper {
 	 *
 	 * @param array $form_attributes Block attributes
 	 *
-	 * @return string $input_style Css style for the label
+	 * @return string $input_style CSS style for the label
 	 * @since 1.0.2
 	 */
 	public static function get_input_style( array $form_attributes ): string {

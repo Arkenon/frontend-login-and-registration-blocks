@@ -117,7 +117,7 @@ class Flr_Blocks_Login {
 
 					wp_send_json( array(
 						'status'  => false,
-						'message' => esc_html_x( "Please activate your account. We sent you an email. Click the activation link in the email.", "user_not_activated", "flr-blocks" )
+						'message' => esc_html_x( "Please activate your account. We sent you an email. Click the activation link in the email.", "user_not_activated", "frontend-login-and-registration-blocks" )
 					) );
 
 					wp_logout();
@@ -139,7 +139,7 @@ class Flr_Blocks_Login {
 	/**
 	 * Json result for login. When login success
 	 *
-	 * @return string Json result
+	 * @return void Json result
 	 * @since 1.0.0
 	 */
 	private function login_success_response(): void {
@@ -147,7 +147,7 @@ class Flr_Blocks_Login {
 		wp_send_json( array(
 			'status'     => true,
 			'return_url' => site_url( get_option( 'flr_blocks_redirect_after_login' ) ) ?? null,
-			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "flr-blocks" )
+			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "frontend-login-and-registration-blocks" )
 		) );
 
 	}
@@ -155,14 +155,14 @@ class Flr_Blocks_Login {
 	/**
 	 * Json result for login. When login failed
 	 *
-	 * @return string Json result
+	 * @return void Json result
 	 * @since 1.0.0
 	 */
 	private function login_failed_response(): void {
 
 		wp_send_json( array(
 			'status'  => false,
-			'message' => esc_html_x( "Invalid username or password.", "invalid_username_or_pass", "flr-blocks" )
+			'message' => esc_html_x( "Invalid username or password.", "invalid_username_or_pass", "frontend-login-and-registration-blocks" )
 		) );
 
 	}
@@ -175,13 +175,14 @@ class Flr_Blocks_Login {
 	 */
 	public function get_login_attempts_count(): array {
 
-		$user_ip = preg_replace( '/[^0-9., ]/', '', wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
+		$get_remote_addr = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+
+		$user_ip = preg_replace( '/[^0-9., ]/', '', $get_remote_addr );
 
 		return [
 			'user_ip'        => $user_ip,
 			'login_attempts' => get_transient( "login_attempts_" . $user_ip )
 		];
-
 	}
 
 	/**
@@ -243,7 +244,7 @@ class Flr_Blocks_Login {
 		wp_send_json( array(
 			'status'  => false,
 			// translators: %1$s duration limit %2$s duration type (second or minute)
-			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error', 'flr-blocks' ), $duration_limit, $duration_type )
+			'message' => sprintf( _x( 'You have made too many unsuccessful login attempts. Please wait %1$s %2$s', 'unsuccessful_login_attempts_error', 'frontend-login-and-registration-blocks' ), $duration_limit, $duration_type )
 		) );
 
 	}
@@ -257,19 +258,20 @@ class Flr_Blocks_Login {
 
 		if ( get_option( 'flr_blocks_redirect_from_wp_login_admin' ) === 'yes' && ! is_user_logged_in() && ! defined( 'DOING_AJAX' ) ) {
 
-			$login_url = $this->get_login_url();
-			$current_page = esc_url_raw( $_SERVER['REQUEST_URI'] );
-			$url       = isset( $_REQUEST['redirect_to'] ) ? "wp-login.php" : $current_page;
+			// This not a form action, nonce verification is not needed
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended
+			$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+			$request_method = isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) : '';
+			$login_url      = $this->get_login_url();
+			$current_page   = esc_url_raw( $request_uri );
+			$url            = isset( $_REQUEST['redirect_to'] ) ? "wp-login.php" : $current_page;
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
-			if ( $url == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' ) {
-
+			if ( $url === "wp-login.php" && $request_method === 'GET' ) {
 				wp_redirect( esc_url_raw( $login_url ) );
 				exit;
-
 			}
-
 		}
-
 	}
 
 	/**

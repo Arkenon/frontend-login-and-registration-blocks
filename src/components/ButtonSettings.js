@@ -16,12 +16,12 @@ const ButtonSettings = ({options}) => {
 	return (
 		<Panel>
 			<PanelBody
-				title={__('Button Settings', 'flr-blocks')}
+				title={__('Button Settings', 'frontend-login-and-registration-blocks')}
 				initialOpen={false}
 			>
 				<PanelRow>
 					<RangeControl
-						label={__('Button Border Radius', 'flr-blocks')}
+						label={__('Button Border Radius', 'frontend-login-and-registration-blocks')}
 						value={attributes.buttonBorderRadius}
 						onChange={(val) =>
 							setAttributes({buttonBorderRadius: val})
@@ -38,7 +38,7 @@ const ButtonSettings = ({options}) => {
 				</PanelRow>
 				<PanelRow>
 					<Text>
-						{__('Button Background Color', 'flr-blocks')}
+						{__('Button Background Color', 'frontend-login-and-registration-blocks')}
 					</Text>
 				</PanelRow>
 				<PanelRow>
@@ -50,7 +50,7 @@ const ButtonSettings = ({options}) => {
 				<PanelRow>
 					<SelectControl
 						labelPosition={'top'}
-						label={__('Button Font Weight', 'flr-blocks')}
+						label={__('Button Font Weight', 'frontend-login-and-registration-blocks')}
 						value={attributes.buttonTextFontWeight}
 						options={[
 							{label: 'Normal', value: 'normal'},
@@ -62,7 +62,7 @@ const ButtonSettings = ({options}) => {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<Text>{__('Button Text Color', 'flr-blocks')}</Text>
+					<Text>{__('Button Text Color', 'frontend-login-and-registration-blocks')}</Text>
 				</PanelRow>
 				<PanelRow>
 					<FlrColorPalette

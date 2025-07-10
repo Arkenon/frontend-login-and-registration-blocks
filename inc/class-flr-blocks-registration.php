@@ -61,7 +61,7 @@ class Flr_Blocks_Registration {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Users are not allowed to register on this website.", "users_can_register_error", "flr-blocks" )
+				'message' => esc_html_x( "Users are not allowed to register on this website.", "users_can_register_error", "frontend-login-and-registration-blocks" )
 			) );
 
 			wp_die();
@@ -86,7 +86,7 @@ class Flr_Blocks_Registration {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Your passwords do not match", "password_match_error", "flr-blocks" )
+				'message' => esc_html_x( "Your passwords do not match", "password_match_error", "frontend-login-and-registration-blocks" )
 			) );
 
 			wp_die();
@@ -97,7 +97,7 @@ class Flr_Blocks_Registration {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "This username already exist.", "username_exist_error", "flr-blocks" )
+				'message' => esc_html_x( "This username already exist.", "username_exist_error", "frontend-login-and-registration-blocks" )
 			) );
 
 			wp_die();
@@ -108,7 +108,7 @@ class Flr_Blocks_Registration {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "This user already exist.", "user_exist_error", "flr-blocks" )
+				'message' => esc_html_x( "This user already exist.", "user_exist_error", "frontend-login-and-registration-blocks" )
 			) );
 
 			wp_die();
@@ -142,9 +142,9 @@ class Flr_Blocks_Registration {
 
 				if ( $add_user_activation && $add_user_activation_code ) {
 
-					$message = esc_html_x( "You have been signed up successfully. Please click the membership activation link sent your e-mail.", "register_succession_with_activation", "flr-blocks" );
+					$message = esc_html_x( "You have been signed up successfully. Please click the membership activation link sent your e-mail.", "register_succession_with_activation", "frontend-login-and-registration-blocks" );
 
-					$activation_link = site_url() . '/' . get_option( "flr_blocks_activation_page" ) . '?key=' . $code . '&user=' . $newuser;
+					$activation_link = site_url() . '/' . get_option( "flr_blocks_activation_page" ) . '?key=' . $code . '&user=' . $email;
 
 					$params['activation_link'] = $activation_link;
 
@@ -152,7 +152,7 @@ class Flr_Blocks_Registration {
 
 			} else {
 
-				$message = esc_html_x( "You have been signed up successfully. You can sign in with your username and password.", "register_succession", "flr-blocks" );
+				$message = esc_html_x( "You have been signed up successfully. You can sign in with your username and password.", "register_succession", "frontend-login-and-registration-blocks" );
 
 			}
 
@@ -160,15 +160,15 @@ class Flr_Blocks_Registration {
 
 			if ( get_option( "flr_blocks_has_activation" ) === 'yes' ) {
 
-				$mail->send_mail( 'flr_blocks_register_mail_to_user_with_activation', 'register_mail_to_user_template_with_activation', $params, _x( 'Welcome to Join Us', 'register_mail_title_to_user', 'flr-blocks' ) );
+				$mail->send_mail( 'flr_blocks_register_mail_to_user_with_activation', 'register_mail_to_user_template_with_activation', $params, _x( 'Welcome to Join Us', 'register_mail_title_to_user', 'frontend-login-and-registration-blocks' ) );
 
 			} else {
 
-				$mail->send_mail( 'flr_blocks_register_mail_to_user', 'register_mail_to_user_template', $params, _x( 'Welcome to Join Us', 'register_mail_title_to_user', 'flr-blocks' ) );
+				$mail->send_mail( 'flr_blocks_register_mail_to_user', 'register_mail_to_user_template', $params, _x( 'Welcome to Join Us', 'register_mail_title_to_user', 'frontend-login-and-registration-blocks' ) );
 
 			}
 
-			$mail->send_mail( 'flr_blocks_register_mail_to_admin', 'register_mail_to_admin_template', $params, _x( 'New Member Registration', 'register_mail_title_to_admin', 'flr-blocks' ), true );
+			$mail->send_mail( 'flr_blocks_register_mail_to_admin', 'register_mail_to_admin_template', $params, _x( 'New Member Registration', 'register_mail_title_to_admin', 'frontend-login-and-registration-blocks' ), true );
 
 			wp_send_json( array(
 				'status'  => true,
@@ -179,7 +179,7 @@ class Flr_Blocks_Registration {
 
 			wp_send_json( array(
 				'status'  => false,
-				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "flr-blocks" )
+				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "frontend-login-and-registration-blocks" )
 			) );
 
 		}

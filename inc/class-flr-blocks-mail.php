@@ -85,23 +85,23 @@ class Flr_Blocks_Mail {
 		switch ( $template_name ) {
 
 			case "register_mail_to_user_template":
-				return _x( 'Hello {{username}}, <br> Welcome to our website.', 'register_mail_to_user_template', 'flr-blocks' );
+				return _x( 'Hello {{username}}, <br> Welcome to our website.', 'register_mail_to_user_template', 'frontend-login-and-registration-blocks' );
 				break;
 
 			case "register_mail_to_user_template_with_activation":
-				return _x( 'Hello {{username}}. You have been signed up successfully. Please click the membership activation link below: <br/> {{activation_link}}', 'register_mail_to_user_template_with_activation', 'flr-blocks' );
+				return _x( 'Hello {{username}}. You have been signed up successfully. Please click the membership activation link below: <br/> {{activation_link}}', 'register_mail_to_user_template_with_activation', 'frontend-login-and-registration-blocks' );
 				break;
 
 			case "register_mail_to_admin_template":
-				return _x( 'New member registered to your web site. <br> Username: {{username}} | User E-Mail: {{email}}', 'register_mail_to_admin_template', 'flr-blocks' );
+				return _x( 'New member registered to your web site. <br> Username: {{username}} | User E-Mail: {{email}}', 'register_mail_to_admin_template', 'frontend-login-and-registration-blocks' );
 				break;
 
 			case "reset_password_mail_to_user_template":
-				return _x( 'Hello {{username}}, <br> This notice confirms that your password was changed. If you did not change your password, please contact the Site Administrator.', 'reset_password_mail_to_user_template', 'flr-blocks' );
+				return _x( 'Hello {{username}}, <br> This notice confirms that your password was changed. If you did not change your password, please contact the Site Administrator.', 'reset_password_mail_to_user_template', 'frontend-login-and-registration-blocks' );
 				break;
 
 			case "reset_password_request_mail_to_user_template":
-				return _x( 'Hello {{username}}, <br> You can change your password from the link below <br> {{reset_link}} <br> Thanks for your attention.', 'reset_password_request_mail_to_user_template', 'flr-blocks' );
+				return _x( 'Hello {{username}}, <br> You can change your password from the link below <br> {{reset_link}} <br> Thanks for your attention.', 'reset_password_request_mail_to_user_template', 'frontend-login-and-registration-blocks' );
 				break;
 
 			default:

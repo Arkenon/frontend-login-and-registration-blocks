@@ -56,7 +56,7 @@ export const FlrBorderControl = ({ options, attributeName }) => {
 	return (
 		<BorderControl
 			colors={colors}
-			label={__('Button Border', 'flr-blocks')}
+			label={__('Button Border', 'frontend-login-and-registration-blocks')}
 			onChange={(newButtonBorder) =>{
 
 				if(newButtonBorder !=undefined){

@@ -10,7 +10,7 @@ export default function Edit(props) {
 
 		<a {...blockProps}>
 
-			{__('Logout','flr-blocks')}
+			{__('Logout','frontend-login-and-registration-blocks')}
 
 		</a>
 

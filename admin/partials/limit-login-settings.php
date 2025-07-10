@@ -27,11 +27,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			<th scope="row">
 
 				<label for="flr_blocks_enable_limit_login">
-					<?php echo esc_html_x( "Enable limit login attempts", "enable_limit_login", "flr-blocks" ); ?>
+					<?php echo esc_html_x( "Enable limit login attempts", "enable_limit_login", "frontend-login-and-registration-blocks" ); ?>
 				</label>
 
 				<p class="flr-blocks-admin-settings-description">
-					<?php echo esc_html_x( "Protect your web site from too many unsuccessful login attempts.", "enable_limit_login_description", "flr-blocks" ); ?>
+					<?php echo esc_html_x( "Protect your web site from too many unsuccessful login attempts.", "enable_limit_login_description", "frontend-login-and-registration-blocks" ); ?>
 				</p>
 
 			</th>
@@ -39,9 +39,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 				<select name="flr_blocks_enable_limit_login" id="flr_blocks_enable_limit_login">
 
-					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "flr-blocks" ) ?></option>
-					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_enable_limit_login' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "flr-blocks" ); ?></option>
-					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_enable_limit_login' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "flr-blocks" ); ?></option>
+					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "frontend-login-and-registration-blocks" ) ?></option>
+					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_enable_limit_login' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "frontend-login-and-registration-blocks" ); ?></option>
+					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_enable_limit_login' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "frontend-login-and-registration-blocks" ); ?></option>
 
 				</select>
 
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			<th scope="row">
 
 				<label for="flr_blocks_limit_login_max_attempts">
-					<?php echo esc_html_x("Maximum number of attempts", "limit_login_max_attempt", "flr-blocks" ); ?>
+					<?php echo esc_html_x("Maximum number of attempts", "limit_login_max_attempt", "frontend-login-and-registration-blocks" ); ?>
 				</label>
 
 			</th>
@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			<th scope="row">
 
 				<label for="flr_blocks_limit_login_lockout_duration">
-					<?php echo esc_html_x( "Lockout duration (as seconds)", "limit_login_lockout_duration", "flr-blocks" ); ?>
+					<?php echo esc_html_x( "Lockout duration (as seconds)", "limit_login_lockout_duration", "frontend-login-and-registration-blocks" ); ?>
 				</label>
 
 			</th>

@@ -35,14 +35,14 @@ $view = '<div '.get_block_wrapper_attributes().'>
 
 							if ( $form_attributes['showLabels'] ) {
 
-								$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="resetpass_pwd">' . esc_html_x( "New Password","new_password_input_text", "flr-blocks" ) . '</label>';
+								$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="resetpass_pwd">' . esc_html_x( "New Password","new_password_input_text", "frontend-login-and-registration-blocks" ) . '</label>';
 							}
 
 							$view .= '<input class="flr-blocks-input-control" id="resetpass_pwd" name="resetpass_pwd" type="password" required style=' . $input_style . ' placeholder="';
 
 							if ( $form_attributes['showPlaceholders'] ) {
 
-								$view .= esc_attr_x( "Enter your new password", "new_password_placeholder_text", "flr-blocks" );
+								$view .= esc_attr_x( "Enter your new password", "new_password_placeholder_text", "frontend-login-and-registration-blocks" );
 
 							}
 
@@ -56,14 +56,14 @@ $view = '<div '.get_block_wrapper_attributes().'>
 
 							if ( $form_attributes['showLabels'] ) {
 
-								$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="resetpass_pwd_again">' . esc_html_x( "New Password Again", "new_password_again_input_text", "flr-blocks" ) . '</label>';
+								$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="resetpass_pwd_again">' . esc_html_x( "New Password Again", "new_password_again_input_text", "frontend-login-and-registration-blocks" ) . '</label>';
 							}
 
 							$view .= '<input class="flr-blocks-input-control" id="resetpass_pwd_again" name="resetpass_pwd_again" type="password" required style=' . $input_style . ' placeholder="';
 
 							if ( $form_attributes['showPlaceholders'] ) {
 
-								$view .= esc_attr_x( "Enter your new password again", "new_password_again_placeholder_text", "flr-blocks" );
+								$view .= esc_attr_x( "Enter your new password again", "new_password_again_placeholder_text", "frontend-login-and-registration-blocks" );
 
 							}
 
@@ -79,10 +79,10 @@ $view = '<div '.get_block_wrapper_attributes().'>
 
 			$view .= '<div class="flr-blocks-form-row">
 							<button style="'.$button_style.'" type="submit" id="flr-blocks-reset-password-submit" class="flr-blocks-reset-password-btn flr-blocks-btn wp-block-button__link wp-element-button">
-								' . esc_html_x( "Change Password", "submit_reset_password_button_text", "flr-blocks" ) . '
+								' . esc_html_x( "Change Password", "submit_reset_password_button_text", "frontend-login-and-registration-blocks" ) . '
 							</button>
 						</div>
-				<div id="flr-blocks-reset-password-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...","loading_text", "flr-blocks" ) . '</div>';
+				<div id="flr-blocks-reset-password-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...","loading_text", "frontend-login-and-registration-blocks" ) . '</div>';
 		$view .= '</form>
 	<div id="flr-blocks-reset-password-form-result"></div>
 </div>';

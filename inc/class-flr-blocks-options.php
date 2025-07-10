@@ -11,7 +11,9 @@
 
 namespace FLR_BLOCKS;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 class Flr_Blocks_Options {
 
@@ -59,30 +61,30 @@ class Flr_Blocks_Options {
 	public function flr_blocks_register_settings() {
 
 		// General settings
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_redirect_after_login' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_login_page' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_redirect_from_wp_login_admin' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_lost_password_page' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_register_page' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_activation_page' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_user_settings_page' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_terms_and_conditions_page' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_privacy_policy_page' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_has_activation' );
-		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_has_user_dashboard' );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_redirect_after_login', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_login_page', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_redirect_from_wp_login_admin', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_lost_password_page', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_register_page', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_activation_page', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_user_settings_page', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_terms_and_conditions_page', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_privacy_policy_page', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_has_activation', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-general-settings-group', 'flr_blocks_has_user_dashboard', [ 'sanitize_callback' => 'sanitize_text_field' ] );
 
 		// E-Mail settings
-		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_enable_mails' );
-		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_user' );
-		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_user_with_activation' );
-		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_admin' );
-		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_reset_request_mail_to_user' );
-		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_reset_password_mail_to_user' );
+		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_enable_mails', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_user', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_user_with_activation', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_register_mail_to_admin', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_reset_request_mail_to_user', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-mail-settings-group', 'flr_blocks_reset_password_mail_to_user', [ 'sanitize_callback' => 'sanitize_text_field' ] );
 
 		// Limit login attempt settings
-		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_enable_limit_login' );
-		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_limit_login_max_attempts' );
-		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_limit_login_lockout_duration' );
+		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_enable_limit_login', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_limit_login_max_attempts', [ 'sanitize_callback' => 'intval' ] );
+		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_limit_login_lockout_duration', [ 'sanitize_callback' => 'intval' ] );
 
 	}
 

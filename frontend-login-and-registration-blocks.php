@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: Frontend Login and Registration Blocks
+ * Plugin Name: Login, Registration and Lost Password Blocks
  * Plugin URI: https://frontendlogin.iyziweb.site/
- * Description: Do login, register and lost password operations from frontend with Gutenberg blocks. Easily customize forms and add to your pages.
+ * Description: A collection of Gutenberg blocks for login, registration and lost password forms and more...
  * Requires at least: 6.1
  * Requires PHP: 7.4
- * Version: 1.0.8
+ * Version: 1.0.9
  * Author: Kadim Gültekin
  * Author URI: https://github.com/Arkenon
- * Text Domain: flr-blocks
+ * Text Domain: frontend-login-and-registration-blocks
  * Domain Path: /languages
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

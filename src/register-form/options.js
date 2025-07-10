@@ -15,7 +15,7 @@ const Options = ({options}) => {
 
 			<div style={{padding:"20px"}}>
 				<ToggleControl
-					label={__('Show Terms and Conditions / Privacy Policy Checkbox', 'flr-blocks')}
+					label={__('Show Terms and Conditions / Privacy Policy Checkbox', 'frontend-login-and-registration-blocks')}
 					help={attributes.showTermsAndPrivacy ? 'Show' : 'Hide'}
 					checked={attributes.showTermsAndPrivacy}
 					onChange={(val) =>

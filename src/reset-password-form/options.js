@@ -25,10 +25,10 @@ const Options = ({options}) => {
 			<ButtonSettings options={options} />
 
 			<Panel>
-				<PanelBody title={__('Description Settings', 'flr-blocks')} initialOpen={false}>
+				<PanelBody title={__('Description Settings', 'frontend-login-and-registration-blocks')} initialOpen={false}>
 					<PanelRow>
 						<ToggleControl
-							label={__('Show Description', 'flr-blocks')}
+							label={__('Show Description', 'frontend-login-and-registration-blocks')}
 							help={
 								attributes.showPlaceholders
 									? 'Show'

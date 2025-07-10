@@ -27,7 +27,7 @@ class Flr_Blocks_I18n {
 	public function load_flr_blocks_textdomain(): void {
 
 		load_plugin_textdomain(
-			"flr-blocks",
+			"frontend-login-and-registration-blocks",
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
@@ -40,7 +40,7 @@ class Flr_Blocks_I18n {
 	 * @since    1.0.0
 	 */
 	/*public function load_block_translations(): void {
-		wp_set_script_translations( 'frontend-login-with-gutenberg-blocks-login-form-editor-script-js', 'flr-blocks' );
+		wp_set_script_translations( 'frontend-login-with-gutenberg-blocks-login-form-editor-script-js', 'frontend-login-and-registration-blocks' );
 
 	}*/
 

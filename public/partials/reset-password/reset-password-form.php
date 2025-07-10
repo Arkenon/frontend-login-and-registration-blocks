@@ -7,7 +7,7 @@ use FLR_BLOCKS\Flr_Blocks_Helper;
 
 if ( is_user_logged_in() ) {
 
-	$view = '<div style="text-align: center;">' . esc_html_x( "This form is only shown to users who are not logged in.", "alert_for_non_logged_in_users", "flr-blocks" ) . '</div>';
+	$view = '<div style="text-align: center;">' . esc_html_x( "This form is only shown to users who are not logged in.", "alert_for_non_logged_in_users", "frontend-login-and-registration-blocks" ) . '</div>';
 
 	return;
 
@@ -27,7 +27,7 @@ if ( Flr_Blocks_Helper::sanitize( 'reset', 'get', 'text' ) === 'in-progress' ) {
 	} else {
 
 		$view = '<p class="alert alert-danger">
-					<strong class="font-s-14">' . esc_html_x( "Wrong reset password link. Please check your reset link sent to your e-mail address or send a new request.", "wrong_reset_password_link", "flr-blocks" ) . '</strong>
+					<strong class="font-s-14">' . esc_html_x( "Wrong reset password link. Please check your reset link sent to your e-mail address or send a new request.", "wrong_reset_password_link", "frontend-login-and-registration-blocks" ) . '</strong>
 				 </p>';
 
 	}
