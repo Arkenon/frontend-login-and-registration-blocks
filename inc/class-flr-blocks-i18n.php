@@ -33,15 +33,4 @@ class Flr_Blocks_I18n {
 		);
 
 	}
-
-	/**
-	 * Set translations for custom blocks
-	 *
-	 * @since    1.0.0
-	 */
-	/*public function load_block_translations(): void {
-		wp_set_script_translations( 'frontend-login-with-gutenberg-blocks-login-form-editor-script-js', 'frontend-login-and-registration-blocks' );
-
-	}*/
-
 }

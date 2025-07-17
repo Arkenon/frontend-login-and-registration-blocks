@@ -19,6 +19,7 @@ class Flr_Blocks_Block_Handler {
 
 	public function load_flr_blocks() {
 		add_action( 'init', [ $this, 'register_blocks' ] );
+		add_action('enqueue_block_editor_assets', [$this, 'set_script_translations']);
 	}
 
 	/**
@@ -28,48 +29,45 @@ class Flr_Blocks_Block_Handler {
 	 */
 	public function register_blocks() {
 
-		//Login Form Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/login-form',
-			[
-				'render_callback' => [ $this, 'login_form_render_callback' ]
-			] );
+		$blocks = [
+			'login-form' => 'login_form_render_callback',
+			'register-form' => 'register_form_render_callback',
+			'reset-password-form' => 'reset_password_form_render_callback',
+			'user-activation' => 'user_activation_render_callback',
+			'welcome-card' => 'welcome_card_render_callback',
+			'user-settings-form' => 'user_settings_render_callback',
+			'logout-nav-menu-item' => 'logout_menu_item_render_callback'
+		];
 
-		//Register Form Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/register-form',
-			[
-				'render_callback' => [ $this, 'register_form_render_callback' ]
-			] );
+		foreach ($blocks as $block_name => $callback_method) {
+			register_block_type(
+				plugin_dir_path(dirname(__FILE__)) . '/build/' . $block_name,
+				[
+					'render_callback' => [$this, $callback_method]
+				]
+			);
+		}
+	}
 
-		//Lost Password Form Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/reset-password-form',
-			[
-				'render_callback' => [ $this, 'reset_password_form_render_callback' ]
-			] );
+	public function set_script_translations() {
+		$blocks = [
+			'login-form',
+			'register-form',
+			'reset-password-form',
+			'user-activation',
+			'welcome-card',
+			'user-settings-form',
+			'logout-nav-menu-item'
+		];
 
-		//User Activation Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/user-activation',
-			[
-				'render_callback' => [ $this, 'user_activation_render_callback' ]
-			] );
-
-		//Welcome Card Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/welcome-card',
-			[
-				'render_callback' => [ $this, 'welcome_card_render_callback' ]
-			] );
-
-		//User Settings Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/user-settings-form',
-			[
-				'render_callback' => [ $this, 'user_settings_render_callback' ]
-			] );
-
-		//Logout Menu Item Block
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . '/build/logout-nav-menu-item',
-			[
-				'render_callback' => [ $this, 'logout_menu_item_render_callback' ]
-			] );
-
+		foreach ($blocks as $block) {
+			$script_handle = "frontend-login-with-gutenberg-blocks-{$block}-editor-script";
+			wp_set_script_translations(
+				$script_handle,
+				'frontend-login-and-registration-blocks',
+				plugin_dir_path(dirname(__FILE__)) . 'languages'
+			);
+		}
 	}
 
 	/**
