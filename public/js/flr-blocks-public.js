@@ -16,6 +16,9 @@ jQuery(document).ready(function ($) {
 			contentType: false,
 			dataType: 'json',
 			data: formData,
+			xhrFields: {
+				withCredentials: true
+			},
 			beforeSend: function () {
 				formBeforeSend(formResult, submitBtn, loadingBtn)
 			},

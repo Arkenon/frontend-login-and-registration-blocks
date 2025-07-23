@@ -76,8 +76,6 @@ class Flr_Blocks_Login {
 	 */
 	public function login_handle_ajax_callback() {
 
-		header( 'Access-Control-Allow-Origin: *' );
-
 		if ( get_option( 'flr_blocks_enable_limit_login' ) === 'yes' && $this->get_login_attempts_count()['login_attempts'] >= $this->get_limit_login_options()['max_attempts'] ) {
 
 			$this->login_attempts_error();
@@ -103,6 +101,9 @@ class Flr_Blocks_Login {
 		} else {
 
 			wp_set_current_user( $user->ID, $user->user_login );
+			wp_clear_auth_cookie();
+			wp_set_current_user( $user->ID );
+			wp_set_auth_cookie( $user->ID, $credentials['remember'], is_ssl() );
 
 			if ( get_option( 'flr_blocks_has_activation' ) === 'yes' ) {
 

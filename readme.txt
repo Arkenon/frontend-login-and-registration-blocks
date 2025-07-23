@@ -4,7 +4,7 @@ Tags:              block, block editor, gutenberg, login form, register form
 Requires at least: 6.1
 Tested up to:      6.8
 Requires PHP:      7.4
-Stable tag:        1.1.0
+Stable tag:        1.1.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,10 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 
 == Changelog ==
+
+= 1.1.0 =
+* Set authentication cookie after successful login
+* Add xhrFields ( withCredentials: true) to ajax requests
 
 = 1.1.0 =
 * Translation files updated
