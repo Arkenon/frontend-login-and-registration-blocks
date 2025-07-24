@@ -47,8 +47,7 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 == Changelog ==
 
-= 1.1.0 =
-* Set authentication cookie after successful login
+= 1.1.1 =
 * Add xhrFields ( withCredentials: true) to ajax requests
 
 = 1.1.0 =

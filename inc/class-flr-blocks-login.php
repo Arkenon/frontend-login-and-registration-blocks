@@ -101,9 +101,6 @@ class Flr_Blocks_Login {
 		} else {
 
 			wp_set_current_user( $user->ID, $user->user_login );
-			wp_clear_auth_cookie();
-			wp_set_current_user( $user->ID );
-			wp_set_auth_cookie( $user->ID, $credentials['remember'], is_ssl() );
 
 			if ( get_option( 'flr_blocks_has_activation' ) === 'yes' ) {
 
