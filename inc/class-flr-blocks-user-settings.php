@@ -58,9 +58,21 @@ class Flr_Blocks_User_Settings {
 	 */
 	public function flr_blocks_user_settings_handle_ajax_callback() {
 
-		header( 'Access-Control-Allow-Origin: *' );
+		// Verify nonce for security
+		\check_ajax_referer( 'flrblocksusersettingsupdatehandle', 'security' );
 
 		$user_id = Flr_Blocks_Helper::sanitize( 'user_id', 'post', 'id' );
+		$current_user_id = \get_current_user_id();
+
+		// Critical authorization check: users can only edit their own profile
+		// unless they have edit_users capability (administrators)
+		if ( $user_id !== $current_user_id && !\current_user_can('edit_users') ) {
+			\wp_send_json( array(
+				'status'  => false,
+				'message' => \esc_html__( 'Unauthorized access. You can only edit your own profile.', 'frontend-login-and-registration-blocks' )
+			) );
+			\wp_die();
+		}
 
 		$user_info = get_userdata( $user_id );
 
