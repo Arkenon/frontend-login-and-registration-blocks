@@ -133,7 +133,8 @@ class Flr_Blocks_Registration {
 
 			if ( get_option( "flr_blocks_has_activation" ) === 'yes' ) {
 
-				$code = sha1( $email . time() );
+				// Generate cryptographically secure activation code
+				$code = wp_generate_password( 32, false );
 
 				$add_user_activation      = add_user_meta( $newuser, 'flr_blocks_user_activation', 'not_activated' );
 				$add_user_activation_code = add_user_meta( $newuser, 'flr_blocks_user_activation_code', $code );
