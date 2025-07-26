@@ -173,14 +173,56 @@ class Flr_Blocks_Login {
 	 */
 	public function get_login_attempts_count(): array {
 
-		$get_remote_addr = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
-
-		$user_ip = preg_replace( '/[^0-9., ]/', '', $get_remote_addr );
+		$user_ip = $this->get_real_user_ip();
 
 		return [
 			'user_ip'        => $user_ip,
 			'login_attempts' => get_transient( "login_attempts_" . $user_ip )
 		];
+	}
+
+	/**
+	 * Get real user IP address (handles proxies and load balancers)
+	 *
+	 * @return string User IP address
+	 * @since 1.0.0
+	 */
+	private function get_real_user_ip(): string {
+
+		// Check for various HTTP headers that may contain the real IP
+		$ip_headers = [
+			'HTTP_CF_CONNECTING_IP',     // Cloudflare
+			'HTTP_CLIENT_IP',            // Proxy
+			'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+			'HTTP_X_FORWARDED',          // Proxy
+			'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+			'HTTP_FORWARDED_FOR',        // Proxy
+			'HTTP_FORWARDED',            // Proxy
+			'REMOTE_ADDR'                // Standard
+		];
+
+		foreach ( $ip_headers as $header ) {
+			if ( ! empty( $_SERVER[ $header ] ) ) {
+				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $header ] ) );
+
+				// Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
+				if ( strpos( $ip, ',' ) !== false ) {
+					$ip = trim( explode( ',', $ip )[0] );
+				}
+
+				// Validate IP address and exclude private ranges for security
+				if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+					return $ip;
+				}
+
+				// If public IP validation fails, use basic validation for internal networks
+				if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+					return $ip;
+				}
+			}
+		}
+
+		return '0.0.0.0'; // Fallback if no valid IP found
 	}
 
 	/**
