@@ -275,7 +275,6 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 		$plugin_public = new Flr_Blocks_Public();
 
 		self::add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		self::add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 

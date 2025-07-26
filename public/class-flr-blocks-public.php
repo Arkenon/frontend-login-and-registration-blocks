@@ -35,33 +35,11 @@ class Flr_Blocks_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/css/flr-blocks-public.css', array(), FLR_BLOCKS_VERSION, 'all' );
+		\wp_enqueue_style( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/css/flr-blocks-public.css', array(), FLR_BLOCKS_VERSION, 'all' );
 
 	}
 
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() : void {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/js/flr-blocks-public.js', array(), FLR_BLOCKS_VERSION, array('strategy' => 'defer') );
-		wp_localize_script( "flr-blocks-public", 'flr_blocks_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
-
-	}
 
 	/**
 	 * Get a form from defined path
