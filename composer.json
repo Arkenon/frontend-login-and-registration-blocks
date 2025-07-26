@@ -1,0 +1,16 @@
+{
+    "name": "vegetable-bits/frontend-login-and-registration-blocks",
+    "type": "wordpress-plugin",
+    "description": "Login, Registration and Lost Password Blocks",
+    "license": "GPL-2.0+",
+    "scripts": {
+        "post-install-cmd": [
+            "npm install",
+            "npm run build"
+        ],
+        "post-update-cmd": [
+            "npm install",
+            "npm run build"
+        ]
+    }
+}
