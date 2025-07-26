@@ -120,9 +120,8 @@ class Flr_Blocks_Helper {
 
 		$view = "";
 
-		//Get attributes
-		extract( $form_attributes );
-
+		// Note: $form_attributes is available as array to the included view files
+		// No need for dangerous extract() - view files use $form_attributes['key'] directly
 		//Include php file which has a variable named $view and equals to html output
 		include_once plugin_dir_path( dirname( __FILE__ ) ) . $path;
 
