@@ -1,185 +1,195 @@
-jQuery(document).ready(function ($) {
-	$('#flr-blocks-login-form').on('submit', function (e) {
+/* global flr_blocks_ajax_object */
+/* eslint-disable camelcase */
+
+// Login form
+const loginForm = document.getElementById('flr-blocks-login-form');
+if (loginForm) {
+	loginForm.addEventListener('submit', function (e) {
 		e.preventDefault();
-		const form = $(this);
-		const formData = new FormData(
-			document.getElementById('flr-blocks-login-form')
-		);
-		const submitBtn = form.find('#flr-blocks-login-submit');
-		const formResult = $('#flr-blocks-login-form-result');
-		const loadingBtn = $('#flr-blocks-login-loading');
+		const form = this;
+		const formData = new FormData(form);
+		const submitBtn = form.querySelector('#flr-blocks-login-submit');
+		const formResult = document.getElementById('flr-blocks-login-form-result');
+		const loadingBtn = document.getElementById('flr-blocks-login-loading');
 
-		$.ajax({
-			url: flr_blocks_ajax_object.ajax_url,
-			type: 'POST',
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			data: formData,
-			xhrFields: {
-				withCredentials: true
-			},
-			beforeSend: function () {
-				formBeforeSend(formResult, submitBtn, loadingBtn)
-			},
-			success: function (response) {
-				formSuccess(response, formResult, submitBtn, loadingBtn)
-			},
-			error: function (xhr) {
-				formError(xhr, formResult)
-			},
-		});
+		fetch(flr_blocks_ajax_object.ajax_url, {
+			method: 'POST',
+			body: formData,
+			credentials: 'include'
+		})
+			.then(response => response.json())
+			.then(response => {
+				formSuccess(response, formResult, submitBtn, loadingBtn);
+			})
+			.catch(error => {
+				formError(error, formResult, submitBtn, loadingBtn);
+			});
+
+		formBeforeSend(formResult, submitBtn, loadingBtn);
 	});
+}
 
-	//Lost password request form
-	$('#flr-blocks-reset-pass-request-form').on('submit', function (e) {
+// Lost password request form
+const resetPassRequestForm = document.getElementById('flr-blocks-reset-pass-request-form');
+if (resetPassRequestForm) {
+	resetPassRequestForm.addEventListener('submit', function (e) {
 		e.preventDefault();
-		const form = $(this);
-		const formData = new FormData(
-			document.getElementById('flr-blocks-reset-pass-request-form')
-		);
-		const submitBtn = form.find('#flr-blocks-reset-request-submit');
-		const formResult = $('#flr-blocks-reset-request-form-result');
-		const loadingBtn = $('#flr-blocks-reset-request-loading');
+		const form = this;
+		const formData = new FormData(form);
+		const submitBtn = form.querySelector('#flr-blocks-reset-request-submit');
+		const formResult = document.getElementById('flr-blocks-reset-request-form-result');
+		const loadingBtn = document.getElementById('flr-blocks-reset-request-loading');
 
-		$.ajax({
-			url: flr_blocks_ajax_object.ajax_url,
-			type: 'POST',
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			data: formData,
-			beforeSend: function () {
-				formBeforeSend(formResult, submitBtn, loadingBtn)
-			},
-			success: function (response) {
-				formSuccess(response, formResult, submitBtn, loadingBtn)
-			},
-			error: function (xhr) {
-				formError(xhr, formResult)
-			},
-		});
+		fetch(flr_blocks_ajax_object.ajax_url, {
+			method: 'POST',
+			body: formData,
+			credentials: 'include'
+		})
+			.then(response => response.json())
+			.then(response => {
+				formSuccess(response, formResult, submitBtn, loadingBtn);
+			})
+			.catch(error => {
+				formError(error, formResult, submitBtn, loadingBtn);
+			});
+
+		formBeforeSend(formResult, submitBtn, loadingBtn);
 	});
+}
 
-	// Reset Password Form
-	$('#flr-blocks-reset-pass-form').on('submit', function (e) {
+// Reset Password Form
+const resetPassForm = document.getElementById('flr-blocks-reset-pass-form');
+if (resetPassForm) {
+	resetPassForm.addEventListener('submit', function (e) {
 		e.preventDefault();
-		const form = $(this);
-		const formData = new FormData(
-			document.getElementById('flr-blocks-reset-pass-form')
-		);
-		const submitBtn = form.find('#flr-blocks-reset-password-submit');
-		const formResult = $('#flr-blocks-reset-password-form-result');
-		const loadingBtn = $('#flr-blocks-reset-password-loading');
+		const form = this;
+		const formData = new FormData(form);
+		const submitBtn = form.querySelector('#flr-blocks-reset-password-submit');
+		const formResult = document.getElementById('flr-blocks-reset-password-form-result');
+		const loadingBtn = document.getElementById('flr-blocks-reset-password-loading');
 
-		$.ajax({
-			url: flr_blocks_ajax_object.ajax_url,
-			type: 'POST',
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			data: formData,
-			beforeSend: function () {
-				formBeforeSend(formResult, submitBtn, loadingBtn)
-			},
-			success: function (response) {
-				formSuccess(response, formResult, submitBtn, loadingBtn)
-			},
-			error: function (xhr) {
-				formError(xhr, formResult)
-			},
-		});
+		fetch(flr_blocks_ajax_object.ajax_url, {
+			method: 'POST',
+			body: formData,
+			credentials: 'include'
+		})
+			.then(response => response.json())
+			.then(response => {
+				formSuccess(response, formResult, submitBtn, loadingBtn);
+			})
+			.catch(error => {
+				formError(error, formResult, submitBtn, loadingBtn);
+			});
+
+		formBeforeSend(formResult, submitBtn, loadingBtn);
 	});
+}
 
-	// Registration Form
-	$('#flr-blocks-register-form').on('submit', function (e) {
+// Registration Form
+const registerForm = document.getElementById('flr-blocks-register-form');
+if (registerForm) {
+	registerForm.addEventListener('submit', function (e) {
 		e.preventDefault();
-		const form = $(this);
-		const formData = new FormData(
-			document.getElementById('flr-blocks-register-form')
-		);
-		const submitBtn = form.find('#flr-blocks-register-submit');
-		const formResult = $('#flr-blocks-register-form-result');
-		const loadingBtn = $('#flr-blocks-register-loading');
+		const form = this;
+		const formData = new FormData(form);
+		const submitBtn = form.querySelector('#flr-blocks-register-submit');
+		const formResult = document.getElementById('flr-blocks-register-form-result');
+		const loadingBtn = document.getElementById('flr-blocks-register-loading');
 
-		$.ajax({
-			url: flr_blocks_ajax_object.ajax_url,
-			type: 'POST',
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			data: formData,
-			beforeSend: function () {
-				formBeforeSend(formResult, submitBtn, loadingBtn)
-			},
-			success: function (response) {
-				formSuccess(response, formResult, submitBtn, loadingBtn)
-			},
-			error: function (xhr) {
-				formError(xhr, formResult)
-			},
-		});
+		fetch(flr_blocks_ajax_object.ajax_url, {
+			method: 'POST',
+			body: formData,
+			credentials: 'include'
+		})
+			.then(response => response.json())
+			.then(response => {
+				formSuccess(response, formResult, submitBtn, loadingBtn);
+			})
+			.catch(error => {
+				formError(error, formResult, submitBtn, loadingBtn);
+			});
+
+		formBeforeSend(formResult, submitBtn, loadingBtn);
 	});
+}
 
-	// User Settings Form
-	$('#flr-blocks-user-settings-form').on('submit', function (e) {
+// User Settings Form
+const userSettingsForm = document.getElementById('flr-blocks-user-settings-form');
+if (userSettingsForm) {
+	userSettingsForm.addEventListener('submit', function (e) {
 		e.preventDefault();
-		const form = $(this);
-		const formData = new FormData(
-			document.getElementById('flr-blocks-user-settings-form')
-		);
-		const submitBtn = form.find('#flr-blocks-user-settings-submit');
-		const formResult = $('#flr-blocks-user-settings-form-result');
-		const loadingBtn = $('#flr-blocks-user-settings-loading');
+		const form = this;
+		const formData = new FormData(form);
+		const submitBtn = form.querySelector('#flr-blocks-user-settings-submit');
+		const formResult = document.getElementById('flr-blocks-user-settings-form-result');
+		const loadingBtn = document.getElementById('flr-blocks-user-settings-loading');
 
-		$.ajax({
-			url: flr_blocks_ajax_object.ajax_url,
-			type: 'POST',
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			data: formData,
-			beforeSend: function () {
-				formBeforeSend(formResult, submitBtn, loadingBtn)
-			},
-			success: function (response) {
-				formSuccess(response, formResult, submitBtn, loadingBtn)
-			},
-			error: function (xhr) {
-				formError(xhr, formResult)
-			},
-		});
+		fetch(flr_blocks_ajax_object.ajax_url, {
+			method: 'POST',
+			body: formData,
+			credentials: 'include'
+		})
+			.then(response => response.json())
+			.then(response => {
+				formSuccess(response, formResult, submitBtn, loadingBtn);
+			})
+			.catch(error => {
+				formError(error, formResult, submitBtn, loadingBtn);
+			});
+
+		formBeforeSend(formResult, submitBtn, loadingBtn);
 	});
+}
 
-	function formBeforeSend(form_result, submitBtn, loadingBtn) {
-		loadingBtn.removeClass('flr-blocks-hide');
-		form_result.html('');
-		submitBtn.prop('disabled', true);
+function formBeforeSend(formResult, submitBtn, loadingBtn) {
+	if (loadingBtn) {
+		loadingBtn.classList.remove('flr-blocks-hide');
 	}
+	if (formResult) {
+		formResult.innerHTML = '';
+		formResult.classList.remove('flr-blocks-success', 'flr-blocks-danger');
+	}
+	if (submitBtn) {
+		submitBtn.disabled = true;
+	}
+}
 
-	function formSuccess(response, form_result, submitBtn, loadingBtn) {
+function formSuccess(response, formResult, submitBtn, loadingBtn) {
+	if (formResult) {
 		if (response.status) {
-			form_result.addClass('flr-blocks-success');
+			formResult.classList.add('flr-blocks-success');
 		} else {
-			form_result.addClass('flr-blocks-danger');
+			formResult.classList.add('flr-blocks-danger');
 		}
-
-		form_result.html(response.message);
-
-		loadingBtn.addClass('flr-blocks-hide');
-
-		submitBtn.prop('disabled', false);
-
-		if (response.return_url != null) {
-			window.location.href = response.return_url;
-		}
+		formResult.innerHTML = response.message;
 	}
 
-	function formError(xhr, form_result){
-		form_result.addClass('flr-blocks-danger');
-		form_result.html(xhr.responseText);
+	if (loadingBtn) {
+		loadingBtn.classList.add('flr-blocks-hide');
 	}
 
-});
+	if (submitBtn) {
+		submitBtn.disabled = false;
+	}
 
+	if (response.return_url !== null && response.return_url !== undefined) {
+		window.location.href = response.return_url;
+	}
+}
 
+function formError(error, formResult, submitBtn, loadingBtn) {
+	if (formResult) {
+		formResult.classList.add('flr-blocks-danger');
+		formResult.innerHTML = 'An error occurred. Please try again.';
+	}
+
+	if (loadingBtn) {
+		loadingBtn.classList.add('flr-blocks-hide');
+	}
+
+	if (submitBtn) {
+		submitBtn.disabled = false;
+	}
+
+	console.error('Form submission error:', error);
+}

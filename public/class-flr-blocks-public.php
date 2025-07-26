@@ -58,8 +58,8 @@ class Flr_Blocks_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/js/flr-blocks-public.js', array( 'jquery' ), FLR_BLOCKS_VERSION, false );
-		wp_localize_script( 'jquery', 'flr_blocks_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_enqueue_script( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/js/flr-blocks-public.js', array(), FLR_BLOCKS_VERSION, array('strategy' => 'defer') );
+		wp_localize_script( "flr-blocks-public", 'flr_blocks_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 	}
 
