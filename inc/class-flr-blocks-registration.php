@@ -91,6 +91,18 @@ class Flr_Blocks_Registration {
 
 		}
 
+		// Validate password strength
+		if ( ! empty( $password ) ) {
+			$password_validation = Flr_Blocks_Helper::validate_password_strength( $password );
+			if ( ! $password_validation['valid'] ) {
+				wp_send_json( array(
+					'status'  => false,
+					'message' => $password_validation['message']
+				) );
+				wp_die();
+			}
+		}
+
 		if ( username_exists( $username ) ) {
 
 			wp_send_json( array(

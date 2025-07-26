@@ -110,6 +110,16 @@ class Flr_Blocks_User_Settings {
 
 						} else {
 
+							// Validate new password strength
+							$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
+							if ( ! $password_validation['valid'] ) {
+								wp_send_json( array(
+									'status'  => false,
+									'message' => $password_validation['message']
+								) );
+								wp_die();
+							}
+
 							wp_set_password( $new_password, $user_id );
 
 							wp_send_json( array(

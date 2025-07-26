@@ -93,6 +93,80 @@ class Flr_Blocks_Helper {
 	}
 
 	/**
+	 * Validate password strength
+	 *
+	 * @param string $password Password to validate
+	 * @param int $min_length Minimum password length (default: 8)
+	 *
+	 * @return array Validation result with status and message
+	 * @since 1.0.0
+	 */
+	public static function validate_password_strength( string $password, int $min_length = 8 ): array {
+
+		// Check minimum length
+		if ( strlen( $password ) < $min_length ) {
+			return [
+				'valid' => false,
+				'message' => sprintf(
+					/* translators: %d is the minimum password length */
+					\esc_html__( 'Password must be at least %d characters long.', 'frontend-login-and-registration-blocks' ),
+					$min_length
+				)
+			];
+		}
+
+		// Check for at least one uppercase letter
+		if ( ! preg_match( '/[A-Z]/', $password ) ) {
+			return [
+				'valid' => false,
+				'message' => \esc_html__( 'Password must contain at least one uppercase letter.', 'frontend-login-and-registration-blocks' )
+			];
+		}
+
+		// Check for at least one lowercase letter
+		if ( ! preg_match( '/[a-z]/', $password ) ) {
+			return [
+				'valid' => false,
+				'message' => \esc_html__( 'Password must contain at least one lowercase letter.', 'frontend-login-and-registration-blocks' )
+			];
+		}
+
+		// Check for at least one number
+		if ( ! preg_match( '/[0-9]/', $password ) ) {
+			return [
+				'valid' => false,
+				'message' => \esc_html__( 'Password must contain at least one number.', 'frontend-login-and-registration-blocks' )
+			];
+		}
+
+		// Check for at least one special character
+		if ( ! preg_match( '/[^A-Za-z0-9]/', $password ) ) {
+			return [
+				'valid' => false,
+				'message' => \esc_html__( 'Password must contain at least one special character.', 'frontend-login-and-registration-blocks' )
+			];
+		}
+
+		// Check for common weak passwords
+		$weak_passwords = [
+			'password', 'password123', '123456', '123456789', 'qwerty', 'abc123',
+			'password1', 'admin', 'test', 'user', 'guest', 'demo'
+		];
+
+		if ( in_array( strtolower( $password ), $weak_passwords, true ) ) {
+			return [
+				'valid' => false,
+				'message' => \esc_html__( 'This password is too common. Please choose a different password.', 'frontend-login-and-registration-blocks' )
+			];
+		}
+
+		return [
+			'valid' => true,
+			'message' => \esc_html__( 'Password strength is good.', 'frontend-login-and-registration-blocks' )
+		];
+	}
+
+	/**
 	 * Print a php page as a view
 	 * To return a view uses include_once() function
 	 *
