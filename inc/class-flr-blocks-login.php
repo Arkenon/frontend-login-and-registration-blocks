@@ -142,12 +142,53 @@ class Flr_Blocks_Login {
 	 */
 	private function login_success_response(): void {
 
+		// Enhanced session security after successful login
+		$this->enhance_session_security();
+
+		// Clear login attempt counters on successful login
+		$user_ip = $this->get_real_user_ip();
+		delete_transient( "login_attempts_" . $user_ip );
+
 		wp_send_json( array(
 			'status'     => true,
 			'return_url' => site_url( get_option( 'flr_blocks_redirect_after_login' ) ) ?? null,
 			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "frontend-login-and-registration-blocks" )
 		) );
 
+	}
+
+	/**
+	 * Enhance session security after login
+	 *
+	 * @since 1.0.0
+	 */
+	private function enhance_session_security(): void {
+
+		// Regenerate session ID to prevent session fixation
+		if ( session_status() === PHP_SESSION_ACTIVE ) {
+			session_regenerate_id( true );
+		}
+
+		// Set secure session parameters
+		if ( ! headers_sent() ) {
+			// HttpOnly flag prevents XSS attacks on session cookies
+			ini_set( 'session.cookie_httponly', 1 );
+
+			// Secure flag for HTTPS sites
+			if ( is_ssl() ) {
+				ini_set( 'session.cookie_secure', 1 );
+			}
+
+			// SameSite attribute for CSRF protection
+			ini_set( 'session.cookie_samesite', 'Strict' );
+		}
+
+		// Store additional security information in user meta
+		$user_id = get_current_user_id();
+		if ( $user_id ) {
+			update_user_meta( $user_id, 'last_login_ip', $this->get_real_user_ip() );
+			update_user_meta( $user_id, 'last_login_time', current_time( 'timestamp' ) );
+		}
 	}
 
 	/**
