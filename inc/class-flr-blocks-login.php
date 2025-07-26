@@ -142,12 +142,53 @@ class Flr_Blocks_Login {
 	 */
 	private function login_success_response(): void {
 
+		// Enhanced session security after successful login
+		$this->enhance_session_security();
+
+		// Clear login attempt counters on successful login
+		$user_ip = $this->get_real_user_ip();
+		delete_transient( "login_attempts_" . $user_ip );
+
 		wp_send_json( array(
 			'status'     => true,
 			'return_url' => site_url( get_option( 'flr_blocks_redirect_after_login' ) ) ?? null,
 			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "frontend-login-and-registration-blocks" )
 		) );
 
+	}
+
+	/**
+	 * Enhance session security after login
+	 *
+	 * @since 1.0.0
+	 */
+	private function enhance_session_security(): void {
+
+		// Regenerate session ID to prevent session fixation
+		if ( session_status() === PHP_SESSION_ACTIVE ) {
+			session_regenerate_id( true );
+		}
+
+		// Set secure session parameters
+		if ( ! headers_sent() ) {
+			// HttpOnly flag prevents XSS attacks on session cookies
+			ini_set( 'session.cookie_httponly', 1 );
+
+			// Secure flag for HTTPS sites
+			if ( is_ssl() ) {
+				ini_set( 'session.cookie_secure', 1 );
+			}
+
+			// SameSite attribute for CSRF protection
+			ini_set( 'session.cookie_samesite', 'Strict' );
+		}
+
+		// Store additional security information in user meta
+		$user_id = get_current_user_id();
+		if ( $user_id ) {
+			update_user_meta( $user_id, 'last_login_ip', $this->get_real_user_ip() );
+			update_user_meta( $user_id, 'last_login_time', current_time( 'timestamp' ) );
+		}
 	}
 
 	/**
@@ -173,14 +214,56 @@ class Flr_Blocks_Login {
 	 */
 	public function get_login_attempts_count(): array {
 
-		$get_remote_addr = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
-
-		$user_ip = preg_replace( '/[^0-9., ]/', '', $get_remote_addr );
+		$user_ip = $this->get_real_user_ip();
 
 		return [
 			'user_ip'        => $user_ip,
 			'login_attempts' => get_transient( "login_attempts_" . $user_ip )
 		];
+	}
+
+	/**
+	 * Get real user IP address (handles proxies and load balancers)
+	 *
+	 * @return string User IP address
+	 * @since 1.0.0
+	 */
+	private function get_real_user_ip(): string {
+
+		// Check for various HTTP headers that may contain the real IP
+		$ip_headers = [
+			'HTTP_CF_CONNECTING_IP',     // Cloudflare
+			'HTTP_CLIENT_IP',            // Proxy
+			'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+			'HTTP_X_FORWARDED',          // Proxy
+			'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+			'HTTP_FORWARDED_FOR',        // Proxy
+			'HTTP_FORWARDED',            // Proxy
+			'REMOTE_ADDR'                // Standard
+		];
+
+		foreach ( $ip_headers as $header ) {
+			if ( ! empty( $_SERVER[ $header ] ) ) {
+				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $header ] ) );
+
+				// Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
+				if ( strpos( $ip, ',' ) !== false ) {
+					$ip = trim( explode( ',', $ip )[0] );
+				}
+
+				// Validate IP address and exclude private ranges for security
+				if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+					return $ip;
+				}
+
+				// If public IP validation fails, use basic validation for internal networks
+				if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+					return $ip;
+				}
+			}
+		}
+
+		return '0.0.0.0'; // Fallback if no valid IP found
 	}
 
 	/**

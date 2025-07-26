@@ -1,57 +1,58 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "frontend-login-with-gutenberg-blocks/login-form",
-  "version": "1.0.0",
-  "title": "Login Form",
-  "category": "theme",
-  "icon": "share-alt2",
-  "description": "Display login form",
-  "attributes": {
-	"showLabels": {
-	  "type": "boolean",
-	  "default": true
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontend-login-with-gutenberg-blocks/login-form",
+	"version": "1.0.0",
+	"title": "Login Form",
+	"category": "theme",
+	"icon": "share-alt2",
+	"description": "Display login form",
+	"attributes": {
+		"showLabels": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPlaceholders": {
+			"type": "boolean",
+			"default": false
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"textFontWeight": {
+			"type": "string",
+			"default": "bold"
+		},
+		"inputBorderRadius": {
+			"type": "number"
+		},
+		"buttonBgColor": {
+			"type": "string"
+		},
+		"buttonTextColor": {
+			"type": "string"
+		},
+		"buttonBorder": {
+			"type": "object",
+			"default": {
+				"color": "#000",
+				"style": "solid",
+				"width": "0px"
+			}
+		},
+		"buttonBorderRadius": {
+			"type": "number"
+		},
+		"buttonTextFontWeight": {
+			"type": "string"
+		}
 	},
-	"showPlaceholders": {
-	  "type": "boolean",
-	  "default": false
+	"supports": {
+		"html": false
 	},
-	"textColor": {
-	  "type": "string"
-	},
-	"textFontWeight": {
-	  "type": "string",
-	  "default": "bold"
-	},
-	"inputBorderRadius": {
-	  "type": "number"
-	},
-	"buttonBgColor": {
-	  "type": "string"
-	},
-	"buttonTextColor": {
-	  "type": "string"
-	},
-	"buttonBorder": {
-	  "type": "object",
-	  "default": {
-		"color": "#000",
-		"style": "solid",
-		"width": "0px"
-	  }
-	},
-	"buttonBorderRadius": {
-	  "type": "number"
-	},
-	"buttonTextFontWeight": {
-	  "type": "string"
-	}
-  },
-  "supports": {
-	"html": false
-  },
-  "textdomain": "frontend-login-and-registration-blocks",
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+	"textdomain": "frontend-login-and-registration-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScriptModule": "file:./frontend.js"
 }

@@ -65,9 +65,21 @@ class Flr_Blocks_Lost_Password {
 	 */
 	public function flr_blocks_reset_password_request_handle_ajax_callback() {
 
-		header( 'Access-Control-Allow-Origin: *' );
-
 		check_ajax_referer( 'flrblocksresetrequesthandle', 'security' );
+
+		// Rate limiting for password reset requests
+		$user_ip = $this->get_real_user_ip();
+		$reset_attempts = get_transient( "reset_attempts_" . $user_ip );
+		$max_reset_attempts = 3; // Maximum 3 reset requests per hour
+		$reset_lockout_duration = 3600; // 1 hour
+
+		if ( $reset_attempts >= $max_reset_attempts ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => esc_html_x( "Too many password reset requests. Please wait 1 hour before trying again.", "reset_rate_limit_error", "frontend-login-and-registration-blocks" )
+			) );
+			wp_die();
+		}
 
 		$email = Flr_Blocks_Helper::sanitize( 'flr-blocks-email', 'post', 'email' );
 
@@ -114,6 +126,10 @@ class Flr_Blocks_Lost_Password {
 
 		$send_reset_password_email = $mail->send_mail( 'flr_blocks_reset_request_mail_to_user', 'reset_password_request_mail_to_user_template', $params, _x( 'Reset Password Request', 'reset_request_mail_title', 'frontend-login-and-registration-blocks' ) );
 
+		// Increment reset attempt counter
+		$reset_attempts = get_transient( "reset_attempts_" . $user_ip ) ?: 0;
+		set_transient( "reset_attempts_" . $user_ip, $reset_attempts + 1, $reset_lockout_duration );
+
 		if ( $send_reset_password_email ) {
 
 			wp_send_json( array(
@@ -141,8 +157,6 @@ class Flr_Blocks_Lost_Password {
 	 * @since 1.0.0
 	 */
 	public function flr_blocks_reset_password_handle_ajax_callback() {
-
-		header( 'Access-Control-Allow-Origin: *' );
 
 		check_ajax_referer( 'flrblocksresetpasswordhandle', 'security' );
 
@@ -193,4 +207,49 @@ class Flr_Blocks_Lost_Password {
 		wp_die();
 
 	}
+
+	/**
+	 * Get real user IP address (handles proxies and load balancers)
+	 *
+	 * @return string User IP address
+	 * @since 1.0.0
+	 */
+	private function get_real_user_ip(): string {
+
+		// Check for various HTTP headers that may contain the real IP
+		$ip_headers = [
+			'HTTP_CF_CONNECTING_IP',     // Cloudflare
+			'HTTP_CLIENT_IP',            // Proxy
+			'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+			'HTTP_X_FORWARDED',          // Proxy
+			'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+			'HTTP_FORWARDED_FOR',        // Proxy
+			'HTTP_FORWARDED',            // Proxy
+			'REMOTE_ADDR'                // Standard
+		];
+
+		foreach ( $ip_headers as $header ) {
+			if ( ! empty( $_SERVER[ $header ] ) ) {
+				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $header ] ) );
+
+				// Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
+				if ( strpos( $ip, ',' ) !== false ) {
+					$ip = trim( explode( ',', $ip )[0] );
+				}
+
+				// Validate IP address and exclude private ranges for security
+				if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+					return $ip;
+				}
+
+				// If public IP validation fails, use basic validation for internal networks
+				if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+					return $ip;
+				}
+			}
+		}
+
+		return '0.0.0.0'; // Fallback if no valid IP found
+	}
+
 }

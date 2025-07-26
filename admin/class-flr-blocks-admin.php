@@ -44,7 +44,7 @@ class Flr_Blocks_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( "flr-blocks-admin-js", FLR_BLOCKS_PLUGIN_URL . '/admin/js/flr-blocks-admin.js', array( 'jquery' ), FLR_BLOCKS_VERSION, false );
+		wp_enqueue_script( "flr-blocks-admin-js", FLR_BLOCKS_PLUGIN_URL . '/admin/js/flr-blocks-admin.js', array(), FLR_BLOCKS_VERSION, false );
 
 	}
 
