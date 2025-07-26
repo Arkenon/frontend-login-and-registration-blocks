@@ -73,6 +73,25 @@ class Flr_Blocks_Registration {
 		$first_name     = Flr_Blocks_Helper::sanitize( 'flr-blocks-first-name-for-register', 'post', 'text' );
 		$last_name      = Flr_Blocks_Helper::sanitize( 'flr-blocks-last-name-for-register', 'post', 'text' );
 
+		// Enhanced input validation
+		$username_validation = Flr_Blocks_Helper::validate_username_security( $username );
+		if ( ! $username_validation['valid'] ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => $username_validation['message']
+			) );
+			wp_die();
+		}
+
+		$email_validation = Flr_Blocks_Helper::validate_email_security( $email );
+		if ( ! $email_validation['valid'] ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => $email_validation['message']
+			) );
+			wp_die();
+		}
+
 		$params = [
 			'username'        => $username,
 			'email'           => $email,

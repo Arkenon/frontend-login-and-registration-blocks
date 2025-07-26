@@ -82,6 +82,18 @@ class Flr_Blocks_User_Settings {
 		$user_info->user_url    = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-website', 'post', 'text' );
 		$user_info->description = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-bio', 'post', 'textarea' );
 
+		// Enhanced email validation if email is being updated
+		if ( ! empty( $user_info->user_email ) ) {
+			$email_validation = Flr_Blocks_Helper::validate_email_security( $user_info->user_email );
+			if ( ! $email_validation['valid'] ) {
+				wp_send_json( array(
+					'status'  => false,
+					'message' => $email_validation['message']
+				) );
+				wp_die();
+			}
+		}
+
 		// Update custom fields
 		do_action('flr_blocks_save_user_form_extra_user_fields', $user_id);
 
