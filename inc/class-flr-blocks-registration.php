@@ -53,8 +53,6 @@ class Flr_Blocks_Registration {
 	 */
 	public function flr_blocks_register_handle_ajax_callback() {
 
-		header( 'Access-Control-Allow-Origin: *' );
-
 		check_ajax_referer( 'flrblocksregisterhandle', 'security' );
 
 		if ( ! get_option( 'users_can_register' ) ) {

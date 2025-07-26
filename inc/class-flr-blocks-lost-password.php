@@ -65,8 +65,6 @@ class Flr_Blocks_Lost_Password {
 	 */
 	public function flr_blocks_reset_password_request_handle_ajax_callback() {
 
-		header( 'Access-Control-Allow-Origin: *' );
-
 		check_ajax_referer( 'flrblocksresetrequesthandle', 'security' );
 
 		$email = Flr_Blocks_Helper::sanitize( 'flr-blocks-email', 'post', 'email' );
@@ -141,8 +139,6 @@ class Flr_Blocks_Lost_Password {
 	 * @since 1.0.0
 	 */
 	public function flr_blocks_reset_password_handle_ajax_callback() {
-
-		header( 'Access-Control-Allow-Origin: *' );
 
 		check_ajax_referer( 'flrblocksresetpasswordhandle', 'security' );
 
