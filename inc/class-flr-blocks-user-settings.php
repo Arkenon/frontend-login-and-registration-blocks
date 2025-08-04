@@ -58,9 +58,21 @@ class Flr_Blocks_User_Settings {
 	 */
 	public function flr_blocks_user_settings_handle_ajax_callback() {
 
-		header( 'Access-Control-Allow-Origin: *' );
+		// Verify nonce for security
+		\check_ajax_referer( 'flrblocksusersettingsupdatehandle', 'security' );
 
 		$user_id = Flr_Blocks_Helper::sanitize( 'user_id', 'post', 'id' );
+		$current_user_id = \get_current_user_id();
+
+		// Critical authorization check: users can only edit their own profile
+		// unless they have edit_users capability (administrators)
+		if ( $user_id !== $current_user_id && !\current_user_can('edit_users') ) {
+			\wp_send_json( array(
+				'status'  => false,
+				'message' => \esc_html__( 'Unauthorized access. You can only edit your own profile.', 'frontend-login-and-registration-blocks' )
+			) );
+			\wp_die();
+		}
 
 		$user_info = get_userdata( $user_id );
 
@@ -69,6 +81,18 @@ class Flr_Blocks_User_Settings {
 		$user_info->user_email  = Flr_Blocks_Helper::sanitize( 'flr-blocks-email-update', 'post', 'email' );
 		$user_info->user_url    = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-website', 'post', 'text' );
 		$user_info->description = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-bio', 'post', 'textarea' );
+
+		// Enhanced email validation if email is being updated
+		if ( ! empty( $user_info->user_email ) ) {
+			$email_validation = Flr_Blocks_Helper::validate_email_security( $user_info->user_email );
+			if ( ! $email_validation['valid'] ) {
+				wp_send_json( array(
+					'status'  => false,
+					'message' => $email_validation['message']
+				) );
+				wp_die();
+			}
+		}
 
 		// Update custom fields
 		do_action('flr_blocks_save_user_form_extra_user_fields', $user_id);
@@ -97,6 +121,16 @@ class Flr_Blocks_User_Settings {
 							wp_die();
 
 						} else {
+
+							// Validate new password strength
+							$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
+							if ( ! $password_validation['valid'] ) {
+								wp_send_json( array(
+									'status'  => false,
+									'message' => $password_validation['message']
+								) );
+								wp_die();
+							}
 
 							wp_set_password( $new_password, $user_id );
 

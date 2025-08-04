@@ -53,8 +53,6 @@ class Flr_Blocks_Registration {
 	 */
 	public function flr_blocks_register_handle_ajax_callback() {
 
-		header( 'Access-Control-Allow-Origin: *' );
-
 		check_ajax_referer( 'flrblocksregisterhandle', 'security' );
 
 		if ( ! get_option( 'users_can_register' ) ) {
@@ -75,6 +73,25 @@ class Flr_Blocks_Registration {
 		$first_name     = Flr_Blocks_Helper::sanitize( 'flr-blocks-first-name-for-register', 'post', 'text' );
 		$last_name      = Flr_Blocks_Helper::sanitize( 'flr-blocks-last-name-for-register', 'post', 'text' );
 
+		// Enhanced input validation
+		$username_validation = Flr_Blocks_Helper::validate_username_security( $username );
+		if ( ! $username_validation['valid'] ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => $username_validation['message']
+			) );
+			wp_die();
+		}
+
+		$email_validation = Flr_Blocks_Helper::validate_email_security( $email );
+		if ( ! $email_validation['valid'] ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => $email_validation['message']
+			) );
+			wp_die();
+		}
+
 		$params = [
 			'username'        => $username,
 			'email'           => $email,
@@ -91,6 +108,18 @@ class Flr_Blocks_Registration {
 
 			wp_die();
 
+		}
+
+		// Validate password strength
+		if ( ! empty( $password ) ) {
+			$password_validation = Flr_Blocks_Helper::validate_password_strength( $password );
+			if ( ! $password_validation['valid'] ) {
+				wp_send_json( array(
+					'status'  => false,
+					'message' => $password_validation['message']
+				) );
+				wp_die();
+			}
 		}
 
 		if ( username_exists( $username ) ) {
@@ -135,7 +164,8 @@ class Flr_Blocks_Registration {
 
 			if ( get_option( "flr_blocks_has_activation" ) === 'yes' ) {
 
-				$code = sha1( $email . time() );
+				// Generate cryptographically secure activation code
+				$code = wp_generate_password( 32, false );
 
 				$add_user_activation      = add_user_meta( $newuser, 'flr_blocks_user_activation', 'not_activated' );
 				$add_user_activation_code = add_user_meta( $newuser, 'flr_blocks_user_activation_code', $code );

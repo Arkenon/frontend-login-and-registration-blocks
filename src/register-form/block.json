@@ -64,5 +64,6 @@
 	"textdomain": "frontend-login-and-registration-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"viewScriptModule": "file:./frontend.js"
 }

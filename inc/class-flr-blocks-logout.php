@@ -37,13 +37,116 @@ class Flr_Blocks_Logout {
 	 * @since 1.0.0
 	 */
 	public function nonce_url_for_logout(): string {
-		$request_uri              = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-		$redirect_url             = esc_url_raw( $request_uri );
-		$logout_url               = wp_logout_url( home_url( '/' ) );
-		$logout_url_with_redirect = add_query_arg( 'redirect_to', $redirect_url, $logout_url );
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 
-		return wp_nonce_url( $logout_url_with_redirect, 'log-out' );
+		// Validate and sanitize redirect URL for security
+		$redirect_url = $this->validate_redirect_url( $request_uri );
 
+		$logout_url = wp_logout_url( $redirect_url );
+
+		// Add additional logout hook for session cleanup
+		add_action( 'wp_logout', [ $this, 'secure_logout_cleanup' ] );
+
+		return wp_nonce_url( $logout_url, 'log-out' );
+	}
+
+	/**
+	 * Validate redirect URL to prevent open redirect vulnerabilities
+	 *
+	 * @param string $url URL to validate
+	 * @return string Safe redirect URL
+	 * @since 1.0.0
+	 */
+	private function validate_redirect_url( string $url ): string {
+
+		// Default safe redirect
+		$safe_url = home_url( '/' );
+
+		if ( empty( $url ) ) {
+			return $safe_url;
+		}
+
+		// Parse the URL
+		$parsed_url = wp_parse_url( $url );
+
+		// Only allow relative URLs or URLs from the same domain
+		if ( isset( $parsed_url['host'] ) ) {
+			$site_host = wp_parse_url( home_url(), PHP_URL_HOST );
+			if ( $parsed_url['host'] !== $site_host ) {
+				return $safe_url; // Prevent open redirect
+			}
+		}
+
+		// Additional security: check if it's a valid WordPress redirect
+		if ( wp_validate_redirect( $url, $safe_url ) ) {
+			return esc_url_raw( $url );
+		}
+
+		return $safe_url;
+	}
+
+	/**
+	 * Perform secure logout cleanup
+	 *
+	 * @since 1.0.0
+	 */
+	public function secure_logout_cleanup(): void {
+
+		// Clear any custom plugin sessions or transients
+		if ( is_user_logged_in() ) {
+			$user_id = get_current_user_id();
+
+			// Clear login attempt counters for this user's IP on successful logout
+			$user_ip = $this->get_real_user_ip();
+			delete_transient( "login_attempts_" . $user_ip );
+
+			// Clear any user-specific transients
+			delete_transient( "user_activation_" . $user_id );
+		}
+
+		// Force session regeneration on next login
+		if ( session_status() === PHP_SESSION_ACTIVE ) {
+			session_destroy();
+		}
+	}
+
+	/**
+	 * Get real user IP address (handles proxies and load balancers)
+	 *
+	 * @return string User IP address
+	 * @since 1.0.0
+	 */
+	private function get_real_user_ip(): string {
+
+		// Check for various HTTP headers that may contain the real IP
+		$ip_headers = [
+			'HTTP_CF_CONNECTING_IP',     // Cloudflare
+			'HTTP_CLIENT_IP',            // Proxy
+			'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+			'HTTP_X_FORWARDED',          // Proxy
+			'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+			'HTTP_FORWARDED_FOR',        // Proxy
+			'HTTP_FORWARDED',            // Proxy
+			'REMOTE_ADDR'                // Standard
+		];
+
+		foreach ( $ip_headers as $header ) {
+			if ( ! empty( $_SERVER[ $header ] ) ) {
+				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $header ] ) );
+
+				// Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
+				if ( strpos( $ip, ',' ) !== false ) {
+					$ip = trim( explode( ',', $ip )[0] );
+				}
+
+				// Validate IP address
+				if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+					return $ip;
+				}
+			}
+		}
+
+		return '0.0.0.0'; // Fallback if no valid IP found
 	}
 
 }

@@ -20,6 +20,7 @@ class Flr_Blocks_Block_Handler {
 	public function load_flr_blocks() {
 		add_action( 'init', [ $this, 'register_blocks' ] );
 		add_action('enqueue_block_editor_assets', [$this, 'set_script_translations']);
+		add_action('wp_enqueue_scripts', [$this, 'add_frontend_config']);
 	}
 
 	/**
@@ -178,5 +179,39 @@ class Flr_Blocks_Block_Handler {
 
 		return $logout->logout_menu_item( $block_attributes );
 
+	}
+
+	/**
+	 * Global config for blocks
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_frontend_config() {
+		// Only add config on pages that could use blocks
+		if (is_admin() || !has_blocks()) {
+			return;
+		}
+
+		// Provide configuration data for frontend scripts
+		$ajax_config = [
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('flr_blocks_nonce'),
+			'strings' => [
+				'loading' => __('Loading...', 'frontend-login-and-registration-blocks'),
+				'error' => __('An error occurred', 'frontend-login-and-registration-blocks'),
+				'success' => __('Success!', 'frontend-login-and-registration-blocks')
+			]
+		];
+
+		// Register minimal script handle for config
+		wp_register_script('flr-blocks-config', '', [], '1.0.0', false);
+		wp_enqueue_script('flr-blocks-config');
+
+		// Add config via wp_add_inline_script
+		wp_add_inline_script(
+			'flr-blocks-config',
+			'window.flr_blocks_ajax_object = ' . wp_json_encode($ajax_config),
+			'before'
+		);
 	}
 }
