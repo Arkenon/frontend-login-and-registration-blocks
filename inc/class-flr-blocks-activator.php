@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class Flr_Blocks_Activator {
 
 	/**
-	 * This is plugin activator.
+	 * This is a plugin activator.
 	 *
 	 * Includes all code necessary to run during the plugin's activation
 	 *

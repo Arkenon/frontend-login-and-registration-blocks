@@ -69,7 +69,7 @@ class Flr_Blocks_User_Settings {
 		if ( $user_id !== $current_user_id && !\current_user_can('edit_users') ) {
 			\wp_send_json( array(
 				'status'  => false,
-				'message' => \esc_html__( 'Unauthorized access. You can only edit your own profile.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Unauthorized access. You can only edit your own profile.', 'frontend-login-and-registration-blocks' )
 			) );
 			\wp_die();
 		}

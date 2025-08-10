@@ -22,7 +22,7 @@ class Flr_Blocks_Admin {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( "flr-blocks-admin-css", FLR_BLOCKS_PLUGIN_URL . '/admin/css/flr-blocks-admin.css', array(), FLR_BLOCKS_VERSION, 'all' );
+		wp_enqueue_style( "flr-blocks-admin-css", FLR_BLOCKS_PLUGIN_URL . '/admin/css/flr-blocks-admin.css', array(), FLR_BLOCKS_VERSION );
 
 	}
 

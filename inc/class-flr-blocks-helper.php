@@ -99,7 +99,7 @@ class Flr_Blocks_Helper {
 	 * @param int $min_length Minimum password length (default: 8)
 	 *
 	 * @return array Validation result with status and message
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public static function validate_password_strength( string $password, int $min_length = 8 ): array {
 
@@ -109,7 +109,7 @@ class Flr_Blocks_Helper {
 				'valid' => false,
 				'message' => sprintf(
 					/* translators: %d is the minimum password length */
-					\esc_html__( 'Password must be at least %d characters long.', 'frontend-login-and-registration-blocks' ),
+					esc_html__( 'Password must be at least %d characters long.', 'frontend-login-and-registration-blocks' ),
 					$min_length
 				)
 			];
@@ -119,7 +119,7 @@ class Flr_Blocks_Helper {
 		if ( ! preg_match( '/[A-Z]/', $password ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Password must contain at least one uppercase letter.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Password must contain at least one uppercase letter.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -127,7 +127,7 @@ class Flr_Blocks_Helper {
 		if ( ! preg_match( '/[a-z]/', $password ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Password must contain at least one lowercase letter.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Password must contain at least one lowercase letter.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -135,7 +135,7 @@ class Flr_Blocks_Helper {
 		if ( ! preg_match( '/[0-9]/', $password ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Password must contain at least one number.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Password must contain at least one number.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -143,7 +143,7 @@ class Flr_Blocks_Helper {
 		if ( ! preg_match( '/[^A-Za-z0-9]/', $password ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Password must contain at least one special character.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Password must contain at least one special character.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -156,13 +156,13 @@ class Flr_Blocks_Helper {
 		if ( in_array( strtolower( $password ), $weak_passwords, true ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'This password is too common. Please choose a different password.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'This password is too common. Please choose a different password.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		return [
 			'valid' => true,
-			'message' => \esc_html__( 'Password strength is good.', 'frontend-login-and-registration-blocks' )
+			'message' => esc_html__( 'Password strength is good.', 'frontend-login-and-registration-blocks' )
 		];
 	}
 
@@ -171,7 +171,7 @@ class Flr_Blocks_Helper {
 	 *
 	 * @param string $email Email to validate
 	 * @return array Validation result with status and message
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public static function validate_email_security( string $email ): array {
 
@@ -179,7 +179,7 @@ class Flr_Blocks_Helper {
 		if ( ! is_email( $email ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Please enter a valid email address.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Please enter a valid email address.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -195,7 +195,7 @@ class Flr_Blocks_Helper {
 			if ( preg_match( $pattern, $email ) ) {
 				return [
 					'valid' => false,
-					'message' => \esc_html__( 'Email address contains invalid characters.', 'frontend-login-and-registration-blocks' )
+					'message' => esc_html__( 'Email address contains invalid characters.', 'frontend-login-and-registration-blocks' )
 				];
 			}
 		}
@@ -205,7 +205,7 @@ class Flr_Blocks_Helper {
 		if ( count( $email_parts ) !== 2 ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Email address format is invalid.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Email address format is invalid.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -213,13 +213,13 @@ class Flr_Blocks_Helper {
 		if ( strlen( $domain ) > 253 || strlen( $domain ) < 1 ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Email domain is invalid.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Email domain is invalid.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		return [
 			'valid' => true,
-			'message' => \esc_html__( 'Email address is valid.', 'frontend-login-and-registration-blocks' )
+			'message' => esc_html__( 'Email address is valid.', 'frontend-login-and-registration-blocks' )
 		];
 	}
 
@@ -228,7 +228,7 @@ class Flr_Blocks_Helper {
 	 *
 	 * @param string $username Username to validate
 	 * @return array Validation result with status and message
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public static function validate_username_security( string $username ): array {
 
@@ -236,14 +236,14 @@ class Flr_Blocks_Helper {
 		if ( strlen( $username ) < 3 ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Username must be at least 3 characters long.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Username must be at least 3 characters long.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		if ( strlen( $username ) > 60 ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Username must be less than 60 characters long.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Username must be less than 60 characters long.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -251,7 +251,7 @@ class Flr_Blocks_Helper {
 		if ( ! preg_match( '/^[a-zA-Z0-9._-]+$/', $username ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Username can only contain letters, numbers, dots, underscores, and hyphens.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Username can only contain letters, numbers, dots, underscores, and hyphens.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -265,7 +265,7 @@ class Flr_Blocks_Helper {
 		if ( in_array( strtolower( $username ), $reserved_usernames, true ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'This username is reserved. Please choose a different username.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'This username is reserved. Please choose a different username.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -273,7 +273,7 @@ class Flr_Blocks_Helper {
 		if ( preg_match( '/[._-]{2,}/', $username ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Username cannot contain consecutive special characters.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Username cannot contain consecutive special characters.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
@@ -281,13 +281,13 @@ class Flr_Blocks_Helper {
 		if ( preg_match( '/^[._-]|[._-]$/', $username ) ) {
 			return [
 				'valid' => false,
-				'message' => \esc_html__( 'Username cannot start or end with special characters.', 'frontend-login-and-registration-blocks' )
+				'message' => esc_html__( 'Username cannot start or end with special characters.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		return [
 			'valid' => true,
-			'message' => \esc_html__( 'Username is valid.', 'frontend-login-and-registration-blocks' )
+			'message' => esc_html__( 'Username is valid.', 'frontend-login-and-registration-blocks' )
 		];
 	}
 
@@ -319,9 +319,9 @@ class Flr_Blocks_Helper {
 
 		$view = "";
 
-		// Note: $form_attributes is available as array to the included view files
+		// Note: $form_attributes is available as an array to the included view files
 		// No need for dangerous extract() - view files use $form_attributes['key'] directly
-		//Include php file which has a variable named $view and equals to html output
+		//Include php file which has a variable named $view and equals to HTML output
 		include_once plugin_dir_path( dirname( __FILE__ ) ) . $path;
 
 		return $view;
@@ -429,6 +429,50 @@ class Flr_Blocks_Helper {
 		$input_style         = 'border-radius:' . $input_border_radius . 'px';
 
 		return $input_style;
+	}
+
+	/**
+	 * Get real user IP address (handles proxies and load balancers)
+	 *
+	 * @return string User IP address
+	 * @since 1.2.0
+	 */
+	public static function get_real_user_ip(): string {
+
+		// Check for various HTTP headers that may contain the real IP
+		$ip_headers = [
+			'HTTP_CF_CONNECTING_IP',     // Cloudflare
+			'HTTP_CLIENT_IP',            // Proxy
+			'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+			'HTTP_X_FORWARDED',          // Proxy
+			'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+			'HTTP_FORWARDED_FOR',        // Proxy
+			'HTTP_FORWARDED',            // Proxy
+			'REMOTE_ADDR'                // Standard
+		];
+
+		foreach ( $ip_headers as $header ) {
+			if ( ! empty( $_SERVER[ $header ] ) ) {
+				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $header ] ) );
+
+				// Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
+				if ( strpos( $ip, ',' ) !== false ) {
+					$ip = trim( explode( ',', $ip )[0] );
+				}
+
+				// Validate IP address and exclude private ranges for security
+				if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+					return $ip;
+				}
+
+				// If public IP validation fails, use basic validation for internal networks
+				if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+					return $ip;
+				}
+			}
+		}
+
+		return '0.0.0.0'; // Fallback if no valid IP found
 	}
 
 }

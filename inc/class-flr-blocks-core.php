@@ -19,7 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 Flr_Blocks_Helper::using( 'inc/class-flr-blocks-loader.php' );
 
-
 class Flr_Blocks_Core extends Flr_Blocks_Loader {
 
 	/**
@@ -142,7 +141,7 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 	}
 
 	/**
-	 * Get registration (sign up) form actions
+	 * Get registration (sign-up) form actions
 	 *
 	 * Load registration actions from Flr_Blocks_Registration class
 	 *
@@ -248,7 +247,7 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area and block editor
-		 * Editor styles for only common css rules of blocks.
+		 * Editor styles for only common CSS rules of blocks.
 		 */
 		Flr_Blocks_Helper::using( 'admin/class-flr-blocks-admin.php' );
 
@@ -297,7 +296,7 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 	}
 
 	/**
-	 * Run the loader to execute all of the hooks with WordPress.
+	 * Run the loader to execute all the hooks with WordPress.
 	 *
 	 * @since    1.0.0
 	 */

@@ -23,19 +23,7 @@ class Flr_Blocks_Public {
 	 */
 	public function enqueue_styles() : void {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		\wp_enqueue_style( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/css/flr-blocks-public.css', array(), FLR_BLOCKS_VERSION, 'all' );
+		wp_enqueue_style( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/css/flr-blocks-public.css', array(), FLR_BLOCKS_VERSION, 'all' );
 
 	}
 
@@ -51,7 +39,7 @@ class Flr_Blocks_Public {
 	 */
 	public function get_the_form(string $path, array $block_attributes) : string  {
 
-		//Return html output of the form
+		//Return HTML output of the form
 		return Flr_Blocks_Helper::return_view( $path, $block_attributes );
 
 	}

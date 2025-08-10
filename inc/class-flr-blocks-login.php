@@ -36,35 +36,35 @@ class Flr_Blocks_Login {
 	}
 
 	/**
-	 * Welcome Card html output (for logged in users)
+	 * Welcome Card HTML output (for logged-in users)
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
 	 *
-	 * @return string html result of welcome card
+	 * @return string HTML result of welcome card
 	 * @since 1.0.0
 	 */
 	public function welcome_card( array $block_attributes ): string {
 
 		$frontend = new Flr_Blocks_Public();
 
-		//Get html output from Frontend class
+		//Get HTML output from Frontend class
 		return $frontend->get_the_form( 'public/partials/login/welcome-card.php', $block_attributes );
 
 	}
 
 	/**
-	 * Login form html output
+	 * Login form HTML output
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
 	 *
-	 * @return string html result of login form
+	 * @return string HTML result of the login form
 	 * @since 1.0.0
 	 */
 	public function login_form( array $block_attributes ): string {
 
 		$frontend = new Flr_Blocks_Public();
 
-		//Get login form html output from Frontend class
+		//Get login form HTML output from Frontend class
 		return $frontend->get_the_form( 'public/partials/login/login-form.php', $block_attributes );
 
 	}
@@ -135,7 +135,7 @@ class Flr_Blocks_Login {
 	}
 
 	/**
-	 * Json result for login. When login success
+	 * JSON result for login. When login success
 	 *
 	 * @return void Json result
 	 * @since 1.0.0
@@ -160,10 +160,10 @@ class Flr_Blocks_Login {
 	/**
 	 * Enhance session security after login
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	private function enhance_session_security(): void {
-
+		//TODO fix this with session_start() and session_write_close() to avoid session issues
 		// Regenerate session ID to prevent session fixation
 		if ( session_status() === PHP_SESSION_ACTIVE ) {
 			session_regenerate_id( true );
@@ -192,7 +192,7 @@ class Flr_Blocks_Login {
 	}
 
 	/**
-	 * Json result for login. When login failed
+	 * JSON result for login. When login failed
 	 *
 	 * @return void Json result
 	 * @since 1.0.0
@@ -214,56 +214,12 @@ class Flr_Blocks_Login {
 	 */
 	public function get_login_attempts_count(): array {
 
-		$user_ip = $this->get_real_user_ip();
+		$user_ip = Flr_Blocks_Helper::get_real_user_ip();
 
 		return [
 			'user_ip'        => $user_ip,
 			'login_attempts' => get_transient( "login_attempts_" . $user_ip )
 		];
-	}
-
-	/**
-	 * Get real user IP address (handles proxies and load balancers)
-	 *
-	 * @return string User IP address
-	 * @since 1.0.0
-	 */
-	private function get_real_user_ip(): string {
-
-		// Check for various HTTP headers that may contain the real IP
-		$ip_headers = [
-			'HTTP_CF_CONNECTING_IP',     // Cloudflare
-			'HTTP_CLIENT_IP',            // Proxy
-			'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
-			'HTTP_X_FORWARDED',          // Proxy
-			'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
-			'HTTP_FORWARDED_FOR',        // Proxy
-			'HTTP_FORWARDED',            // Proxy
-			'REMOTE_ADDR'                // Standard
-		];
-
-		foreach ( $ip_headers as $header ) {
-			if ( ! empty( $_SERVER[ $header ] ) ) {
-				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $header ] ) );
-
-				// Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
-				if ( strpos( $ip, ',' ) !== false ) {
-					$ip = trim( explode( ',', $ip )[0] );
-				}
-
-				// Validate IP address and exclude private ranges for security
-				if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
-					return $ip;
-				}
-
-				// If public IP validation fails, use basic validation for internal networks
-				if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
-					return $ip;
-				}
-			}
-		}
-
-		return '0.0.0.0'; // Fallback if no valid IP found
 	}
 
 	/**
@@ -285,7 +241,7 @@ class Flr_Blocks_Login {
 	}
 
 	/**
-	 * Limit login attempt to prevent brute force attacks
+	 * Limit login attempts to prevent brute force attacks
 	 *
 	 * @since 1.0.0
 	 */
@@ -303,7 +259,7 @@ class Flr_Blocks_Login {
 	/**
 	 * Json result for to login attempt error.
 	 *
-	 * @return string Json result
+	 * @return void Json result
 	 * @since 1.0.0
 	 */
 	private function login_attempts_error(): void {
