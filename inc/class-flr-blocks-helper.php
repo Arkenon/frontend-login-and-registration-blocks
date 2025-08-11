@@ -106,9 +106,9 @@ class Flr_Blocks_Helper {
 		// Check minimum length
 		if ( strlen( $password ) < $min_length ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => sprintf(
-					/* translators: %d is the minimum password length */
+				/* translators: %d is the minimum password length */
 					esc_html__( 'Password must be at least %d characters long.', 'frontend-login-and-registration-blocks' ),
 					$min_length
 				)
@@ -118,7 +118,7 @@ class Flr_Blocks_Helper {
 		// Check for at least one uppercase letter
 		if ( ! preg_match( '/[A-Z]/', $password ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Password must contain at least one uppercase letter.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -126,7 +126,7 @@ class Flr_Blocks_Helper {
 		// Check for at least one lowercase letter
 		if ( ! preg_match( '/[a-z]/', $password ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Password must contain at least one lowercase letter.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -134,7 +134,7 @@ class Flr_Blocks_Helper {
 		// Check for at least one number
 		if ( ! preg_match( '/[0-9]/', $password ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Password must contain at least one number.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -142,26 +142,36 @@ class Flr_Blocks_Helper {
 		// Check for at least one special character
 		if ( ! preg_match( '/[^A-Za-z0-9]/', $password ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Password must contain at least one special character.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		// Check for common weak passwords
 		$weak_passwords = [
-			'password', 'password123', '123456', '123456789', 'qwerty', 'abc123',
-			'password1', 'admin', 'test', 'user', 'guest', 'demo'
+			'password',
+			'password123',
+			'123456',
+			'123456789',
+			'qwerty',
+			'abc123',
+			'password1',
+			'admin',
+			'test',
+			'user',
+			'guest',
+			'demo'
 		];
 
 		if ( in_array( strtolower( $password ), $weak_passwords, true ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'This password is too common. Please choose a different password.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		return [
-			'valid' => true,
+			'valid'   => true,
 			'message' => esc_html__( 'Password strength is good.', 'frontend-login-and-registration-blocks' )
 		];
 	}
@@ -170,6 +180,7 @@ class Flr_Blocks_Helper {
 	 * Enhanced email validation with additional security checks
 	 *
 	 * @param string $email Email to validate
+	 *
 	 * @return array Validation result with status and message
 	 * @since 1.2.0
 	 */
@@ -178,7 +189,7 @@ class Flr_Blocks_Helper {
 		// Basic email validation
 		if ( ! is_email( $email ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Please enter a valid email address.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -194,7 +205,7 @@ class Flr_Blocks_Helper {
 		foreach ( $suspicious_patterns as $pattern ) {
 			if ( preg_match( $pattern, $email ) ) {
 				return [
-					'valid' => false,
+					'valid'   => false,
 					'message' => esc_html__( 'Email address contains invalid characters.', 'frontend-login-and-registration-blocks' )
 				];
 			}
@@ -204,7 +215,7 @@ class Flr_Blocks_Helper {
 		$email_parts = explode( '@', $email );
 		if ( count( $email_parts ) !== 2 ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Email address format is invalid.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -212,13 +223,13 @@ class Flr_Blocks_Helper {
 		$domain = $email_parts[1];
 		if ( strlen( $domain ) > 253 || strlen( $domain ) < 1 ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Email domain is invalid.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		return [
-			'valid' => true,
+			'valid'   => true,
 			'message' => esc_html__( 'Email address is valid.', 'frontend-login-and-registration-blocks' )
 		];
 	}
@@ -227,6 +238,7 @@ class Flr_Blocks_Helper {
 	 * Enhanced username validation with security checks
 	 *
 	 * @param string $username Username to validate
+	 *
 	 * @return array Validation result with status and message
 	 * @since 1.2.0
 	 */
@@ -235,14 +247,14 @@ class Flr_Blocks_Helper {
 		// Length validation
 		if ( strlen( $username ) < 3 ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Username must be at least 3 characters long.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		if ( strlen( $username ) > 60 ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Username must be less than 60 characters long.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -250,21 +262,39 @@ class Flr_Blocks_Helper {
 		// Character validation
 		if ( ! preg_match( '/^[a-zA-Z0-9._-]+$/', $username ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Username can only contain letters, numbers, dots, underscores, and hyphens.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		// Reserved usernames
 		$reserved_usernames = [
-			'admin', 'administrator', 'root', 'test', 'demo', 'guest', 'user',
-			'www', 'ftp', 'mail', 'email', 'api', 'support', 'help', 'info',
-			'null', 'undefined', 'false', 'true', 'system', 'security'
+			'admin',
+			'administrator',
+			'root',
+			'test',
+			'demo',
+			'guest',
+			'user',
+			'www',
+			'ftp',
+			'mail',
+			'email',
+			'api',
+			'support',
+			'help',
+			'info',
+			'null',
+			'undefined',
+			'false',
+			'true',
+			'system',
+			'security'
 		];
 
 		if ( in_array( strtolower( $username ), $reserved_usernames, true ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'This username is reserved. Please choose a different username.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -272,7 +302,7 @@ class Flr_Blocks_Helper {
 		// Check for consecutive special characters
 		if ( preg_match( '/[._-]{2,}/', $username ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Username cannot contain consecutive special characters.', 'frontend-login-and-registration-blocks' )
 			];
 		}
@@ -280,13 +310,13 @@ class Flr_Blocks_Helper {
 		// Cannot start or end with special characters
 		if ( preg_match( '/^[._-]|[._-]$/', $username ) ) {
 			return [
-				'valid' => false,
+				'valid'   => false,
 				'message' => esc_html__( 'Username cannot start or end with special characters.', 'frontend-login-and-registration-blocks' )
 			];
 		}
 
 		return [
-			'valid' => true,
+			'valid'   => true,
 			'message' => esc_html__( 'Username is valid.', 'frontend-login-and-registration-blocks' )
 		];
 	}
@@ -388,12 +418,12 @@ class Flr_Blocks_Helper {
 		$button_border_width     = array_key_exists( 'width', $form_attributes['buttonBorder'] ) ? 'border-width: ' . $form_attributes['buttonBorder']['width'] . ';' : "";
 
 		$button_style = 'color:' . $button_text_color . '; ' .
-		                'background-color: ' . $button_bg_color . '; ' .
-		                $button_border_color .
-		                $button_border_style .
-		                $button_border_width .
-		                'border-radius: ' . $button_border_radius . 'px;' .
-		                'font-weight: ' . $button_text_font_weight;
+						'background-color: ' . $button_bg_color . '; ' .
+						$button_border_color .
+						$button_border_style .
+						$button_border_width .
+						'border-radius: ' . $button_border_radius . 'px;' .
+						'font-weight: ' . $button_text_font_weight;
 
 		return $button_style;
 	}
@@ -473,6 +503,28 @@ class Flr_Blocks_Helper {
 		}
 
 		return '0.0.0.0'; // Fallback if no valid IP found
+	}
+
+	/**
+	 * Get the permalink of a page by its slug.
+	 *
+	 * @param string $page_slug
+	 *
+	 * @return string
+	 *
+	 */
+	public static function get_page_permalink( string $page_slug ): string {
+		// Check if the page exists
+		if ( ! $page_slug ) {
+			return '';
+		}
+		$get_page_by_path = get_page_by_path( $page_slug );
+
+		if ( $get_page_by_path === null ) {
+			return '';
+		}
+
+		return get_permalink( $get_page_by_path );
 	}
 
 }

@@ -29,7 +29,7 @@ class Flr_Blocks_Registration {
 	}
 
 	/**
-	 * Registeration form html output
+	 * Registration form html output
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
 	 *
@@ -48,7 +48,7 @@ class Flr_Blocks_Registration {
 	/**
 	 * POST operation for registration.
 	 *
-	 * @return string|false a JSON encoded string on success or FALSE on failure.
+	 * @return void a JSON encoded string on success or FALSE on failure.
 	 * @since 1.0.0
 	 */
 	public function flr_blocks_register_handle_ajax_callback() {
@@ -174,7 +174,8 @@ class Flr_Blocks_Registration {
 
 					$message = esc_html_x( "You have been signed up successfully. Please click the membership activation link sent your e-mail.", "register_succession_with_activation", "frontend-login-and-registration-blocks" );
 
-					$activation_link = site_url() . '/' . get_option( "flr_blocks_activation_page" ) . '?key=' . $code . '&user=' . $email;
+					$get_permalink   = Flr_Blocks_Helper::get_page_permalink( get_option( "flr_blocks_activation_page" ) );
+					$activation_link = $get_permalink . '?key=' . $code . '&user=' . $email;
 
 					$params['activation_link'] = $activation_link;
 

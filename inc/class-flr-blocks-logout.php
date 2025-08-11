@@ -55,7 +55,7 @@ class Flr_Blocks_Logout {
 	 *
 	 * @param string $url URL to validate
 	 * @return string Safe redirect URL
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	private function validate_redirect_url( string $url ): string {
 
@@ -88,7 +88,7 @@ class Flr_Blocks_Logout {
 	/**
 	 * Perform secure logout cleanup
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function secure_logout_cleanup(): void {
 
@@ -97,7 +97,7 @@ class Flr_Blocks_Logout {
 			$user_id = get_current_user_id();
 
 			// Clear login attempt counters for this user's IP on successful logout
-			$user_ip = $this->get_real_user_ip();
+			$user_ip = Flr_Blocks_Helper::get_real_user_ip();
 			delete_transient( "login_attempts_" . $user_ip );
 
 			// Clear any user-specific transients
@@ -109,44 +109,4 @@ class Flr_Blocks_Logout {
 			session_destroy();
 		}
 	}
-
-	/**
-	 * Get real user IP address (handles proxies and load balancers)
-	 *
-	 * @return string User IP address
-	 * @since 1.0.0
-	 */
-	private function get_real_user_ip(): string {
-
-		// Check for various HTTP headers that may contain the real IP
-		$ip_headers = [
-			'HTTP_CF_CONNECTING_IP',     // Cloudflare
-			'HTTP_CLIENT_IP',            // Proxy
-			'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
-			'HTTP_X_FORWARDED',          // Proxy
-			'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
-			'HTTP_FORWARDED_FOR',        // Proxy
-			'HTTP_FORWARDED',            // Proxy
-			'REMOTE_ADDR'                // Standard
-		];
-
-		foreach ( $ip_headers as $header ) {
-			if ( ! empty( $_SERVER[ $header ] ) ) {
-				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $header ] ) );
-
-				// Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
-				if ( strpos( $ip, ',' ) !== false ) {
-					$ip = trim( explode( ',', $ip )[0] );
-				}
-
-				// Validate IP address
-				if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
-					return $ip;
-				}
-			}
-		}
-
-		return '0.0.0.0'; // Fallback if no valid IP found
-	}
-
 }

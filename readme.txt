@@ -1,5 +1,5 @@
 === Login, Registration and Lost Password Blocks ===
-Contributors:      arkenon
+Contributors:      arkenon, Verdure Wordpress
 Tags:              block, block editor, gutenberg, login form, register form
 Requires at least: 6.1
 Tested up to:      6.8

@@ -9,7 +9,9 @@
 
 namespace FLR_BLOCKS;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 class Flr_Blocks_User_Settings {
 
@@ -41,7 +43,7 @@ class Flr_Blocks_User_Settings {
 	 * @return string html result of user settings form
 	 * @since 1.0.0
 	 */
-	public function user_settings_form( array $block_attributes ) {
+	public function user_settings_form( array $block_attributes ): string {
 
 		$frontend = new Flr_Blocks_Public();
 
@@ -53,28 +55,36 @@ class Flr_Blocks_User_Settings {
 	/**
 	 * POST operation for user settings.
 	 *
-	 * @return string|false a JSON encoded string on success or FALSE on failure.
+	 * @return void a JSON encoded string on success or FALSE on failure.
 	 * @since 1.0.0
 	 */
 	public function flr_blocks_user_settings_handle_ajax_callback() {
 
 		// Verify nonce for security
-		\check_ajax_referer( 'flrblocksusersettingsupdatehandle', 'security' );
+		check_ajax_referer( 'flrblocksusersettingsupdatehandle', 'security' );
 
-		$user_id = Flr_Blocks_Helper::sanitize( 'user_id', 'post', 'id' );
-		$current_user_id = \get_current_user_id();
+		$user_id         = Flr_Blocks_Helper::sanitize( 'user_id', 'post', 'id' );
+		$current_user_id = get_current_user_id();
 
 		// Critical authorization check: users can only edit their own profile
 		// unless they have edit_users capability (administrators)
-		if ( $user_id !== $current_user_id && !\current_user_can('edit_users') ) {
-			\wp_send_json( array(
+		if ( $user_id !== $current_user_id && ! current_user_can( 'edit_users' ) ) {
+			wp_send_json( array(
 				'status'  => false,
 				'message' => esc_html__( 'Unauthorized access. You can only edit your own profile.', 'frontend-login-and-registration-blocks' )
 			) );
-			\wp_die();
+			wp_die();
 		}
 
 		$user_info = get_userdata( $user_id );
+
+		if ( ! $user_info ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => esc_html_x( "User data could not be fetched.", "user_data_not_fetch_error", "frontend-login-and-registration-blocks" )
+			) );
+			wp_die();
+		}
 
 		$user_info->first_name  = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-first-name', 'post', 'text' );
 		$user_info->last_name   = Flr_Blocks_Helper::sanitize( 'flr-blocks-user-last-name', 'post', 'text' );
@@ -95,7 +105,7 @@ class Flr_Blocks_User_Settings {
 		}
 
 		// Update custom fields
-		do_action('flr_blocks_save_user_form_extra_user_fields', $user_id);
+		do_action( 'flr_blocks_save_user_form_extra_user_fields', $user_id );
 
 		$update = wp_update_user( $user_info );
 
@@ -105,76 +115,52 @@ class Flr_Blocks_User_Settings {
 			$new_password       = Flr_Blocks_Helper::sanitize( 'flr-blocks-password-update', 'post' );
 			$new_password_again = Flr_Blocks_Helper::sanitize( 'flr-blocks-password-again-update', 'post' );
 
+			// Password update logic if new passwords are provided
 			if ( ! empty( $new_password ) && ! empty( $new_password_again ) ) {
 
-				if ( $user_info ) {
+				if ( wp_check_password( $current_password, $user_info->user_pass, $user_id ) ) {
 
-					if ( wp_check_password( $current_password, $user_info->user_pass, $user_id ) ) {
-
-						if ( ( ! empty( $new_password ) && ! empty( $new_password_again ) ) && ( $new_password != $new_password_again ) ) {
-
-							wp_send_json( array(
-								'status'  => false,
-								'message' => esc_html_x( "Your passwords do not match", "password_match_error", "frontend-login-and-registration-blocks" )
-							) );
-
-							wp_die();
-
-						} else {
-
-							// Validate new password strength
-							$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
-							if ( ! $password_validation['valid'] ) {
-								wp_send_json( array(
-									'status'  => false,
-									'message' => $password_validation['message']
-								) );
-								wp_die();
-							}
-
-							wp_set_password( $new_password, $user_id );
-
-							wp_send_json( array(
-								'status'  => true,
-								'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "frontend-login-and-registration-blocks" )
-							) );
-
-							wp_die();
-
-						}
-
-					} else {
+					if ( ( $new_password != $new_password_again ) ) {
 
 						wp_send_json( array(
 							'status'  => false,
-							'message' => esc_html_x( "Make sure your user information is correct.", "check_your_user_info_error", "frontend-login-and-registration-blocks" )
+							'message' => esc_html_x( "Your passwords do not match", "password_match_error", "frontend-login-and-registration-blocks" )
 						) );
 
 						wp_die();
 
-					}
+					} else {
 
+						// Validate new password strength
+						$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
+						if ( ! $password_validation['valid'] ) {
+							wp_send_json( array(
+								'status'  => false,
+								'message' => $password_validation['message']
+							) );
+							wp_die();
+						}
+
+						wp_set_password( $new_password, $user_id );
+
+					}
 
 				} else {
 
 					wp_send_json( array(
 						'status'  => false,
-						'message' => esc_html_x( "Your current password is wrong. Please check it again.", "current_password_error", "frontend-login-and-registration-blocks" )
+						'message' => esc_html_x( "Please check your current password.", "check_your_user_info_error", "frontend-login-and-registration-blocks" )
 					) );
 
 					wp_die();
 
 				}
-			} else {
-
-				wp_send_json( array(
-					'status'  => true,
-					'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "frontend-login-and-registration-blocks" )
-				) );
-
-				wp_die();
-
 			}
+
+			wp_send_json( array(
+				'status'  => true,
+				'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "frontend-login-and-registration-blocks" )
+			) );
 
 		} else {
 
@@ -183,9 +169,9 @@ class Flr_Blocks_User_Settings {
 				'message' => esc_html_x( "Something went wrong. Please try again later.", "general_error_message", "frontend-login-and-registration-blocks" )
 			) );
 
-			wp_die();
-
 		}
+
+		wp_die();
 
 	}
 

@@ -68,9 +68,9 @@ class Flr_Blocks_Lost_Password {
 		check_ajax_referer( 'flrblocksresetrequesthandle', 'security' );
 
 		// Rate limiting for password reset requests
-		$user_ip = Flr_Blocks_Helper::get_real_user_ip();
-		$reset_attempts = get_transient( "reset_attempts_" . $user_ip );
-		$max_reset_attempts = 3; // Maximum 3 reset requests per hour
+		$user_ip                = Flr_Blocks_Helper::get_real_user_ip();
+		$reset_attempts         = get_transient( "reset_attempts_" . $user_ip );
+		$max_reset_attempts     = 3; // Maximum 3 reset requests per hour
 		$reset_lockout_duration = 3600; // 1 hour
 
 		if ( $reset_attempts >= $max_reset_attempts ) {
@@ -105,7 +105,8 @@ class Flr_Blocks_Lost_Password {
 
 
 		$username               = $user->user_login;
-		$lost_password_page_url = site_url( get_option( 'flr_blocks_lost_password_page' ) );
+		$page_slug              = get_option( 'flr_blocks_lost_password_page' );
+		$lost_password_page_url = Flr_Blocks_Helper::get_page_permalink( $page_slug );
 
 		$reset_link = add_query_arg(
 			[
@@ -188,6 +189,16 @@ class Flr_Blocks_Lost_Password {
 			] );
 		}
 
+		// Validate password strength
+		$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
+		if ( ! $password_validation['valid'] ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => $password_validation['message']
+			) );
+			wp_die();
+		}
+
 		reset_password( $user, $new_password );
 
 		$params = [
@@ -200,8 +211,9 @@ class Flr_Blocks_Lost_Password {
 		$mail->send_mail( 'flr_blocks_reset_password_mail_to_user', 'reset_password_mail_to_user_template', $params, _x( 'Your Password Changed', 'reset_password_mail_title', 'frontend-login-and-registration-blocks' ) );
 
 		wp_send_json( [
-			'status'  => true,
-			'message' => __( 'Your password has been reset successfully.', 'frontend-login-and-registration-blocks' )
+			'status'     => true,
+			'message'    => __( 'Your password has been reset successfully.', 'frontend-login-and-registration-blocks' ),
+			'return_url' => Flr_Blocks_Helper::get_page_permalink( get_option( 'flr_blocks_login_page' ) )
 		] );
 
 		wp_die();

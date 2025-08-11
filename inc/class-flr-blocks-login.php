@@ -14,8 +14,8 @@ defined( 'ABSPATH' ) or die;
 
 class Flr_Blocks_Login {
 
-	private $max_attempts = 5; //times
-	private $lockout_duration = 300; //seconds
+	private int $max_attempts = 5; //times
+	private int $lockout_duration = 300; //seconds
 
 	public function load_login_actions() {
 
@@ -36,7 +36,7 @@ class Flr_Blocks_Login {
 	}
 
 	/**
-	 * Welcome Card HTML output (for logged-in users)
+	 * "Welcome Card" HTML output (for logged-in users)
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
 	 *
@@ -87,12 +87,11 @@ class Flr_Blocks_Login {
 		check_ajax_referer( 'flrblocksloginhandle', 'security' );
 
 		$credentials                  = array();
-		$credentials['user_login']    = Flr_Blocks_Helper::sanitize( 'flr-blocks-username-or-email', 'post', 'text' ) ?? '';
+		$credentials['user_login']    = Flr_Blocks_Helper::sanitize( 'flr-blocks-username-or-email', 'post' ) ?? '';
 		$credentials['user_password'] = Flr_Blocks_Helper::sanitize( 'flr-blocks-password', 'post' ) ?? '';
-		$credentials['remember']      = Flr_Blocks_Helper::sanitize( 'flr-blocks-rememberme', 'post', 'text' ) === 'on';
+		$credentials['remember']      = Flr_Blocks_Helper::sanitize( 'flr-blocks-rememberme', 'post' ) === 'on';
 
 		$user = wp_signon( $credentials, is_ssl() );
-
 
 		if ( is_wp_error( $user ) ) {
 
@@ -146,7 +145,7 @@ class Flr_Blocks_Login {
 		$this->enhance_session_security();
 
 		// Clear login attempt counters on successful login
-		$user_ip = $this->get_real_user_ip();
+		$user_ip = Flr_Blocks_Helper::get_real_user_ip();
 		delete_transient( "login_attempts_" . $user_ip );
 
 		wp_send_json( array(
@@ -159,34 +158,31 @@ class Flr_Blocks_Login {
 
 	/**
 	 * Enhance session security after login
-	 *
+	 * This includes regenerating session ID and setting secure cookie parameters
+	 * @return void
 	 * @since 1.2.0
 	 */
 	private function enhance_session_security(): void {
-		//TODO fix this with session_start() and session_write_close() to avoid session issues
+
+		// Start session with secure parameters if not active
+		if ( session_status() !== PHP_SESSION_ACTIVE && ! headers_sent() ) {
+			session_start( [
+				'cookie_httponly' => true,               // Prevent JavaScript access to cookies
+				'cookie_secure'   => is_ssl(),           // Only send cookie over HTTPS
+				'cookie_samesite' => 'Strict',           // CSRF protection
+			] );
+		}
+
 		// Regenerate session ID to prevent session fixation
 		if ( session_status() === PHP_SESSION_ACTIVE ) {
 			session_regenerate_id( true );
-		}
-
-		// Set secure session parameters
-		if ( ! headers_sent() ) {
-			// HttpOnly flag prevents XSS attacks on session cookies
-			ini_set( 'session.cookie_httponly', 1 );
-
-			// Secure flag for HTTPS sites
-			if ( is_ssl() ) {
-				ini_set( 'session.cookie_secure', 1 );
-			}
-
-			// SameSite attribute for CSRF protection
-			ini_set( 'session.cookie_samesite', 'Strict' );
+			session_write_close();
 		}
 
 		// Store additional security information in user meta
 		$user_id = get_current_user_id();
 		if ( $user_id ) {
-			update_user_meta( $user_id, 'last_login_ip', $this->get_real_user_ip() );
+			update_user_meta( $user_id, 'last_login_ip', Flr_Blocks_Helper::get_real_user_ip() );
 			update_user_meta( $user_id, 'last_login_time', current_time( 'timestamp' ) );
 		}
 	}
@@ -319,9 +315,8 @@ class Flr_Blocks_Login {
 	 */
 	public function get_login_url(): string {
 
-		return get_option( 'flr_blocks_login_page' ) ? site_url( get_option( 'flr_blocks_login_page' ) ) : home_url();
+		return get_option( 'flr_blocks_login_page' ) ? Flr_BLocks_Helper::get_page_permalink( get_option( 'flr_blocks_login_page' ) ) : home_url();
 
 	}
-
 
 }
