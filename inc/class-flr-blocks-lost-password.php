@@ -69,16 +69,18 @@ class Flr_Blocks_Lost_Password {
 
 		// Rate limiting for password reset requests
 		$user_ip                = Flr_Blocks_Helper::get_real_user_ip();
-		$reset_attempts         = get_transient( "reset_attempts_" . $user_ip );
 		$max_reset_attempts     = 3; // Maximum 3 reset requests per hour
 		$reset_lockout_duration = 3600; // 1 hour
 
-		if ( $reset_attempts >= $max_reset_attempts ) {
-			wp_send_json( array(
-				'status'  => false,
-				'message' => esc_html_x( "Too many password reset requests. Please wait 1 hour before trying again.", "reset_rate_limit_error", "frontend-login-and-registration-blocks" )
-			) );
-			wp_die();
+		if ( get_option( 'flr_blocks_enable_limit_reset_request_attempts' ) !== 'no' ) {
+			$reset_attempts = get_transient( "reset_attempts_" . $user_ip );
+			if ( $reset_attempts >= $max_reset_attempts ) {
+				wp_send_json( array(
+					'status'  => false,
+					'message' => esc_html_x( "Too many password reset requests. Please wait 1 hour before trying again.", "reset_rate_limit_error", "frontend-login-and-registration-blocks" )
+				) );
+				wp_die();
+			}
 		}
 
 		$email = Flr_Blocks_Helper::sanitize( 'flr-blocks-email', 'post', 'email' );
@@ -128,8 +130,10 @@ class Flr_Blocks_Lost_Password {
 		$send_reset_password_email = $mail->send_mail( 'flr_blocks_reset_request_mail_to_user', 'reset_password_request_mail_to_user_template', $params, _x( 'Reset Password Request', 'reset_request_mail_title', 'frontend-login-and-registration-blocks' ) );
 
 		// Increment reset attempt counter
-		$reset_attempts = get_transient( "reset_attempts_" . $user_ip ) ?: 0;
-		set_transient( "reset_attempts_" . $user_ip, $reset_attempts + 1, $reset_lockout_duration );
+		if ( get_option( 'flr_blocks_enable_limit_reset_request_attempts' ) !== 'no' ) {
+			$reset_attempts = get_transient( "reset_attempts_" . $user_ip ) ?: 0;
+			set_transient( "reset_attempts_" . $user_ip, $reset_attempts + 1, $reset_lockout_duration );
+		}
 
 		if ( $send_reset_password_email ) {
 
@@ -190,13 +194,15 @@ class Flr_Blocks_Lost_Password {
 		}
 
 		// Validate password strength
-		$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
-		if ( ! $password_validation['valid'] ) {
-			wp_send_json( array(
-				'status'  => false,
-				'message' => $password_validation['message']
-			) );
-			wp_die();
+		if ( get_option( 'flr_blocks_enable_password_strength' ) !== 'no' ) {
+			$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
+			if ( ! $password_validation['valid'] ) {
+				wp_send_json( array(
+					'status'  => false,
+					'message' => $password_validation['message']
+				) );
+				wp_die();
+			}
 		}
 
 		reset_password( $user, $new_password );

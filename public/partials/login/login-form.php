@@ -1,5 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 use FLR_BLOCKS\Flr_Blocks_Helper;
 
@@ -10,11 +12,11 @@ if ( is_user_logged_in() ) {
 
 } else {
 
-	$input_style = Flr_Blocks_Helper::get_input_style($form_attributes);
-	$text_style = Flr_Blocks_Helper::get_label_style($form_attributes);
-	$button_style = Flr_Blocks_Helper::get_button_style($form_attributes);
+	$input_style  = Flr_Blocks_Helper::get_input_style( $form_attributes );
+	$text_style   = Flr_Blocks_Helper::get_label_style( $form_attributes );
+	$button_style = Flr_Blocks_Helper::get_button_style( $form_attributes );
 
-	$view = '<div '.get_block_wrapper_attributes().'>
+	$view = '<div ' . get_block_wrapper_attributes() . '>
 				<form name="flr-blocks-login-form" id="flr-blocks-login-form" method="post">';
 
 	$view .= '<div class="flr-blocks-form-row">
@@ -74,11 +76,11 @@ if ( is_user_logged_in() ) {
 	$view .= '</form>';
 	$view .= '<div id="flr-blocks-login-form-result"></div>';
 	$view .= '<div style="text-align:center;">
-				<a style="text-decoration:none;" href="' . esc_url( site_url( get_option( 'flr_blocks_lost_password_page' ) ) ) . '">
+				<a style="text-decoration:none;" href="' . esc_url( Flr_Blocks_Helper::get_page_permalink( get_option( 'flr_blocks_lost_password_page' ) ) ) . '">
 						' . esc_html_x( "Lost Password", "reset_password_button_text", "frontend-login-and-registration-blocks" ) . '
 				</a> | ';
 
-	$view .= '<a style="text-decoration:none;" href="' . esc_url( site_url( get_option( 'flr_blocks_register_page' ) ) ) . '">
+	$view .= '<a style="text-decoration:none;" href="' . esc_url( Flr_Blocks_Helper::get_page_permalink( get_option( 'flr_blocks_register_page' ) ) ) . '">
 						' . esc_html_x( "Register", "register_button_text", "frontend-login-and-registration-blocks" ) . '
 				</a>
 			</div>

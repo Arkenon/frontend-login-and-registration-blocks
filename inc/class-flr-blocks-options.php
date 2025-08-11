@@ -86,11 +86,10 @@ class Flr_Blocks_Options {
 		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_limit_login_max_attempts', [ 'sanitize_callback' => 'intval' ] );
 		register_setting( 'flr-blocks-limit-login-settings-group', 'flr_blocks_limit_login_lockout_duration', [ 'sanitize_callback' => 'intval' ] );
 
-		//TODO add new options
 		// Advanced settings
 		register_setting( 'flr-blocks-advanced-settings-group', 'flr_blocks_enable_password_strength', [ 'sanitize_callback' => 'sanitize_text_field' ] );
 		register_setting( 'flr-blocks-advanced-settings-group', 'flr_blocks_enable_username_validation', [ 'sanitize_callback' => 'sanitize_text_field' ] );
-		register_setting( 'flr-blocks-advanced-settings-group', 'flr_blocks_enaable_limit_reset_request_attempts', [ 'sanitize_callback' => 'sanitize_text_field' ] );
+		register_setting( 'flr-blocks-advanced-settings-group', 'flr_blocks_enable_limit_reset_request_attempts', [ 'sanitize_callback' => 'sanitize_text_field' ] );
 	}
 
 	/**

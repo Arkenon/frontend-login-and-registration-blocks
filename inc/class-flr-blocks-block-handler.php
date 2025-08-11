@@ -198,7 +198,6 @@ class Flr_Blocks_Block_Handler {
 		$ajax_config = [
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( 'flr_blocks_nonce' ),
-			//TODO remove strings
 			'strings'  => [
 				'loading' => __( 'Loading...', 'frontend-login-and-registration-blocks' ),
 				'error'   => __( 'An error occurred', 'frontend-login-and-registration-blocks' ),

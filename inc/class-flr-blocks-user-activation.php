@@ -71,6 +71,13 @@ class Flr_Blocks_User_Activation {
 	 */
 	public function activate_user( string $code, string $user_email ): array {
 		$user             = get_user_by( 'email', $user_email );
+		if(!$user){
+			return array(
+				'status'  => false,
+				'message' => esc_html_x( "User not found. Please check your email address.", "user_not_found", "frontend-login-and-registration-blocks" )
+			);
+		}
+
 		$activation_code  = get_user_meta( $user->ID, 'flr_blocks_user_activation_code', true );
 		$check_activation = $this->check_is_user_activated( $user->ID );
 

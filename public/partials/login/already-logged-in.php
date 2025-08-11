@@ -19,7 +19,7 @@ $view = '<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);transition: 0.3s;wi
 
 if ( get_option( 'flr_blocks_has_user_dashboard' ) === 'yes' ) :
 
-	$view .= '<a style="text-decoration:none;font-size:14px;" href="' . esc_url( site_url( get_option( 'flr_blocks_user_settings_page' ) ) ) . '">
+	$view .= '<a style="text-decoration:none;font-size:14px;" href="' . esc_url( Flr_Blocks_Helper::get_page_permalink( get_option( 'flr_blocks_user_settings_page' ) ) ) . '">
 				' . esc_html_x( "Go to user dashboard", "go_to_user_dashboard_text", "frontend-login-and-registration-blocks" ) . '
 			  </a> |';
 

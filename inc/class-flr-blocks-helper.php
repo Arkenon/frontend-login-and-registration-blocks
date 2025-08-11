@@ -512,6 +512,7 @@ class Flr_Blocks_Helper {
 	 *
 	 * @return string
 	 *
+	 * @since 1.2.0
 	 */
 	public static function get_page_permalink( string $page_slug ): string {
 		// Check if the page exists
@@ -527,5 +528,26 @@ class Flr_Blocks_Helper {
 		return get_permalink( $get_page_by_path );
 	}
 
+	/**
+	 * Render a toggle input for options page.
+	 *
+	 * @param string $option_name
+	 * @param false|string $default_value
+	 *
+	 * @return void
+	 * @since 1.2.0
+	 */
+	public static function render_toggle_input( string $option_name, $default_value = false ) {
+		$option_value = get_option( $option_name, $default_value );
+		?>
+		<label class="flr-blocks-toggle-switch">
+			<input type="checkbox" name="<?php echo esc_attr( $option_name ); ?>"
+				   id="<?php echo esc_attr( $option_name ); ?>"
+				   value="yes" <?php checked( $option_value, 'yes' ); ?>>
+			<span class="flr-blocks-toggle-slider"></span>
+		</label>
+		<input type="hidden" name="<?php echo esc_attr( $option_name ); ?>_hidden" value="no">
+		<?php
+	}
 }
 

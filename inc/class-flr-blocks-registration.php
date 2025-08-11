@@ -74,13 +74,15 @@ class Flr_Blocks_Registration {
 		$last_name      = Flr_Blocks_Helper::sanitize( 'flr-blocks-last-name-for-register', 'post', 'text' );
 
 		// Enhanced input validation
-		$username_validation = Flr_Blocks_Helper::validate_username_security( $username );
-		if ( ! $username_validation['valid'] ) {
-			wp_send_json( array(
-				'status'  => false,
-				'message' => $username_validation['message']
-			) );
-			wp_die();
+		if ( get_option( 'flr_blocks_enable_username_validation' ) !== 'no' ) {
+			$username_validation = Flr_Blocks_Helper::validate_username_security( $username );
+			if ( ! $username_validation['valid'] ) {
+				wp_send_json( array(
+					'status'  => false,
+					'message' => $username_validation['message']
+				) );
+				wp_die();
+			}
 		}
 
 		$email_validation = Flr_Blocks_Helper::validate_email_security( $email );
@@ -112,13 +114,15 @@ class Flr_Blocks_Registration {
 
 		// Validate password strength
 		if ( ! empty( $password ) ) {
-			$password_validation = Flr_Blocks_Helper::validate_password_strength( $password );
-			if ( ! $password_validation['valid'] ) {
-				wp_send_json( array(
-					'status'  => false,
-					'message' => $password_validation['message']
-				) );
-				wp_die();
+			if ( get_option( 'flr_blocks_enable_password_strength' ) !== 'no' ) {
+				$password_validation = Flr_Blocks_Helper::validate_password_strength( $password );
+				if ( ! $password_validation['valid'] ) {
+					wp_send_json( array(
+						'status'  => false,
+						'message' => $password_validation['message']
+					) );
+					wp_die();
+				}
 			}
 		}
 

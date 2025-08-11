@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+use FLR_BLOCKS\Flr_Blocks_Helper;
 use FLR_BLOCKS\Flr_Blocks_Mail;
 
 ?>
@@ -76,13 +77,7 @@ use FLR_BLOCKS\Flr_Blocks_Mail;
 				</p>
 			</th>
 			<td>
-				<select name="flr_blocks_enable_mails" id="flr_blocks_enable_mails">
-
-					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "frontend-login-and-registration-blocks" ) ?></option>
-					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_enable_mails' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "frontend-login-and-registration-blocks" ); ?></option>
-					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_enable_mails' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "frontend-login-and-registration-blocks" ); ?></option>
-
-				</select>
+				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_enable_mails' ) ?>
 			</td>
 		</tr>
 

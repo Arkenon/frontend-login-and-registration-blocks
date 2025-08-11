@@ -132,13 +132,15 @@ class Flr_Blocks_User_Settings {
 					} else {
 
 						// Validate new password strength
-						$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
-						if ( ! $password_validation['valid'] ) {
-							wp_send_json( array(
-								'status'  => false,
-								'message' => $password_validation['message']
-							) );
-							wp_die();
+						if ( get_option( 'flr_blocks_enable_password_strength' ) !== 'no' ) {
+							$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
+							if ( ! $password_validation['valid'] ) {
+								wp_send_json( array(
+									'status'  => false,
+									'message' => $password_validation['message']
+								) );
+								wp_die();
+							}
 						}
 
 						wp_set_password( $new_password, $user_id );
@@ -158,8 +160,9 @@ class Flr_Blocks_User_Settings {
 			}
 
 			wp_send_json( array(
-				'status'  => true,
-				'message' => esc_html_x( "Operation has been completed successfully.", "general_success_message", "frontend-login-and-registration-blocks" )
+				'status'     => true,
+				'return_url' => Flr_Blocks_Helper::get_page_permalink( get_option( 'flr_blocks_user_settings_page' ) ),
+				'message'    => esc_html_x( "User information has been updated successfully.", "general_success_message", "frontend-login-and-registration-blocks" )
 			) );
 
 		} else {

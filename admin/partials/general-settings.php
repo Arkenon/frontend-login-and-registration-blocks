@@ -41,13 +41,7 @@ $pages = get_pages();
 			</th>
 			<td>
 
-				<select name="flr_blocks_has_activation" id="flr_blocks_has_activation">
-
-					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "frontend-login-and-registration-blocks" ) ?></option>
-					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_has_activation' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "frontend-login-and-registration-blocks" ); ?></option>
-					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_has_activation' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "frontend-login-and-registration-blocks" ); ?></option>
-
-				</select>
+				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_has_activation' ) ?>
 
 			</td>
 		</tr>
@@ -66,13 +60,7 @@ $pages = get_pages();
 			</th>
 			<td>
 
-				<select name="flr_blocks_has_user_dashboard" id="flr_blocks_has_user_dashboard">
-
-					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "frontend-login-and-registration-blocks" ) ?></option>
-					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_has_user_dashboard' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "frontend-login-and-registration-blocks" ); ?></option>
-					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_has_user_dashboard' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "frontend-login-and-registration-blocks" ); ?></option>
-
-				</select>
+				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_has_user_dashboard' ) ?>
 
 			</td>
 		</tr>
@@ -91,13 +79,7 @@ $pages = get_pages();
 			</th>
 			<td>
 
-				<select name="flr_blocks_redirect_from_wp_login_admin" id="flr_blocks_redirect_from_wp_login_admin">
-
-					<option value=""><?php echo esc_html_x( "Please select...", "select_text", "frontend-login-and-registration-blocks" ) ?></option>
-					<option value="yes" <?php echo esc_html(get_option( 'flr_blocks_redirect_from_wp_login_admin' )) === 'yes' ? "selected" : ""; ?>><?php echo esc_html_x( "Yes", "yes_text", "frontend-login-and-registration-blocks" ); ?></option>
-					<option value="no" <?php echo esc_html(get_option( 'flr_blocks_redirect_from_wp_login_admin' )) === 'no' ? "selected" : ""; ?>><?php echo esc_html_x( "No", "no_text", "frontend-login-and-registration-blocks" ); ?></option>
-
-				</select>
+				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_redirect_from_wp_login_admin' ) ?>
 
 			</td>
 		</tr>

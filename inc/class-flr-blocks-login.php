@@ -150,7 +150,7 @@ class Flr_Blocks_Login {
 
 		wp_send_json( array(
 			'status'     => true,
-			'return_url' => site_url( get_option( 'flr_blocks_redirect_after_login' ) ) ?? null,
+			'return_url' => Flr_Blocks_Helper::get_page_permalink( get_option( 'flr_blocks_redirect_after_login' ) ) ?? null,
 			'message'    => esc_html_x( "You have successfully logged in...", "login_successful", "frontend-login-and-registration-blocks" )
 		) );
 

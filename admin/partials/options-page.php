@@ -54,6 +54,11 @@ $tab         = Flr_Blocks_Helper::sanitize( 'tab', 'get', 'text' ) ?? $default_t
 			<?php echo esc_html_x( "Limit Login Attempts", "limit_login_settings", "frontend-login-and-registration-blocks" ); ?>
 		</a>
 
+		<a href="?page=frontend-login-with-gutenberg-blocks-settings&tab=advanced-settings"
+		   class="nav-tab <?php if ( $tab === 'advanced-settings' ): ?>nav-tab-active<?php endif; ?>">
+			<?php echo esc_html_x( "Advanced Settings", "limit_login_settings", "frontend-login-and-registration-blocks" ); ?>
+		</a>
+
 	</nav>
 
 	<div class="tab-content">
@@ -67,6 +72,10 @@ $tab         = Flr_Blocks_Helper::sanitize( 'tab', 'get', 'text' ) ?? $default_t
 
 			case 'limit-login':
 				Flr_Blocks_Helper::print_view( "admin/partials/limit-login-settings.php" );
+				break;
+
+			case 'advanced-settings':
+				Flr_Blocks_Helper::print_view( "admin/partials/advanced-settings.php" );
 				break;
 
 			default:
