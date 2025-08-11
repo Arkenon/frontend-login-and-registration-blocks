@@ -29,7 +29,7 @@ class Flr_Blocks_Registration {
 	}
 
 	/**
-	 * Registration form html output
+	 * Registration form HTML output
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
 	 *
@@ -40,7 +40,7 @@ class Flr_Blocks_Registration {
 
 		$frontend = new Flr_Blocks_Public();
 
-		//Get register form html output from Frontend class
+		//Get register form HTML output from Frontend class
 		return $frontend->get_the_form( 'public/partials/register/register-form.php', $block_attributes );
 	}
 
@@ -74,7 +74,7 @@ class Flr_Blocks_Registration {
 		$last_name      = Flr_Blocks_Helper::sanitize( 'flr-blocks-last-name-for-register', 'post', 'text' );
 
 		// Enhanced input validation
-		if ( get_option( 'flr_blocks_enable_username_validation' ) !== 'no' ) {
+		if ( get_option( 'flr_blocks_enable_username_validation' ) === 'yes' ) {
 			$username_validation = Flr_Blocks_Helper::validate_username_security( $username );
 			if ( ! $username_validation['valid'] ) {
 				wp_send_json( array(
@@ -114,7 +114,7 @@ class Flr_Blocks_Registration {
 
 		// Validate password strength
 		if ( ! empty( $password ) ) {
-			if ( get_option( 'flr_blocks_enable_password_strength' ) !== 'no' ) {
+			if ( get_option( 'flr_blocks_enable_password_strength' ) === 'yes' ) {
 				$password_validation = Flr_Blocks_Helper::validate_password_strength( $password );
 				if ( ! $password_validation['valid'] ) {
 					wp_send_json( array(
@@ -156,13 +156,13 @@ class Flr_Blocks_Registration {
 			'last_name'  => $last_name,
 		);
 
-		$newuser = wp_insert_user( $userdata );
+		$new_user = wp_insert_user( $userdata );
 
 
-		if ( ! is_wp_error( $newuser ) ) {
+		if ( ! is_wp_error( $new_user ) ) {
 
 			// Update custom fields
-			do_action( 'flr_blocks_save_register_form_extra_user_fields', $newuser );
+			do_action( 'flr_blocks_save_register_form_extra_user_fields', $new_user );
 
 			$message = "";
 
@@ -171,17 +171,23 @@ class Flr_Blocks_Registration {
 				// Generate cryptographically secure activation code
 				$code = wp_generate_password( 32, false );
 
-				$add_user_activation      = add_user_meta( $newuser, 'flr_blocks_user_activation', 'not_activated' );
-				$add_user_activation_code = add_user_meta( $newuser, 'flr_blocks_user_activation_code', $code );
+				$add_user_activation      = add_user_meta( $new_user, 'flr_blocks_user_activation', 'not_activated' );
+				$add_user_activation_code = add_user_meta( $new_user, 'flr_blocks_user_activation_code', $code );
 
 				if ( $add_user_activation && $add_user_activation_code ) {
 
 					$message = esc_html_x( "You have been signed up successfully. Please click the membership activation link sent your e-mail.", "register_succession_with_activation", "frontend-login-and-registration-blocks" );
 
-					$get_permalink   = Flr_Blocks_Helper::get_page_permalink( get_option( "flr_blocks_activation_page" ) );
-					$activation_link = $get_permalink . '?key=' . $code . '&user=' . $email;
+					$get_permalink = Flr_Blocks_Helper::get_page_permalink( get_option( "flr_blocks_activation_page" ) );
 
-					$params['activation_link'] = $activation_link;
+					// add query arguments to the $get_permalink with email and activation code
+					$params['activation_link'] = add_query_arg(
+						array(
+							'key'  => $code,
+							'user' => $email,
+						),
+						$get_permalink
+					);
 
 				}
 

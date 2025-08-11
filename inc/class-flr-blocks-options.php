@@ -101,7 +101,7 @@ class Flr_Blocks_Options {
 
 		$backend = new Flr_Blocks_Admin();
 
-		//Get options page html output from Backend class
+		//Get options page HTML output from Backend class
 		$backend->get_options_page();
 
 	}

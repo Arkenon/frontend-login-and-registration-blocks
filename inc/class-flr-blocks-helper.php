@@ -541,12 +541,15 @@ class Flr_Blocks_Helper {
 		$option_value = get_option( $option_name, $default_value );
 		?>
 		<label class="flr-blocks-toggle-switch">
-			<input type="checkbox" name="<?php echo esc_attr( $option_name ); ?>"
+			<input class="flr-blocks-toggle-checkbox"
+				   type="checkbox"
+				   name="<?php echo esc_attr( $option_name ); ?>"
 				   id="<?php echo esc_attr( $option_name ); ?>"
-				   value="yes" <?php checked( $option_value, 'yes' ); ?>>
+				   value="yes"
+				<?php checked( $option_value, 'yes' ); ?>
+			>
 			<span class="flr-blocks-toggle-slider"></span>
 		</label>
-		<input type="hidden" name="<?php echo esc_attr( $option_name ); ?>_hidden" value="no">
 		<?php
 	}
 }

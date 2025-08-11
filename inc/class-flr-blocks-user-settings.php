@@ -132,7 +132,7 @@ class Flr_Blocks_User_Settings {
 					} else {
 
 						// Validate new password strength
-						if ( get_option( 'flr_blocks_enable_password_strength' ) !== 'no' ) {
+						if ( get_option( 'flr_blocks_enable_password_strength' ) === 'yes' ) {
 							$password_validation = Flr_Blocks_Helper::validate_password_strength( $new_password );
 							if ( ! $password_validation['valid'] ) {
 								wp_send_json( array(

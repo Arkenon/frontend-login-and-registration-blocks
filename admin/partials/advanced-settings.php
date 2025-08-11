@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</th>
 			<td>
 
-				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_enable_password_strength', 'yes' ) ?>
+				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_enable_password_strength' ) ?>
 
 			</td>
 		</tr>
@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</th>
 			<td>
 
-				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_enable_username_validation', 'yes' ) ?>
+				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_enable_username_validation' ) ?>
 
 			</td>
 		</tr>
@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</th>
 			<td>
 
-				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_enable_limit_reset_request_attempts', 'yes' ) ?>
+				<?php Flr_Blocks_Helper::render_toggle_input( 'flr_blocks_enable_limit_reset_request_attempts' ) ?>
 
 			</td>
 		</tr>

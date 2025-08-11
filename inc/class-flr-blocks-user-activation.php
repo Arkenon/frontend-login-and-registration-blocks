@@ -18,18 +18,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Flr_Blocks_User_Activation {
 
 	/**
-	 * User Activation block html output
+	 * User Activation block's HTML output
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js
 	 *
-	 * @return string html result of user activation block
+	 * @return string HTML result of user activation block
 	 * @since 1.0.0
 	 */
 	public function user_activation_block( array $block_attributes ): string {
 
 		$frontend = new Flr_Blocks_Public();
 
-		//Get login form html output from Frontend class
+		//Get login form HTML output from Frontend class
 		return $frontend->get_the_form( 'public/partials/user-activation/user-activation.php', $block_attributes );
 
 	}
@@ -70,8 +70,10 @@ class Flr_Blocks_User_Activation {
 	 *
 	 */
 	public function activate_user( string $code, string $user_email ): array {
-		$user             = get_user_by( 'email', $user_email );
-		if(!$user){
+
+		// Check if user exists with the given email
+		$user = get_user_by( 'email', $user_email );
+		if ( ! $user ) {
 			return array(
 				'status'  => false,
 				'message' => esc_html_x( "User not found. Please check your email address.", "user_not_found", "frontend-login-and-registration-blocks" )
