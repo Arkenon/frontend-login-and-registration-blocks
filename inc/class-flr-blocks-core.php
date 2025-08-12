@@ -43,9 +43,6 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 		//Load block types (required)
 		self::set_block_types();
 
-		//Load internationalization functionality (required)
-		self::set_locale();
-
 		//Load admin options functionality (optional)
 		self::set_options();
 
@@ -89,11 +86,6 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 		 * The class responsible for registering block types
 		 */
 		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-block-handler.php' );
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 */
-		Flr_Blocks_Helper::using( 'inc/class-flr-blocks-i18n.php' );
 
 	}
 
@@ -220,24 +212,7 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 	}
 
 	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Plugin_Name_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function set_locale() {
-
-		$plugin_i18n = new Flr_Blocks_I18n();
-
-		self::add_action( 'plugins_loaded', $plugin_i18n, 'load_flr_blocks_textdomain' );
-
-	}
-
-	/**
-	 * Register all of the hooks related to the admin area functionality
+	 * Register all the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
 	 * @since    1.0.0

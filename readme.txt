@@ -1,10 +1,10 @@
 === Login, Registration and Lost Password Blocks ===
 Contributors:      arkenon, Verdure Wordpress
-Tags:              block, block editor, gutenberg, login form, register form
+Tags:              login block, lost password block, login form, custom login, wp login
 Requires at least: 6.1
 Tested up to:      6.8
 Requires PHP:      7.4
-Stable tag:        1.1.1
+Stable tag:        1.2.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,8 +31,20 @@ You can add login, register, lost password or user settings with just a one clic
 **2. Customization**
 Each block has color, font and size option in the right sidebar of block editor. You can easily customize your forms.
 
-...and more....
-
+☑ Login Form Block
+☑ Register Form Block
+☑ Lost Password Form Block
+☑ User Settings Form Block
+☑ User Activation Form Block
+☑ Welcome Card Block
+☑ Menu Item Block (Login/Logout)
+☑ Limit Login Attempts
+☑ Limit Reset Request Attempts
+☑ E-Mail Settings
+☑ Strength Password
+☑ Username Validation
+☑ Customizable Form Fields
+☑ Customizable Colors
 
 == Note: Please read the guide before using the plugin. ==
 ☑ [Documentation](https://guide-frontendlogin.iyziweb.site/)
@@ -46,6 +58,20 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 
 == Changelog ==
+
+= 1.2.0 =
+* Fixed security issues reported from Plugin Check plugin
+* Enhanced security for Register Form Block
+* Enhanced security for Lost Password Form Block
+* Enhanced security for User Settings Form Block
+* Enhanced security for User Activation Form Block
+* Enhanced security for Login Form Block
+* Added new settings to Admin Settings Page
+* Added Password Strength Meter
+* Added Username Validation
+* Revised code for better performance
+* class-flr-blocks-i18n.php removed  (load_plugin_textdomain() has been discouraged error)
+* Thanks to [Verdure Wordpress](https://github.com/vegetable-bits) for the contribution
 
 = 1.1.1 =
 * Add xhrFields ( withCredentials: true) to ajax requests
