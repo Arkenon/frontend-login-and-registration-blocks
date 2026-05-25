@@ -2,9 +2,9 @@
 Contributors:      arkenon
 Tags:              login block, lost password block, login form, custom login, wp login
 Requires at least: 6.1
-Tested up to:      6.9
+Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        1.2.2
+Stable tag:        1.2.3
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Each block has color, font and size option in the right sidebar of block editor.
 
 
 == Changelog ==
+
+= 1.2.3 =
+* Tested: Compatibility with WordPress 7.0
 
 = 1.2.2 =
 * Fixed: Missing stable tag issue in readme.txt

@@ -5,7 +5,7 @@
  * Description: A collection of Gutenberg blocks for login, registration and lost password forms and more...
  * Requires at least: 6.1
  * Requires PHP: 7.4
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: Kadim Gültekin
  * Author URI: https://github.com/Arkenon
  * Text Domain: frontend-login-and-registration-blocks
