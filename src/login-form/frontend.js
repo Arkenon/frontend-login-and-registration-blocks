@@ -4,13 +4,13 @@ import { formBeforeSend, formSuccess, formError } from '../forms';
 // Configuration data provided via wp_add_inline_script
 
 // Login form
-const loginForm = document.getElementById('flr-blocks-login-form');
-if (loginForm) {
-	loginForm.addEventListener('submit', async function (e) {
+const loginForm = document.getElementById( 'flr-blocks-login-form' );
+if ( loginForm ) {
+	loginForm.addEventListener( 'submit', async function ( e ) {
 		e.preventDefault();
 		const form = this;
-		const formData = new FormData(form);
-		const submitBtn = form.querySelector('#flr-blocks-login-submit');
+		const formData = new FormData( form );
+		const submitBtn = form.querySelector( '#flr-blocks-login-submit' );
 		const formResult = document.getElementById(
 			'flr-blocks-login-form-result'
 		);
@@ -21,28 +21,28 @@ if (loginForm) {
 		// Access configuration data via global object
 		const ajaxConfig = window.flr_blocks_ajax_object || {};
 
-		if (!ajaxConfig.ajax_url) {
-			console.error('AJAX URL not available');
+		if ( ! ajaxConfig.ajax_url ) {
+			console.error( 'AJAX URL not available' );
 			return;
 		}
 
 		// Form processing before sending
-		formBeforeSend(formResult, submitBtn, loadingBtn);
+		formBeforeSend( formResult, submitBtn, loadingBtn );
 
 		try {
-			const response = await fetch(ajaxConfig.ajax_url, {
+			const response = await fetch( ajaxConfig.ajax_url, {
 				method: 'POST',
 				body: formData,
 				credentials: 'include',
 				headers: {
-					'X-WP-Nonce': ajaxConfig.nonce || ''
-				}
-			});
+					'X-WP-Nonce': ajaxConfig.nonce || '',
+				},
+			} );
 
 			const data = await response.json();
-			formSuccess(data, formResult, submitBtn, loadingBtn);
-		} catch (error) {
-			formError(error, formResult, submitBtn, loadingBtn);
+			formSuccess( data, formResult, submitBtn, loadingBtn );
+		} catch ( error ) {
+			formError( error, formResult, submitBtn, loadingBtn );
 		}
-	});
+	} );
 }

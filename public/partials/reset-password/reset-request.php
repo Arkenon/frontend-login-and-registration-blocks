@@ -1,73 +1,61 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * Step one of a password reset: ask for the e-mail address.
+ *
+ * Mirrored by src/reset-password-form/edit.js when its editor preview is set to
+ * the request step. The ids are a contract with
+ * src/reset-password-form/frontend.js.
+ *
+ * @package Frontend_Login_And_Registration_Blocks
+ */
 
-$input_border_radius = $form_attributes['inputBorderRadius'] ?? '';
-$text_color = $form_attributes['textColor'] ?? '';
-$text_font_weight = $form_attributes['textFontWeight'] ?? '';
-$button_text_color = $form_attributes['buttonTextColor'] ?? '';
-$button_text_font_weight = $form_attributes['buttonTextFontWeight'] ?? '';
-$button_bg_color = $form_attributes['buttonBgColor'] ?? '';
-$button_border_radius = $form_attributes['buttonBorderRadius'] ?? '';
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
-$input_style = 'border-radius:' . $input_border_radius.'px' ;
-$text_style  = 'color:' .$text_color.'; font-weight:' . $text_font_weight;
+use FLR_BLOCKS\Flr_Blocks_Form_Markup;
+use FLR_BLOCKS\Flr_Blocks_Style;
 
-$button_border_color = array_key_exists( 'color', $form_attributes['buttonBorder'] ) ? 'border-color: ' . $form_attributes['buttonBorder']['color'] . ';' : "";
-$button_border_style = array_key_exists( 'style', $form_attributes['buttonBorder'] ) ? 'border-style: ' . $form_attributes['buttonBorder']['style'] . ';' : "";
-$button_border_width = array_key_exists( 'width', $form_attributes['buttonBorder'] ) ? 'border-width: ' . $form_attributes['buttonBorder']['width'] . ';' : "";
+$view = '<div ' . Flr_Blocks_Style::wrapper( $form_attributes ) . '>';
 
-$button_style = 'color:' . $button_text_color . '; ' .
-                'background-color: ' . $button_bg_color . '; ' .
-                $button_border_color .
-                $button_border_style .
-                $button_border_width .
-                'border-radius: ' . $button_border_radius . 'px;' .
-                'font-weight: ' . $button_text_font_weight;
+$view .= '<form name="flr-blocks-reset-pass-request-form" id="flr-blocks-reset-pass-request-form" method="post" class="flr-blocks-form">';
 
-$desc = $form_attributes['description'] ?: _x( "Please enter your e-mail address. We will send you an e-mail to reset your password.", "send_reset_request_description", "frontend-login-and-registration-blocks" );
+$view .= Flr_Blocks_Form_Markup::description(
+	$form_attributes,
+	'requestDescription',
+	_x( 'Please enter your e-mail address. We will send you an e-mail to reset your password.', 'send_reset_request_description', 'frontend-login-and-registration-blocks' )
+);
 
-$view = '<div '.get_block_wrapper_attributes().'>
-				<form name="flr-blocks-reset-pass-request-form" id="flr-blocks-reset-pass-request-form" method="post">';
+$view .= Flr_Blocks_Form_Markup::field(
+	$form_attributes,
+	[
+		'id'           => 'flr-blocks-email',
+		'key'          => 'email',
+		'type'         => 'email',
+		'required'     => true,
+		'autocomplete' => 'email',
+		'label'        => _x( 'Your e-mail', 'email_input_text', 'frontend-login-and-registration-blocks' ),
+		'placeholder'  => _x( 'Enter your e-mail', 'email_placeholder_text', 'frontend-login-and-registration-blocks' ),
+	]
+);
 
-if ( $form_attributes['showDescription'] ) {
-	$view .= '<div style="text-align:center;">
-							<p>' . esc_html( $desc ) . '</p>
-						  </div>';
-}
+$view .= Flr_Blocks_Form_Markup::form_action( 'flrblocksresetrequesthandle' );
 
-$view .= '<div class="flr-blocks-form-row">
-						    <div class="flr-blocks-input-group">';
+$view .= Flr_Blocks_Form_Markup::submit(
+	$form_attributes,
+	'reset-request',
+	'flr-blocks-reset-request-submit',
+	'flr-blocks-reset-request-loading',
+	Flr_Blocks_Style::text(
+		$form_attributes,
+		'labels',
+		'requestSubmit',
+		_x( 'Send Request', 'send_reset_request', 'frontend-login-and-registration-blocks' )
+	)
+);
 
-if ( $form_attributes['showLabels'] ) {
+$view .= '</form>';
 
-	$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="flr-blocks-email">' . esc_html_x("Your e-mail", "email_input_text", "frontend-login-and-registration-blocks" ) . '</label>';
-}
+$view .= Flr_Blocks_Form_Markup::result( 'flr-blocks-reset-request-form-result' );
 
-$view .= '<input class="flr-blocks-input-control" id="flr-blocks-email" name="flr-blocks-email" required type="text" style=' . $input_style . ' placeholder="';
-
-if ( $form_attributes['showPlaceholders'] ) {
-
-	$view .= esc_attr_x( "Enter your e-mail", "email_placeholder_text", "frontend-login-and-registration-blocks" );
-
-}
-
-$view .= '" />';
-$view .= '</div>
-
-						</div>';
-
-$view .= '<input type="hidden" name="action" value="' . esc_attr( 'flrblocksresetrequesthandle' ) . '">';
-
-$view .= '<input type="hidden" name="security" value="' . esc_attr( wp_create_nonce( 'flrblocksresetrequesthandle' ) ) . '">';
-
-$view .= '<div class="flr-blocks-form-row">
-							<button style="' . $button_style . '" type="submit" id="flr-blocks-reset-request-submit" class="flr-blocks-reset-request-btn flr-blocks-btn wp-block-button__link wp-element-button">
-								' . esc_html_x( "Send Request", "send_reset_request", "frontend-login-and-registration-blocks" ) . '
-							</button>
-						</div>
-				<div id="flr-blocks-reset-request-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...", "loading_text", "frontend-login-and-registration-blocks" ) . '</div>';
-$view .= '</form>
-			<div id="flr-blocks-reset-request-form-result"></div>
-	    </div>';
-
-
+$view .= '</div>';

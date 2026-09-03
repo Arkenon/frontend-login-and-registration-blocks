@@ -1,0 +1,479 @@
+/*
+ * Shared form styles for the block editor and the front end.
+ *
+ * Registered once as flr-blocks-forms and listed in both the style and
+ * editorStyle fields of every form block, so the editor canvas and the
+ * rendered page consume the exact same selectors. That parity is the whole
+ * point: nothing here may be duplicated or overridden per context, and
+ * nothing needs !important.
+ *
+ * Section 1 declares the default value of every --flr-* token at
+ * specificity 0, which means the inline custom properties emitted by
+ * Flr_Blocks_Style::css_vars() and buildStyleVars() always win. Consuming
+ * rules therefore reference bare var(--flr-x) with no inline fallback.
+ *
+ * Adding a token? Give it a default here AND a consuming rule below, or
+ * `npm run lint:tokens` will fail.
+ */
+
+/* ------------------------------------------------------------------
+ * 1. Token defaults
+ * ------------------------------------------------------------------ */
+
+:where(
+.wp-block-frontend-login-with-gutenberg-blocks-login-form,
+.wp-block-frontend-login-with-gutenberg-blocks-register-form,
+.wp-block-frontend-login-with-gutenberg-blocks-reset-password-form,
+.wp-block-frontend-login-with-gutenberg-blocks-user-settings-form,
+.wp-block-frontend-login-with-gutenberg-blocks-welcome-card,
+.flr-blocks-form-wrapper
+) {
+
+	/* Layout */
+	--flr-form-max-width: 100%;
+	--flr-field-gap: 1rem;
+	--flr-card-shadow: none;
+
+	/* Labels */
+	--flr-label-color: currentcolor;
+	--flr-label-font-size: inherit;
+	--flr-label-font-weight: 600;
+	--flr-label-line-height: 1.4;
+	--flr-label-letter-spacing: normal;
+	--flr-label-text-transform: none;
+	--flr-label-gap: 0.375rem;
+	--flr-label-required-color: #cc1818;
+
+	/* Inputs */
+	--flr-input-color: #1e1e1e;
+	--flr-input-bg: #fff;
+	--flr-input-border-color: #ced4da;
+	--flr-input-border-width: 1px;
+	--flr-input-border-style: solid;
+	--flr-input-radius: 4px;
+	--flr-input-padding-block: 0.5rem;
+	--flr-input-padding-inline: 0.75rem;
+	--flr-input-font-size: 1rem;
+	--flr-input-shadow: none;
+	--flr-input-placeholder-color: #767676;
+	--flr-input-focus-border-color: #3858e9;
+	--flr-input-focus-bg: var(--flr-input-bg);
+	--flr-input-focus-shadow: 0 0 0 2px #3858e94d;
+	--flr-input-disabled-bg: #f0f0f0;
+	--flr-input-disabled-color: #8c8f94;
+
+	/* Submit button */
+	--flr-button-bg: #1e1e1e;
+	--flr-button-color: #fff;
+	--flr-button-border-color: transparent;
+	--flr-button-border-width: 0;
+	--flr-button-border-style: solid;
+	--flr-button-radius: 4px;
+	--flr-button-padding-block: 0.7rem;
+	--flr-button-padding-inline: 1.25rem;
+	--flr-button-font-size: 1rem;
+	--flr-button-font-weight: 600;
+	--flr-button-letter-spacing: normal;
+	--flr-button-text-transform: none;
+	--flr-button-shadow: none;
+	--flr-button-width: 100%;
+	--flr-button-justify: stretch;
+	--flr-button-bg-hover: #3c434a;
+	--flr-button-color-hover: var(--flr-button-color);
+	--flr-button-border-color-hover: var(--flr-button-border-color);
+	--flr-button-shadow-hover: var(--flr-button-shadow);
+
+	/* Secondary links */
+	--flr-link-color: currentcolor;
+	--flr-link-color-hover: var(--flr-link-color);
+	--flr-link-font-size: 0.875rem;
+	--flr-link-decoration: none;
+	--flr-link-decoration-hover: underline;
+	--flr-links-justify: center;
+	--flr-links-gap: 0.5rem;
+
+	/* Checkbox rows */
+	--flr-check-size: 1rem;
+	--flr-check-accent: var(--flr-button-bg);
+	--flr-check-gap: 0.5rem;
+	--flr-check-label-color: currentcolor;
+	--flr-check-label-font-size: 0.875rem;
+
+	/* Notices and the loading state */
+	--flr-notice-radius: 4px;
+	--flr-notice-padding-block: 0.6rem;
+	--flr-notice-padding-inline: 0.9rem;
+	--flr-notice-font-size: 0.9375rem;
+	--flr-notice-justify: center;
+	--flr-success-bg: #edfaef;
+	--flr-success-color: #0a4b23;
+	--flr-success-border: #9dcb9d;
+	--flr-error-bg: #fcf0f1;
+	--flr-error-color: #8a1f11;
+	--flr-error-border: #e08888;
+	--flr-loading-color: #757575;
+
+	/* Descriptions and avatars */
+	--flr-description-color: currentcolor;
+	--flr-description-font-size: 0.9375rem;
+	--flr-description-justify: center;
+	--flr-avatar-size: 72px;
+	--flr-avatar-radius: 50%;
+}
+
+/* ------------------------------------------------------------------
+ * 2. Structure and token consumption
+ *
+ * Specificity 0,2,0 -- enough to beat a theme.json `:root :where(...)` rule
+ * (0,1,0), never enough to beat an inline style.
+ * ------------------------------------------------------------------ */
+
+/* The wrapper keeps the same rhythm as the form, so the message box and the
+   links below the form element are spaced like the fields inside it rather
+   than butting up against the submit button. */
+.flr-blocks-form-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--flr-field-gap);
+	max-width: var(--flr-form-max-width);
+	box-shadow: var(--flr-card-shadow);
+}
+
+/* The message box starts empty and is filled by the block's view module. While
+   it holds nothing it is removed from the layout entirely, so no gap opens up
+   for a message that is not there. */
+.flr-blocks-form-wrapper .flr-blocks-form-result:empty {
+	display: none;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-form,
+.flr-blocks-form-wrapper .flr-blocks-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--flr-field-gap);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-form-row {
+	margin: 0;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-input-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--flr-label-gap);
+	width: 100%;
+}
+
+/* Labels */
+
+.flr-blocks-form-wrapper .flr-blocks-input-label {
+	color: var(--flr-label-color);
+	font-size: var(--flr-label-font-size);
+	font-weight: var(--flr-label-font-weight);
+	line-height: var(--flr-label-line-height);
+	letter-spacing: var(--flr-label-letter-spacing);
+	text-transform: var(--flr-label-text-transform);
+}
+
+.flr-blocks-form-wrapper.flr-required-marks .flr-blocks-input-label[data-required="1"]::after {
+	content: "*";
+	color: var(--flr-label-required-color);
+	margin-inline-start: 0.15em;
+}
+
+/* Inputs */
+
+.flr-blocks-form-wrapper .flr-blocks-input-control,
+.flr-blocks-form-wrapper .flr-blocks-textarea-control {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	color: var(--flr-input-color);
+	background-color: var(--flr-input-bg);
+	border-color: var(--flr-input-border-color);
+	border-width: var(--flr-input-border-width);
+	border-style: var(--flr-input-border-style);
+	border-radius: var(--flr-input-radius);
+	padding-block: var(--flr-input-padding-block);
+	padding-inline: var(--flr-input-padding-inline);
+	font-size: var(--flr-input-font-size);
+	line-height: 1.5;
+	box-shadow: var(--flr-input-shadow);
+	appearance: none;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-input-control::placeholder,
+.flr-blocks-form-wrapper .flr-blocks-textarea-control::placeholder {
+	color: var(--flr-input-placeholder-color);
+	opacity: 1;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-input-control:focus,
+.flr-blocks-form-wrapper .flr-blocks-textarea-control:focus {
+	border-color: var(--flr-input-focus-border-color);
+	background-color: var(--flr-input-focus-bg);
+	box-shadow: var(--flr-input-focus-shadow);
+
+	/* The token shadow is the visible focus ring; keep a transparent outline so
+	   Windows high contrast mode still draws one. */
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-input-control:disabled,
+.flr-blocks-form-wrapper .flr-blocks-textarea-control:disabled {
+	background-color: var(--flr-input-disabled-bg);
+	color: var(--flr-input-disabled-color);
+	cursor: not-allowed;
+}
+
+/* Submit button */
+
+.flr-blocks-form-wrapper .flr-blocks-form-row--submit {
+	display: flex;
+	justify-content: var(--flr-button-justify);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-btn {
+	width: var(--flr-button-width);
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	user-select: none;
+	line-height: 1.5;
+	color: var(--flr-button-color);
+	background-color: var(--flr-button-bg);
+	border-color: var(--flr-button-border-color);
+	border-width: var(--flr-button-border-width);
+	border-style: var(--flr-button-border-style);
+	border-radius: var(--flr-button-radius);
+	padding-block: var(--flr-button-padding-block);
+	padding-inline: var(--flr-button-padding-inline);
+	font-size: var(--flr-button-font-size);
+	font-weight: var(--flr-button-font-weight);
+	letter-spacing: var(--flr-button-letter-spacing);
+	text-transform: var(--flr-button-text-transform);
+	box-shadow: var(--flr-button-shadow);
+	transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-btn:hover,
+.flr-blocks-form-wrapper .flr-blocks-btn:focus-visible {
+	background-color: var(--flr-button-bg-hover);
+	color: var(--flr-button-color-hover);
+	border-color: var(--flr-button-border-color-hover);
+	box-shadow: var(--flr-button-shadow-hover);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-btn[disabled] {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* Secondary links */
+
+.flr-blocks-form-wrapper .flr-blocks-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: var(--flr-links-justify);
+	gap: var(--flr-links-gap);
+	font-size: var(--flr-link-font-size);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-links a,
+.flr-blocks-form-wrapper .flr-blocks-links .flr-blocks-link-preview {
+	color: var(--flr-link-color);
+	font-size: var(--flr-link-font-size);
+	text-decoration: var(--flr-link-decoration);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-links a:hover,
+.flr-blocks-form-wrapper .flr-blocks-links a:focus-visible {
+	color: var(--flr-link-color-hover);
+	text-decoration: var(--flr-link-decoration-hover);
+}
+
+/* Checkbox rows */
+
+.flr-blocks-form-wrapper .flr-blocks-form-check-group {
+	display: flex;
+	align-items: center;
+	gap: var(--flr-check-gap);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-form-check-input {
+	inline-size: var(--flr-check-size);
+	block-size: var(--flr-check-size);
+	accent-color: var(--flr-check-accent);
+	margin: 0;
+	flex: none;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-form-check-label {
+	color: var(--flr-check-label-color);
+	font-size: var(--flr-check-label-font-size);
+}
+
+/* Notices, loading state and descriptions */
+
+.flr-blocks-form-wrapper .flr-blocks-success,
+.flr-blocks-form-wrapper .flr-blocks-danger {
+	border-radius: var(--flr-notice-radius);
+	padding-block: var(--flr-notice-padding-block);
+	padding-inline: var(--flr-notice-padding-inline);
+	font-size: var(--flr-notice-font-size);
+	text-align: var(--flr-notice-justify);
+	border-width: 1px;
+	border-style: solid;
+}
+
+.flr-blocks-form-wrapper .flr-blocks-success {
+	background-color: var(--flr-success-bg);
+	color: var(--flr-success-color);
+	border-color: var(--flr-success-border);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-danger {
+	background-color: var(--flr-error-bg);
+	color: var(--flr-error-color);
+	border-color: var(--flr-error-border);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-loading {
+	color: var(--flr-loading-color);
+	font-size: var(--flr-notice-font-size);
+	text-align: var(--flr-notice-justify);
+}
+
+.flr-blocks-form-wrapper .flr-blocks-description {
+	color: var(--flr-description-color);
+	font-size: var(--flr-description-font-size);
+	text-align: var(--flr-description-justify);
+	margin: 0;
+}
+
+/* Avatar */
+
+.flr-blocks-form-wrapper .flr-blocks-avatar {
+	inline-size: var(--flr-avatar-size);
+	block-size: var(--flr-avatar-size);
+	border-radius: var(--flr-avatar-radius);
+	object-fit: cover;
+	align-self: center;
+}
+
+/* State class used by frontend.js -- must keep this exact name. */
+.flr-blocks-hide {
+	display: none;
+}
+
+/* ------------------------------------------------------------------
+ * 3. Theme button opt-in
+ *
+ * When fieldOptions.useThemeButton is on, PHP and JS both stop emitting every
+ * --flr-button-* token and add the core button classes instead. Unsetting our
+ * own declarations here lets the theme's rules through cleanly; an unresolvable
+ * var() would otherwise fall back to the property's initial value, not to the
+ * theme.
+ * ------------------------------------------------------------------ */
+
+.flr-blocks-form-wrapper.flr-theme-button .flr-blocks-btn {
+	color: unset;
+	background-color: unset;
+	border-color: unset;
+	border-width: unset;
+	border-style: unset;
+	border-radius: unset;
+	padding-block: unset;
+	padding-inline: unset;
+	font-size: unset;
+	font-weight: unset;
+	letter-spacing: unset;
+	text-transform: unset;
+	box-shadow: unset;
+	width: unset;
+}
+
+.flr-blocks-form-wrapper.flr-theme-button .flr-blocks-btn:hover,
+.flr-blocks-form-wrapper.flr-theme-button .flr-blocks-btn:focus-visible {
+	color: unset;
+	background-color: unset;
+	border-color: unset;
+	box-shadow: unset;
+}
+
+/* ------------------------------------------------------------------
+ * 4. Label position variants
+ * ------------------------------------------------------------------ */
+
+.flr-blocks-form-wrapper.flr-labels-inline .flr-blocks-input-group {
+	flex-direction: row;
+	align-items: center;
+}
+
+.flr-blocks-form-wrapper.flr-labels-inline .flr-blocks-input-label {
+	flex: 0 0 35%;
+}
+
+/* Visually hidden, still announced by screen readers. */
+.flr-blocks-form-wrapper.flr-labels-hidden .flr-blocks-input-label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+	padding: 0;
+	margin: -1px;
+}
+
+/* ------------------------------------------------------------------
+ * 5. Preset rules that tokens alone cannot express
+ * ------------------------------------------------------------------ */
+
+.flr-blocks-form-wrapper.flr-preset-underline .flr-blocks-input-control,
+.flr-blocks-form-wrapper.flr-preset-underline .flr-blocks-textarea-control {
+	border-width: 0 0 var(--flr-input-border-width);
+	border-radius: 0;
+	padding-inline: 0;
+}
+
+.flr-blocks-form-wrapper.flr-preset-underline .flr-blocks-input-control:focus,
+.flr-blocks-form-wrapper.flr-preset-underline .flr-blocks-textarea-control:focus {
+	box-shadow: 0 1px 0 0 var(--flr-input-focus-border-color);
+}
+
+/* ------------------------------------------------------------------
+ * 6. Responsive
+ * ------------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+	.flr-blocks-form-wrapper.flr-labels-inline .flr-blocks-input-group {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.flr-blocks-form-wrapper.flr-labels-inline .flr-blocks-input-label {
+		flex: none;
+	}
+}
+
+/* ------------------------------------------------------------------
+ * 7. Reduced motion
+ * ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+	.flr-blocks-form-wrapper .flr-blocks-input-control,
+	.flr-blocks-form-wrapper .flr-blocks-textarea-control,
+	.flr-blocks-form-wrapper .flr-blocks-btn {
+		transition: none;
+	}
+}

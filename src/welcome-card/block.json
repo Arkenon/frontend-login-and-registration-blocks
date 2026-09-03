@@ -1,17 +1,122 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "frontend-login-with-gutenberg-blocks/welcome-card",
-  "version": "1.0.0",
-  "title": "Welcome Card",
-  "category": "theme",
-  "icon": "smiley",
-  "description": "Display a welcome card for logged in users. Card has a logout button.",
-  "supports": {
-	"html": false
-  },
-  "textdomain": "frontend-login-and-registration-blocks",
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontend-login-with-gutenberg-blocks/welcome-card",
+	"version": "2.0.0",
+	"title": "Welcome Card",
+	"category": "theme",
+	"icon": "smiley",
+	"description": "Greets a signed-in member and links them to their account.",
+	"keywords": [ "welcome", "account", "member", "greeting", "logout" ],
+	"textdomain": "frontend-login-and-registration-blocks",
+	"attributes": {
+		"templateChosen": {
+			"type": "boolean",
+			"default": false
+		},
+		"preset": {
+			"type": "string",
+			"default": ""
+		},
+		"greeting": {
+			"type": "string",
+			"default": ""
+		},
+		"showAvatar": {
+			"type": "boolean",
+			"default": true
+		},
+		"showDashboardLink": {
+			"type": "boolean",
+			"default": true
+		},
+		"showLogoutLink": {
+			"type": "boolean",
+			"default": true
+		},
+		"loggedOutBehavior": {
+			"type": "string",
+			"default": "hide"
+		},
+		"loggedOutMessage": {
+			"type": "string",
+			"default": ""
+		},
+		"labels": {
+			"type": "object",
+			"default": {}
+		},
+		"fieldOptions": {
+			"type": "object",
+			"default": {}
+		},
+		"layoutStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"descriptionStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"linkStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"avatarStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"noticeStyles": {
+			"type": "object",
+			"default": {}
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"className": true,
+		"align": [ "left", "center", "right", "wide", "full" ],
+		"color": {
+			"text": true,
+			"background": true,
+			"gradients": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"text": false,
+				"background": false
+			}
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalTextTransform": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"spacing": {
+			"padding": true,
+			"margin": [ "top", "bottom" ],
+			"__experimentalDefaultControls": {
+				"padding": true
+			}
+		},
+		"border": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true,
+			"__experimentalDefaultControls": {
+				"radius": true
+			}
+		},
+		"shadow": true
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": [ "flr-blocks-editor-ui", "flr-blocks-forms" ],
+	"style": [ "flr-blocks-forms" ]
 }

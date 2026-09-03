@@ -1,22 +1,65 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "frontend-login-with-gutenberg-blocks/logout-nav-menu-item",
-  "version": "1.0.0",
-  "title": "Login/Logout Menu Item",
-  "category": "theme",
-  "parent" : [ "core/navigation" ],
-  "icon": "menu-alt2",
-  "description": "Navigation menu item for login/logout operation.",
-  "supports": {
-	"html": false,
-	"typography": {
-	  "fontSize": true,
-	  "lineHeight": true
-	}
-  },
-  "textdomain": "frontend-login-and-registration-blocks",
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontend-login-with-gutenberg-blocks/logout-nav-menu-item",
+	"version": "2.0.0",
+	"title": "Login/Logout Menu Item",
+	"category": "theme",
+	"icon": "menu-alt2",
+	"description": "A navigation link that logs a member out, or in when they are signed out.",
+	"keywords": [ "logout", "login", "menu", "navigation", "account" ],
+	"textdomain": "frontend-login-and-registration-blocks",
+	"ancestor": [ "core/navigation" ],
+	"attributes": {
+		"logoutLabel": {
+			"type": "string",
+			"default": ""
+		},
+		"loginLabel": {
+			"type": "string",
+			"default": ""
+		},
+		"showWhenLoggedOut": {
+			"type": "boolean",
+			"default": true
+		},
+		"editorPreviewState": {
+			"type": "string",
+			"default": "loggedIn"
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"className": true,
+		"interactivity": {
+			"clientNavigation": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalTextTransform": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"text": true
+			}
+		},
+		"spacing": {
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": [ "flr-blocks-editor-ui" ]
 }

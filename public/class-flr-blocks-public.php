@@ -19,18 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Flr_Blocks_Public {
 
 	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles(): void {
-
-		wp_enqueue_style( "flr-blocks-public", FLR_BLOCKS_PLUGIN_URL . '/public/css/flr-blocks-public.css', array(), FLR_BLOCKS_VERSION );
-
-	}
-
-
-	/**
 	 * Get a form from defined path
 	 *
 	 * @param array $block_attributes Get block attributes from block-name/edit.js

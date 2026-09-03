@@ -2,68 +2,117 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "frontend-login-with-gutenberg-blocks/register-form",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"title": "Register Form",
 	"category": "theme",
-	"icon": "format-aside",
-	"description": "Display register form",
+	"icon": "id-alt",
+	"description": "A front-end registration form new members can sign up with.",
+	"keywords": [ "register", "sign up", "form", "account", "member" ],
+	"textdomain": "frontend-login-and-registration-blocks",
 	"attributes": {
-		"showLabels": {
-			"type": "boolean",
-			"default": true
-		},
-		"showPlaceholders": {
+		"templateChosen": {
 			"type": "boolean",
 			"default": false
 		},
-		"showTermsAndPrivacy": {
-			"type": "boolean",
-			"default": true
-		},
-		"textColor": {
-			"type": "string"
-		},
-		"textFontWeight": {
+		"preset": {
 			"type": "string",
-			"default": "bold"
+			"default": ""
 		},
-		"inputBorderRadius": {
-			"type": "number"
-		},
-		"buttonBgColor": {
-			"type": "string"
-		},
-		"buttonTextColor": {
-			"type": "string"
-		},
-		"buttonBorder": {
+		"fieldOptions": {
 			"type": "object",
-			"default": {
-				"color": "#000",
-				"style": "solid",
-				"width": "0px"
-			}
+			"default": {}
 		},
-		"buttonBorderRadius": {
-			"type": "number"
-		},
-		"buttonTextFontWeight": {
-			"type": "string"
-		},
-		"additionalFields": {
+		"labels": {
 			"type": "object",
-			"default": {
-				"showFirstName": false,
-				"showLastName": false
-			}
+			"default": {}
+		},
+		"placeholders": {
+			"type": "object",
+			"default": {}
+		},
+		"messages": {
+			"type": "object",
+			"default": {}
+		},
+		"layoutStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"labelStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"inputStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"buttonStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"linkStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"checkStyles": {
+			"type": "object",
+			"default": {}
+		},
+		"noticeStyles": {
+			"type": "object",
+			"default": {}
 		}
 	},
 	"supports": {
-		"html": false
+		"html": false,
+		"anchor": true,
+		"className": true,
+		"align": [ "wide", "full" ],
+		"interactivity": {
+			"clientNavigation": false
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"gradients": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"text": false,
+				"background": false
+			}
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalTextTransform": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"spacing": {
+			"padding": true,
+			"margin": [ "top", "bottom" ],
+			"__experimentalDefaultControls": {
+				"padding": true
+			}
+		},
+		"border": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true,
+			"__experimentalDefaultControls": {
+				"radius": true
+			}
+		},
+		"shadow": true
 	},
-	"textdomain": "frontend-login-and-registration-blocks",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
+	"editorStyle": [ "flr-blocks-editor-ui", "flr-blocks-forms" ],
+	"style": [ "flr-blocks-forms" ],
 	"viewScriptModule": "file:./frontend.js"
 }

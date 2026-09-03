@@ -1,92 +1,81 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * Step two of a password reset: choose the new password.
+ *
+ * Reached only when check_password_reset_key() accepted the link, which
+ * public/partials/reset-password/reset-password-form.php verifies first.
+ *
+ * Mirrored by src/reset-password-form/edit.js when its editor preview is set to
+ * the change step. The ids are a contract with
+ * src/reset-password-form/frontend.js.
+ *
+ * @package Frontend_Login_And_Registration_Blocks
+ */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
+
+use FLR_BLOCKS\Flr_Blocks_Form_Markup;
 use FLR_BLOCKS\Flr_Blocks_Helper;
+use FLR_BLOCKS\Flr_Blocks_Style;
 
-$input_border_radius = $form_attributes['inputBorderRadius'] ?? '';
-$text_color = $form_attributes['textColor'] ?? '';
-$text_font_weight = $form_attributes['textFontWeight'] ?? '';
-$button_text_color = $form_attributes['buttonTextColor'] ?? '';
-$button_text_font_weight = $form_attributes['buttonTextFontWeight'] ?? '';
-$button_bg_color = $form_attributes['buttonBgColor'] ?? '';
-$button_border_radius = $form_attributes['buttonBorderRadius'] ?? '';
+$view = '<div ' . Flr_Blocks_Style::wrapper( $form_attributes ) . '>';
 
-$input_style = 'border-radius:' . $input_border_radius.'px' ;
-$text_style  = 'color:' .$text_color.'; font-weight:' . $text_font_weight;
+$view .= '<form name="flr-blocks-reset-pass-form" id="flr-blocks-reset-pass-form" method="post" class="flr-blocks-form">';
 
-$button_border_color = array_key_exists( 'color', $form_attributes['buttonBorder'] ) ? 'border-color: ' . $form_attributes['buttonBorder']['color'] . ';' : "";
-$button_border_style = array_key_exists( 'style', $form_attributes['buttonBorder'] ) ? 'border-style: ' . $form_attributes['buttonBorder']['style'] . ';' : "";
-$button_border_width = array_key_exists( 'width', $form_attributes['buttonBorder'] ) ? 'border-width: ' . $form_attributes['buttonBorder']['width'] . ';' : "";
+$view .= Flr_Blocks_Form_Markup::description(
+	$form_attributes,
+	'progressDescription',
+	_x( 'Choose a new password for your account.', 'reset_in_progress_description', 'frontend-login-and-registration-blocks' )
+);
 
-$button_style = 'color:' . $button_text_color . '; ' .
-                'background-color: ' . $button_bg_color . '; ' .
-                $button_border_color .
-                $button_border_style .
-                $button_border_width .
-                'border-radius: ' . $button_border_radius . 'px;' .
-                'font-weight: ' . $button_text_font_weight;
+$view .= Flr_Blocks_Form_Markup::field(
+	$form_attributes,
+	[
+		'id'           => 'resetpass_pwd',
+		'key'          => 'newPassword',
+		'type'         => 'password',
+		'required'     => true,
+		'autocomplete' => 'new-password',
+		'label'        => _x( 'New Password', 'new_password_input_text', 'frontend-login-and-registration-blocks' ),
+		'placeholder'  => _x( 'Enter your new password', 'new_password_placeholder_text', 'frontend-login-and-registration-blocks' ),
+	]
+);
 
+$view .= Flr_Blocks_Form_Markup::field(
+	$form_attributes,
+	[
+		'id'           => 'resetpass_pwd_again',
+		'key'          => 'newPasswordAgain',
+		'type'         => 'password',
+		'required'     => true,
+		'autocomplete' => 'new-password',
+		'label'        => _x( 'New Password Again', 'new_password_again_input_text', 'frontend-login-and-registration-blocks' ),
+		'placeholder'  => _x( 'Enter your new password again', 'new_password_again_placeholder_text', 'frontend-login-and-registration-blocks' ),
+	]
+);
 
-$view = '<div '.get_block_wrapper_attributes().'>
-			<form name="flr-blocks-reset-pass-form" id="flr-blocks-reset-pass-form" method="post">';
+$view .= Flr_Blocks_Form_Markup::form_action( 'flrblocksresetpasswordhandle' );
 
-			$view .= '<div class="flr-blocks-form-row">
-							<div class="flr-blocks-input-group">';
+$view .= '<input type="hidden" name="rp_key" value="' . esc_attr( Flr_Blocks_Helper::sanitize( 'rp_key', 'get' ) ) . '">';
+$view .= '<input type="hidden" name="rp_login" value="' . esc_attr( Flr_Blocks_Helper::sanitize( 'rp_login', 'get' ) ) . '">';
 
-							if ( $form_attributes['showLabels'] ) {
+$view .= Flr_Blocks_Form_Markup::submit(
+	$form_attributes,
+	'reset-password',
+	'flr-blocks-reset-password-submit',
+	'flr-blocks-reset-password-loading',
+	Flr_Blocks_Style::text(
+		$form_attributes,
+		'labels',
+		'changeSubmit',
+		_x( 'Change Password', 'submit_reset_password_button_text', 'frontend-login-and-registration-blocks' )
+	)
+);
 
-								$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="resetpass_pwd">' . esc_html_x( "New Password","new_password_input_text", "frontend-login-and-registration-blocks" ) . '</label>';
-							}
+$view .= '</form>';
 
-							$view .= '<input class="flr-blocks-input-control" id="resetpass_pwd" name="resetpass_pwd" type="password" required style=' . $input_style . ' placeholder="';
+$view .= Flr_Blocks_Form_Markup::result( 'flr-blocks-reset-password-form-result' );
 
-							if ( $form_attributes['showPlaceholders'] ) {
-
-								$view .= esc_attr_x( "Enter your new password", "new_password_placeholder_text", "frontend-login-and-registration-blocks" );
-
-							}
-
-							$view .= '" />';
-							$view .= '</div>
-
-					</div>';
-
-			$view .= '<div class="flr-blocks-form-row">
-						<div class="flr-blocks-input-group">';
-
-							if ( $form_attributes['showLabels'] ) {
-
-								$view .= '<label class="flr-blocks-input-label" style="' . $text_style . '" for="resetpass_pwd_again">' . esc_html_x( "New Password Again", "new_password_again_input_text", "frontend-login-and-registration-blocks" ) . '</label>';
-							}
-
-							$view .= '<input class="flr-blocks-input-control" id="resetpass_pwd_again" name="resetpass_pwd_again" type="password" required style=' . $input_style . ' placeholder="';
-
-							if ( $form_attributes['showPlaceholders'] ) {
-
-								$view .= esc_attr_x( "Enter your new password again", "new_password_again_placeholder_text", "frontend-login-and-registration-blocks" );
-
-							}
-
-							$view .= '" />';
-							$view .= '</div>
-
-					</div>';
-
-			$view .= '<input type="hidden" name="action" value="'.esc_attr('flrblocksresetpasswordhandle').'">';
-			$view .= '<input type="hidden" name="security" value="'.esc_attr(wp_create_nonce('flrblocksresetpasswordhandle')).'">';
-			$view .= '<input type="hidden" name="rp_key" value="' . esc_attr(Flr_Blocks_Helper::sanitize( 'rp_key', 'get' )) . '">';
-			$view .= '<input type="hidden" name="rp_login" value="' . esc_attr(Flr_Blocks_Helper::sanitize( 'rp_login', 'get' )) . '">';
-
-			$view .= '<div class="flr-blocks-form-row">
-							<button style="'.$button_style.'" type="submit" id="flr-blocks-reset-password-submit" class="flr-blocks-reset-password-btn flr-blocks-btn wp-block-button__link wp-element-button">
-								' . esc_html_x( "Change Password", "submit_reset_password_button_text", "frontend-login-and-registration-blocks" ) . '
-							</button>
-						</div>
-				<div id="flr-blocks-reset-password-loading" class="flr-blocks-loading flr-blocks-hide">' . esc_html_x( "Loading...","loading_text", "frontend-login-and-registration-blocks" ) . '</div>';
-		$view .= '</form>
-	<div id="flr-blocks-reset-password-form-result"></div>
-</div>';
-
-
-
-
+$view .= '</div>';

@@ -1,10 +1,10 @@
 === Login, Registration and Lost Password Blocks ===
 Contributors:      arkenon
 Tags:              login block, lost password block, login form, custom login, wp login
-Requires at least: 6.1
-Tested up to:      7.0
+Requires at least: 6.5
+Tested up to:      7.1
 Requires PHP:      7.4
-Stable tag:        1.2.3
+Stable tag:        2.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,7 +57,34 @@ Each block has color, font and size option in the right sidebar of block editor.
 * Site Editor
 
 
+== Upgrade Notice ==
+
+= 2.0.0 =
+The styling system has been rebuilt. Style settings saved with version 1.x are not carried over: after updating, your forms fall back to the default appearance and you restyle them with the new controls, or pick one of the ready-made designs. No content, users or settings are affected. Two other changes to be aware of: the plugin now requires WordPress 6.5, and the submit button no longer uses your theme button style by default - turn on "Use theme button style" under the block Settings tab to get that back.
+
 == Changelog ==
+
+= 2.0.0 =
+This is a major redesign of the block settings. See the upgrade notice below before updating a live site.
+
+* Added: a setup screen on every form block with six ready-made designs (Minimal, Card, Soft, Dark, Outline, Underline) and a Start blank option. The same designs appear in the inserter and in the block toolbar under Design.
+* Added: WordPress block supports for colour, typography, spacing, border, shadow, alignment and anchor, so the blocks now follow the theme and Global Styles.
+* Added: modern ToolsPanel style controls, grouped into Form layout, Labels, Input fields, Submit button, Links, Messages and Checkboxes. Every control can be added, cleared and reset individually.
+* Added: control over states that were previously unreachable, including placeholder colour, focus ring, disabled fields and button hover.
+* Added: per-field wording overrides for every label, placeholder and button.
+* Added: label position (above, beside, visually hidden) and an optional required-field marker.
+* Added: a Use theme button style option that hands the submit button back to the theme.
+* Added: welcome card settings - greeting text with {display_name}, {username}, {first_name} and {email} placeholders, avatar and link toggles, and a choice of what signed-out visitors see.
+* Added: the login/logout menu item can be worded for both states and now works inside submenus.
+* Changed: colours now come from the theme palette through the editor, which also fixes an empty palette on classic themes.
+* Changed: styles are applied through CSS custom properties, so the editor preview and the published page render identically.
+* Changed: the stylesheet is loaded only on pages that contain a block, instead of on every request.
+* Fixed: unbalanced markup in the registration form.
+* Fixed: a PHP notice from the welcome card when the visitor was signed out.
+* Fixed: two blocks of the same type on one page rendered the second one empty.
+* Fixed: the reset password description toggle showed the wrong help text.
+* Removed: the per-element inline styles and the !important-laden editor stylesheet they needed.
+* Bumped WordPress tested-up-to version 7.1
 
 = 1.2.3 =
 * Tested: Compatibility with WordPress 7.0

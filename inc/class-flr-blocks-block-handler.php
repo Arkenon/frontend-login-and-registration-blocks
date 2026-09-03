@@ -32,6 +32,8 @@ class Flr_Blocks_Block_Handler {
 	 */
 	public function register_blocks() {
 
+		$this->register_block_styles();
+
 		$blocks = [
 			'login-form'           => 'login_form_render_callback',
 			'register-form'        => 'register_form_render_callback',
@@ -50,6 +52,40 @@ class Flr_Blocks_Block_Handler {
 				]
 			);
 		}
+	}
+
+	/**
+	 * Register the shared stylesheets the blocks reference by handle.
+	 *
+	 * flr-blocks-forms is listed in both the style and editorStyle fields of
+	 * every block, so the editor canvas and the front end load the same file
+	 * with the same selectors. That is what keeps the preview honest, and it is
+	 * why no rule in it needs !important: there is no second copy to fight.
+	 *
+	 * Registering by handle rather than pointing block.json at a built asset
+	 * also means the sheet loads only on pages that actually use a block,
+	 * instead of on every request.
+	 *
+	 * Must run before the register_block_type() loop so the handles resolve.
+	 *
+	 * @since    2.0.0
+	 */
+	private function register_block_styles() {
+
+		wp_register_style(
+			'flr-blocks-forms',
+			FLR_BLOCKS_PLUGIN_URL . 'public/css/flr-blocks-forms.css',
+			[],
+			FLR_BLOCKS_VERSION
+		);
+
+		wp_register_style(
+			'flr-blocks-editor-ui',
+			FLR_BLOCKS_PLUGIN_URL . 'admin/css/flr-blocks-editor-ui.css',
+			[],
+			FLR_BLOCKS_VERSION
+		);
+
 	}
 
 	public function set_script_translations() {

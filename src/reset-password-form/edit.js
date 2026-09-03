@@ -1,123 +1,240 @@
-import './editor.scss';
-import {useBlockProps} from '@wordpress/block-editor';
-import {__} from '@wordpress/i18n';
-import Options from "./options";
+/**
+ * Editor view of the reset password form.
+ *
+ * The block renders two different forms on the front end depending on the
+ * request: the request step normally, the change step when a visitor follows a
+ * valid reset link. Which one the canvas shows is chosen with the toolbar
+ * control below and stored in editorPreviewStep, an attribute the renderer
+ * never reads -- see public/partials/reset-password/reset-password-form.php.
+ */
 
-export default function Edit(props) {
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, BlockControls } from '@wordpress/block-editor';
+import { ToolbarGroup } from '@wordpress/components';
+import { rotateLeft } from '@wordpress/icons';
+import Inspector from './inspector';
+import DesignToolbar from '../shared/components/DesignToolbar';
+import FormSetupPlaceholder from '../shared/components/FormSetupPlaceholder';
+import {
+	buildStyleVars,
+	buildWrapperClasses,
+	resolveOptions,
+	resolveText,
+} from '../shared/style-vars';
+import {
+	Form,
+	Field,
+	SubmitButton,
+	Description,
+	fieldProps,
+} from '../shared/form-parts';
+import {
+	ToggleGroupControl,
+	ToggleGroupControlOption,
+} from '../shared/components/controls';
 
-	const {attributes, setAttributes} = props;
+export default function Edit( props ) {
+	const { attributes, setAttributes } = props;
+	const options = resolveOptions( attributes );
+	const step = attributes.editorPreviewStep || 'request';
 
-	const blockProps = useBlockProps(props);
+	const showSetup = ! attributes.templateChosen;
 
-	const inputStyle = {
-		'border-radius': attributes.inputBorderRadius,
-	}
+	// The setup screen is editor chrome, not a preview of the form, so it takes
+	// neither the wrapper's tokens nor flr-blocks-editor-preview -- that class
+	// makes every control inside it inert, which would swallow the clicks on the
+	// design cards.
+	const blockProps = useBlockProps(
+		showSetup
+			? { className: 'flr-blocks-setup-wrapper' }
+			: {
+					className: `${ buildWrapperClasses(
+						attributes
+					) } flr-blocks-editor-preview`,
+					style: buildStyleVars( attributes ),
+			  }
+	);
 
-	const textStyle = {
-		'color': attributes.textColor,
-		'font-weight': attributes.textFontWeight
-	}
-
-	const buttonStyle = {
-		'color': attributes.buttonTextColor,
-		'backgroundColor': attributes.buttonBgColor,
-		'border-color': attributes.buttonBorder.color,
-		'border-style': attributes.buttonBorder.style,
-		'border-width': attributes.buttonBorder.width,
-		'border-radius': attributes.buttonBorderRadius,
-		'font-weight': attributes.buttonTextFontWeight
-	}
-
-	const desc = attributes.description ? attributes.description : 'Please enter your e-mail address. We will send you an e-mail to reset your password.';
-
-	const formSelectBtnStyles = {
-		'cursor': 'pointer', 'border': '1px solid gray', 'padding': '5px','text-decoration':'none'
+	if ( showSetup ) {
+		return (
+			<div { ...blockProps }>
+				<FormSetupPlaceholder
+					icon={ rotateLeft }
+					title={ __(
+						'Reset Password Form',
+						'frontend-login-and-registration-blocks'
+					) }
+					previewFields={ 1 }
+					setAttributes={ setAttributes }
+				/>
+			</div>
+		);
 	}
 
 	return (
 		<>
+			<DesignToolbar { ...props } />
 
-			<Options options={props}/>
-
-			<div {...blockProps}>
-
-				<div style={{'display': 'flex', 'justify-content': 'center', 'align-items': 'center', 'gap':'15px','margin-bottom':'30px'}}>
-					<a style={formSelectBtnStyles} onClick={() => setAttributes({selectedForm: 'requestForm'})}>{__('Step 1', 'frontend-login-and-registration-blocks')}</a>
-					<a style={formSelectBtnStyles} onClick={() => setAttributes({selectedForm: 'changePasswordForm'})}>{__('Step 2', 'frontend-login-and-registration-blocks')}</a>
-				</div>
-
-				{
-					attributes.selectedForm === 'requestForm' &&
-					<div>
-						<p style={{'text-align':'center','font-weight':'bold'}}>{__('Password Reset Request Form', 'frontend-login-and-registration-blocks')}</p>
-						{
-							attributes.showDescription &&
-							<div style={{'text-align': 'center'}}>
-								<p>{__(desc,'frontend-login-and-registration-blocks')}</p>
-							</div>
-						}
-						<div className="flr-blocks-form-row">
-							<div className="flr-blocks-input-group">
-								{attributes.showLabels &&
-								<label className="flr-blocks-input-label" style={textStyle}
-									   htmlFor="flr-blocks-email">{__('Your e-mail', 'frontend-login-and-registration-blocks')}</label>}
-								<input className="flr-blocks-input-control" id="flr-blocks-email" type="text"
-									   style={inputStyle}
-									   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'frontend-login-and-registration-blocks')}/>
-							</div>
-						</div>
-
-
-						<div className="flr-blocks-form-row">
-							<button style={buttonStyle} type="submit" name="wp-submit" id="wp-submit"
-									className="flr-blocks-reset-password-btn flr-blocks-btn wp-block-button__link wp-element-button">
-								{__('Send Request', 'frontend-login-and-registration-blocks')}
-							</button>
-						</div>
-
+			<BlockControls group="other">
+				<ToolbarGroup>
+					<div className="flr-step-switch">
+						<ToggleGroupControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							isBlock
+							hideLabelFromVision
+							label={ __(
+								'Preview step',
+								'frontend-login-and-registration-blocks'
+							) }
+							value={ step }
+							onChange={ ( value ) =>
+								setAttributes( { editorPreviewStep: value } )
+							}
+						>
+							<ToggleGroupControlOption
+								value="request"
+								label={ __(
+									'Request',
+									'frontend-login-and-registration-blocks'
+								) }
+							/>
+							<ToggleGroupControlOption
+								value="change"
+								label={ __(
+									'New password',
+									'frontend-login-and-registration-blocks'
+								) }
+							/>
+						</ToggleGroupControl>
 					</div>
-				}
+				</ToolbarGroup>
+			</BlockControls>
 
-				{
-					attributes.selectedForm === 'changePasswordForm' &&
-					<div>
-						<p style={{'text-align':'center','font-weight':'bold'}}>{__('Change Password Form', 'frontend-login-and-registration-blocks')}</p>
-						<div className="flr-blocks-form-row">
-							<div className="flr-blocks-input-group">
-								{attributes.showLabels &&
-								<label className="flr-blocks-input-label" style={textStyle}
-									   htmlFor="flr-blocks-password">{__('Password', 'frontend-login-and-registration-blocks')}</label>}
-								<input className="flr-blocks-input-control" id="flr-blocks-password" type="password"
-									   style={inputStyle}
-									   placeholder={attributes.showPlaceholders && __('Enter your password', 'frontend-login-and-registration-blocks')}/>
-							</div>
-						</div>
+			<Inspector { ...props } />
 
-						<div className="flr-blocks-form-row">
-							<div className="flr-blocks-input-group">
-								{attributes.showLabels &&
-								<label className="flr-blocks-input-label" style={textStyle}
-									   htmlFor="flr-blocks-password-again">{__('Password Again', 'frontend-login-and-registration-blocks')}</label>}
-								<input className="flr-blocks-input-control" id="flr-blocks-password-again" type="password"
-									   style={inputStyle}
-									   placeholder={attributes.showPlaceholders && __('Enter your password again', 'frontend-login-and-registration-blocks')}/>
-							</div>
-						</div>
+			<div { ...blockProps }>
+				{ step === 'request' ? (
+					<Form>
+						{ options.showDescription !== false && (
+							<Description>
+								{ resolveText(
+									attributes,
+									'content',
+									'requestDescription',
+									__(
+										'Please enter your e-mail address. We will send you an e-mail to reset your password.',
+										'frontend-login-and-registration-blocks'
+									)
+								) }
+							</Description>
+						) }
 
+						<Field
+							id="flr-blocks-email"
+							type="email"
+							required
+							{ ...fieldProps(
+								attributes,
+								options,
+								'email',
+								__(
+									'Your e-mail',
+									'frontend-login-and-registration-blocks'
+								),
+								__(
+									'Enter your e-mail',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						/>
 
-						<div className="flr-blocks-form-row">
-							<button style={buttonStyle} type="submit" name="wp-submit-pwd" id="wp-submit-pwd"
-									className="flr-blocks-reset-password-btn flr-blocks-btn wp-block-button__link wp-element-button">
-								{__('Change Password', 'frontend-login-and-registration-blocks')}
-							</button>
-						</div>
+						<SubmitButton
+							attributes={ attributes }
+							variant="reset-request"
+						>
+							{ resolveText(
+								attributes,
+								'labels',
+								'requestSubmit',
+								__(
+									'Send Request',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						</SubmitButton>
+					</Form>
+				) : (
+					<Form>
+						{ options.showDescription !== false && (
+							<Description>
+								{ resolveText(
+									attributes,
+									'content',
+									'progressDescription',
+									__(
+										'Choose a new password for your account.',
+										'frontend-login-and-registration-blocks'
+									)
+								) }
+							</Description>
+						) }
 
-					</div>
-				}
+						<Field
+							id="resetpass_pwd"
+							type="password"
+							required
+							{ ...fieldProps(
+								attributes,
+								options,
+								'newPassword',
+								__(
+									'New Password',
+									'frontend-login-and-registration-blocks'
+								),
+								__(
+									'Enter your new password',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						/>
+
+						<Field
+							id="resetpass_pwd_again"
+							type="password"
+							required
+							{ ...fieldProps(
+								attributes,
+								options,
+								'newPasswordAgain',
+								__(
+									'New Password Again',
+									'frontend-login-and-registration-blocks'
+								),
+								__(
+									'Enter your new password again',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						/>
+
+						<SubmitButton
+							attributes={ attributes }
+							variant="reset-password"
+						>
+							{ resolveText(
+								attributes,
+								'labels',
+								'changeSubmit',
+								__(
+									'Change Password',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						</SubmitButton>
+					</Form>
+				) }
 			</div>
-
-
 		</>
-
 	);
 }

@@ -1,0 +1,131 @@
+{
+	"$comment": "Single source of truth for the --flr-* design tokens. Consumed by src/shared/style-vars.js (editor) and inc/class-flr-blocks-style.php (front end). Every var name here must also have a default and a consuming rule in public/css/flr-blocks-forms.css; npm run lint:tokens enforces that. Token VALUES may only use var()/calc()/clamp()/min()/max() -- core's safecss_filter_attr() drops declarations containing any other function, rgba() included, so alpha colours must be 8-digit hex.",
+	"version": 2,
+	"groups": {
+		"layoutStyles": {
+			"maxWidth":   { "var": "--flr-form-max-width", "type": "length" },
+			"fieldGap":   { "var": "--flr-field-gap", "type": "length" },
+			"cardShadow": { "var": "--flr-card-shadow", "type": "shadow" }
+		},
+		"labelStyles": {
+			"color":         { "var": "--flr-label-color", "type": "color" },
+			"fontSize":      { "var": "--flr-label-font-size", "type": "length" },
+			"fontWeight":    { "var": "--flr-label-font-weight", "type": "keyword",
+			                   "allow": [ "100", "200", "300", "400", "500", "600", "700", "800", "900", "normal", "bold" ] },
+			"lineHeight":    { "var": "--flr-label-line-height", "type": "number" },
+			"letterSpacing": { "var": "--flr-label-letter-spacing", "type": "length" },
+			"textTransform": { "var": "--flr-label-text-transform", "type": "keyword",
+			                   "allow": [ "none", "uppercase", "lowercase", "capitalize" ] },
+			"gap":           { "var": "--flr-label-gap", "type": "length" },
+			"requiredColor": { "var": "--flr-label-required-color", "type": "color" }
+		},
+		"inputStyles": {
+			"color":  { "var": "--flr-input-color", "type": "color" },
+			"bg":     { "var": "--flr-input-bg", "type": "color" },
+			"border": { "type": "border", "vars": {
+			              "color": "--flr-input-border-color",
+			              "width": "--flr-input-border-width",
+			              "style": "--flr-input-border-style" } },
+			"radius":            { "var": "--flr-input-radius", "type": "length" },
+			"paddingBlock":      { "var": "--flr-input-padding-block", "type": "length" },
+			"paddingInline":     { "var": "--flr-input-padding-inline", "type": "length" },
+			"fontSize":          { "var": "--flr-input-font-size", "type": "length" },
+			"shadow":            { "var": "--flr-input-shadow", "type": "shadow" },
+			"placeholderColor":  { "var": "--flr-input-placeholder-color", "type": "color" },
+			"focusBorderColor":  { "var": "--flr-input-focus-border-color", "type": "color" },
+			"focusBg":           { "var": "--flr-input-focus-bg", "type": "color" },
+			"focusShadow":       { "var": "--flr-input-focus-shadow", "type": "shadow" },
+			"disabledBg":        { "var": "--flr-input-disabled-bg", "type": "color" },
+			"disabledColor":     { "var": "--flr-input-disabled-color", "type": "color" }
+		},
+		"buttonStyles": {
+			"bg":     { "var": "--flr-button-bg", "type": "color" },
+			"color":  { "var": "--flr-button-color", "type": "color" },
+			"border": { "type": "border", "vars": {
+			              "color": "--flr-button-border-color",
+			              "width": "--flr-button-border-width",
+			              "style": "--flr-button-border-style" } },
+			"radius":        { "var": "--flr-button-radius", "type": "length" },
+			"paddingBlock":  { "var": "--flr-button-padding-block", "type": "length" },
+			"paddingInline": { "var": "--flr-button-padding-inline", "type": "length" },
+			"fontSize":      { "var": "--flr-button-font-size", "type": "length" },
+			"fontWeight":    { "var": "--flr-button-font-weight", "type": "keyword",
+			                   "allow": [ "100", "200", "300", "400", "500", "600", "700", "800", "900", "normal", "bold" ] },
+			"letterSpacing": { "var": "--flr-button-letter-spacing", "type": "length" },
+			"textTransform": { "var": "--flr-button-text-transform", "type": "keyword",
+			                   "allow": [ "none", "uppercase", "lowercase", "capitalize" ] },
+			"shadow":        { "var": "--flr-button-shadow", "type": "shadow" },
+			"width":         { "var": "--flr-button-width", "type": "keyword", "allow": [ "100%", "auto" ] },
+			"justify":       { "var": "--flr-button-justify", "type": "keyword",
+			                   "allow": [ "stretch", "flex-start", "center", "flex-end" ] },
+			"bgHover":          { "var": "--flr-button-bg-hover", "type": "color" },
+			"colorHover":       { "var": "--flr-button-color-hover", "type": "color" },
+			"borderColorHover": { "var": "--flr-button-border-color-hover", "type": "color" },
+			"shadowHover":      { "var": "--flr-button-shadow-hover", "type": "shadow" }
+		},
+		"linkStyles": {
+			"color":           { "var": "--flr-link-color", "type": "color" },
+			"colorHover":      { "var": "--flr-link-color-hover", "type": "color" },
+			"fontSize":        { "var": "--flr-link-font-size", "type": "length" },
+			"decoration":      { "var": "--flr-link-decoration", "type": "keyword",
+			                     "allow": [ "none", "underline", "line-through", "overline" ] },
+			"decorationHover": { "var": "--flr-link-decoration-hover", "type": "keyword",
+			                     "allow": [ "none", "underline", "line-through", "overline" ] },
+			"justify":         { "var": "--flr-links-justify", "type": "keyword",
+			                     "allow": [ "flex-start", "center", "flex-end", "space-between" ] },
+			"gap":             { "var": "--flr-links-gap", "type": "length" }
+		},
+		"checkStyles": {
+			"size":          { "var": "--flr-check-size", "type": "length" },
+			"accent":        { "var": "--flr-check-accent", "type": "color" },
+			"gap":           { "var": "--flr-check-gap", "type": "length" },
+			"labelColor":    { "var": "--flr-check-label-color", "type": "color" },
+			"labelFontSize": { "var": "--flr-check-label-font-size", "type": "length" }
+		},
+		"noticeStyles": {
+			"radius":        { "var": "--flr-notice-radius", "type": "length" },
+			"paddingBlock":  { "var": "--flr-notice-padding-block", "type": "length" },
+			"paddingInline": { "var": "--flr-notice-padding-inline", "type": "length" },
+			"fontSize":      { "var": "--flr-notice-font-size", "type": "length" },
+			"justify":       { "var": "--flr-notice-justify", "type": "keyword",
+			                   "allow": [ "left", "center", "right" ] },
+			"successBg":     { "var": "--flr-success-bg", "type": "color" },
+			"successColor":  { "var": "--flr-success-color", "type": "color" },
+			"successBorder": { "var": "--flr-success-border", "type": "color" },
+			"errorBg":       { "var": "--flr-error-bg", "type": "color" },
+			"errorColor":    { "var": "--flr-error-color", "type": "color" },
+			"errorBorder":   { "var": "--flr-error-border", "type": "color" },
+			"loadingColor":  { "var": "--flr-loading-color", "type": "color" }
+		},
+		"descriptionStyles": {
+			"color":    { "var": "--flr-description-color", "type": "color" },
+			"fontSize": { "var": "--flr-description-font-size", "type": "length" },
+			"justify":  { "var": "--flr-description-justify", "type": "keyword",
+			              "allow": [ "left", "center", "right" ] }
+		},
+		"avatarStyles": {
+			"size":   { "var": "--flr-avatar-size", "type": "length" },
+			"radius": { "var": "--flr-avatar-radius", "type": "length" }
+		}
+	},
+	"options": {
+		"fieldOptions": {
+			"showLabels": true,
+			"showPlaceholders": false,
+			"labelPosition": "top",
+			"requiredMark": false,
+			"showRememberMe": true,
+			"showLinks": true,
+			"useThemeButton": false,
+			"showTermsAndPrivacy": true,
+			"showFirstName": false,
+			"showLastName": false,
+			"showDescription": true,
+			"showAvatar": true,
+			"showGravatarLink": true,
+			"showBio": true,
+			"showWebsite": true,
+			"showPasswordSection": true
+		}
+	}
+}

@@ -229,8 +229,6 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 		$plugin_admin = new Flr_Blocks_Admin();
 
 		self::add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		self::add_action( 'init', $plugin_admin, 'editor_styles' );
-		self::add_action( 'pre_get_posts', $plugin_admin, 'editor_styles' );
 		self::add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 	}
@@ -244,11 +242,10 @@ class Flr_Blocks_Core extends Flr_Blocks_Loader {
 	 */
 	private function define_public_hooks() {
 
+		// The form styles are no longer enqueued on every request: they are
+		// registered as the flr-blocks-forms handle and listed in each block's
+		// block.json, so WordPress loads them only where a block is used.
 		Flr_Blocks_Helper::using( 'public/class-flr-blocks-public.php' );
-
-		$plugin_public = new Flr_Blocks_Public();
-
-		self::add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 
 	}
 

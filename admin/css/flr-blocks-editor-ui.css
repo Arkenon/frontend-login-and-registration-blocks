@@ -1,0 +1,141 @@
+/*
+ * Editor-only chrome: the setup screen and its design previews.
+ *
+ * Nothing here styles the form itself -- that lives in
+ * public/css/flr-blocks-forms.css and is loaded in both contexts so the editor
+ * canvas and the published page stay identical. This file only dresses the
+ * scaffolding the visitor never sees.
+ */
+
+/* ------------------------------------------------------------------
+ * Setup placeholder
+ * ------------------------------------------------------------------ */
+
+.flr-setup .components-placeholder__fieldset {
+	flex-direction: column;
+	align-items: stretch;
+	gap: 16px;
+}
+
+.flr-setup__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 100%;
+}
+
+.flr-setup__card.components-button {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 8px;
+	width: 100%;
+	height: auto;
+	padding: 10px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	background: #fff;
+	text-align: start;
+	white-space: normal;
+}
+
+.flr-setup__card.components-button:hover {
+	border-color: var(--wp-admin-theme-color, #3858e9);
+	box-shadow: 0 2px 6px #0000001a;
+}
+
+.flr-setup__card.components-button:focus-visible {
+	outline: 2px solid var(--wp-admin-theme-color, #3858e9);
+	outline-offset: 1px;
+}
+
+.flr-setup__title {
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.3;
+	color: #1e1e1e;
+}
+
+/* ------------------------------------------------------------------
+ * Design preview miniatures
+ *
+ * The preview renders the same markup as the real block, styled by the
+ * preset's own --flr-* tokens, then scales it down. Rendering the actual
+ * thing rather than a static icon means a preview can never go stale.
+ * ------------------------------------------------------------------ */
+
+.flr-preview {
+	position: relative;
+	overflow: hidden;
+	border-radius: 3px;
+	background: #f6f7f7;
+	block-size: 118px;
+	pointer-events: none;
+	user-select: none;
+}
+
+.flr-preview__scale {
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline-start: 0;
+	inline-size: 340px;
+	transform: scale(0.44);
+	transform-origin: top left;
+	padding: 14px;
+	box-sizing: border-box;
+}
+
+/* The miniature is decorative: keep it out of the accessibility tree and stop
+   its fields from taking focus. */
+.flr-preview input,
+.flr-preview button,
+.flr-preview a {
+	pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+ * In-canvas helpers
+ * ------------------------------------------------------------------ */
+
+/* The editor preview is a mock-up: its fields must never take focus or accept
+   typing, or authors will try to fill the form in the editor.
+
+   Scoped to the mock form itself, never to the block wrapper. A wrapper-wide
+   rule also caught the setup screen's design cards and made them
+   unclickable. */
+.flr-blocks-editor-preview .flr-blocks-form input,
+.flr-blocks-editor-preview .flr-blocks-form textarea,
+.flr-blocks-editor-preview .flr-blocks-form button,
+.flr-blocks-editor-preview .flr-blocks-card input,
+.flr-blocks-editor-preview .flr-blocks-card button {
+	pointer-events: none;
+}
+
+.flr-blocks-editor-notice {
+	font-size: 12px;
+	font-style: italic;
+	color: #757575;
+	text-align: center;
+}
+
+/* ------------------------------------------------------------------
+ * Preview state switch
+ *
+ * The reset password block and the navigation item each render differently
+ * depending on who is visiting, so their toolbars carry a small segmented
+ * control that lets an author look at either state.
+ * ------------------------------------------------------------------ */
+
+.flr-step-switch {
+	display: flex;
+	align-items: center;
+	padding: 0 6px;
+	min-inline-size: 180px;
+}
+
+.flr-step-switch .components-toggle-group-control {
+	min-block-size: 32px;
+}

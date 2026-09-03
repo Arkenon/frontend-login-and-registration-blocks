@@ -1,38 +1,16 @@
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
 import { registerBlockType } from '@wordpress/blocks';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import './style.scss';
-
-/**
- * Internal dependencies
- */
-import Edit from './edit';
-import save from './save';
+import { unlock } from '@wordpress/icons';
 import metadata from './block.json';
+import Edit from './edit';
+import { registerPresetVariations } from '../shared/presets/register-variations';
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
+// No save function: the block is rendered in PHP, so the default of returning
+// null is what we want. No stylesheet import either -- the shared sheet is
+// registered as a handle and listed in block.json, which keeps one copy of it
+// instead of one per block.
 registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
+	icon: unlock,
 	edit: Edit,
-	/**
-	 * @see ./save.js
-	 */
-	save,
 } );
+
+registerPresetVariations( metadata.name, unlock );

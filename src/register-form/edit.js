@@ -1,128 +1,247 @@
-import './editor.scss';
-import {useBlockProps} from '@wordpress/block-editor';
-import {__} from '@wordpress/i18n';
-import Options from "./options";
+/**
+ * Editor view of the registration form.
+ *
+ * Mirrors public/partials/register/register-form.php field for field, so the
+ * canvas shows what the page will render.
+ */
 
-export default function Edit(props) {
+import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
+import { people } from '@wordpress/icons';
+import Inspector from './inspector';
+import DesignToolbar from '../shared/components/DesignToolbar';
+import FormSetupPlaceholder from '../shared/components/FormSetupPlaceholder';
+import {
+	buildStyleVars,
+	buildWrapperClasses,
+	resolveOptions,
+	resolveText,
+} from '../shared/style-vars';
+import {
+	Form,
+	Field,
+	CheckboxRow,
+	SubmitButton,
+	LinksRow,
+	fieldProps,
+} from '../shared/form-parts';
 
-	const {attributes} = props;
+export default function Edit( props ) {
+	const { attributes, setAttributes } = props;
+	const options = resolveOptions( attributes );
 
-	console.log(attributes.additionalFields)
+	const showSetup = ! attributes.templateChosen;
 
-	const blockProps = useBlockProps(props);
+	// The setup screen is editor chrome, not a preview of the form, so it takes
+	// neither the wrapper's tokens nor flr-blocks-editor-preview -- that class
+	// makes every control inside it inert, which would swallow the clicks on the
+	// design cards.
+	const blockProps = useBlockProps(
+		showSetup
+			? { className: 'flr-blocks-setup-wrapper' }
+			: {
+					className: `${ buildWrapperClasses(
+						attributes
+					) } flr-blocks-editor-preview`,
+					style: buildStyleVars( attributes ),
+			  }
+	);
 
-	const inputStyle = {
-		'border-radius': attributes.inputBorderRadius,
-	}
-
-	const textStyle = {
-		'color': attributes.textColor,
-		'font-weight': attributes.textFontWeight
-	}
-
-	const buttonStyle = {
-		'color': attributes.buttonTextColor,
-		'backgroundColor': attributes.buttonBgColor,
-		'border-color': attributes.buttonBorder.color,
-		'border-style': attributes.buttonBorder.style,
-		'border-width': attributes.buttonBorder.width,
-		'border-radius': attributes.buttonBorderRadius,
-		'font-weight': attributes.buttonTextFontWeight
+	if ( showSetup ) {
+		return (
+			<div { ...blockProps }>
+				<FormSetupPlaceholder
+					icon={ people }
+					title={ __(
+						'Register Form',
+						'frontend-login-and-registration-blocks'
+					) }
+					previewFields={ 3 }
+					setAttributes={ setAttributes }
+				/>
+			</div>
+		);
 	}
 
 	return (
-
 		<>
+			<DesignToolbar { ...props } />
+			<Inspector { ...props } />
 
-			<Options options={props}/>
+			<div { ...blockProps }>
+				<Form>
+					<Field
+						id="flr-blocks-username-for-register"
+						type="text"
+						required
+						{ ...fieldProps(
+							attributes,
+							options,
+							'username',
+							__(
+								'Username',
+								'frontend-login-and-registration-blocks'
+							),
+							__(
+								'Enter your username',
+								'frontend-login-and-registration-blocks'
+							)
+						) }
+					/>
 
-			<div {...blockProps}>
+					<Field
+						id="flr-blocks-email-for-register"
+						type="email"
+						required
+						{ ...fieldProps(
+							attributes,
+							options,
+							'email',
+							__(
+								'Your e-mail',
+								'frontend-login-and-registration-blocks'
+							),
+							__(
+								'Enter your e-mail',
+								'frontend-login-and-registration-blocks'
+							)
+						) }
+					/>
 
-				<div className="flr-blocks-form-row">
-					<div className="flr-blocks-input-group">
-						{attributes.showLabels &&
-						<label className="flr-blocks-input-label" style={textStyle}
-							   htmlFor="flr-blocks-username">{__('Username', 'frontend-login-and-registration-blocks')}</label>}
-						<input className="flr-blocks-input-control" id="flr-blocks-username" type="text"
-							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your username', 'frontend-login-and-registration-blocks')}/>
-					</div>
-				</div>
+					{ options.showFirstName && (
+						<Field
+							id="flr-blocks-first-name-for-register"
+							type="text"
+							{ ...fieldProps(
+								attributes,
+								options,
+								'firstName',
+								__(
+									'First Name',
+									'frontend-login-and-registration-blocks'
+								),
+								__(
+									'Enter your first name',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						/>
+					) }
 
-				<div className="flr-blocks-form-row">
-					<div className="flr-blocks-input-group">
-						{attributes.showLabels &&
-						<label className="flr-blocks-input-label" style={textStyle}
-							   htmlFor="flr-blocks-email">{__('Your e-mail', 'frontend-login-and-registration-blocks')}</label>}
-						<input className="flr-blocks-input-control" id="flr-blocks-email" type="text"
-							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your e-mail', 'frontend-login-and-registration-blocks')}/>
-					</div>
-				</div>
+					{ options.showLastName && (
+						<Field
+							id="flr-blocks-last-name-for-register"
+							type="text"
+							{ ...fieldProps(
+								attributes,
+								options,
+								'lastName',
+								__(
+									'Last Name',
+									'frontend-login-and-registration-blocks'
+								),
+								__(
+									'Enter your last name',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						/>
+					) }
 
-				{
-					attributes.additionalFields.showFirstName && <div className="flr-blocks-input-group">
-						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
-														 htmlFor="flr-blocks-first-name">{__('First Name', 'frontend-login-and-registration-blocks')}</label>}
-						<input className="flr-blocks-input-control" id="flr-blocks-first-name" type="text"
-							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your first name', 'frontend-login-and-registration-blocks')}/>
-					</div>
+					<Field
+						id="flr-blocks-password-for-register"
+						type="password"
+						required
+						{ ...fieldProps(
+							attributes,
+							options,
+							'password',
+							__(
+								'Password',
+								'frontend-login-and-registration-blocks'
+							),
+							__(
+								'Enter your password',
+								'frontend-login-and-registration-blocks'
+							)
+						) }
+					/>
 
-				}
+					<Field
+						id="flr-blocks-password-again-for-register"
+						type="password"
+						required
+						{ ...fieldProps(
+							attributes,
+							options,
+							'passwordAgain',
+							__(
+								'Password Again',
+								'frontend-login-and-registration-blocks'
+							),
+							__(
+								'Enter your password again',
+								'frontend-login-and-registration-blocks'
+							)
+						) }
+					/>
 
-				{
-					attributes.additionalFields.showLastName && <div className="flr-blocks-input-group">
-						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
-														 htmlFor="flr-blocks-last-name">{__('Last Name', 'frontend-login-and-registration-blocks')}</label>}
-						<input className="flr-blocks-input-control" id="flr-blocks-last-name" type="text"
-							   style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your last name', 'frontend-login-and-registration-blocks')}/>
-					</div>
+					{ options.showTermsAndPrivacy !== false && (
+						<CheckboxRow
+							id="flr-blocks-terms-and-privacy"
+							label={ resolveText(
+								attributes,
+								'labels',
+								'terms',
+								__(
+									'I have read and accept the terms and conditions and privacy policy',
+									'frontend-login-and-registration-blocks'
+								)
+							) }
+						/>
+					) }
 
-				}
+					<SubmitButton attributes={ attributes } variant="register">
+						{ resolveText(
+							attributes,
+							'labels',
+							'submit',
+							__(
+								'Register',
+								'frontend-login-and-registration-blocks'
+							)
+						) }
+					</SubmitButton>
+				</Form>
 
-				<div className="flr-blocks-form-row">
-					<div className="flr-blocks-input-group">
-						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
-														 htmlFor="flr-blocks-password">{__('Password', 'frontend-login-and-registration-blocks')}</label>}
-						<input className="flr-blocks-input-control" id="flr-blocks-password" type="password" style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your password', 'frontend-login-and-registration-blocks')}/>
-					</div>
-				</div>
-
-				<div className="flr-blocks-form-row">
-					<div className="flr-blocks-input-group">
-						{attributes.showLabels && <label className="flr-blocks-input-label" style={textStyle}
-														 htmlFor="flr-blocks-password-again">{__('Password Again', 'frontend-login-and-registration-blocks')}</label>}
-						<input className="flr-blocks-input-control" id="flr-blocks-password-again" type="password" style={inputStyle}
-							   placeholder={attributes.showPlaceholders && __('Enter your password again', 'frontend-login-and-registration-blocks')}/>
-					</div>
-				</div>
-
-
-				{
-					attributes.showTermsAndPrivacy &&
-					<div className="flr-blocks-form-row">
-						<div className="flr-blocks-form-check-group">
-							<input id="flr-blocks-terms-and-privacy" checked="checked" type="checkbox"
-								   className="flr-blocks-form-check-input"/>
-							<label className="flr-blocks-form-check-label"
-								   htmlFor="flr-blocks-terms-and-privacy">{__('I have read and accept terms and conditions and privacy policy.', 'frontend-login-and-registration-blocks')}</label>
-						</div>
-					</div>
-				}
-
-				<div className="flr-blocks-form-row">
-					<button style={buttonStyle} type="submit" name="wp-submit" id="wp-submit"
-							className="flr-blocks-register-btn flr-blocks-btn wp-block-button__link wp-element-button">
-						{__('Register', 'frontend-login-and-registration-blocks')}
-					</button>
-				</div>
-
+				{ options.showLinks !== false && (
+					<LinksRow
+						intro={ resolveText(
+							attributes,
+							'labels',
+							'haveAccount',
+							__(
+								'Already signed up?',
+								'frontend-login-and-registration-blocks'
+							)
+						) }
+						links={ [
+							{
+								key: 'login',
+								label: resolveText(
+									attributes,
+									'labels',
+									'login',
+									__(
+										'Login',
+										'frontend-login-and-registration-blocks'
+									)
+								),
+							},
+						] }
+					/>
+				) }
 			</div>
-
 		</>
-
 	);
 }

@@ -1,15 +1,18 @@
 {
 	"name": "frontend-login-with-gutenberg-blocks",
-	"version": "1.0.0",
-	"description": "Example static block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"version": "2.0.0",
+	"description": "Login, registration, lost password and account blocks for the WordPress block editor.",
+	"author": "Kadim Gültekin",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build --experimental-modules",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
+		"lint:tokens": "node bin/lint-tokens.js",
+		"test:tokens": "php tests/test-style-tokens.php",
+		"test:parity": "node tests/parity.mjs",
+		"test": "npm run lint:tokens && npm run test:tokens && npm run test:parity",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start"
@@ -19,6 +22,11 @@
 	},
 	"dependencies": {
 		"@wordpress/block-editor": "^15.0.0",
-		"@wordpress/core-data": "^7.27.0"
+		"@wordpress/blocks": "^15.0.0",
+		"@wordpress/components": "^30.0.0",
+		"@wordpress/core-data": "^7.27.0",
+		"@wordpress/element": "^6.0.0",
+		"@wordpress/i18n": "^6.0.0",
+		"@wordpress/icons": "^11.0.0"
 	}
 }

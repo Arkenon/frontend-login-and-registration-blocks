@@ -27,17 +27,6 @@ class Flr_Blocks_Admin {
 	}
 
 	/**
-	 * Register the stylesheets for the block editor (Common styles).
-	 *
-	 * @since    1.0.0
-	 */
-	public function editor_styles() {
-
-		add_editor_style( array( FLR_BLOCKS_PLUGIN_URL . '/admin/css/flr-blocks-editor.css' ) );
-
-	}
-
-	/**
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since    1.0.0
